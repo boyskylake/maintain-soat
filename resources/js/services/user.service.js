@@ -1,0 +1,95 @@
+import { authHeader } from '../helpers';
+// import axios from 'axios';
+import { NotificationManager} from 'react-notifications';
+
+export const userService = {
+    login,
+    logout,
+    getAll,
+    getAuthUser
+};
+
+function login(username, password) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password })
+    };
+
+    return fetch(`/api/auth/login`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            // login successful if there's a jwt token in the response
+            if (user.token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+
+                NotificationManager.success('login success', 'Success', 5000);
+            }
+
+            return user;
+        });
+}
+
+function logout() {
+    // remove user from local storage to log user out
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader()
+    };
+    fetch(`/api/auth/logout`, requestOptions)
+    .then(res => res.json())
+    .then(res =>{
+        if (res.message) {
+            NotificationManager.success(res.message, 'success', 5000);
+        }
+    });
+    localStorage.removeItem('user');
+}
+
+function getAuthUser() {
+    // remove user from local storage to log user out
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader()
+    };
+    
+    return fetch(`/api/auth/getAuthUser`, requestOptions).then(res =>{
+        if (res.status === 400) {
+            logout();            
+        }
+        return res;
+    });
+
+    // localStorage.removeItem('user');
+}
+
+function getAll() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`api/user`, requestOptions).then(handleResponse);
+}
+
+function handleResponse(response) {
+    return response.text().then(text => {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) {
+                // auto logout if 401 response returned from api
+                logout();
+                // location.reload(true);
+            }
+            if (data.error) {
+                NotificationManager.error(data.error, 'Error', 5000);                
+            }
+
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+
+        return data;
+    });
+}
