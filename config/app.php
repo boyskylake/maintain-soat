@@ -179,6 +179,8 @@ return [
 
         Yajra\Oci8\Oci8ServiceProvider::class,
 
+        Barryvdh\Cors\ServiceProvider::class,
+
     ],
 
     /*

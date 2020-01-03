@@ -8,7 +8,7 @@ use App\Model\User;
 use Tymon\JWTAuth\Facades\JWTAuth;
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class AuthController extends Controller
+class OfficerAuthController extends Controller
 {
         /*
     |--------------------------------------------------------------------------

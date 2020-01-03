@@ -1,11 +1,10 @@
 import { authHeader } from '../helpers';
 // import axios from 'axios';
-import { NotificationManager} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 
 export const userService = {
     login,
     logout,
-    getAll,
     getAuthUser
 };
 
@@ -56,22 +55,20 @@ function getAuthUser() {
     
     return fetch(`/api/auth/getAuthUser`, requestOptions).then(res =>{
         if (res.status === 400) {
-            logout();            
+            localStorage.removeItem('user');
         }
         return res;
     });
-
-    // localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+// function getAll() {
+//     const requestOptions = {
+//         method: 'GET',
+//         headers: authHeader()
+//     };
 
-    return fetch(`api/user`, requestOptions).then(handleResponse);
-}
+//     return fetch(`api/user`, requestOptions).then(handleResponse);
+// }
 
 function handleResponse(response) {
     return response.text().then(text => {

@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
 {
-        /*
+    /*
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -30,15 +33,15 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'refresh']]);
     }
 
     public function register(Request $request)
     {
         $user = User::create([
-             'email'    => $request->email,
-             'password' => $request->password,
-         ]);
+            'email'    => $request->email,
+            'password' => $request->password,
+        ]);
 
         $token = $this->guard()->login($user);
 
@@ -50,12 +53,14 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
-        // $validate = $this->guard()->validate($credentials);
+        // $test = $request->json()->all();
+        // $test2 = $test->email;
 
-        if (! $token = $this->guard()->attempt($credentials)) {
+        $credentials = request(['email', 'password']);
+
+        if (!$token = $this->guard()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -93,6 +98,7 @@ class AuthController extends Controller
         // Token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
     }
+
     /**
      * Log the user out (Invalidate the token).
      *
@@ -135,5 +141,4 @@ class AuthController extends Controller
     {
         return Auth::guard('api');
     }
-
 }

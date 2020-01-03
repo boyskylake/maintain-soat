@@ -7,28 +7,31 @@ import { userActions } from "../actions";
 import Header from '../layout/Header'
 import Sidebar from '../layout/Sidebar'
 import Footer from '../layout/Footer'
-import Content from './Content'
+// import Content from './Content'
 
-import Home from '../components/Home'
+import Home from '../pages/Home/Home'
+import Saveorder from '../pages/Order/Saveorder'
+
 
 const PrivateRoute = () => {
-    return (
-        <div>
-            {/* <FadingContentRoute path="/officer/home" component={Content}/> */}
-            <FadingContentRoute path="/officer/home" component={Home}/>
-        </div>
-    )
-}
-
-// wrapping/composing
-// You can spread routeProps to make them available to your rendered Component
-function FadingContentRoute({ component: Component, ...rest }) {
 
   const authentication = useSelector(state => state.authentication);
 
   if (authentication.loggedIn) {
-    useDispatch(userActions.getAuthUser());  
+    useDispatch(userActions.getAuthUser());
   }
+  
+    return (
+        <div>
+            <FadingContentRoute path="/officer/home" component={Home}/>
+            <FadingContentRoute path="/officer/saveorder" component={Saveorder}/>
+        </div>
+    )
+}
+
+function FadingContentRoute({ component: Component, ...rest }) {
+
+  const authentication = useSelector(state => state.authentication);
 
   return (
     <Route
@@ -44,7 +47,6 @@ function FadingContentRoute({ component: Component, ...rest }) {
       )}
     />
   );
-
 }
 
 export default PrivateRoute;

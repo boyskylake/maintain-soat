@@ -20,19 +20,17 @@ class Authenticate extends Middleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        if(is_array($guards) && !empty($guards)){
-            if ($guards[0] == 'api') {
+        $guard = array_get($guards,0);
+
+        switch ($guard) {
+            case 'api':
                 JWTAuth::parseToken()->authenticate();
-            }
-        }else{
-            $this->authenticate($request, $guards);
+                break;
+            default:
+                $this->authenticate($request, $guards);
+                break;
         }
-        // switch ($guards[0]) {
-        //     case 'api':
-        //         break;
-        //     default:
-        //         break;
-        // }
+        
         return $next($request);
     }
     /**

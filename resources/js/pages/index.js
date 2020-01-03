@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { store , history } from '../helpers'
 import { Router , Switch , Route , Redirect } from 'react-router-dom'
 import PrivateRoute from '../layout/PrivateRoute'
-import Login from './Login'
+import Login from './Login/Login'
 
 // React Notification
 import 'react-notifications/lib/notifications.css';

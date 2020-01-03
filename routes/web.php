@@ -10,9 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/deploy', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+});
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+    return view('test');
 });
 
 Auth::routes();
@@ -24,4 +32,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //      return view('officer.home');
 //  })->where('any', '.*');
 
- Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');
+Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');

@@ -1284,7 +1284,7 @@ a:focus {
 .form-control {
   border-radius: 0;
   box-shadow: none;
-  border-color: #d2d6de;
+  /* border-color: #d2d6de; */
 }
 .form-control:focus {
   border-color: #3c8dbc;
@@ -4792,7 +4792,7 @@ fieldset[disabled] .btn-yahoo.focus {
 .select2-container--default .select2-selection--single,
 .select2-selection .select2-selection--single {
   border: 1px solid #d2d6de;
-  border-radius: 0;
+  /* border-radius: 0; */
   padding: 6px 12px;
   height: 34px;
 }

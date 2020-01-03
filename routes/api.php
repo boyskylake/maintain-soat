@@ -13,18 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group([ 'namespace' => 'Api' ], function () {
+Route::group(['namespace' => 'Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/auth/logout', 'AuthController@logout');
-        Route::post('/auth/refresh', 'AuthController@refresh');
+        // Route::post('/auth/refresh', 'AuthController@refresh');
         Route::post('/auth/getAuthUser', 'AuthController@getAuthUser');
-        Route::post('me', 'AuthController@me');
 
-        Route::resource('home', 'HomeController');
+        Route::get('/orderPage', 'OrderPageController@editOrder');
+
+       
+
     });
-    
-    Route::post('/auth/login', 'AuthController@login');
+    Route::get('/refresh', 'AuthController@refresh');
 
+    Route::post('/auth/login', 'AuthController@login');
+    Route::post('/auth/register', 'AuthController@register');
 });
 
 
@@ -32,4 +35,3 @@ Route::group([ 'namespace' => 'Api' ], function () {
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-

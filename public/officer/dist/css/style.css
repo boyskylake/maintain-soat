@@ -1,0 +1,35 @@
+.coopid > .select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+  border: 2px solid blue;
+  border-radius: 1;
+}
+
+.receiver > .select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+  border: 1.5px solid #3c8dbc;
+  border-radius: 1;
+}
+
+.blueselect > .select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+  border: 1.5px solid blue;
+  border-radius: 1;
+}
+
+.orangeselect > .select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+  border: 1.5px solid #f39c12;
+  border-radius: 1;
+}
+
+.greenselect > .select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+  border: 1.5px solid #12a600ba;
+  border-radius: 1;
+}
+
+.prinkselect > .select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+  border: 1.5px solid #3c8dbc;
+  border-radius: 1;
+}

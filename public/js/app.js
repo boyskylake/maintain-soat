@@ -1958,14 +1958,14 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.3.1 (https://getbootstrap.com/)
+  * Bootstrap v4.4.1 (https://getbootstrap.com/)
   * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
    true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
   undefined;
-}(this, function (exports, $, Popper) { 'use strict';
+}(this, (function (exports, $, Popper) { 'use strict';
 
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
   Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
@@ -2001,20 +2001,35 @@ module.exports = {
     return obj;
   }
 
-  function _objectSpread(target) {
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
 
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
       }
-
-      ownKeys.forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
     }
 
     return target;
@@ -2028,7 +2043,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.3.1): util.js
+   * Bootstrap (v4.4.1): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2177,8 +2192,25 @@ module.exports = {
       }
 
       return Util.findShadowRoot(element.parentNode);
+    },
+    jQueryDetection: function jQueryDetection() {
+      if (typeof $ === 'undefined') {
+        throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
+      }
+
+      var version = $.fn.jquery.split(' ')[0].split('.');
+      var minMajor = 1;
+      var ltMajor = 2;
+      var minMinor = 9;
+      var minPatch = 1;
+      var maxMajor = 4;
+
+      if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
+        throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
+      }
     }
   };
+  Util.jQueryDetection();
   setTransitionEndSupport();
 
   /**
@@ -2188,7 +2220,7 @@ module.exports = {
    */
 
   var NAME = 'alert';
-  var VERSION = '4.3.1';
+  var VERSION = '4.4.1';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -2205,13 +2237,12 @@ module.exports = {
     ALERT: 'alert',
     FADE: 'fade',
     SHOW: 'show'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Alert =
   /*#__PURE__*/
@@ -2353,7 +2384,7 @@ module.exports = {
    */
 
   var NAME$1 = 'button';
-  var VERSION$1 = '4.3.1';
+  var VERSION$1 = '4.4.1';
   var DATA_KEY$1 = 'bs.button';
   var EVENT_KEY$1 = "." + DATA_KEY$1;
   var DATA_API_KEY$1 = '.data-api';
@@ -2365,21 +2396,23 @@ module.exports = {
   };
   var Selector$1 = {
     DATA_TOGGLE_CARROT: '[data-toggle^="button"]',
-    DATA_TOGGLE: '[data-toggle="buttons"]',
+    DATA_TOGGLES: '[data-toggle="buttons"]',
+    DATA_TOGGLE: '[data-toggle="button"]',
+    DATA_TOGGLES_BUTTONS: '[data-toggle="buttons"] .btn',
     INPUT: 'input:not([type="hidden"])',
     ACTIVE: '.active',
     BUTTON: '.btn'
   };
   var Event$1 = {
     CLICK_DATA_API: "click" + EVENT_KEY$1 + DATA_API_KEY$1,
-    FOCUS_BLUR_DATA_API: "focus" + EVENT_KEY$1 + DATA_API_KEY$1 + " " + ("blur" + EVENT_KEY$1 + DATA_API_KEY$1)
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
+    FOCUS_BLUR_DATA_API: "focus" + EVENT_KEY$1 + DATA_API_KEY$1 + " " + ("blur" + EVENT_KEY$1 + DATA_API_KEY$1),
+    LOAD_DATA_API: "load" + EVENT_KEY$1 + DATA_API_KEY$1
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Button =
   /*#__PURE__*/
@@ -2395,7 +2428,7 @@ module.exports = {
     _proto.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
-      var rootElement = $(this._element).closest(Selector$1.DATA_TOGGLE)[0];
+      var rootElement = $(this._element).closest(Selector$1.DATA_TOGGLES)[0];
 
       if (rootElement) {
         var input = this._element.querySelector(Selector$1.INPUT);
@@ -2411,13 +2444,16 @@ module.exports = {
                 $(activeElement).removeClass(ClassName$1.ACTIVE);
               }
             }
+          } else if (input.type === 'checkbox') {
+            if (this._element.tagName === 'LABEL' && input.checked === this._element.classList.contains(ClassName$1.ACTIVE)) {
+              triggerChangeEvent = false;
+            }
+          } else {
+            // if it's not a radio button or checkbox don't add a pointless/invalid checked property to the input
+            triggerChangeEvent = false;
           }
 
           if (triggerChangeEvent) {
-            if (input.hasAttribute('disabled') || rootElement.hasAttribute('disabled') || input.classList.contains('disabled') || rootElement.classList.contains('disabled')) {
-              return;
-            }
-
             input.checked = !this._element.classList.contains(ClassName$1.ACTIVE);
             $(input).trigger('change');
           }
@@ -2427,12 +2463,14 @@ module.exports = {
         }
       }
 
-      if (addAriaPressed) {
-        this._element.setAttribute('aria-pressed', !this._element.classList.contains(ClassName$1.ACTIVE));
-      }
+      if (!(this._element.hasAttribute('disabled') || this._element.classList.contains('disabled'))) {
+        if (addAriaPressed) {
+          this._element.setAttribute('aria-pressed', !this._element.classList.contains(ClassName$1.ACTIVE));
+        }
 
-      if (triggerChangeEvent) {
-        $(this._element).toggleClass(ClassName$1.ACTIVE);
+        if (triggerChangeEvent) {
+          $(this._element).toggleClass(ClassName$1.ACTIVE);
+        }
       }
     };
 
@@ -2474,17 +2512,57 @@ module.exports = {
 
 
   $(document).on(Event$1.CLICK_DATA_API, Selector$1.DATA_TOGGLE_CARROT, function (event) {
-    event.preventDefault();
     var button = event.target;
 
     if (!$(button).hasClass(ClassName$1.BUTTON)) {
-      button = $(button).closest(Selector$1.BUTTON);
+      button = $(button).closest(Selector$1.BUTTON)[0];
     }
 
-    Button._jQueryInterface.call($(button), 'toggle');
+    if (!button || button.hasAttribute('disabled') || button.classList.contains('disabled')) {
+      event.preventDefault(); // work around Firefox bug #1540995
+    } else {
+      var inputBtn = button.querySelector(Selector$1.INPUT);
+
+      if (inputBtn && (inputBtn.hasAttribute('disabled') || inputBtn.classList.contains('disabled'))) {
+        event.preventDefault(); // work around Firefox bug #1540995
+
+        return;
+      }
+
+      Button._jQueryInterface.call($(button), 'toggle');
+    }
   }).on(Event$1.FOCUS_BLUR_DATA_API, Selector$1.DATA_TOGGLE_CARROT, function (event) {
     var button = $(event.target).closest(Selector$1.BUTTON)[0];
     $(button).toggleClass(ClassName$1.FOCUS, /^focus(in)?$/.test(event.type));
+  });
+  $(window).on(Event$1.LOAD_DATA_API, function () {
+    // ensure correct active class is set to match the controls' actual values/states
+    // find all checkboxes/readio buttons inside data-toggle groups
+    var buttons = [].slice.call(document.querySelectorAll(Selector$1.DATA_TOGGLES_BUTTONS));
+
+    for (var i = 0, len = buttons.length; i < len; i++) {
+      var button = buttons[i];
+      var input = button.querySelector(Selector$1.INPUT);
+
+      if (input.checked || input.hasAttribute('checked')) {
+        button.classList.add(ClassName$1.ACTIVE);
+      } else {
+        button.classList.remove(ClassName$1.ACTIVE);
+      }
+    } // find all button toggles
+
+
+    buttons = [].slice.call(document.querySelectorAll(Selector$1.DATA_TOGGLE));
+
+    for (var _i = 0, _len = buttons.length; _i < _len; _i++) {
+      var _button = buttons[_i];
+
+      if (_button.getAttribute('aria-pressed') === 'true') {
+        _button.classList.add(ClassName$1.ACTIVE);
+      } else {
+        _button.classList.remove(ClassName$1.ACTIVE);
+      }
+    }
   });
   /**
    * ------------------------------------------------------------------------
@@ -2507,7 +2585,7 @@ module.exports = {
    */
 
   var NAME$2 = 'carousel';
-  var VERSION$2 = '4.3.1';
+  var VERSION$2 = '4.4.1';
   var DATA_KEY$2 = 'bs.carousel';
   var EVENT_KEY$2 = "." + DATA_KEY$2;
   var DATA_API_KEY$2 = '.data-api';
@@ -2580,13 +2658,12 @@ module.exports = {
   var PointerType = {
     TOUCH: 'touch',
     PEN: 'pen'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Carousel =
   /*#__PURE__*/
@@ -2706,7 +2783,7 @@ module.exports = {
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default, config);
+      config = _objectSpread2({}, Default, {}, config);
       Util.typeCheckConfig(NAME$2, config, DefaultType);
       return config;
     };
@@ -2718,7 +2795,8 @@ module.exports = {
         return;
       }
 
-      var direction = absDeltax / this.touchDeltaX; // swipe left
+      var direction = absDeltax / this.touchDeltaX;
+      this.touchDeltaX = 0; // swipe left
 
       if (direction > 0) {
         this.prev();
@@ -2844,8 +2922,6 @@ module.exports = {
           event.preventDefault();
           this.next();
           break;
-
-        default:
       }
     };
 
@@ -2997,10 +3073,10 @@ module.exports = {
       return this.each(function () {
         var data = $(this).data(DATA_KEY$2);
 
-        var _config = _objectSpread({}, Default, $(this).data());
+        var _config = _objectSpread2({}, Default, {}, $(this).data());
 
         if (typeof config === 'object') {
-          _config = _objectSpread({}, _config, config);
+          _config = _objectSpread2({}, _config, {}, config);
         }
 
         var action = typeof config === 'string' ? config : _config.slide;
@@ -3038,7 +3114,7 @@ module.exports = {
         return;
       }
 
-      var config = _objectSpread({}, $(target).data(), $(this).data());
+      var config = _objectSpread2({}, $(target).data(), {}, $(this).data());
 
       var slideIndex = this.getAttribute('data-slide-to');
 
@@ -3107,7 +3183,7 @@ module.exports = {
    */
 
   var NAME$3 = 'collapse';
-  var VERSION$3 = '4.3.1';
+  var VERSION$3 = '4.4.1';
   var DATA_KEY$3 = 'bs.collapse';
   var EVENT_KEY$3 = "." + DATA_KEY$3;
   var DATA_API_KEY$3 = '.data-api';
@@ -3140,13 +3216,12 @@ module.exports = {
   var Selector$3 = {
     ACTIVES: '.show, .collapsing',
     DATA_TOGGLE: '[data-toggle="collapse"]'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Collapse =
   /*#__PURE__*/
@@ -3333,7 +3408,7 @@ module.exports = {
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$1, config);
+      config = _objectSpread2({}, Default$1, {}, config);
       config.toggle = Boolean(config.toggle); // Coerce string values
 
       Util.typeCheckConfig(NAME$3, config, DefaultType$1);
@@ -3387,7 +3462,7 @@ module.exports = {
         var $this = $(this);
         var data = $this.data(DATA_KEY$3);
 
-        var _config = _objectSpread({}, Default$1, $this.data(), typeof config === 'object' && config ? config : {});
+        var _config = _objectSpread2({}, Default$1, {}, $this.data(), {}, typeof config === 'object' && config ? config : {});
 
         if (!data && _config.toggle && /show|hide/.test(config)) {
           _config.toggle = false;
@@ -3467,7 +3542,7 @@ module.exports = {
    */
 
   var NAME$4 = 'dropdown';
-  var VERSION$4 = '4.3.1';
+  var VERSION$4 = '4.4.1';
   var DATA_KEY$4 = 'bs.dropdown';
   var EVENT_KEY$4 = "." + DATA_KEY$4;
   var DATA_API_KEY$4 = '.data-api';
@@ -3527,21 +3602,22 @@ module.exports = {
     flip: true,
     boundary: 'scrollParent',
     reference: 'toggle',
-    display: 'dynamic'
+    display: 'dynamic',
+    popperConfig: null
   };
   var DefaultType$2 = {
     offset: '(number|string|function)',
     flip: 'boolean',
     boundary: '(string|element)',
     reference: '(string|element)',
-    display: 'string'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
+    display: 'string',
+    popperConfig: '(null|object)'
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Dropdown =
   /*#__PURE__*/
@@ -3565,8 +3641,6 @@ module.exports = {
         return;
       }
 
-      var parent = Dropdown._getParentFromElement(this._element);
-
       var isActive = $(this._menu).hasClass(ClassName$4.SHOW);
 
       Dropdown._clearMenus();
@@ -3575,10 +3649,25 @@ module.exports = {
         return;
       }
 
+      this.show(true);
+    };
+
+    _proto.show = function show(usePopper) {
+      if (usePopper === void 0) {
+        usePopper = false;
+      }
+
+      if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED) || $(this._menu).hasClass(ClassName$4.SHOW)) {
+        return;
+      }
+
       var relatedTarget = {
         relatedTarget: this._element
       };
       var showEvent = $.Event(Event$4.SHOW, relatedTarget);
+
+      var parent = Dropdown._getParentFromElement(this._element);
+
       $(parent).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented()) {
@@ -3586,7 +3675,7 @@ module.exports = {
       } // Disable totally Popper.js for Dropdown in Navbar
 
 
-      if (!this._inNavbar) {
+      if (!this._inNavbar && usePopper) {
         /**
          * Check for Popper dependency
          * Popper - https://popper.js.org
@@ -3633,28 +3722,6 @@ module.exports = {
       $(parent).toggleClass(ClassName$4.SHOW).trigger($.Event(Event$4.SHOWN, relatedTarget));
     };
 
-    _proto.show = function show() {
-      if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED) || $(this._menu).hasClass(ClassName$4.SHOW)) {
-        return;
-      }
-
-      var relatedTarget = {
-        relatedTarget: this._element
-      };
-      var showEvent = $.Event(Event$4.SHOW, relatedTarget);
-
-      var parent = Dropdown._getParentFromElement(this._element);
-
-      $(parent).trigger(showEvent);
-
-      if (showEvent.isDefaultPrevented()) {
-        return;
-      }
-
-      $(this._menu).toggleClass(ClassName$4.SHOW);
-      $(parent).toggleClass(ClassName$4.SHOW).trigger($.Event(Event$4.SHOWN, relatedTarget));
-    };
-
     _proto.hide = function hide() {
       if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED) || !$(this._menu).hasClass(ClassName$4.SHOW)) {
         return;
@@ -3671,6 +3738,10 @@ module.exports = {
 
       if (hideEvent.isDefaultPrevented()) {
         return;
+      }
+
+      if (this._popper) {
+        this._popper.destroy();
       }
 
       $(this._menu).toggleClass(ClassName$4.SHOW);
@@ -3711,7 +3782,7 @@ module.exports = {
     };
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, this.constructor.Default, $(this._element).data(), config);
+      config = _objectSpread2({}, this.constructor.Default, {}, $(this._element).data(), {}, config);
       Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
       return config;
     };
@@ -3760,7 +3831,7 @@ module.exports = {
 
       if (typeof this._config.offset === 'function') {
         offset.fn = function (data) {
-          data.offsets = _objectSpread({}, data.offsets, _this2._config.offset(data.offsets, _this2._element) || {});
+          data.offsets = _objectSpread2({}, data.offsets, {}, _this2._config.offset(data.offsets, _this2._element) || {});
           return data;
         };
       } else {
@@ -3781,9 +3852,8 @@ module.exports = {
           preventOverflow: {
             boundariesElement: this._config.boundary
           }
-        } // Disable Popper.js if we have a static display
-
-      };
+        }
+      }; // Disable Popper.js if we have a static display
 
       if (this._config.display === 'static') {
         popperConfig.modifiers.applyStyle = {
@@ -3791,7 +3861,7 @@ module.exports = {
         };
       }
 
-      return popperConfig;
+      return _objectSpread2({}, popperConfig, {}, this._config.popperConfig);
     } // Static
     ;
 
@@ -3863,6 +3933,11 @@ module.exports = {
         }
 
         toggles[i].setAttribute('aria-expanded', 'false');
+
+        if (context._popper) {
+          context._popper.destroy();
+        }
+
         $(dropdownMenu).removeClass(ClassName$4.SHOW);
         $(parent).removeClass(ClassName$4.SHOW).trigger($.Event(Event$4.HIDDEN, relatedTarget));
       }
@@ -3903,6 +3978,10 @@ module.exports = {
 
       var isActive = $(parent).hasClass(ClassName$4.SHOW);
 
+      if (!isActive && event.which === ESCAPE_KEYCODE) {
+        return;
+      }
+
       if (!isActive || isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE)) {
         if (event.which === ESCAPE_KEYCODE) {
           var toggle = parent.querySelector(Selector$4.DATA_TOGGLE);
@@ -3913,7 +3992,9 @@ module.exports = {
         return;
       }
 
-      var items = [].slice.call(parent.querySelectorAll(Selector$4.VISIBLE_ITEMS));
+      var items = [].slice.call(parent.querySelectorAll(Selector$4.VISIBLE_ITEMS)).filter(function (item) {
+        return $(item).is(':visible');
+      });
 
       if (items.length === 0) {
         return;
@@ -3993,7 +4074,7 @@ module.exports = {
    */
 
   var NAME$5 = 'modal';
-  var VERSION$5 = '4.3.1';
+  var VERSION$5 = '4.4.1';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
   var DATA_API_KEY$5 = '.data-api';
@@ -4014,6 +4095,7 @@ module.exports = {
   };
   var Event$5 = {
     HIDE: "hide" + EVENT_KEY$5,
+    HIDE_PREVENTED: "hidePrevented" + EVENT_KEY$5,
     HIDDEN: "hidden" + EVENT_KEY$5,
     SHOW: "show" + EVENT_KEY$5,
     SHOWN: "shown" + EVENT_KEY$5,
@@ -4031,7 +4113,8 @@ module.exports = {
     BACKDROP: 'modal-backdrop',
     OPEN: 'modal-open',
     FADE: 'fade',
-    SHOW: 'show'
+    SHOW: 'show',
+    STATIC: 'modal-static'
   };
   var Selector$5 = {
     DIALOG: '.modal-dialog',
@@ -4040,13 +4123,12 @@ module.exports = {
     DATA_DISMISS: '[data-dismiss="modal"]',
     FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
     STICKY_CONTENT: '.sticky-top'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Modal =
   /*#__PURE__*/
@@ -4192,15 +4274,40 @@ module.exports = {
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$3, config);
+      config = _objectSpread2({}, Default$3, {}, config);
       Util.typeCheckConfig(NAME$5, config, DefaultType$3);
       return config;
     };
 
-    _proto._showElement = function _showElement(relatedTarget) {
+    _proto._triggerBackdropTransition = function _triggerBackdropTransition() {
       var _this3 = this;
 
+      if (this._config.backdrop === 'static') {
+        var hideEventPrevented = $.Event(Event$5.HIDE_PREVENTED);
+        $(this._element).trigger(hideEventPrevented);
+
+        if (hideEventPrevented.defaultPrevented) {
+          return;
+        }
+
+        this._element.classList.add(ClassName$5.STATIC);
+
+        var modalTransitionDuration = Util.getTransitionDurationFromElement(this._element);
+        $(this._element).one(Util.TRANSITION_END, function () {
+          _this3._element.classList.remove(ClassName$5.STATIC);
+        }).emulateTransitionEnd(modalTransitionDuration);
+
+        this._element.focus();
+      } else {
+        this.hide();
+      }
+    };
+
+    _proto._showElement = function _showElement(relatedTarget) {
+      var _this4 = this;
+
       var transition = $(this._element).hasClass(ClassName$5.FADE);
+      var modalBody = this._dialog ? this._dialog.querySelector(Selector$5.MODAL_BODY) : null;
 
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
         // Don't move modal's DOM position
@@ -4213,8 +4320,8 @@ module.exports = {
 
       this._element.setAttribute('aria-modal', true);
 
-      if ($(this._dialog).hasClass(ClassName$5.SCROLLABLE)) {
-        this._dialog.querySelector(Selector$5.MODAL_BODY).scrollTop = 0;
+      if ($(this._dialog).hasClass(ClassName$5.SCROLLABLE) && modalBody) {
+        modalBody.scrollTop = 0;
       } else {
         this._element.scrollTop = 0;
       }
@@ -4234,12 +4341,12 @@ module.exports = {
       });
 
       var transitionComplete = function transitionComplete() {
-        if (_this3._config.focus) {
-          _this3._element.focus();
+        if (_this4._config.focus) {
+          _this4._element.focus();
         }
 
-        _this3._isTransitioning = false;
-        $(_this3._element).trigger(shownEvent);
+        _this4._isTransitioning = false;
+        $(_this4._element).trigger(shownEvent);
       };
 
       if (transition) {
@@ -4251,25 +4358,23 @@ module.exports = {
     };
 
     _proto._enforceFocus = function _enforceFocus() {
-      var _this4 = this;
+      var _this5 = this;
 
       $(document).off(Event$5.FOCUSIN) // Guard against infinite focus loop
       .on(Event$5.FOCUSIN, function (event) {
-        if (document !== event.target && _this4._element !== event.target && $(_this4._element).has(event.target).length === 0) {
-          _this4._element.focus();
+        if (document !== event.target && _this5._element !== event.target && $(_this5._element).has(event.target).length === 0) {
+          _this5._element.focus();
         }
       });
     };
 
     _proto._setEscapeEvent = function _setEscapeEvent() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this._isShown && this._config.keyboard) {
         $(this._element).on(Event$5.KEYDOWN_DISMISS, function (event) {
           if (event.which === ESCAPE_KEYCODE$1) {
-            event.preventDefault();
-
-            _this5.hide();
+            _this6._triggerBackdropTransition();
           }
         });
       } else if (!this._isShown) {
@@ -4278,11 +4383,11 @@ module.exports = {
     };
 
     _proto._setResizeEvent = function _setResizeEvent() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (this._isShown) {
         $(window).on(Event$5.RESIZE, function (event) {
-          return _this6.handleUpdate(event);
+          return _this7.handleUpdate(event);
         });
       } else {
         $(window).off(Event$5.RESIZE);
@@ -4290,7 +4395,7 @@ module.exports = {
     };
 
     _proto._hideModal = function _hideModal() {
-      var _this7 = this;
+      var _this8 = this;
 
       this._element.style.display = 'none';
 
@@ -4303,11 +4408,11 @@ module.exports = {
       this._showBackdrop(function () {
         $(document.body).removeClass(ClassName$5.OPEN);
 
-        _this7._resetAdjustments();
+        _this8._resetAdjustments();
 
-        _this7._resetScrollbar();
+        _this8._resetScrollbar();
 
-        $(_this7._element).trigger(Event$5.HIDDEN);
+        $(_this8._element).trigger(Event$5.HIDDEN);
       });
     };
 
@@ -4319,7 +4424,7 @@ module.exports = {
     };
 
     _proto._showBackdrop = function _showBackdrop(callback) {
-      var _this8 = this;
+      var _this9 = this;
 
       var animate = $(this._element).hasClass(ClassName$5.FADE) ? ClassName$5.FADE : '';
 
@@ -4333,8 +4438,8 @@ module.exports = {
 
         $(this._backdrop).appendTo(document.body);
         $(this._element).on(Event$5.CLICK_DISMISS, function (event) {
-          if (_this8._ignoreBackdropClick) {
-            _this8._ignoreBackdropClick = false;
+          if (_this9._ignoreBackdropClick) {
+            _this9._ignoreBackdropClick = false;
             return;
           }
 
@@ -4342,11 +4447,7 @@ module.exports = {
             return;
           }
 
-          if (_this8._config.backdrop === 'static') {
-            _this8._element.focus();
-          } else {
-            _this8.hide();
-          }
+          _this9._triggerBackdropTransition();
         });
 
         if (animate) {
@@ -4370,7 +4471,7 @@ module.exports = {
         $(this._backdrop).removeClass(ClassName$5.SHOW);
 
         var callbackRemove = function callbackRemove() {
-          _this8._removeBackdrop();
+          _this9._removeBackdrop();
 
           if (callback) {
             callback();
@@ -4417,7 +4518,7 @@ module.exports = {
     };
 
     _proto._setScrollbar = function _setScrollbar() {
-      var _this9 = this;
+      var _this10 = this;
 
       if (this._isBodyOverflowing) {
         // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
@@ -4428,13 +4529,13 @@ module.exports = {
         $(fixedContent).each(function (index, element) {
           var actualPadding = element.style.paddingRight;
           var calculatedPadding = $(element).css('padding-right');
-          $(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
+          $(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this10._scrollbarWidth + "px");
         }); // Adjust sticky content margin
 
         $(stickyContent).each(function (index, element) {
           var actualMargin = element.style.marginRight;
           var calculatedMargin = $(element).css('margin-right');
-          $(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
+          $(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this10._scrollbarWidth + "px");
         }); // Adjust body padding
 
         var actualPadding = document.body.style.paddingRight;
@@ -4483,7 +4584,7 @@ module.exports = {
       return this.each(function () {
         var data = $(this).data(DATA_KEY$5);
 
-        var _config = _objectSpread({}, Default$3, $(this).data(), typeof config === 'object' && config ? config : {});
+        var _config = _objectSpread2({}, Default$3, {}, $(this).data(), {}, typeof config === 'object' && config ? config : {});
 
         if (!data) {
           data = new Modal(this, _config);
@@ -4524,7 +4625,7 @@ module.exports = {
 
 
   $(document).on(Event$5.CLICK_DATA_API, Selector$5.DATA_TOGGLE, function (event) {
-    var _this10 = this;
+    var _this11 = this;
 
     var target;
     var selector = Util.getSelectorFromElement(this);
@@ -4533,7 +4634,7 @@ module.exports = {
       target = document.querySelector(selector);
     }
 
-    var config = $(target).data(DATA_KEY$5) ? 'toggle' : _objectSpread({}, $(target).data(), $(this).data());
+    var config = $(target).data(DATA_KEY$5) ? 'toggle' : _objectSpread2({}, $(target).data(), {}, $(this).data());
 
     if (this.tagName === 'A' || this.tagName === 'AREA') {
       event.preventDefault();
@@ -4546,8 +4647,8 @@ module.exports = {
       }
 
       $target.one(Event$5.HIDDEN, function () {
-        if ($(_this10).is(':visible')) {
-          _this10.focus();
+        if ($(_this11).is(':visible')) {
+          _this11.focus();
         }
       });
     });
@@ -4570,7 +4671,7 @@ module.exports = {
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.3.1): tools/sanitizer.js
+   * Bootstrap (v4.4.1): tools/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4608,13 +4709,13 @@ module.exports = {
     strong: [],
     u: [],
     ul: []
-    /**
-     * A pattern that recognizes a commonly useful subset of URLs that are safe.
-     *
-     * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
-     */
-
   };
+  /**
+   * A pattern that recognizes a commonly useful subset of URLs that are safe.
+   *
+   * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
+   */
+
   var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:/?#]*(?:[/?#]|$))/gi;
   /**
    * A pattern that matches safe data URLs. Only matches image, video and audio types.
@@ -4681,7 +4782,7 @@ module.exports = {
     };
 
     for (var i = 0, len = elements.length; i < len; i++) {
-      var _ret = _loop(i, len);
+      var _ret = _loop(i);
 
       if (_ret === "continue") continue;
     }
@@ -4696,7 +4797,7 @@ module.exports = {
    */
 
   var NAME$6 = 'tooltip';
-  var VERSION$6 = '4.3.1';
+  var VERSION$6 = '4.4.1';
   var DATA_KEY$6 = 'bs.tooltip';
   var EVENT_KEY$6 = "." + DATA_KEY$6;
   var JQUERY_NO_CONFLICT$6 = $.fn[NAME$6];
@@ -4718,7 +4819,8 @@ module.exports = {
     boundary: '(string|element)',
     sanitize: 'boolean',
     sanitizeFn: '(null|function)',
-    whiteList: 'object'
+    whiteList: 'object',
+    popperConfig: '(null|object)'
   };
   var AttachmentMap$1 = {
     AUTO: 'auto',
@@ -4742,7 +4844,8 @@ module.exports = {
     boundary: 'scrollParent',
     sanitize: true,
     sanitizeFn: null,
-    whiteList: DefaultWhitelist
+    whiteList: DefaultWhitelist,
+    popperConfig: null
   };
   var HoverState = {
     SHOW: 'show',
@@ -4774,22 +4877,17 @@ module.exports = {
     FOCUS: 'focus',
     CLICK: 'click',
     MANUAL: 'manual'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Tooltip =
   /*#__PURE__*/
   function () {
     function Tooltip(element, config) {
-      /**
-       * Check for Popper dependency
-       * Popper - https://popper.js.org
-       */
       if (typeof Popper === 'undefined') {
         throw new TypeError('Bootstrap\'s tooltips require Popper.js (https://popper.js.org/)');
       } // private
@@ -4860,7 +4958,7 @@ module.exports = {
       clearTimeout(this._timeout);
       $.removeData(this.element, this.constructor.DATA_KEY);
       $(this.element).off(this.constructor.EVENT_KEY);
-      $(this.element).closest('.modal').off('hide.bs.modal');
+      $(this.element).closest('.modal').off('hide.bs.modal', this._hideModalHandler);
 
       if (this.tip) {
         $(this.tip).remove();
@@ -4871,7 +4969,7 @@ module.exports = {
       this._hoverState = null;
       this._activeTrigger = null;
 
-      if (this._popper !== null) {
+      if (this._popper) {
         this._popper.destroy();
       }
 
@@ -4924,29 +5022,7 @@ module.exports = {
         }
 
         $(this.element).trigger(this.constructor.Event.INSERTED);
-        this._popper = new Popper(this.element, tip, {
-          placement: attachment,
-          modifiers: {
-            offset: this._getOffset(),
-            flip: {
-              behavior: this.config.fallbackPlacement
-            },
-            arrow: {
-              element: Selector$6.ARROW
-            },
-            preventOverflow: {
-              boundariesElement: this.config.boundary
-            }
-          },
-          onCreate: function onCreate(data) {
-            if (data.originalPlacement !== data.placement) {
-              _this._handlePopperPlacementChange(data);
-            }
-          },
-          onUpdate: function onUpdate(data) {
-            return _this._handlePopperPlacementChange(data);
-          }
-        });
+        this._popper = new Popper(this.element, tip, this._getPopperConfig(attachment));
         $(tip).addClass(ClassName$6.SHOW); // If this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
@@ -5094,14 +5170,43 @@ module.exports = {
     } // Private
     ;
 
-    _proto._getOffset = function _getOffset() {
+    _proto._getPopperConfig = function _getPopperConfig(attachment) {
       var _this3 = this;
+
+      var defaultBsConfig = {
+        placement: attachment,
+        modifiers: {
+          offset: this._getOffset(),
+          flip: {
+            behavior: this.config.fallbackPlacement
+          },
+          arrow: {
+            element: Selector$6.ARROW
+          },
+          preventOverflow: {
+            boundariesElement: this.config.boundary
+          }
+        },
+        onCreate: function onCreate(data) {
+          if (data.originalPlacement !== data.placement) {
+            _this3._handlePopperPlacementChange(data);
+          }
+        },
+        onUpdate: function onUpdate(data) {
+          return _this3._handlePopperPlacementChange(data);
+        }
+      };
+      return _objectSpread2({}, defaultBsConfig, {}, this.config.popperConfig);
+    };
+
+    _proto._getOffset = function _getOffset() {
+      var _this4 = this;
 
       var offset = {};
 
       if (typeof this.config.offset === 'function') {
         offset.fn = function (data) {
-          data.offsets = _objectSpread({}, data.offsets, _this3.config.offset(data.offsets, _this3.element) || {});
+          data.offsets = _objectSpread2({}, data.offsets, {}, _this4.config.offset(data.offsets, _this4.element) || {});
           return data;
         };
       } else {
@@ -5128,32 +5233,35 @@ module.exports = {
     };
 
     _proto._setListeners = function _setListeners() {
-      var _this4 = this;
+      var _this5 = this;
 
       var triggers = this.config.trigger.split(' ');
       triggers.forEach(function (trigger) {
         if (trigger === 'click') {
-          $(_this4.element).on(_this4.constructor.Event.CLICK, _this4.config.selector, function (event) {
-            return _this4.toggle(event);
+          $(_this5.element).on(_this5.constructor.Event.CLICK, _this5.config.selector, function (event) {
+            return _this5.toggle(event);
           });
         } else if (trigger !== Trigger.MANUAL) {
-          var eventIn = trigger === Trigger.HOVER ? _this4.constructor.Event.MOUSEENTER : _this4.constructor.Event.FOCUSIN;
-          var eventOut = trigger === Trigger.HOVER ? _this4.constructor.Event.MOUSELEAVE : _this4.constructor.Event.FOCUSOUT;
-          $(_this4.element).on(eventIn, _this4.config.selector, function (event) {
-            return _this4._enter(event);
-          }).on(eventOut, _this4.config.selector, function (event) {
-            return _this4._leave(event);
+          var eventIn = trigger === Trigger.HOVER ? _this5.constructor.Event.MOUSEENTER : _this5.constructor.Event.FOCUSIN;
+          var eventOut = trigger === Trigger.HOVER ? _this5.constructor.Event.MOUSELEAVE : _this5.constructor.Event.FOCUSOUT;
+          $(_this5.element).on(eventIn, _this5.config.selector, function (event) {
+            return _this5._enter(event);
+          }).on(eventOut, _this5.config.selector, function (event) {
+            return _this5._leave(event);
           });
-        }
-      });
-      $(this.element).closest('.modal').on('hide.bs.modal', function () {
-        if (_this4.element) {
-          _this4.hide();
         }
       });
 
+      this._hideModalHandler = function () {
+        if (_this5.element) {
+          _this5.hide();
+        }
+      };
+
+      $(this.element).closest('.modal').on('hide.bs.modal', this._hideModalHandler);
+
       if (this.config.selector) {
-        this.config = _objectSpread({}, this.config, {
+        this.config = _objectSpread2({}, this.config, {
           trigger: 'manual',
           selector: ''
         });
@@ -5253,7 +5361,7 @@ module.exports = {
           delete dataAttributes[dataAttr];
         }
       });
-      config = _objectSpread({}, this.constructor.Default, dataAttributes, typeof config === 'object' && config ? config : {});
+      config = _objectSpread2({}, this.constructor.Default, {}, dataAttributes, {}, typeof config === 'object' && config ? config : {});
 
       if (typeof config.delay === 'number') {
         config.delay = {
@@ -5413,21 +5521,21 @@ module.exports = {
    */
 
   var NAME$7 = 'popover';
-  var VERSION$7 = '4.3.1';
+  var VERSION$7 = '4.4.1';
   var DATA_KEY$7 = 'bs.popover';
   var EVENT_KEY$7 = "." + DATA_KEY$7;
   var JQUERY_NO_CONFLICT$7 = $.fn[NAME$7];
   var CLASS_PREFIX$1 = 'bs-popover';
   var BSCLS_PREFIX_REGEX$1 = new RegExp("(^|\\s)" + CLASS_PREFIX$1 + "\\S+", 'g');
 
-  var Default$5 = _objectSpread({}, Tooltip.Default, {
+  var Default$5 = _objectSpread2({}, Tooltip.Default, {
     placement: 'right',
     trigger: 'click',
     content: '',
     template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
   });
 
-  var DefaultType$5 = _objectSpread({}, Tooltip.DefaultType, {
+  var DefaultType$5 = _objectSpread2({}, Tooltip.DefaultType, {
     content: '(string|element|function)'
   });
 
@@ -5450,13 +5558,12 @@ module.exports = {
     FOCUSOUT: "focusout" + EVENT_KEY$7,
     MOUSEENTER: "mouseenter" + EVENT_KEY$7,
     MOUSELEAVE: "mouseleave" + EVENT_KEY$7
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Popover =
   /*#__PURE__*/
@@ -5600,7 +5707,7 @@ module.exports = {
    */
 
   var NAME$8 = 'scrollspy';
-  var VERSION$8 = '4.3.1';
+  var VERSION$8 = '4.4.1';
   var DATA_KEY$8 = 'bs.scrollspy';
   var EVENT_KEY$8 = "." + DATA_KEY$8;
   var DATA_API_KEY$6 = '.data-api';
@@ -5639,13 +5746,12 @@ module.exports = {
   var OffsetMethod = {
     OFFSET: 'offset',
     POSITION: 'position'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var ScrollSpy =
   /*#__PURE__*/
@@ -5727,7 +5833,7 @@ module.exports = {
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$6, typeof config === 'object' && config ? config : {});
+      config = _objectSpread2({}, Default$6, {}, typeof config === 'object' && config ? config : {});
 
       if (typeof config.target !== 'string') {
         var id = $(config.target).attr('id');
@@ -5907,7 +6013,7 @@ module.exports = {
    */
 
   var NAME$9 = 'tab';
-  var VERSION$9 = '4.3.1';
+  var VERSION$9 = '4.4.1';
   var DATA_KEY$9 = 'bs.tab';
   var EVENT_KEY$9 = "." + DATA_KEY$9;
   var DATA_API_KEY$7 = '.data-api';
@@ -5934,13 +6040,12 @@ module.exports = {
     DATA_TOGGLE: '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
     DROPDOWN_TOGGLE: '.dropdown-toggle',
     DROPDOWN_ACTIVE_CHILD: '> .dropdown-menu .active'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Tab =
   /*#__PURE__*/
@@ -6142,7 +6247,7 @@ module.exports = {
    */
 
   var NAME$a = 'toast';
-  var VERSION$a = '4.3.1';
+  var VERSION$a = '4.4.1';
   var DATA_KEY$a = 'bs.toast';
   var EVENT_KEY$a = "." + DATA_KEY$a;
   var JQUERY_NO_CONFLICT$a = $.fn[NAME$a];
@@ -6171,13 +6276,12 @@ module.exports = {
   };
   var Selector$a = {
     DATA_DISMISS: '[data-dismiss="toast"]'
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-
   };
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
 
   var Toast =
   /*#__PURE__*/
@@ -6197,7 +6301,12 @@ module.exports = {
     _proto.show = function show() {
       var _this = this;
 
-      $(this._element).trigger(Event$a.SHOW);
+      var showEvent = $.Event(Event$a.SHOW);
+      $(this._element).trigger(showEvent);
+
+      if (showEvent.isDefaultPrevented()) {
+        return;
+      }
 
       if (this._config.animation) {
         this._element.classList.add(ClassName$a.FADE);
@@ -6211,11 +6320,15 @@ module.exports = {
         $(_this._element).trigger(Event$a.SHOWN);
 
         if (_this._config.autohide) {
-          _this.hide();
+          _this._timeout = setTimeout(function () {
+            _this.hide();
+          }, _this._config.delay);
         }
       };
 
       this._element.classList.remove(ClassName$a.HIDE);
+
+      Util.reflow(this._element);
 
       this._element.classList.add(ClassName$a.SHOWING);
 
@@ -6227,22 +6340,19 @@ module.exports = {
       }
     };
 
-    _proto.hide = function hide(withoutTimeout) {
-      var _this2 = this;
-
+    _proto.hide = function hide() {
       if (!this._element.classList.contains(ClassName$a.SHOW)) {
         return;
       }
 
-      $(this._element).trigger(Event$a.HIDE);
+      var hideEvent = $.Event(Event$a.HIDE);
+      $(this._element).trigger(hideEvent);
 
-      if (withoutTimeout) {
-        this._close();
-      } else {
-        this._timeout = setTimeout(function () {
-          _this2._close();
-        }, this._config.delay);
+      if (hideEvent.isDefaultPrevented()) {
+        return;
       }
+
+      this._close();
     };
 
     _proto.dispose = function dispose() {
@@ -6261,26 +6371,26 @@ module.exports = {
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _objectSpread({}, Default$7, $(this._element).data(), typeof config === 'object' && config ? config : {});
+      config = _objectSpread2({}, Default$7, {}, $(this._element).data(), {}, typeof config === 'object' && config ? config : {});
       Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
       return config;
     };
 
     _proto._setListeners = function _setListeners() {
-      var _this3 = this;
+      var _this2 = this;
 
       $(this._element).on(Event$a.CLICK_DISMISS, Selector$a.DATA_DISMISS, function () {
-        return _this3.hide(true);
+        return _this2.hide();
       });
     };
 
     _proto._close = function _close() {
-      var _this4 = this;
+      var _this3 = this;
 
       var complete = function complete() {
-        _this4._element.classList.add(ClassName$a.HIDE);
+        _this3._element.classList.add(ClassName$a.HIDE);
 
-        $(_this4._element).trigger(Event$a.HIDDEN);
+        $(_this3._element).trigger(Event$a.HIDDEN);
       };
 
       this._element.classList.remove(ClassName$a.SHOW);
@@ -6350,31 +6460,6 @@ module.exports = {
     return Toast._jQueryInterface;
   };
 
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.3.1): index.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  (function () {
-    if (typeof $ === 'undefined') {
-      throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
-    }
-
-    var version = $.fn.jquery.split(' ')[0].split('.');
-    var minMajor = 1;
-    var ltMajor = 2;
-    var minMinor = 9;
-    var minPatch = 1;
-    var maxMajor = 4;
-
-    if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
-      throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
-    }
-  })();
-
-  exports.Util = Util;
   exports.Alert = Alert;
   exports.Button = Button;
   exports.Carousel = Carousel;
@@ -6386,10 +6471,11 @@ module.exports = {
   exports.Tab = Tab;
   exports.Toast = Toast;
   exports.Tooltip = Tooltip;
+  exports.Util = Util;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=bootstrap.js.map
 
 
@@ -40124,7 +40210,7 @@ module.exports = ReactPropTypesSecret;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.11.0
+/** @license React v16.12.0
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -41418,12 +41504,8 @@ function restoreStateIfNeeded() {
   }
 }
 
-var enableUserTimingAPI = true; // Helps identify side effects in begin-phase lifecycle hooks and setState reducers:
-
-var debugRenderPhaseSideEffects = false; // In some cases, StrictMode should also double-render lifecycles.
-// This can be confusing for tests though,
-// And it can be bad for performance in production.
-// This feature flag can be used to control the behavior:
+var enableUserTimingAPI = true; // Helps identify side effects in render-phase lifecycle hooks and setState
+// reducers by double invoking them in Strict Mode.
 
 var debugRenderPhaseSideEffectsForStrictMode = true; // To preserve the "Pause on caught exceptions" behavior of the debugger, we
 // replay the begin phase of a failed component inside invokeGuardedCallback.
@@ -41459,7 +41541,7 @@ var enableFundamentalAPI = false; // Experimental Scope support.
 var enableScopeAPI = false; // New API for JSX transforms to target - https://github.com/reactjs/rfcs/pull/107
 
  // We will enforce mocking scheduler with scheduler/unstable_mock at some point. (v17?)
-// Till then, we warn about the missing mock, but still fallback to a sync mode compatible version
+// Till then, we warn about the missing mock, but still fallback to a legacy mode compatible version
 
 var warnAboutUnmockedScheduler = false; // For tests, we flush suspense fallbacks in an act scope;
 // *except* in some of our own tests, where we test incremental loading states.
@@ -41478,7 +41560,7 @@ var warnAboutDefaultPropsOnFunctionComponents = false;
 var warnAboutStringRefs = false;
 var disableLegacyContext = false;
 var disableSchedulerTimeoutBasedOnReactExpirationTime = false;
-var enableTrustedTypesIntegration = false;
+var enableTrustedTypesIntegration = false; // Flag to turn event.target and event.currentTarget in ReactNative from a reactTag to a component instance
 
 // the renderer. Such as when we're dispatching events or if third party
 // libraries need to call batchedUpdates. Eventually, this API will go away when
@@ -43892,7 +43974,7 @@ var ShouldCapture =
 /*         */
 4096;
 
-var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
+var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
 function getNearestMountedFiber(fiber) {
   var node = fiber;
   var nearestMounted = fiber;
@@ -43957,7 +44039,7 @@ function isFiberMounted(fiber) {
 }
 function isMounted(component) {
   {
-    var owner = ReactCurrentOwner$1.current;
+    var owner = ReactCurrentOwner.current;
 
     if (owner !== null && owner.tag === ClassComponent) {
       var ownerFiber = owner;
@@ -49711,14 +49793,31 @@ function insertInContainerBefore(container, child, beforeChild) {
   } else {
     container.insertBefore(child, beforeChild);
   }
+} // This is a specific event for the React Flare
+// event system, so event responders can act
+// accordingly to a DOM node being unmounted that
+// previously had active document focus.
+
+function dispatchDetachedVisibleNodeEvent(child) {
+  if (enableFlareAPI && selectionInformation && child === selectionInformation.focusedElem) {
+    var targetFiber = getClosestInstanceFromNode(child); // Simlulate a blur event to the React Flare responder system.
+
+    dispatchEventForResponderEventSystem('detachedvisiblenode', targetFiber, {
+      target: child,
+      timeStamp: Date.now()
+    }, child, RESPONDER_EVENT_SYSTEM | IS_PASSIVE);
+  }
 }
+
 function removeChild(parentInstance, child) {
+  dispatchDetachedVisibleNodeEvent(child);
   parentInstance.removeChild(child);
 }
 function removeChildFromContainer(container, child) {
   if (container.nodeType === COMMENT_NODE) {
     container.parentNode.removeChild(child);
   } else {
+    dispatchDetachedVisibleNodeEvent(child);
     container.removeChild(child);
   }
 }
@@ -50110,11 +50209,17 @@ function precacheFiberNode(hostInst, node) {
 }
 function markContainerAsRoot(hostRoot, node) {
   node[internalContainerInstanceKey] = hostRoot;
+}
+function unmarkContainerAsRoot(node) {
+  node[internalContainerInstanceKey] = null;
+}
+function isContainerMarkedAsRoot(node) {
+  return !!node[internalContainerInstanceKey];
 } // Given a DOM node, return the closest HostComponent or HostText fiber ancestor.
 // If the target node is part of a hydrated or not yet rendered subtree, then
 // this may also return a SuspenseComponent or HostRoot to indicate that.
 // Conceptually the HostRoot fiber is a child of the Container node. So if you
-// pass the Container node as the targetNode, you wiill not actually get the
+// pass the Container node as the targetNode, you will not actually get the
 // HostRoot back. To get to the HostRoot, you need to pass a child of it.
 // The same thing applies to Suspense boundaries.
 
@@ -52140,7 +52245,7 @@ function findCurrentUnmaskedContext(fiber) {
 }
 
 var LegacyRoot = 0;
-var BatchedRoot = 1;
+var BlockingRoot = 1;
 var ConcurrentRoot = 2;
 
 // Intentionally not named imports because Rollup would use dynamic dispatch for
@@ -52324,10 +52429,10 @@ function flushSyncCallbackQueueImpl() {
 }
 
 var NoMode = 0;
-var StrictMode = 1; // TODO: Remove BatchedMode and ConcurrentMode by reading from the root
+var StrictMode = 1; // TODO: Remove BlockingMode and ConcurrentMode by reading from the root
 // tag instead
 
-var BatchedMode = 2;
+var BlockingMode = 2;
 var ConcurrentMode = 4;
 var ProfileMode = 8;
 
@@ -53709,7 +53814,7 @@ function getStateFromUpdate(workInProgress, queue, update, prevState, nextProps,
           {
             enterDisallowedContextReadInDEV();
 
-            if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+            if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
               payload.call(instance, prevState, nextProps);
             }
           }
@@ -53743,7 +53848,7 @@ function getStateFromUpdate(workInProgress, queue, update, prevState, nextProps,
           {
             enterDisallowedContextReadInDEV();
 
-            if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+            if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
               _payload.call(instance, prevState, nextProps);
             }
           }
@@ -54056,7 +54161,7 @@ function applyDerivedStateFromProps(workInProgress, ctor, getDerivedStateFromPro
   var prevState = workInProgress.memoizedState;
 
   {
-    if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+    if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
       // Invoke the function an extra time to help detect side-effects.
       getDerivedStateFromProps(nextProps, prevState);
     }
@@ -54303,7 +54408,7 @@ function constructClassInstance(workInProgress, ctor, props, renderExpirationTim
 
 
   {
-    if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+    if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
       new ctor(props, context); // eslint-disable-line no-new
     }
   }
@@ -58249,7 +58354,7 @@ function updateForwardRef(current$$1, workInProgress, Component, nextProps, rend
     setCurrentPhase('render');
     nextChildren = renderWithHooks(current$$1, workInProgress, render, nextProps, ref, renderExpirationTime);
 
-    if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+    if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
       // Only double-render components with Hooks
       if (workInProgress.memoizedState !== null) {
         nextChildren = renderWithHooks(current$$1, workInProgress, render, nextProps, ref, renderExpirationTime);
@@ -58453,7 +58558,7 @@ function updateFunctionComponent(current$$1, workInProgress, Component, nextProp
     setCurrentPhase('render');
     nextChildren = renderWithHooks(current$$1, workInProgress, Component, nextProps, context, renderExpirationTime);
 
-    if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+    if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
       // Only double-render components with Hooks
       if (workInProgress.memoizedState !== null) {
         nextChildren = renderWithHooks(current$$1, workInProgress, Component, nextProps, context, renderExpirationTime);
@@ -58576,7 +58681,7 @@ function finishClassComponent(current$$1, workInProgress, Component, shouldUpdat
       setCurrentPhase('render');
       nextChildren = instance.render();
 
-      if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+      if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
         instance.render();
       }
 
@@ -58949,7 +59054,7 @@ function mountIndeterminateComponent(_current, workInProgress, Component, render
         warningWithoutStack$1(false, '%s uses the legacy contextTypes API which is no longer supported. ' + 'Use React.createContext() with React.useContext() instead.', getComponentName(Component) || 'Unknown');
       }
 
-      if (debugRenderPhaseSideEffects || debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
+      if (debugRenderPhaseSideEffectsForStrictMode && workInProgress.mode & StrictMode) {
         // Only double-render components with Hooks
         if (workInProgress.memoizedState !== null) {
           value = renderWithHooks(null, workInProgress, Component, props, context, renderExpirationTime);
@@ -59125,8 +59230,8 @@ function updateSuspenseComponent(current$$1, workInProgress, renderExpirationTim
       var primaryChildFragment = createFiberFromFragment(null, mode, NoWork, null);
       primaryChildFragment.return = workInProgress;
 
-      if ((workInProgress.mode & BatchedMode) === NoMode) {
-        // Outside of batched mode, we commit the effects from the
+      if ((workInProgress.mode & BlockingMode) === NoMode) {
+        // Outside of blocking mode, we commit the effects from the
         // partially completed, timed-out tree, too.
         var progressedState = workInProgress.memoizedState;
         var progressedPrimaryChild = progressedState !== null ? workInProgress.child.child : workInProgress.child;
@@ -59189,8 +59294,8 @@ function updateSuspenseComponent(current$$1, workInProgress, renderExpirationTim
 
             _primaryChildFragment.child = null;
 
-            if ((workInProgress.mode & BatchedMode) === NoMode) {
-              // Outside of batched mode, we commit the effects from the
+            if ((workInProgress.mode & BlockingMode) === NoMode) {
+              // Outside of blocking mode, we commit the effects from the
               // partially completed, timed-out tree, too.
               var _progressedChild = _primaryChildFragment.child = workInProgress.child;
 
@@ -59249,8 +59354,8 @@ function updateSuspenseComponent(current$$1, workInProgress, renderExpirationTim
 
         _primaryChildFragment2.return = workInProgress;
 
-        if ((workInProgress.mode & BatchedMode) === NoMode) {
-          // Outside of batched mode, we commit the effects from the
+        if ((workInProgress.mode & BlockingMode) === NoMode) {
+          // Outside of blocking mode, we commit the effects from the
           // partially completed, timed-out tree, too.
           var _progressedState = workInProgress.memoizedState;
 
@@ -59334,8 +59439,8 @@ function updateSuspenseComponent(current$$1, workInProgress, renderExpirationTim
         // primaryChildFragment.effectTag |= Placement;
 
 
-        if ((workInProgress.mode & BatchedMode) === NoMode) {
-          // Outside of batched mode, we commit the effects from the
+        if ((workInProgress.mode & BlockingMode) === NoMode) {
+          // Outside of blocking mode, we commit the effects from the
           // partially completed, timed-out tree, too.
           var _progressedState2 = workInProgress.memoizedState;
 
@@ -59404,9 +59509,9 @@ function retrySuspenseComponentWithoutHydrating(current$$1, workInProgress, rend
 function mountDehydratedSuspenseComponent(workInProgress, suspenseInstance, renderExpirationTime) {
   // During the first pass, we'll bail out and not drill into the children.
   // Instead, we'll leave the content in place and try to hydrate it later.
-  if ((workInProgress.mode & BatchedMode) === NoMode) {
+  if ((workInProgress.mode & BlockingMode) === NoMode) {
     {
-      warning$1(false, 'Cannot hydrate Suspense in legacy mode. Switch from ' + 'ReactDOM.hydrate(element, container) to ' + 'ReactDOM.createSyncRoot(container, { hydrate: true })' + '.render(element) or remove the Suspense components from ' + 'the server rendered components.');
+      warning$1(false, 'Cannot hydrate Suspense in legacy mode. Switch from ' + 'ReactDOM.hydrate(element, container) to ' + 'ReactDOM.createBlockingRoot(container, { hydrate: true })' + '.render(element) or remove the Suspense components from ' + 'the server rendered components.');
     }
 
     workInProgress.expirationTime = Sync;
@@ -59448,7 +59553,7 @@ function updateDehydratedSuspenseComponent(current$$1, workInProgress, suspenseI
   // but after we've already committed once.
   warnIfHydrating();
 
-  if ((workInProgress.mode & BatchedMode) === NoMode) {
+  if ((workInProgress.mode & BlockingMode) === NoMode) {
     return retrySuspenseComponentWithoutHydrating(current$$1, workInProgress, renderExpirationTime);
   }
 
@@ -59770,8 +59875,8 @@ function updateSuspenseListComponent(current$$1, workInProgress, renderExpiratio
 
   pushSuspenseContext(workInProgress, suspenseContext);
 
-  if ((workInProgress.mode & BatchedMode) === NoMode) {
-    // Outside of batched mode, SuspenseList doesn't work so we just
+  if ((workInProgress.mode & BlockingMode) === NoMode) {
+    // Outside of blocking mode, SuspenseList doesn't work so we just
     // use make it a noop by treating it as the default revealOrder.
     workInProgress.memoizedState = null;
   } else {
@@ -60143,7 +60248,12 @@ function beginWork$1(current$$1, workInProgress, renderExpirationTime) {
 
         case Profiler:
           if (enableProfilerTimer) {
-            workInProgress.effectTag |= Update;
+            // Profiler should only call onRender when one of its descendants actually rendered.
+            var hasChildWork = workInProgress.childExpirationTime >= renderExpirationTime;
+
+            if (hasChildWork) {
+              workInProgress.effectTag |= Update;
+            }
           }
 
           break;
@@ -60199,10 +60309,11 @@ function beginWork$1(current$$1, workInProgress, renderExpirationTime) {
         case SuspenseListComponent:
           {
             var didSuspendBefore = (current$$1.effectTag & DidCapture) !== NoEffect;
-            var hasChildWork = workInProgress.childExpirationTime >= renderExpirationTime;
+
+            var _hasChildWork = workInProgress.childExpirationTime >= renderExpirationTime;
 
             if (didSuspendBefore) {
-              if (hasChildWork) {
+              if (_hasChildWork) {
                 // If something was in fallback state last time, and we have all the
                 // same children then we're still in progressive loading state.
                 // Something might get unblocked by state updates or retries in the
@@ -60231,7 +60342,7 @@ function beginWork$1(current$$1, workInProgress, renderExpirationTime) {
 
             pushSuspenseContext(workInProgress, suspenseStackCursor.current);
 
-            if (hasChildWork) {
+            if (_hasChildWork) {
               break;
             } else {
               // If none of the children had any work, that means that none of
@@ -60414,14 +60525,19 @@ function getSuspenseFallbackChild(fiber) {
   return fiber.child.sibling.child;
 }
 
+var emptyObject$1 = {};
+
 function collectScopedNodes(node, fn, scopedNodes) {
   if (enableScopeAPI) {
     if (node.tag === HostComponent) {
       var _type = node.type,
-          memoizedProps = node.memoizedProps;
+          memoizedProps = node.memoizedProps,
+          stateNode = node.stateNode;
 
-      if (fn(_type, memoizedProps) === true) {
-        scopedNodes.push(getPublicInstance(node.stateNode));
+      var _instance = getPublicInstance(stateNode);
+
+      if (_instance !== null && fn(_type, memoizedProps || emptyObject$1, _instance) === true) {
+        scopedNodes.push(_instance);
       }
     }
 
@@ -60441,10 +60557,13 @@ function collectFirstScopedNode(node, fn) {
   if (enableScopeAPI) {
     if (node.tag === HostComponent) {
       var _type2 = node.type,
-          memoizedProps = node.memoizedProps;
+          memoizedProps = node.memoizedProps,
+          stateNode = node.stateNode;
 
-      if (fn(_type2, memoizedProps) === true) {
-        return getPublicInstance(node.stateNode);
+      var _instance2 = getPublicInstance(stateNode);
+
+      if (_instance2 !== null && fn(_type2, memoizedProps, _instance2) === true) {
+        return _instance2;
       }
     }
 
@@ -61328,12 +61447,12 @@ function completeWork(current, workInProgress, renderExpirationTime) {
         }
 
         if (nextDidTimeout && !prevDidTimeout) {
-          // If this subtreee is running in batched mode we can suspend,
+          // If this subtreee is running in blocking mode we can suspend,
           // otherwise we won't suspend.
           // TODO: This will still suspend a synchronous tree if anything
           // in the concurrent tree already suspended during this render.
           // This is a known bug.
-          if ((workInProgress.mode & BatchedMode) !== NoMode) {
+          if ((workInProgress.mode & BlockingMode) !== NoMode) {
             // TODO: Move this back to throwException because this is too late
             // if this is a large tree which is common for initial loads. We
             // don't know if we should restart a render or not until we get
@@ -61522,9 +61641,9 @@ function completeWork(current, workInProgress, renderExpirationTime) {
 
               cutOffTailIfNeeded(renderState, true); // This might have been modified.
 
-              if (renderState.tail === null && renderState.tailMode === 'hidden') {
+              if (renderState.tail === null && renderState.tailMode === 'hidden' && !renderedTail.alternate) {
                 // We need to delete the row we just rendered.
-                // Reset the effect list to what it w as before we rendered this
+                // Reset the effect list to what it was before we rendered this
                 // child. The nested children have already appended themselves.
                 var lastEffect = workInProgress.lastEffect = renderState.lastEffect; // Remove any effects that were appended after this point.
 
@@ -63440,17 +63559,17 @@ function throwException(root, returnFiber, sourceFiber, value, renderExpirationT
           _workInProgress.updateQueue = updateQueue;
         } else {
           thenables.add(thenable);
-        } // If the boundary is outside of batched mode, we should *not*
+        } // If the boundary is outside of blocking mode, we should *not*
         // suspend the commit. Pretend as if the suspended component rendered
         // null and keep rendering. In the commit phase, we'll schedule a
         // subsequent synchronous update to re-render the Suspense.
         //
         // Note: It doesn't matter whether the component that suspended was
-        // inside a batched mode tree. If the Suspense is outside of it, we
+        // inside a blocking mode tree. If the Suspense is outside of it, we
         // should *not* suspend the commit.
 
 
-        if ((_workInProgress.mode & BatchedMode) === NoMode) {
+        if ((_workInProgress.mode & BlockingMode) === NoMode) {
           _workInProgress.effectTag |= DidCapture; // We're going to commit this fiber even though it didn't complete.
           // But we shouldn't call any lifecycle methods or callbacks. Remove
           // all lifecycle effect tags.
@@ -63697,7 +63816,7 @@ function getCurrentTime() {
 function computeExpirationForFiber(currentTime, fiber, suspenseConfig) {
   var mode = fiber.mode;
 
-  if ((mode & BatchedMode) === NoMode) {
+  if ((mode & BlockingMode) === NoMode) {
     return Sync;
   }
 
@@ -63798,7 +63917,7 @@ function scheduleUpdateOnFiber(fiber, expirationTime) {
         // a batch. This is intentionally inside scheduleUpdateOnFiber instead of
         // scheduleCallbackForFiber to preserve the ability to schedule a callback
         // without immediately flushing it. We only do this for user-initiated
-        // updates, to preserve historical behavior of sync mode.
+        // updates, to preserve historical behavior of legacy mode.
         flushSyncCallbackQueue();
       }
     }
@@ -65017,7 +65136,16 @@ function commitRoot(root) {
 }
 
 function commitRootImpl(root, renderPriorityLevel) {
-  flushPassiveEffects();
+  do {
+    // `flushPassiveEffects` will call `flushSyncUpdateQueue` at the end, which
+    // means `flushPassiveEffects` will sometimes result in additional
+    // passive effects. So we need to keep flushing in a loop until there are
+    // no more pending effects.
+    // TODO: Might be better if `flushPassiveEffects` did not automatically
+    // flush synchronous work at the end, to avoid factoring hazards like this.
+    flushPassiveEffects();
+  } while (rootWithPendingPassiveEffects !== null);
+
   flushRenderPhaseStrictModeWarningsInDEV();
 
   if (!((executionContext & (RenderContext | CommitContext)) === NoContext)) {
@@ -65944,7 +66072,7 @@ var didWarnAboutUnmockedScheduler = false; // TODO Before we release concurrent 
 function warnIfUnmockedScheduler(fiber) {
   {
     if (didWarnAboutUnmockedScheduler === false && Scheduler.unstable_flushAllWithoutAsserting === undefined) {
-      if (fiber.mode & BatchedMode || fiber.mode & ConcurrentMode) {
+      if (fiber.mode & BlockingMode || fiber.mode & ConcurrentMode) {
         didWarnAboutUnmockedScheduler = true;
         warningWithoutStack$1(false, 'In Concurrent or Sync modes, the "scheduler" module needs to be mocked ' + 'to guarantee consistent behaviour across tests and browsers. ' + 'For example, with jest: \n' + "jest.mock('scheduler', () => require('scheduler/unstable_mock'));\n\n" + 'For more info, visit https://fb.me/react-mock-scheduler');
       } else if (warnAboutUnmockedScheduler === true) {
@@ -66587,9 +66715,9 @@ function createHostRootFiber(tag) {
   var mode;
 
   if (tag === ConcurrentRoot) {
-    mode = ConcurrentMode | BatchedMode | StrictMode;
-  } else if (tag === BatchedRoot) {
-    mode = BatchedMode | StrictMode;
+    mode = ConcurrentMode | BlockingMode | StrictMode;
+  } else if (tag === BlockingRoot) {
+    mode = BlockingMode | StrictMode;
   } else {
     mode = NoMode;
   }
@@ -66631,7 +66759,7 @@ key, pendingProps, owner, mode, expirationTime) {
 
       case REACT_CONCURRENT_MODE_TYPE:
         fiberTag = Mode;
-        mode |= ConcurrentMode | BatchedMode | StrictMode;
+        mode |= ConcurrentMode | BlockingMode | StrictMode;
         break;
 
       case REACT_STRICT_MODE_TYPE:
@@ -67414,63 +67542,44 @@ function injectIntoDevTools(devToolsConfig) {
 // This file intentionally does *not* have the Flow annotation.
 // Don't add it. See `./inline-typed.js` for an explanation.
 
-function createPortal$1(children, containerInfo, // TODO: figure out the API for cross-renderer implementation.
-implementation) {
-  var key = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  return {
-    // This tag allow us to uniquely identify this as a React Portal
-    $$typeof: REACT_PORTAL_TYPE,
-    key: key == null ? null : '' + key,
-    children: children,
-    containerInfo: containerInfo,
-    implementation: implementation
-  };
-}
-
-// TODO: this is special because it gets imported during build.
-
-var ReactVersion = '16.11.0';
-
 // TODO: This type is shared between the reconciler and ReactDOM, but will
 // eventually be lifted out to the renderer.
-setAttemptSynchronousHydration(attemptSynchronousHydration$1);
-setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
-setAttemptContinuousHydration(attemptContinuousHydration$1);
-setAttemptHydrationAtCurrentPriority(attemptHydrationAtCurrentPriority$1);
-var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
-var topLevelUpdateWarnings;
-var warnOnInvalidCallback;
-var didWarnAboutUnstableCreatePortal = false;
-
-{
-  if (typeof Map !== 'function' || // $FlowIssue Flow incorrectly thinks Map has no prototype
-  Map.prototype == null || typeof Map.prototype.forEach !== 'function' || typeof Set !== 'function' || // $FlowIssue Flow incorrectly thinks Set has no prototype
-  Set.prototype == null || typeof Set.prototype.clear !== 'function' || typeof Set.prototype.forEach !== 'function') {
-    warningWithoutStack$1(false, 'React depends on Map and Set built-in types. Make sure that you load a ' + 'polyfill in older browsers. https://fb.me/react-polyfills');
-  }
-
-  topLevelUpdateWarnings = function (container) {
-    if (container._reactRootContainer && container.nodeType !== COMMENT_NODE) {
-      var hostInstance = findHostInstanceWithNoPortals(container._reactRootContainer._internalRoot.current);
-
-      if (hostInstance) {
-        !(hostInstance.parentNode === container) ? warningWithoutStack$1(false, 'render(...): It looks like the React-rendered content of this ' + 'container was removed without using React. This is not ' + 'supported and will cause errors. Instead, call ' + 'ReactDOM.unmountComponentAtNode to empty a container.') : void 0;
-      }
-    }
-
-    var isRootRenderedBySomeReact = !!container._reactRootContainer;
-    var rootEl = getReactRootElementInContainer(container);
-    var hasNonRootReactChild = !!(rootEl && getInstanceFromNode$1(rootEl));
-    !(!hasNonRootReactChild || isRootRenderedBySomeReact) ? warningWithoutStack$1(false, 'render(...): Replacing React-rendered children with a new root ' + 'component. If you intended to update the children of this node, ' + 'you should instead have the existing children update their state ' + 'and render the new components instead of calling ReactDOM.render.') : void 0;
-    !(container.nodeType !== ELEMENT_NODE || !container.tagName || container.tagName.toUpperCase() !== 'BODY') ? warningWithoutStack$1(false, 'render(): Rendering components directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : void 0;
-  };
-
-  warnOnInvalidCallback = function (callback, callerName) {
-    !(callback === null || typeof callback === 'function') ? warningWithoutStack$1(false, '%s(...): Expected the last optional `callback` argument to be a ' + 'function. Instead received: %s.', callerName, callback) : void 0;
-  };
+function ReactDOMRoot(container, options) {
+  this._internalRoot = createRootImpl(container, ConcurrentRoot, options);
 }
 
-setRestoreImplementation(restoreControlledState$$1);
+function ReactDOMBlockingRoot(container, tag, options) {
+  this._internalRoot = createRootImpl(container, tag, options);
+}
+
+ReactDOMRoot.prototype.render = ReactDOMBlockingRoot.prototype.render = function (children, callback) {
+  var root = this._internalRoot;
+  var cb = callback === undefined ? null : callback;
+
+  {
+    warnOnInvalidCallback(cb, 'render');
+  }
+
+  updateContainer(children, root, null, cb);
+};
+
+ReactDOMRoot.prototype.unmount = ReactDOMBlockingRoot.prototype.unmount = function (callback) {
+  var root = this._internalRoot;
+  var cb = callback === undefined ? null : callback;
+
+  {
+    warnOnInvalidCallback(cb, 'render');
+  }
+
+  var container = root.containerInfo;
+  updateContainer(null, root, null, function () {
+    unmarkContainerAsRoot(container);
+
+    if (cb !== null) {
+      cb();
+    }
+  });
+};
 
 function createRootImpl(container, tag, options) {
   // Tag is either LegacyRoot or Concurrent Root
@@ -67487,46 +67596,70 @@ function createRootImpl(container, tag, options) {
   return root;
 }
 
-function ReactSyncRoot(container, tag, options) {
-  this._internalRoot = createRootImpl(container, tag, options);
-}
-
-function ReactRoot(container, options) {
-  this._internalRoot = createRootImpl(container, ConcurrentRoot, options);
-}
-
-ReactRoot.prototype.render = ReactSyncRoot.prototype.render = function (children, callback) {
-  var root = this._internalRoot;
-  callback = callback === undefined ? null : callback;
-
-  {
-    warnOnInvalidCallback(callback, 'render');
+function createRoot(container, options) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error("createRoot(...): Target container is not a DOM element.");
+    }
   }
 
-  updateContainer(children, root, null, callback);
-};
-
-ReactRoot.prototype.unmount = ReactSyncRoot.prototype.unmount = function (callback) {
-  var root = this._internalRoot;
-  callback = callback === undefined ? null : callback;
-
-  {
-    warnOnInvalidCallback(callback, 'render');
+  warnIfReactDOMContainerInDEV(container);
+  return new ReactDOMRoot(container, options);
+}
+function createBlockingRoot(container, options) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error("createRoot(...): Target container is not a DOM element.");
+    }
   }
 
-  updateContainer(null, root, null, callback);
-};
-/**
- * True if the supplied DOM node is a valid node element.
- *
- * @param {?DOMElement} node The candidate DOM node.
- * @return {boolean} True if the DOM is a valid DOM node.
- * @internal
- */
-
-
+  warnIfReactDOMContainerInDEV(container);
+  return new ReactDOMBlockingRoot(container, BlockingRoot, options);
+}
+function createLegacyRoot(container, options) {
+  return new ReactDOMBlockingRoot(container, LegacyRoot, options);
+}
 function isValidContainer(node) {
   return !!(node && (node.nodeType === ELEMENT_NODE || node.nodeType === DOCUMENT_NODE || node.nodeType === DOCUMENT_FRAGMENT_NODE || node.nodeType === COMMENT_NODE && node.nodeValue === ' react-mount-point-unstable '));
+}
+function warnOnInvalidCallback(callback, callerName) {
+  {
+    !(callback === null || typeof callback === 'function') ? warningWithoutStack$1(false, '%s(...): Expected the last optional `callback` argument to be a ' + 'function. Instead received: %s.', callerName, callback) : void 0;
+  }
+}
+
+function warnIfReactDOMContainerInDEV(container) {
+  {
+    if (isContainerMarkedAsRoot(container)) {
+      if (container._reactRootContainer) {
+        warningWithoutStack$1(false, 'You are calling ReactDOM.createRoot() on a container that was previously ' + 'passed to ReactDOM.render(). This is not supported.');
+      } else {
+        warningWithoutStack$1(false, 'You are calling ReactDOM.createRoot() on a container that ' + 'has already been passed to createRoot() before. Instead, call ' + 'root.render() on the existing root instead if you want to update it.');
+      }
+    }
+  }
+}
+
+var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
+var topLevelUpdateWarnings;
+var warnedAboutHydrateAPI = false;
+
+{
+  topLevelUpdateWarnings = function (container) {
+    if (container._reactRootContainer && container.nodeType !== COMMENT_NODE) {
+      var hostInstance = findHostInstanceWithNoPortals(container._reactRootContainer._internalRoot.current);
+
+      if (hostInstance) {
+        !(hostInstance.parentNode === container) ? warningWithoutStack$1(false, 'render(...): It looks like the React-rendered content of this ' + 'container was removed without using React. This is not ' + 'supported and will cause errors. Instead, call ' + 'ReactDOM.unmountComponentAtNode to empty a container.') : void 0;
+      }
+    }
+
+    var isRootRenderedBySomeReact = !!container._reactRootContainer;
+    var rootEl = getReactRootElementInContainer(container);
+    var hasNonRootReactChild = !!(rootEl && getInstanceFromNode$1(rootEl));
+    !(!hasNonRootReactChild || isRootRenderedBySomeReact) ? warningWithoutStack$1(false, 'render(...): Replacing React-rendered children with a new root ' + 'component. If you intended to update the children of this node, ' + 'you should instead have the existing children update their state ' + 'and render the new components instead of calling ReactDOM.render.') : void 0;
+    !(container.nodeType !== ELEMENT_NODE || !container.tagName || container.tagName.toUpperCase() !== 'BODY') ? warningWithoutStack$1(false, 'render(): Rendering components directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : void 0;
+  };
 }
 
 function getReactRootElementInContainer(container) {
@@ -67545,9 +67678,6 @@ function shouldHydrateDueToLegacyHeuristic(container) {
   var rootElement = getReactRootElementInContainer(container);
   return !!(rootElement && rootElement.nodeType === ELEMENT_NODE && rootElement.hasAttribute(ROOT_ATTRIBUTE_NAME));
 }
-
-setBatchingImplementation(batchedUpdates$1, discreteUpdates$1, flushDiscreteUpdates, batchedEventUpdates$1);
-var warnedAboutHydrateAPI = false;
 
 function legacyCreateRootFromDOMContainer(container, forceHydrate) {
   var shouldHydrate = forceHydrate || shouldHydrateDueToLegacyHeuristic(container); // First clear any existing content.
@@ -67573,10 +67703,9 @@ function legacyCreateRootFromDOMContainer(container, forceHydrate) {
       warnedAboutHydrateAPI = true;
       lowPriorityWarningWithoutStack$1(false, 'render(): Calling ReactDOM.render() to hydrate server-rendered markup ' + 'will stop working in React v17. Replace the ReactDOM.render() call ' + 'with ReactDOM.hydrate() if you want React to attach to the server HTML.');
     }
-  } // Legacy roots are not batched.
+  }
 
-
-  return new ReactSyncRoot(container, LegacyRoot, shouldHydrate ? {
+  return createLegacyRoot(container, shouldHydrate ? {
     hydrate: true
   } : undefined);
 }
@@ -67630,6 +67759,161 @@ function legacyRenderSubtreeIntoContainer(parentComponent, children, container, 
   return getPublicRootInstance(fiberRoot);
 }
 
+function findDOMNode(componentOrElement) {
+  {
+    var owner = ReactCurrentOwner$1.current;
+
+    if (owner !== null && owner.stateNode !== null) {
+      var warnedAboutRefsInRender = owner.stateNode._warnedAboutRefsInRender;
+      !warnedAboutRefsInRender ? warningWithoutStack$1(false, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentName(owner.type) || 'A component') : void 0;
+      owner.stateNode._warnedAboutRefsInRender = true;
+    }
+  }
+
+  if (componentOrElement == null) {
+    return null;
+  }
+
+  if (componentOrElement.nodeType === ELEMENT_NODE) {
+    return componentOrElement;
+  }
+
+  {
+    return findHostInstanceWithWarning(componentOrElement, 'findDOMNode');
+  }
+
+  return findHostInstance(componentOrElement);
+}
+function hydrate(element, container, callback) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error("Target container is not a DOM element.");
+    }
+  }
+
+  {
+    var isModernRoot = isContainerMarkedAsRoot(container) && container._reactRootContainer === undefined;
+
+    if (isModernRoot) {
+      warningWithoutStack$1(false, 'You are calling ReactDOM.hydrate() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. ' + 'Did you mean to call createRoot(container, {hydrate: true}).render(element)?');
+    }
+  } // TODO: throw or warn if we couldn't hydrate?
+
+
+  return legacyRenderSubtreeIntoContainer(null, element, container, true, callback);
+}
+function render(element, container, callback) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error("Target container is not a DOM element.");
+    }
+  }
+
+  {
+    var isModernRoot = isContainerMarkedAsRoot(container) && container._reactRootContainer === undefined;
+
+    if (isModernRoot) {
+      warningWithoutStack$1(false, 'You are calling ReactDOM.render() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. ' + 'Did you mean to call root.render(element)?');
+    }
+  }
+
+  return legacyRenderSubtreeIntoContainer(null, element, container, false, callback);
+}
+function unstable_renderSubtreeIntoContainer(parentComponent, element, containerNode, callback) {
+  if (!isValidContainer(containerNode)) {
+    {
+      throw Error("Target container is not a DOM element.");
+    }
+  }
+
+  if (!(parentComponent != null && has(parentComponent))) {
+    {
+      throw Error("parentComponent must be a valid React Component");
+    }
+  }
+
+  return legacyRenderSubtreeIntoContainer(parentComponent, element, containerNode, false, callback);
+}
+function unmountComponentAtNode(container) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error("unmountComponentAtNode(...): Target container is not a DOM element.");
+    }
+  }
+
+  {
+    var isModernRoot = isContainerMarkedAsRoot(container) && container._reactRootContainer === undefined;
+
+    if (isModernRoot) {
+      warningWithoutStack$1(false, 'You are calling ReactDOM.unmountComponentAtNode() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. Did you mean to call root.unmount()?');
+    }
+  }
+
+  if (container._reactRootContainer) {
+    {
+      var rootEl = getReactRootElementInContainer(container);
+      var renderedByDifferentReact = rootEl && !getInstanceFromNode$1(rootEl);
+      !!renderedByDifferentReact ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by another copy of React.') : void 0;
+    } // Unmount should not be batched.
+
+
+    unbatchedUpdates(function () {
+      legacyRenderSubtreeIntoContainer(null, null, container, false, function () {
+        container._reactRootContainer = null;
+        unmarkContainerAsRoot(container);
+      });
+    }); // If you call unmountComponentAtNode twice in quick succession, you'll
+    // get `true` twice. That's probably fine?
+
+    return true;
+  } else {
+    {
+      var _rootEl = getReactRootElementInContainer(container);
+
+      var hasNonRootReactChild = !!(_rootEl && getInstanceFromNode$1(_rootEl)); // Check if the container itself is a React root node.
+
+      var isContainerReactRoot = container.nodeType === ELEMENT_NODE && isValidContainer(container.parentNode) && !!container.parentNode._reactRootContainer;
+      !!hasNonRootReactChild ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by React and is not a top-level container. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its container.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.') : void 0;
+    }
+
+    return false;
+  }
+}
+
+function createPortal$1(children, containerInfo, // TODO: figure out the API for cross-renderer implementation.
+implementation) {
+  var key = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  return {
+    // This tag allow us to uniquely identify this as a React Portal
+    $$typeof: REACT_PORTAL_TYPE,
+    key: key == null ? null : '' + key,
+    children: children,
+    containerInfo: containerInfo,
+    implementation: implementation
+  };
+}
+
+// TODO: this is special because it gets imported during build.
+
+var ReactVersion = '16.12.0';
+
+setAttemptSynchronousHydration(attemptSynchronousHydration$1);
+setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
+setAttemptContinuousHydration(attemptContinuousHydration$1);
+setAttemptHydrationAtCurrentPriority(attemptHydrationAtCurrentPriority$1);
+var didWarnAboutUnstableCreatePortal = false;
+
+{
+  if (typeof Map !== 'function' || // $FlowIssue Flow incorrectly thinks Map has no prototype
+  Map.prototype == null || typeof Map.prototype.forEach !== 'function' || typeof Set !== 'function' || // $FlowIssue Flow incorrectly thinks Set has no prototype
+  Set.prototype == null || typeof Set.prototype.clear !== 'function' || typeof Set.prototype.forEach !== 'function') {
+    warningWithoutStack$1(false, 'React depends on Map and Set built-in types. Make sure that you load a ' + 'polyfill in older browsers. https://fb.me/react-polyfills');
+  }
+}
+
+setRestoreImplementation(restoreControlledState$$1);
+setBatchingImplementation(batchedUpdates$1, discreteUpdates$1, flushDiscreteUpdates, batchedEventUpdates$1);
+
 function createPortal$$1(children, container) {
   var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
@@ -67645,113 +67929,12 @@ function createPortal$$1(children, container) {
 
 var ReactDOM = {
   createPortal: createPortal$$1,
-  findDOMNode: function (componentOrElement) {
-    {
-      var owner = ReactCurrentOwner.current;
-
-      if (owner !== null && owner.stateNode !== null) {
-        var warnedAboutRefsInRender = owner.stateNode._warnedAboutRefsInRender;
-        !warnedAboutRefsInRender ? warningWithoutStack$1(false, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentName(owner.type) || 'A component') : void 0;
-        owner.stateNode._warnedAboutRefsInRender = true;
-      }
-    }
-
-    if (componentOrElement == null) {
-      return null;
-    }
-
-    if (componentOrElement.nodeType === ELEMENT_NODE) {
-      return componentOrElement;
-    }
-
-    {
-      return findHostInstanceWithWarning(componentOrElement, 'findDOMNode');
-    }
-
-    return findHostInstance(componentOrElement);
-  },
-  hydrate: function (element, container, callback) {
-    if (!isValidContainer(container)) {
-      {
-        throw Error("Target container is not a DOM element.");
-      }
-    }
-
-    {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.hydrate() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. ' + 'Did you mean to call createRoot(container, {hydrate: true}).render(element)?') : void 0;
-    } // TODO: throw or warn if we couldn't hydrate?
-
-
-    return legacyRenderSubtreeIntoContainer(null, element, container, true, callback);
-  },
-  render: function (element, container, callback) {
-    if (!isValidContainer(container)) {
-      {
-        throw Error("Target container is not a DOM element.");
-      }
-    }
-
-    {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.render() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. ' + 'Did you mean to call root.render(element)?') : void 0;
-    }
-
-    return legacyRenderSubtreeIntoContainer(null, element, container, false, callback);
-  },
-  unstable_renderSubtreeIntoContainer: function (parentComponent, element, containerNode, callback) {
-    if (!isValidContainer(containerNode)) {
-      {
-        throw Error("Target container is not a DOM element.");
-      }
-    }
-
-    if (!(parentComponent != null && has(parentComponent))) {
-      {
-        throw Error("parentComponent must be a valid React Component");
-      }
-    }
-
-    return legacyRenderSubtreeIntoContainer(parentComponent, element, containerNode, false, callback);
-  },
-  unmountComponentAtNode: function (container) {
-    if (!isValidContainer(container)) {
-      {
-        throw Error("unmountComponentAtNode(...): Target container is not a DOM element.");
-      }
-    }
-
-    {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.unmountComponentAtNode() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. Did you mean to call root.unmount()?') : void 0;
-    }
-
-    if (container._reactRootContainer) {
-      {
-        var rootEl = getReactRootElementInContainer(container);
-        var renderedByDifferentReact = rootEl && !getInstanceFromNode$1(rootEl);
-        !!renderedByDifferentReact ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by another copy of React.') : void 0;
-      } // Unmount should not be batched.
-
-
-      unbatchedUpdates(function () {
-        legacyRenderSubtreeIntoContainer(null, null, container, false, function () {
-          container._reactRootContainer = null;
-        });
-      }); // If you call unmountComponentAtNode twice in quick succession, you'll
-      // get `true` twice. That's probably fine?
-
-      return true;
-    } else {
-      {
-        var _rootEl = getReactRootElementInContainer(container);
-
-        var hasNonRootReactChild = !!(_rootEl && getInstanceFromNode$1(_rootEl)); // Check if the container itself is a React root node.
-
-        var isContainerReactRoot = container.nodeType === ELEMENT_NODE && isValidContainer(container.parentNode) && !!container.parentNode._reactRootContainer;
-        !!hasNonRootReactChild ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by React and is not a top-level container. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its container.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.') : void 0;
-      }
-
-      return false;
-    }
-  },
+  // Legacy
+  findDOMNode: findDOMNode,
+  hydrate: hydrate,
+  render: render,
+  unstable_renderSubtreeIntoContainer: unstable_renderSubtreeIntoContainer,
+  unmountComponentAtNode: unmountComponentAtNode,
   // Temporary alias since we already shipped React 16 RC with it.
   // TODO: remove in React 17.
   unstable_createPortal: function () {
@@ -67771,38 +67954,9 @@ var ReactDOM = {
   }
 };
 
-function createRoot(container, options) {
-  if (!isValidContainer(container)) {
-    {
-      throw Error("createRoot(...): Target container is not a DOM element.");
-    }
-  }
-
-  warnIfReactDOMContainerInDEV(container);
-  return new ReactRoot(container, options);
-}
-
-function createSyncRoot(container, options) {
-  if (!isValidContainer(container)) {
-    {
-      throw Error("createRoot(...): Target container is not a DOM element.");
-    }
-  }
-
-  warnIfReactDOMContainerInDEV(container);
-  return new ReactSyncRoot(container, BatchedRoot, options);
-}
-
-function warnIfReactDOMContainerInDEV(container) {
-  {
-    !!container._reactRootContainer ? warningWithoutStack$1(false, 'You are calling ReactDOM.createRoot() on a container that was previously ' + 'passed to ReactDOM.render(). This is not supported.') : void 0;
-    container._reactHasBeenPassedToCreateRootDEV = true;
-  }
-}
-
 if (exposeConcurrentModeAPIs) {
   ReactDOM.createRoot = createRoot;
-  ReactDOM.createSyncRoot = createSyncRoot;
+  ReactDOM.createBlockingRoot = createBlockingRoot;
   ReactDOM.unstable_discreteUpdates = discreteUpdates$1;
   ReactDOM.unstable_flushDiscreteUpdates = flushDiscreteUpdates;
   ReactDOM.unstable_flushControlled = flushControlled;
@@ -67896,6 +68050,1217 @@ function checkDCE() {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/react-hook-form/dist/react-hook-form.es.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-hook-form/dist/react-hook-form.es.js ***!
+  \*****************************************************************/
+/*! exports provided: default, FormContext, useFormContext */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormContext", function() { return FormContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useFormContext", function() { return useFormContext; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+
+const VALIDATION_MODE = {
+    onBlur: 'onBlur',
+    onChange: 'onChange',
+    onSubmit: 'onSubmit',
+};
+const RADIO_INPUT = 'radio';
+const UNDEFINED = 'undefined';
+const EVENTS = {
+    BLUR: 'blur',
+    CHANGE: 'change',
+    INPUT: 'input',
+};
+const INPUT_VALIDATION_RULES = {
+    max: 'max',
+    min: 'min',
+    maxLength: 'maxLength',
+    minLength: 'minLength',
+    pattern: 'pattern',
+    required: 'required',
+    validate: 'validate',
+};
+
+function attachEventListeners({ field, validateAndStateUpdate, isRadioOrCheckbox, }) {
+    const { ref } = field;
+    if (!ref.addEventListener) {
+        return;
+    }
+    ref.addEventListener(isRadioOrCheckbox ? EVENTS.CHANGE : EVENTS.INPUT, validateAndStateUpdate);
+    ref.addEventListener(EVENTS.BLUR, validateAndStateUpdate);
+}
+
+var isUndefined = (val) => val === undefined;
+
+var isNullOrUndefined = (value) => value === null || isUndefined(value);
+
+var isArray = (value) => Array.isArray(value);
+
+const isObjectType = (value) => typeof value === 'object';
+var isObject = (value) => !isNullOrUndefined(value) && !isArray(value) && isObjectType(value);
+
+const reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
+const reIsPlainProp = /^\w*$/;
+const rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+const reEscapeChar = /\\(\\)?/g;
+const reIsUint = /^(?:0|[1-9]\d*)$/;
+function isIndex(value) {
+    return reIsUint.test(value) && value > -1;
+}
+function isKey(value) {
+    if (isArray(value)) {
+        return false;
+    }
+    return reIsPlainProp.test(value) || !reIsDeepProp.test(value);
+}
+const stringToPath = (string) => {
+    const result = [];
+    string.replace(rePropName, (match, number, quote, string) => {
+        result.push(quote ? string.replace(reEscapeChar, '$1') : number || match);
+    });
+    return result;
+};
+function set(object, path, value) {
+    let index = -1;
+    const tempPath = isKey(path) ? [path] : stringToPath(path);
+    const length = tempPath.length;
+    const lastIndex = length - 1;
+    while (++index < length) {
+        const key = tempPath[index];
+        let newValue = value;
+        if (index !== lastIndex) {
+            const objValue = object[key];
+            newValue =
+                isObject(objValue) || isArray(objValue)
+                    ? objValue
+                    : isIndex(tempPath[index + 1])
+                        ? []
+                        : {};
+        }
+        object[key] = newValue;
+        object = object[key];
+    }
+    return object;
+}
+
+var combineFieldValues = (data) => Object.entries(data).reduce((previous, [key, value]) => {
+    if (!!key.match(/\[.+\]/gi) || key.indexOf('.') > 0) {
+        set(previous, key, value);
+        return previous;
+    }
+    return Object.assign(Object.assign({}, previous), { [key]: value });
+}, {});
+
+var removeAllEventListeners = (ref, validateWithStateUpdate) => {
+    if (!ref.removeEventListener) {
+        return;
+    }
+    ref.removeEventListener(EVENTS.INPUT, validateWithStateUpdate);
+    ref.removeEventListener(EVENTS.CHANGE, validateWithStateUpdate);
+    ref.removeEventListener(EVENTS.BLUR, validateWithStateUpdate);
+};
+
+var isRadioInput = (type) => type === RADIO_INPUT;
+
+var isCheckBoxInput = (type) => type === 'checkbox';
+
+function isDetached(element) {
+    if (!element) {
+        return true;
+    }
+    if (!(element instanceof HTMLElement) ||
+        element.nodeType === Node.DOCUMENT_NODE) {
+        return false;
+    }
+    return isDetached(element.parentNode);
+}
+
+function findRemovedFieldAndRemoveListener(fields, validateWithStateUpdate = () => { }, field, forceDelete) {
+    if (!field) {
+        return;
+    }
+    const { ref, mutationWatcher } = field;
+    if (!ref.type || !fields[ref.name]) {
+        return;
+    }
+    const { name, type } = ref;
+    const options = fields[name];
+    if (isRadioInput(type) || isCheckBoxInput(type)) {
+        if (isArray(options) && options.length) {
+            options.forEach(({ ref }, index) => {
+                const option = options[index];
+                if ((option && isDetached(ref)) || forceDelete) {
+                    const mutationWatcher = option.mutationWatcher;
+                    removeAllEventListeners(option, validateWithStateUpdate);
+                    if (mutationWatcher) {
+                        mutationWatcher.disconnect();
+                    }
+                    options.splice(index, 1);
+                }
+            });
+        }
+        else {
+            delete fields[name];
+        }
+    }
+    else if (isDetached(ref) || forceDelete) {
+        removeAllEventListeners(ref, validateWithStateUpdate);
+        if (mutationWatcher) {
+            mutationWatcher.disconnect();
+        }
+        delete fields[name];
+    }
+}
+
+const defaultReturn = {
+    isValid: false,
+    value: '',
+};
+var getRadioValue = (options) => isArray(options)
+    ? options.reduce((previous, { ref: { checked, value } }) => checked
+        ? {
+            isValid: true,
+            value,
+        }
+        : previous, defaultReturn)
+    : defaultReturn;
+
+var getMultipleSelectValue = (options) => [...options]
+    .filter(({ selected }) => selected)
+    .map(({ value }) => value);
+
+var isMultipleSelect = (type) => type === 'select-multiple';
+
+var isEmptyString = (value) => value === '';
+
+const defaultResult = {
+    value: false,
+    isValid: false,
+};
+const validResult = { value: true, isValid: true };
+var getCheckboxValue = (options) => {
+    if (isArray(options)) {
+        if (options.length > 1) {
+            const values = options
+                .filter(({ ref: { checked } }) => checked)
+                .map(({ ref: { value } }) => value);
+            return { value: values, isValid: !!values.length };
+        }
+        const { checked, value, attributes: { value: valueAttribute }, } = options[0].ref;
+        return checked
+            ? valueAttribute
+                ? isUndefined(value) || isEmptyString(value)
+                    ? validResult
+                    : { value: value, isValid: true }
+                : validResult
+            : defaultResult;
+    }
+    return defaultResult;
+};
+
+function getFieldValue(fields, ref) {
+    const { type, name, options, value, files } = ref;
+    const field = fields[name];
+    if (type === 'file') {
+        return files;
+    }
+    if (isRadioInput(type)) {
+        return field ? getRadioValue(field.options).value : '';
+    }
+    if (isMultipleSelect(type)) {
+        return getMultipleSelectValue(options);
+    }
+    if (isCheckBoxInput(type)) {
+        return field ? getCheckboxValue(field.options).value : false;
+    }
+    return value;
+}
+
+var getFieldsValues = (fields) => Object.values(fields).reduce((previous, { ref, ref: { name } }) => (Object.assign(Object.assign({}, previous), { [name]: getFieldValue(fields, ref) })), {});
+
+var isEmptyObject = (value) => isObject(value) && !Object.keys(value).length;
+
+var isSameError = (error, type, message) => isObject(error) && error.type === type && error.message === message;
+
+function shouldUpdateWithError({ errors, name, error, validFields, fieldsWithValidation, schemaErrors, }) {
+    const isFieldValid = isEmptyObject(error);
+    const isFormValid = isEmptyObject(errors);
+    const currentFieldError = error[name];
+    const existFieldError = errors[name];
+    if ((isFieldValid && validFields.has(name)) ||
+        (existFieldError && existFieldError.isManual)) {
+        return false;
+    }
+    if (isFormValid !== isFieldValid ||
+        (!isFormValid && !existFieldError) ||
+        (isFieldValid &&
+            fieldsWithValidation.has(name) &&
+            !validFields.has(name)) ||
+        (schemaErrors && isEmptyObject(schemaErrors) !== isFormValid)) {
+        return true;
+    }
+    return (currentFieldError &&
+        !isSameError(existFieldError, currentFieldError.type, currentFieldError.message));
+}
+
+var isRegex = (value) => value instanceof RegExp;
+
+var getValueAndMessage = (validationData) => {
+    const isPureObject = isObject(validationData) && !isRegex(validationData);
+    return {
+        value: isPureObject
+            ? validationData.value
+            : validationData,
+        message: isPureObject
+            ? validationData.message
+            : '',
+    };
+};
+
+var isString = (value) => typeof value === 'string';
+
+var displayNativeError = (nativeValidation, ref, message) => {
+    if (nativeValidation && isString(message)) {
+        ref.setCustomValidity(message);
+    }
+};
+
+var isFunction = (value) => typeof value === 'function';
+
+var isBoolean = (value) => typeof value === 'boolean';
+
+function getValidateError(result, ref, nativeError, type = 'validate') {
+    const isStringValue = isString(result);
+    if (isStringValue || (isBoolean(result) && !result)) {
+        const message = isStringValue ? result : '';
+        const error = {
+            type,
+            message,
+            ref,
+        };
+        nativeError(message);
+        return error;
+    }
+}
+
+var appendErrors = (name, validateAllFieldCriteria, errors, type, message) => {
+    if (!validateAllFieldCriteria) {
+        return {};
+    }
+    const error = errors[name] || { types: {} };
+    return Object.assign(Object.assign({}, error), { types: Object.assign(Object.assign({}, error.types), { [type]: message || true }) });
+};
+
+var validateField = async (fields, nativeValidation, validateAllFieldCriteria, { ref, ref: { type, value, name }, options, required, maxLength, minLength, min, max, pattern, validate, }) => {
+    const error = {};
+    const isRadio = isRadioInput(type);
+    const isCheckBox = isCheckBoxInput(type);
+    const isRadioOrCheckbox = isRadio || isCheckBox;
+    const isEmpty = isEmptyString(value);
+    const nativeError = displayNativeError.bind(null, nativeValidation, ref);
+    const typedName = name;
+    const appendErrorsCurry = appendErrors.bind(null, typedName, validateAllFieldCriteria, error);
+    if (required &&
+        ((!isRadio && !isCheckBox && (isEmpty || isNullOrUndefined(value))) ||
+            (isCheckBox && !getCheckboxValue(options).isValid) ||
+            (isRadio && !getRadioValue(options).isValid))) {
+        const message = isString(required)
+            ? required
+            : getValueAndMessage(required).message;
+        error[typedName] = Object.assign({ type: INPUT_VALIDATION_RULES.required, message, ref: isRadioOrCheckbox ? fields[typedName].options[0].ref : ref }, appendErrorsCurry(INPUT_VALIDATION_RULES.required, message));
+        nativeError(message);
+        if (!validateAllFieldCriteria) {
+            return error;
+        }
+    }
+    if (!isNullOrUndefined(min) || !isNullOrUndefined(max)) {
+        let exceedMax;
+        let exceedMin;
+        const { value: maxValue, message: maxMessage } = getValueAndMessage(max);
+        const { value: minValue, message: minMessage } = getValueAndMessage(min);
+        if (type === 'number') {
+            const valueNumber = parseFloat(value);
+            if (!isNullOrUndefined(maxValue)) {
+                exceedMax = valueNumber > maxValue;
+            }
+            if (!isNullOrUndefined(minValue)) {
+                exceedMin = valueNumber < minValue;
+            }
+        }
+        else {
+            if (isString(maxValue)) {
+                exceedMax = new Date(value) > new Date(maxValue);
+            }
+            if (isString(minValue)) {
+                exceedMin = new Date(value) < new Date(minValue);
+            }
+        }
+        if (exceedMax || exceedMin) {
+            const message = exceedMax ? maxMessage : minMessage;
+            error[typedName] = Object.assign({ type: exceedMax
+                    ? INPUT_VALIDATION_RULES.max
+                    : INPUT_VALIDATION_RULES.min, message,
+                ref }, (exceedMax
+                ? appendErrorsCurry(INPUT_VALIDATION_RULES.max, message)
+                : appendErrorsCurry(INPUT_VALIDATION_RULES.min, message)));
+            nativeError(message);
+            if (!validateAllFieldCriteria) {
+                return error;
+            }
+        }
+    }
+    if (isString(value) && !isEmpty && (maxLength || minLength)) {
+        const { value: maxLengthValue, message: maxLengthMessage, } = getValueAndMessage(maxLength);
+        const { value: minLengthValue, message: minLengthMessage, } = getValueAndMessage(minLength);
+        const inputLength = value.toString().length;
+        const exceedMax = maxLength && inputLength > maxLengthValue;
+        const exceedMin = minLength && inputLength < minLengthValue;
+        if (exceedMax || exceedMin) {
+            const message = exceedMax ? maxLengthMessage : minLengthMessage;
+            error[typedName] = Object.assign({ type: exceedMax
+                    ? INPUT_VALIDATION_RULES.maxLength
+                    : INPUT_VALIDATION_RULES.minLength, message,
+                ref }, (exceedMax
+                ? appendErrorsCurry(INPUT_VALIDATION_RULES.maxLength, message)
+                : appendErrorsCurry(INPUT_VALIDATION_RULES.minLength, message)));
+            nativeError(message);
+            if (!validateAllFieldCriteria) {
+                return error;
+            }
+        }
+    }
+    if (pattern && !isEmpty) {
+        const { value: patternValue, message: patternMessage } = getValueAndMessage(pattern);
+        if (isRegex(patternValue) && !patternValue.test(value)) {
+            error[typedName] = Object.assign({ type: INPUT_VALIDATION_RULES.pattern, message: patternMessage, ref }, appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, patternMessage));
+            nativeError(patternMessage);
+            if (!validateAllFieldCriteria) {
+                return error;
+            }
+        }
+    }
+    if (validate) {
+        const fieldValue = getFieldValue(fields, ref);
+        const validateRef = isRadioOrCheckbox && options ? options[0].ref : ref;
+        if (isFunction(validate)) {
+            const result = await validate(fieldValue);
+            const validateError = getValidateError(result, validateRef, nativeError);
+            if (validateError) {
+                error[typedName] = Object.assign(Object.assign({}, validateError), appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message));
+                if (!validateAllFieldCriteria) {
+                    return error;
+                }
+            }
+        }
+        else if (isObject(validate)) {
+            const validateFunctions = Object.entries(validate);
+            const validationResult = await new Promise((resolve) => {
+                validateFunctions.reduce(async (previous, [key, validate], index) => {
+                    if ((!isEmptyObject(await previous) && !validateAllFieldCriteria) ||
+                        !isFunction(validate)) {
+                        return resolve(previous);
+                    }
+                    let result;
+                    const validateResult = await validate(fieldValue);
+                    const validateError = getValidateError(validateResult, validateRef, nativeError, key);
+                    if (validateError) {
+                        result = Object.assign(Object.assign({}, validateError), appendErrorsCurry(key, validateError.message));
+                        if (validateAllFieldCriteria) {
+                            error[typedName] = result;
+                        }
+                    }
+                    else {
+                        result = previous;
+                    }
+                    return validateFunctions.length - 1 === index
+                        ? resolve(result)
+                        : result;
+                }, {});
+            });
+            if (!isEmptyObject(validationResult)) {
+                error[typedName] = Object.assign({ ref: validateRef }, validationResult);
+                if (!validateAllFieldCriteria) {
+                    return error;
+                }
+            }
+        }
+    }
+    if (nativeValidation) {
+        ref.setCustomValidity('');
+    }
+    return error;
+};
+
+const parseErrorSchema = (error, validateAllFieldCriteria) => isArray(error.inner)
+    ? error.inner.reduce((previous, { path, message, type }) => (Object.assign(Object.assign({}, previous), (previous[path] && validateAllFieldCriteria
+        ? {
+            [path]: appendErrors(path, validateAllFieldCriteria, previous, type, message),
+        }
+        : {
+            [path]: Object.assign({ message,
+                type }, (validateAllFieldCriteria
+                ? {
+                    types: { [type]: message || true },
+                }
+                : {})),
+        }))), {})
+    : {
+        [error.path]: { message: error.message, type: error.type },
+    };
+async function validateWithSchema(validationSchema, validationSchemaOption, validateAllFieldCriteria, data) {
+    try {
+        return {
+            result: await validationSchema.validate(data, validationSchemaOption),
+            fieldErrors: {},
+        };
+    }
+    catch (e) {
+        return {
+            result: {},
+            fieldErrors: parseErrorSchema(e, validateAllFieldCriteria),
+        };
+    }
+}
+
+function attachNativeValidation(ref, rules) {
+    Object.entries(rules).forEach(([key, value]) => {
+        if (key === INPUT_VALIDATION_RULES.pattern && isRegex(value)) {
+            ref[key] = value.source;
+        }
+        else {
+            ref[key] = key === INPUT_VALIDATION_RULES.pattern || value;
+        }
+    });
+}
+
+var get = (obj, path, defaultValue) => {
+    const result = path
+        .split(/[,[\].]+?/)
+        .filter(Boolean)
+        .reduce((result, key) => (isNullOrUndefined(result) ? result : result[key]), obj);
+    return isUndefined(result) || result === obj ? defaultValue : result;
+};
+
+var getDefaultValue = (defaultValues, name, defaultValue) => isUndefined(defaultValues[name])
+    ? get(defaultValues, name, defaultValue)
+    : defaultValues[name];
+
+function flatArray(list) {
+    return list.reduce((a, b) => a.concat(isArray(b) ? flatArray(b) : b), []);
+}
+
+var isPrimitive = (value) => isNullOrUndefined(value) || !isObjectType(value);
+
+const getPath = (path, values) => isArray(values)
+    ? values.map((item, index) => {
+        const pathWithIndex = `${path}[${index}]`;
+        return isPrimitive(item) ? pathWithIndex : getPath(pathWithIndex, item);
+    })
+    : Object.entries(values).map(([key, objectValue]) => {
+        const pathWithKey = `${path}.${key}`;
+        return isPrimitive(objectValue)
+            ? pathWithKey
+            : getPath(pathWithKey, objectValue);
+    });
+var getPath$1 = (parentPath, value) => flatArray(getPath(parentPath, value));
+
+var assignWatchFields = (fieldValues, fieldName, watchFields, combinedDefaultValues) => {
+    let value;
+    if (isEmptyObject(fieldValues)) {
+        value = undefined;
+    }
+    else if (!isUndefined(fieldValues[fieldName])) {
+        watchFields.add(fieldName);
+        value = fieldValues[fieldName];
+    }
+    else {
+        value = get(combineFieldValues(fieldValues), fieldName);
+        if (!isUndefined(value)) {
+            getPath$1(fieldName, value).forEach(name => watchFields.add(name));
+        }
+    }
+    return isUndefined(value)
+        ? isObject(combinedDefaultValues)
+            ? getDefaultValue(combinedDefaultValues, fieldName)
+            : combinedDefaultValues
+        : value;
+};
+
+var omitValidFields = (errorFields, validFieldNames) => Object.entries(errorFields).reduce((previous, [name, error]) => validFieldNames.some(validFieldName => validFieldName === name)
+    ? previous
+    : Object.assign(Object.assign({}, previous), { [name]: error }), {});
+
+function onDomRemove(element, onDetachCallback) {
+    const observer = new MutationObserver(() => {
+        if (isDetached(element)) {
+            observer.disconnect();
+            onDetachCallback();
+        }
+    });
+    observer.observe(window.document, {
+        childList: true,
+        subtree: true,
+    });
+    return observer;
+}
+
+var modeChecker = (mode) => ({
+    isOnSubmit: !mode || mode === VALIDATION_MODE.onSubmit,
+    isOnBlur: mode === VALIDATION_MODE.onBlur,
+    isOnChange: mode === VALIDATION_MODE.onChange,
+});
+
+const { useRef, useState, useCallback, useEffect } = react__WEBPACK_IMPORTED_MODULE_0__;
+function useForm({ mode = VALIDATION_MODE.onSubmit, reValidateMode = VALIDATION_MODE.onChange, validationSchema, defaultValues = {}, nativeValidation = false, submitFocusError = true, validationSchemaOption = { abortEarly: false }, validateCriteriaMode, } = {}) {
+    const fieldsRef = useRef({});
+    const validateAllFieldCriteria = validateCriteriaMode === 'all';
+    const errorsRef = useRef({});
+    const schemaErrorsRef = useRef({});
+    const touchedFieldsRef = useRef(new Set());
+    const watchFieldsRef = useRef(new Set());
+    const dirtyFieldsRef = useRef(new Set());
+    const fieldsWithValidationRef = useRef(new Set());
+    const validFieldsRef = useRef(new Set());
+    const defaultValuesRef = useRef({});
+    const isUnMount = useRef(false);
+    const isWatchAllRef = useRef(false);
+    const isSubmittedRef = useRef(false);
+    const isDirtyRef = useRef(false);
+    const submitCountRef = useRef(0);
+    const isSubmittingRef = useRef(false);
+    const isSchemaValidateTriggeredRef = useRef(false);
+    const validateAndUpdateStateRef = useRef();
+    const [, _render] = useState();
+    const { isOnBlur, isOnSubmit } = useRef(modeChecker(mode)).current;
+    const isWindowUndefined = typeof window === UNDEFINED;
+    const isWeb = typeof document !== UNDEFINED &&
+        !isWindowUndefined &&
+        !isUndefined(window.HTMLElement);
+    const isProxyEnabled = !isWindowUndefined && 'Proxy' in window;
+    const readFormState = useRef({
+        dirty: !isProxyEnabled,
+        isSubmitted: isOnSubmit,
+        submitCount: !isProxyEnabled,
+        touched: !isProxyEnabled,
+        isSubmitting: !isProxyEnabled,
+        isValid: !isProxyEnabled,
+    });
+    const { isOnBlur: isReValidateOnBlur, isOnSubmit: isReValidateOnSubmit, } = useRef(modeChecker(reValidateMode)).current;
+    const validationSchemaOptionRef = useRef(validationSchemaOption);
+    const combineErrorsRef = (data) => (Object.assign(Object.assign({}, errorsRef.current), data));
+    const render = useCallback(() => {
+        if (!isUnMount.current) {
+            _render({});
+        }
+    }, []);
+    const validateFieldCurry = useCallback(validateField.bind(null, fieldsRef.current, nativeValidation, validateAllFieldCriteria), []);
+    const validateWithSchemaCurry = useCallback(validateWithSchema.bind(null, validationSchema, validationSchemaOptionRef.current, validateAllFieldCriteria), [validationSchema]);
+    const renderBaseOnError = useCallback((name, error, shouldRender) => {
+        let reRender = shouldRender ||
+            shouldUpdateWithError({
+                errors: errorsRef.current,
+                error,
+                name,
+                validFields: validFieldsRef.current,
+                fieldsWithValidation: fieldsWithValidationRef.current,
+                schemaErrors: isSchemaValidateTriggeredRef.current && schemaErrorsRef.current,
+            });
+        if (isEmptyObject(error)) {
+            if (fieldsWithValidationRef.current.has(name) || validationSchema) {
+                validFieldsRef.current.add(name);
+                reRender = reRender || errorsRef.current[name];
+            }
+            delete errorsRef.current[name];
+        }
+        else {
+            validFieldsRef.current.delete(name);
+            reRender = reRender || !errorsRef.current[name];
+        }
+        errorsRef.current = combineErrorsRef(error);
+        if (reRender) {
+            render();
+            return true;
+        }
+    }, [render, validationSchema]);
+    const setFieldValue = useCallback((name, rawValue) => {
+        const field = fieldsRef.current[name];
+        if (!field) {
+            return false;
+        }
+        const ref = field.ref;
+        const { type } = ref;
+        const options = field.options;
+        const value = isWeb &&
+            ref instanceof window.HTMLElement &&
+            isNullOrUndefined(rawValue)
+            ? ''
+            : rawValue;
+        if (isRadioInput(type) && options) {
+            options.forEach(({ ref: radioRef }) => (radioRef.checked = radioRef.value === value));
+        }
+        else if (isMultipleSelect(type)) {
+            [...ref.options].forEach(selectRef => (selectRef.selected = value.includes(selectRef.value)));
+        }
+        else if (isCheckBoxInput(type) && options) {
+            options.length > 1
+                ? options.forEach(({ ref: checkboxRef }) => (checkboxRef.checked = value.includes(checkboxRef.value)))
+                : (options[0].ref.checked = !!value);
+        }
+        else {
+            ref.value = value;
+        }
+        return type;
+    }, [isWeb]);
+    const setDirty = (name) => {
+        if (!fieldsRef.current[name]) {
+            return false;
+        }
+        const isDirty = defaultValuesRef.current[name] !==
+            getFieldValue(fieldsRef.current, fieldsRef.current[name].ref);
+        const isDirtyChanged = dirtyFieldsRef.current.has(name) !== isDirty;
+        if (isDirty) {
+            dirtyFieldsRef.current.add(name);
+        }
+        else {
+            dirtyFieldsRef.current.delete(name);
+        }
+        isDirtyRef.current = !!dirtyFieldsRef.current.size;
+        return isDirtyChanged && readFormState.current.dirty;
+    };
+    const setInternalValue = useCallback((name, value) => {
+        setFieldValue(name, value);
+        if (setDirty(name) ||
+            (!touchedFieldsRef.current.has(name) && readFormState.current.touched)) {
+            return !!touchedFieldsRef.current.add(name);
+        }
+    }, [setFieldValue]);
+    const executeValidation = useCallback(async ({ name, value, }, shouldRender) => {
+        const field = fieldsRef.current[name];
+        if (!field) {
+            return false;
+        }
+        if (!isUndefined(value)) {
+            setInternalValue(name, value);
+        }
+        if (shouldRender) {
+            render();
+        }
+        const error = await validateFieldCurry(field);
+        renderBaseOnError(name, error);
+        return isEmptyObject(error);
+    }, [render, renderBaseOnError, setInternalValue, validateFieldCurry]);
+    const executeSchemaValidation = useCallback(async (payload, shouldRender) => {
+        const { fieldErrors } = await validateWithSchemaCurry(combineFieldValues(getFieldsValues(fieldsRef.current)));
+        const isMultipleFields = isArray(payload);
+        const names = isArray(payload)
+            ? payload.map(({ name }) => name)
+            : [payload.name];
+        const validFieldNames = names.filter(name => !fieldErrors[name]);
+        const firstFieldName = names[0];
+        const hasError = fieldErrors[firstFieldName];
+        schemaErrorsRef.current = isMultipleFields
+            ? fieldErrors
+            : hasError
+                ? Object.assign(Object.assign({}, schemaErrorsRef.current), { [firstFieldName]: fieldErrors[firstFieldName] }) : omitValidFields(schemaErrorsRef.current, names);
+        isSchemaValidateTriggeredRef.current = true;
+        if (isMultipleFields) {
+            errorsRef.current = omitValidFields(combineErrorsRef(Object.entries(fieldErrors)
+                .filter(([key]) => names.includes(key))
+                .reduce((previous, [name, error]) => (Object.assign(Object.assign({}, previous), { [name]: error })), {})), validFieldNames);
+            render();
+        }
+        else {
+            renderBaseOnError(firstFieldName, hasError ? schemaErrorsRef.current : {}, shouldRender);
+        }
+        return isEmptyObject(errorsRef.current);
+    }, [render, renderBaseOnError, validateWithSchemaCurry]);
+    const triggerValidation = useCallback(async (payload, shouldRender) => {
+        const fields = payload || Object.keys(fieldsRef.current).map(name => ({ name }));
+        if (validationSchema) {
+            return executeSchemaValidation(fields, shouldRender);
+        }
+        if (isArray(fields)) {
+            const result = await Promise.all(fields.map(async (data) => await executeValidation(data, false)));
+            render();
+            return result.every(Boolean);
+        }
+        return await executeValidation(fields, shouldRender);
+    }, [executeSchemaValidation, executeValidation, render, validationSchema]);
+    const setValue = useCallback((name, value, shouldValidate) => {
+        const shouldRender = setInternalValue(name, value) ||
+            isWatchAllRef.current ||
+            watchFieldsRef.current.has(name);
+        if (shouldValidate) {
+            return triggerValidation({ name }, shouldRender);
+        }
+        if (shouldRender) {
+            render();
+        }
+        return;
+    }, [render, setInternalValue, triggerValidation]);
+    validateAndUpdateStateRef.current = validateAndUpdateStateRef.current
+        ? validateAndUpdateStateRef.current
+        : async ({ type, target }) => {
+            const name = target ? target.name : '';
+            const fields = fieldsRef.current;
+            const errors = errorsRef.current;
+            const field = fields[name];
+            const currentError = errors[name];
+            let error;
+            if (!field) {
+                return;
+            }
+            const isBlurEvent = type === EVENTS.BLUR;
+            const shouldSkipValidation = (isOnSubmit && !isSubmittedRef.current) ||
+                (isOnBlur && !isBlurEvent && !currentError) ||
+                (isReValidateOnBlur && !isBlurEvent && currentError) ||
+                (isReValidateOnSubmit && currentError);
+            const shouldUpdateDirty = setDirty(name);
+            let shouldUpdateState = isWatchAllRef.current ||
+                watchFieldsRef.current.has(name) ||
+                shouldUpdateDirty;
+            if (isBlurEvent &&
+                !touchedFieldsRef.current.has(name) &&
+                readFormState.current.touched) {
+                touchedFieldsRef.current.add(name);
+                shouldUpdateState = true;
+            }
+            if (shouldSkipValidation) {
+                return shouldUpdateState && render();
+            }
+            if (validationSchema) {
+                const { fieldErrors } = await validateWithSchemaCurry(combineFieldValues(getFieldsValues(fields)));
+                Object.keys(fieldErrors).forEach(name => validFieldsRef.current.delete(name));
+                schemaErrorsRef.current = fieldErrors;
+                isSchemaValidateTriggeredRef.current = true;
+                error = fieldErrors[name] ? { [name]: fieldErrors[name] } : {};
+            }
+            else {
+                error = await validateFieldCurry(field);
+            }
+            if (!renderBaseOnError(name, error) && shouldUpdateState) {
+                render();
+            }
+        };
+    const resetFieldRef = useCallback((name) => {
+        delete errorsRef.current[name];
+        delete fieldsRef.current[name];
+        delete defaultValuesRef.current[name];
+        [
+            touchedFieldsRef,
+            dirtyFieldsRef,
+            fieldsWithValidationRef,
+            validFieldsRef,
+            watchFieldsRef,
+        ].forEach(data => data.current.delete(name));
+        if (readFormState.current.isValid || readFormState.current.touched) {
+            render();
+        }
+    }, [render]);
+    const removeEventListenerAndRef = useCallback((field, forceDelete) => {
+        if (!field) {
+            return;
+        }
+        findRemovedFieldAndRemoveListener(fieldsRef.current, validateAndUpdateStateRef.current, field, forceDelete);
+        resetFieldRef(field.ref.name);
+    }, [resetFieldRef]);
+    function clearError(name) {
+        if (isUndefined(name)) {
+            errorsRef.current = {};
+        }
+        else {
+            (isArray(name) ? name : [name]).forEach(fieldName => delete errorsRef.current[fieldName]);
+        }
+        render();
+    }
+    const setInternalError = ({ name, type, types, message, preventRender, }) => {
+        const errors = errorsRef.current;
+        if (!isSameError(errors[name], type, message)) {
+            errors[name] = {
+                type,
+                types,
+                message,
+                ref: {},
+                isManual: true,
+            };
+            if (!preventRender) {
+                render();
+            }
+        }
+    };
+    function setError(name, type = '', message) {
+        if (isString(name)) {
+            setInternalError(Object.assign({ name }, (isObject(type)
+                ? {
+                    types: type,
+                    type: '',
+                }
+                : {
+                    type,
+                    message,
+                })));
+        }
+        else if (isArray(name)) {
+            name.forEach(error => setInternalError(Object.assign(Object.assign({}, error), { preventRender: true })));
+            render();
+        }
+    }
+    function watch(fieldNames, defaultValue) {
+        const combinedDefaultValues = isUndefined(defaultValue)
+            ? isUndefined(defaultValues)
+                ? {}
+                : defaultValues
+            : defaultValue;
+        const fieldValues = getFieldsValues(fieldsRef.current);
+        const watchFields = watchFieldsRef.current;
+        if (isProxyEnabled) {
+            readFormState.current.dirty = true;
+        }
+        if (isString(fieldNames)) {
+            return assignWatchFields(fieldValues, fieldNames, watchFields, combinedDefaultValues);
+        }
+        if (isArray(fieldNames)) {
+            return fieldNames.reduce((previous, name) => {
+                let value = null;
+                if (isEmptyObject(fieldsRef.current) &&
+                    isObject(combinedDefaultValues)) {
+                    value = getDefaultValue(combinedDefaultValues, name);
+                }
+                else {
+                    value = assignWatchFields(fieldValues, name, watchFields, combinedDefaultValues);
+                }
+                return Object.assign(Object.assign({}, previous), { [name]: value });
+            }, {});
+        }
+        isWatchAllRef.current = true;
+        return ((!isEmptyObject(fieldValues) && fieldValues) ||
+            defaultValue ||
+            defaultValues);
+    }
+    function unregister(names) {
+        if (!isEmptyObject(fieldsRef.current)) {
+            (isArray(names) ? names : [names]).forEach(fieldName => removeEventListenerAndRef(fieldsRef.current[fieldName], true));
+        }
+    }
+    function registerIntoFieldsRef(ref, validateOptions = {}) {
+        if (!ref.name) {
+            return console.warn('Missing name at', ref);
+        }
+        const { name, type, value } = ref;
+        const fieldAttributes = Object.assign({ ref }, validateOptions);
+        const fields = fieldsRef.current;
+        const isRadioOrCheckbox = isRadioInput(type) || isCheckBoxInput(type);
+        let currentField = fields[name];
+        if (isRadioOrCheckbox
+            ? currentField &&
+                isArray(currentField.options) &&
+                currentField.options.find(({ ref }) => value === ref.value)
+            : currentField) {
+            fields[name] = Object.assign(Object.assign({}, currentField), validateOptions);
+            return;
+        }
+        if (type) {
+            const mutationWatcher = onDomRemove(ref, () => removeEventListenerAndRef(fieldAttributes));
+            if (isRadioOrCheckbox) {
+                currentField = Object.assign({ options: [
+                        ...((currentField && currentField.options) || []),
+                        {
+                            ref,
+                            mutationWatcher,
+                        },
+                    ], ref: { type, name } }, validateOptions);
+            }
+            else {
+                currentField = Object.assign(Object.assign({}, fieldAttributes), { mutationWatcher });
+            }
+        }
+        else {
+            currentField = fieldAttributes;
+        }
+        fields[name] = currentField;
+        if (!isEmptyObject(defaultValues)) {
+            const defaultValue = getDefaultValue(defaultValues, name);
+            if (!isUndefined(defaultValue)) {
+                setFieldValue(name, defaultValue);
+            }
+        }
+        if (!isEmptyObject(validateOptions)) {
+            fieldsWithValidationRef.current.add(name);
+            if (!isOnSubmit && readFormState.current.isValid) {
+                if (validationSchema) {
+                    isSchemaValidateTriggeredRef.current = true;
+                    validateWithSchemaCurry(combineFieldValues(getFieldsValues(fields))).then(({ fieldErrors }) => {
+                        schemaErrorsRef.current = fieldErrors;
+                        if (isEmptyObject(schemaErrorsRef.current)) {
+                            render();
+                        }
+                    });
+                }
+                else {
+                    validateFieldCurry(currentField).then(error => {
+                        if (isEmptyObject(error)) {
+                            validFieldsRef.current.add(name);
+                        }
+                        if (validFieldsRef.current.size <=
+                            fieldsWithValidationRef.current.size) {
+                            render();
+                        }
+                    });
+                }
+            }
+        }
+        if (!defaultValuesRef.current[name]) {
+            defaultValuesRef.current[name] = getFieldValue(fields, currentField.ref);
+        }
+        if (!type) {
+            return;
+        }
+        const fieldToAttachListener = isRadioOrCheckbox && currentField.options
+            ? currentField.options[currentField.options.length - 1]
+            : currentField;
+        if (nativeValidation && validateOptions) {
+            attachNativeValidation(ref, validateOptions);
+        }
+        else {
+            attachEventListeners({
+                field: fieldToAttachListener,
+                isRadioOrCheckbox,
+                validateAndStateUpdate: validateAndUpdateStateRef.current,
+            });
+        }
+    }
+    function register(refOrValidateRule, validationOptions) {
+        if (isWindowUndefined || !refOrValidateRule) {
+            return;
+        }
+        if (validationOptions && isString(validationOptions.name)) {
+            registerIntoFieldsRef({ name: validationOptions.name }, validationOptions);
+            return;
+        }
+        if (isObject(refOrValidateRule) && 'name' in refOrValidateRule) {
+            registerIntoFieldsRef(refOrValidateRule, validationOptions);
+            return;
+        }
+        return (ref) => ref && registerIntoFieldsRef(ref, refOrValidateRule);
+    }
+    const handleSubmit = (callback) => async (e) => {
+        if (e) {
+            e.preventDefault();
+            e.persist();
+        }
+        let fieldErrors;
+        let fieldValues;
+        const fields = fieldsRef.current;
+        if (readFormState.current.isSubmitting) {
+            isSubmittingRef.current = true;
+            render();
+        }
+        try {
+            if (validationSchema) {
+                fieldValues = getFieldsValues(fields);
+                const output = await validateWithSchemaCurry(combineFieldValues(fieldValues));
+                schemaErrorsRef.current = output.fieldErrors;
+                fieldErrors = output.fieldErrors;
+                fieldValues = output.result;
+            }
+            else {
+                const { errors, values, } = await Object.values(fields).reduce(async (previous, field) => {
+                    if (!field) {
+                        return previous;
+                    }
+                    const resolvedPrevious = await previous;
+                    const { ref, ref: { name }, } = field;
+                    if (!fields[name]) {
+                        return Promise.resolve(resolvedPrevious);
+                    }
+                    const fieldError = await validateFieldCurry(field);
+                    if (fieldError[name]) {
+                        resolvedPrevious.errors = Object.assign(Object.assign({}, resolvedPrevious.errors), fieldError);
+                        validFieldsRef.current.delete(name);
+                        return Promise.resolve(resolvedPrevious);
+                    }
+                    if (fieldsWithValidationRef.current.has(name)) {
+                        validFieldsRef.current.add(name);
+                    }
+                    resolvedPrevious.values[name] = getFieldValue(fields, ref);
+                    return Promise.resolve(resolvedPrevious);
+                }, Promise.resolve({
+                    errors: {},
+                    values: {},
+                }));
+                fieldErrors = errors;
+                fieldValues = values;
+            }
+            if (isEmptyObject(fieldErrors)) {
+                errorsRef.current = {};
+                await callback(combineFieldValues(fieldValues), e);
+            }
+            else {
+                if (submitFocusError) {
+                    Object.keys(fieldErrors).reduce((previous, current) => {
+                        const field = fields[current];
+                        if (field && previous) {
+                            if (field.ref.focus) {
+                                field.ref.focus();
+                                return false;
+                            }
+                            else if (field.options) {
+                                field.options[0].ref.focus();
+                                return false;
+                            }
+                        }
+                        return previous;
+                    }, true);
+                }
+                errorsRef.current = fieldErrors;
+            }
+        }
+        finally {
+            isSubmittedRef.current = true;
+            isSubmittingRef.current = false;
+            submitCountRef.current = submitCountRef.current + 1;
+            render();
+        }
+    };
+    const resetRefs = () => {
+        errorsRef.current = {};
+        defaultValuesRef.current = {};
+        schemaErrorsRef.current = {};
+        touchedFieldsRef.current = new Set();
+        watchFieldsRef.current = new Set();
+        dirtyFieldsRef.current = new Set();
+        validFieldsRef.current = new Set();
+        isWatchAllRef.current = false;
+        isSubmittedRef.current = false;
+        isDirtyRef.current = false;
+        isSchemaValidateTriggeredRef.current = false;
+        submitCountRef.current = 0;
+    };
+    const reset = useCallback((values) => {
+        const fieldsKeyValue = Object.entries(fieldsRef.current);
+        for (const [, value] of fieldsKeyValue) {
+            if (value && value.ref && value.ref.closest) {
+                try {
+                    value.ref.closest('form').reset();
+                    break;
+                }
+                catch (_a) { }
+            }
+        }
+        resetRefs();
+        if (values) {
+            fieldsKeyValue.forEach(([key]) => setFieldValue(key, getDefaultValue(values, key)));
+            defaultValuesRef.current = Object.assign({}, values);
+            if (readFormState.current.isValid) {
+                triggerValidation();
+            }
+        }
+        render();
+    }, [render, setFieldValue, triggerValidation]);
+    const getValues = (payload) => {
+        const fieldValues = getFieldsValues(fieldsRef.current);
+        const outputValues = isEmptyObject(fieldValues)
+            ? defaultValues
+            : fieldValues;
+        return payload && payload.nest
+            ? combineFieldValues(outputValues)
+            : outputValues;
+    };
+    useEffect(() => () => {
+        isUnMount.current = true;
+        fieldsRef.current &&
+            Object.values(fieldsRef.current).forEach((field) => removeEventListenerAndRef(field, true));
+    }, [removeEventListenerAndRef]);
+    const formState = Object.assign({ dirty: isDirtyRef.current, isSubmitted: isSubmittedRef.current, submitCount: submitCountRef.current, touched: [...touchedFieldsRef.current], isSubmitting: isSubmittingRef.current }, (isOnSubmit
+        ? {
+            isValid: isSubmittedRef.current && isEmptyObject(errorsRef.current),
+        }
+        : {
+            isValid: validationSchema
+                ? isSchemaValidateTriggeredRef.current &&
+                    isEmptyObject(schemaErrorsRef.current)
+                : fieldsWithValidationRef.current.size
+                    ? !isEmptyObject(fieldsRef.current) &&
+                        validFieldsRef.current.size >=
+                            fieldsWithValidationRef.current.size
+                    : !isEmptyObject(fieldsRef.current),
+        }));
+    return {
+        register: useCallback(register, []),
+        unregister: useCallback(unregister, [removeEventListenerAndRef]),
+        handleSubmit,
+        watch,
+        reset,
+        clearError,
+        setError: useCallback(setError, []),
+        setValue,
+        triggerValidation,
+        getValues,
+        errors: errorsRef.current,
+        formState: isProxyEnabled
+            ? new Proxy(formState, {
+                get: (obj, prop) => {
+                    if (prop in obj) {
+                        readFormState.current[prop] = true;
+                        return obj[prop];
+                    }
+                    return {};
+                },
+            })
+            : formState,
+    };
+}
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+const FormGlobalContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(null);
+function useFormContext() {
+    return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(FormGlobalContext);
+}
+function FormContext(props) {
+    const { children, formState, errors } = props, restMethods = __rest(props, ["children", "formState", "errors"]);
+    const restRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(restMethods);
+    return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(FormGlobalContext.Provider, { value: Object.assign(Object.assign({}, restRef.current), { formState, errors }) }, children));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (useForm);
+
 
 
 /***/ }),
@@ -68903,7 +70268,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
 /* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_is__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Context */ "./node_modules/react-redux/es/components/Context.js");
+/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
+/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Context */ "./node_modules/react-redux/es/components/Context.js");
+
 
 
 
@@ -68931,26 +70298,20 @@ function storeStateUpdatesReducer(state, action) {
 
 var initStateUpdates = function initStateUpdates() {
   return [null, 0];
-}; // React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect because we want
-// `connect` to perform sync updates to a ref to save the latest props after
-// a render is actually committed to the DOM.
+};
 
-
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_4__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_4__["useEffect"];
 function connectAdvanced(
 /*
   selectorFactory is a func that is responsible for returning the selector function used to
   compute new props from state, props, and dispatch. For example:
-     export default connectAdvanced((dispatch, options) => (state, props) => ({
+      export default connectAdvanced((dispatch, options) => (state, props) => ({
       thing: state.things[props.thingId],
       saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
     }))(YourComponent)
-   Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
+    Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
   outside of their selector as an optimization. Options passed to connectAdvanced are passed to
   the selectorFactory, along with displayName and WrappedComponent, as the second argument.
-   Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
+    Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
   props. Do not use connectAdvanced directly without memoizing results between calls to your
   selector, otherwise the Connect component will re-render on every state or props change.
 */
@@ -68978,7 +70339,7 @@ _ref) {
       _ref2$forwardRef = _ref2.forwardRef,
       forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef,
       _ref2$context = _ref2.context,
-      context = _ref2$context === void 0 ? _Context__WEBPACK_IMPORTED_MODULE_7__["ReactReduxContext"] : _ref2$context,
+      context = _ref2$context === void 0 ? _Context__WEBPACK_IMPORTED_MODULE_8__["ReactReduxContext"] : _ref2$context,
       connectOptions = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
 
   invariant__WEBPACK_IMPORTED_MODULE_3___default()(renderCountProp === undefined, "renderCountProp is removed. render counting is built into the latest React Dev Tools profiling extension");
@@ -69038,12 +70399,15 @@ _ref) {
         return propsContext && propsContext.Consumer && Object(react_is__WEBPACK_IMPORTED_MODULE_5__["isContextConsumer"])(react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(propsContext.Consumer, null)) ? propsContext : Context;
       }, [propsContext, Context]); // Retrieve the store and ancestor subscription via context, if available
 
-      var contextValue = Object(react__WEBPACK_IMPORTED_MODULE_4__["useContext"])(ContextToUse); // The store _must_ exist as either a prop or in context
+      var contextValue = Object(react__WEBPACK_IMPORTED_MODULE_4__["useContext"])(ContextToUse); // The store _must_ exist as either a prop or in context.
+      // We'll check to see if it _looks_ like a Redux store first.
+      // This allows us to pass through a `store` prop that is just a plain value.
 
-      var didStoreComeFromProps = Boolean(props.store);
+      var didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
       var didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
-      invariant__WEBPACK_IMPORTED_MODULE_3___default()(didStoreComeFromProps || didStoreComeFromContext, "Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
-      var store = props.store || contextValue.store;
+      invariant__WEBPACK_IMPORTED_MODULE_3___default()(didStoreComeFromProps || didStoreComeFromContext, "Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options.")); // Based on the previous check, one of these must be true
+
+      var store = didStoreComeFromProps ? props.store : contextValue.store;
       var childPropsSelector = Object(react__WEBPACK_IMPORTED_MODULE_4__["useMemo"])(function () {
         // The child props selector needs the store reference as an input.
         // Re-create this selector whenever the store changes.
@@ -69118,7 +70482,7 @@ _ref) {
       // about useLayoutEffect in SSR, so we try to detect environment and fall back to
       // just useEffect instead to avoid the warning, since neither will run anyway.
 
-      useIsomorphicLayoutEffect(function () {
+      Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_7__["useIsomorphicLayoutEffect"])(function () {
         // We want to capture the wrapper props and child props we used for later comparisons
         lastWrapperProps.current = wrapperProps;
         lastChildProps.current = actualChildProps;
@@ -69130,7 +70494,7 @@ _ref) {
         }
       }); // Our re-subscribe logic only runs when the store/subscription setup changes
 
-      useIsomorphicLayoutEffect(function () {
+      Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_7__["useIsomorphicLayoutEffect"])(function () {
         // If we're not subscribed to the store, nothing to do here
         if (!shouldHandleStateChanges) return; // Capture values for checking if and when this component unmounts
 
@@ -69177,7 +70541,6 @@ _ref) {
             forceComponentUpdateDispatch({
               type: 'STORE_UPDATED',
               payload: {
-                latestStoreState: latestStoreState,
                 error: error
               }
             });
@@ -69821,21 +71184,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var invariant__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(invariant__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _useReduxContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useReduxContext */ "./node_modules/react-redux/es/hooks/useReduxContext.js");
 /* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-redux/es/components/Context.js");
+/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
+/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-redux/es/components/Context.js");
 
 
 
 
- // React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
-// subscription callback always has the selector from the latest render commit
-// available, otherwise a store update may happen between render and the effect,
-// which may cause missed updates; we also must ensure the store subscription
-// is created synchronously, otherwise a store update may occur before the
-// subscription is created and an inconsistent state may be observed
 
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_0__["useEffect"];
+
 
 var refEquality = function refEquality(a, b) {
   return a === b;
@@ -69862,7 +71218,7 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
       selectedState = latestSelectedState.current;
     }
   } catch (err) {
-    var errorMessage = "An error occured while selecting the store state: " + err.message + ".";
+    var errorMessage = "An error occurred while selecting the store state: " + err.message + ".";
 
     if (latestSubscriptionCallbackError.current) {
       errorMessage += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\nOriginal stack trace:";
@@ -69871,12 +71227,12 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
     throw new Error(errorMessage);
   }
 
-  useIsomorphicLayoutEffect(function () {
+  Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_4__["useIsomorphicLayoutEffect"])(function () {
     latestSelector.current = selector;
     latestSelectedState.current = selectedState;
     latestSubscriptionCallbackError.current = undefined;
   });
-  useIsomorphicLayoutEffect(function () {
+  Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_4__["useIsomorphicLayoutEffect"])(function () {
     function checkForUpdates() {
       try {
         var newSelectedState = latestSelector.current(store.getState());
@@ -69916,10 +71272,10 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
 
 function createSelectorHook(context) {
   if (context === void 0) {
-    context = _components_Context__WEBPACK_IMPORTED_MODULE_4__["ReactReduxContext"];
+    context = _components_Context__WEBPACK_IMPORTED_MODULE_5__["ReactReduxContext"];
   }
 
-  var useReduxContext = context === _components_Context__WEBPACK_IMPORTED_MODULE_4__["ReactReduxContext"] ? _useReduxContext__WEBPACK_IMPORTED_MODULE_2__["useReduxContext"] : function () {
+  var useReduxContext = context === _components_Context__WEBPACK_IMPORTED_MODULE_5__["ReactReduxContext"] ? _useReduxContext__WEBPACK_IMPORTED_MODULE_2__["useReduxContext"] : function () {
     return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(context);
   };
   return function useSelector(selector, equalityFn) {
@@ -70307,6 +71663,32 @@ function shallowEqual(objA, objB) {
 
   return true;
 }
+
+/***/ }),
+
+/***/ "./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js ***!
+  \************************************************************************/
+/*! exports provided: useIsomorphicLayoutEffect */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsomorphicLayoutEffect", function() { return useIsomorphicLayoutEffect; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+ // React currently throws a warning when using useLayoutEffect on the server.
+// To get around it, we can conditionally useEffect on the server (no-op) and
+// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
+// subscription callback always has the selector from the latest render commit
+// available, otherwise a store update may happen between render and the effect,
+// which may cause missed updates; we also must ensure the store subscription
+// is created synchronously, otherwise a store update may occur before the
+// subscription is created and an inconsistent state may be observed
+
+var isHopefullyDomEnvironment = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined';
+var useIsomorphicLayoutEffect = isHopefullyDomEnvironment ? react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_0__["useEffect"];
 
 /***/ }),
 
@@ -72811,7 +74193,7 @@ var nameShape = exports.nameShape = _propTypes2.default.oneOfType([_propTypes2.d
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.11.0
+/** @license React v16.12.0
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -72833,7 +74215,7 @@ var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "./nod
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.11.0';
+var ReactVersion = '16.12.0';
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
@@ -74987,12 +76369,8 @@ function createScope() {
   return scopeComponent;
 }
 
-// Helps identify side effects in begin-phase lifecycle hooks and setState reducers:
-
- // In some cases, StrictMode should also double-render lifecycles.
-// This can be confusing for tests though,
-// And it can be bad for performance in production.
-// This feature flag can be used to control the behavior:
+// Helps identify side effects in render-phase lifecycle hooks and setState
+// reducers by double invoking them in Strict Mode.
 
  // To preserve the "Pause on caught exceptions" behavior of the debugger, we
 // replay the begin phase of a failed component inside invokeGuardedCallback.
@@ -75028,7 +76406,7 @@ var enableFundamentalAPI = false; // Experimental Scope support.
 var enableScopeAPI = false; // New API for JSX transforms to target - https://github.com/reactjs/rfcs/pull/107
 
 var enableJSXTransformAPI = false; // We will enforce mocking scheduler with scheduler/unstable_mock at some point. (v17?)
-// Till then, we warn about the missing mock, but still fallback to a sync mode compatible version
+// Till then, we warn about the missing mock, but still fallback to a legacy mode compatible version
 
  // For tests, we flush suspense fallbacks in an act scope;
 // *except* in some of our own tests, where we test incremental loading states.
@@ -75042,6 +76420,12 @@ var enableJSXTransformAPI = false; // We will enforce mocking scheduler with sch
  // Part of the simplification of React.createElement so we can eventually move
 // from React.createElement to React.jsx
 // https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md
+
+
+
+
+
+ // Flag to turn event.target and event.currentTarget in ReactNative from a reactTag to a component instance
 
 var React = {
   Children: {
@@ -76728,7 +78112,7 @@ function resolvePathname(to, from) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v0.17.0
+/** @license React v0.18.0
  * scheduler-tracing.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -76747,12 +78131,8 @@ if (true) {
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-// Helps identify side effects in begin-phase lifecycle hooks and setState reducers:
-
- // In some cases, StrictMode should also double-render lifecycles.
-// This can be confusing for tests though,
-// And it can be bad for performance in production.
-// This feature flag can be used to control the behavior:
+// Helps identify side effects in render-phase lifecycle hooks and setState
+// reducers by double invoking them in Strict Mode.
 
  // To preserve the "Pause on caught exceptions" behavior of the debugger, we
 // replay the begin phase of a failed component inside invokeGuardedCallback.
@@ -76788,7 +78168,7 @@ var enableSchedulerTracing = true; // SSR experiments
  // New API for JSX transforms to target - https://github.com/reactjs/rfcs/pull/107
 
  // We will enforce mocking scheduler with scheduler/unstable_mock at some point. (v17?)
-// Till then, we warn about the missing mock, but still fallback to a sync mode compatible version
+// Till then, we warn about the missing mock, but still fallback to a legacy mode compatible version
 
  // For tests, we flush suspense fallbacks in an act scope;
 // *except* in some of our own tests, where we test incremental loading states.
@@ -76802,6 +78182,12 @@ var enableSchedulerTracing = true; // SSR experiments
  // Part of the simplification of React.createElement so we can eventually move
 // from React.createElement to React.jsx
 // https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md
+
+
+
+
+
+ // Flag to turn event.target and event.currentTarget in ReactNative from a reactTag to a component instance
 
 var DEFAULT_THREAD_ID = 0; // Counters used to generate unique IDs.
 
@@ -77161,7 +78547,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v0.17.0
+/** @license React v0.18.0
  * scheduler.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -77182,15 +78568,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var enableSchedulerDebugging = false;
 var enableIsInputPending = false;
-var enableMessageLoopImplementation = true;
 var enableProfiling = true;
-
-// works by scheduling a requestAnimationFrame, storing the time for the start
-// of the frame, then scheduling a postMessage which gets scheduled after paint.
-// Within the postMessage handler do as much work as possible until time + frame
-// rate. By separating the idle call into a separate event tick we ensure that
-// layout, paint and other browser work is counted against the available time.
-// The frame rate is dynamically adjusted.
 
 var requestHostCallback;
 
@@ -77261,11 +78639,14 @@ typeof MessageChannel !== 'function') {
   var _Date = window.Date;
   var _setTimeout = window.setTimeout;
   var _clearTimeout = window.clearTimeout;
-  var requestAnimationFrame = window.requestAnimationFrame;
-  var cancelAnimationFrame = window.cancelAnimationFrame;
 
   if (typeof console !== 'undefined') {
-    // TODO: Remove fb.me link
+    // TODO: Scheduler no longer requires these methods to be polyfilled. But
+    // maybe we want to continue warning if they don't exist, to preserve the
+    // option to rely on it in the future?
+    var requestAnimationFrame = window.requestAnimationFrame;
+    var cancelAnimationFrame = window.cancelAnimationFrame; // TODO: Remove fb.me link
+
     if (typeof requestAnimationFrame !== 'function') {
       console.error("This browser doesn't support requestAnimationFrame. " + 'Make sure that you load a ' + 'polyfill in older browsers. https://fb.me/react-polyfills');
     }
@@ -77287,26 +78668,18 @@ typeof MessageChannel !== 'function') {
     };
   }
 
-  var isRAFLoopRunning = false;
   var isMessageLoopRunning = false;
   var scheduledHostCallback = null;
-  var rAFTimeoutID = -1;
-  var taskTimeoutID = -1;
-  var frameLength = enableMessageLoopImplementation ? // We won't attempt to align with the vsync. Instead we'll yield multiple
-  // times per frame, often enough to keep it responsive even at really
-  // high frame rates > 120.
-  5 : // Use a heuristic to measure the frame rate and yield at the end of the
-  // frame. We start out assuming that we run at 30fps but then the
-  // heuristic tracking will adjust this value to a faster fps if we get
-  // more frequent animation frames.
-  33.33;
-  var prevRAFTime = -1;
-  var prevRAFInterval = -1;
-  var frameDeadline = 0;
-  var fpsLocked = false; // TODO: Make this configurable
+  var taskTimeoutID = -1; // Scheduler periodically yields in case there is other work on the main
+  // thread, like user events. By default, it yields multiple times per frame.
+  // It does not attempt to align with frame boundaries, since most tasks don't
+  // need to be frame aligned; for those that do, use requestAnimationFrame.
+
+  var yieldInterval = 5;
+  var deadline = 0; // TODO: Make this configurable
   // TODO: Adjust this based on priority?
 
-  var maxFrameLength = 300;
+  var maxYieldInterval = 300;
   var needsPaint = false;
 
   if (enableIsInputPending && navigator !== undefined && navigator.scheduling !== undefined && navigator.scheduling.isInputPending !== undefined) {
@@ -77315,23 +78688,23 @@ typeof MessageChannel !== 'function') {
     shouldYieldToHost = function () {
       var currentTime = exports.unstable_now();
 
-      if (currentTime >= frameDeadline) {
-        // There's no time left in the frame. We may want to yield control of
-        // the main thread, so the browser can perform high priority tasks. The
-        // main ones are painting and user input. If there's a pending paint or
-        // a pending input, then we should yield. But if there's neither, then
-        // we can yield less often while remaining responsive. We'll eventually
-        // yield regardless, since there could be a pending paint that wasn't
+      if (currentTime >= deadline) {
+        // There's no time left. We may want to yield control of the main
+        // thread, so the browser can perform high priority tasks. The main ones
+        // are painting and user input. If there's a pending paint or a pending
+        // input, then we should yield. But if there's neither, then we can
+        // yield less often while remaining responsive. We'll eventually yield
+        // regardless, since there could be a pending paint that wasn't
         // accompanied by a call to `requestPaint`, or other main thread tasks
         // like network events.
         if (needsPaint || scheduling.isInputPending()) {
           // There is either a pending paint or a pending input.
           return true;
         } // There's no pending input. Only yield if we've reached the max
-        // frame length.
+        // yield interval.
 
 
-        return currentTime >= frameDeadline + maxFrameLength;
+        return currentTime >= maxYieldInterval;
       } else {
         // There's still time left in the frame.
         return false;
@@ -77345,7 +78718,7 @@ typeof MessageChannel !== 'function') {
     // `isInputPending` is not available. Since we have no way of knowing if
     // there's pending input, always yield at the end of the frame.
     shouldYieldToHost = function () {
-      return exports.unstable_now() >= frameDeadline;
+      return exports.unstable_now() >= deadline;
     }; // Since we yield every frame regardless, `requestPaint` has no effect.
 
 
@@ -77359,166 +78732,58 @@ typeof MessageChannel !== 'function') {
     }
 
     if (fps > 0) {
-      frameLength = Math.floor(1000 / fps);
-      fpsLocked = true;
+      yieldInterval = Math.floor(1000 / fps);
     } else {
       // reset the framerate
-      frameLength = 33.33;
-      fpsLocked = false;
+      yieldInterval = 5;
     }
   };
 
   var performWorkUntilDeadline = function () {
-    if (enableMessageLoopImplementation) {
-      if (scheduledHostCallback !== null) {
-        var currentTime = exports.unstable_now(); // Yield after `frameLength` ms, regardless of where we are in the vsync
-        // cycle. This means there's always time remaining at the beginning of
-        // the message event.
+    if (scheduledHostCallback !== null) {
+      var currentTime = exports.unstable_now(); // Yield after `yieldInterval` ms, regardless of where we are in the vsync
+      // cycle. This means there's always time remaining at the beginning of
+      // the message event.
 
-        frameDeadline = currentTime + frameLength;
-        var hasTimeRemaining = true;
+      deadline = currentTime + yieldInterval;
+      var hasTimeRemaining = true;
 
-        try {
-          var hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
+      try {
+        var hasMoreWork = scheduledHostCallback(hasTimeRemaining, currentTime);
 
-          if (!hasMoreWork) {
-            isMessageLoopRunning = false;
-            scheduledHostCallback = null;
-          } else {
-            // If there's more work, schedule the next message event at the end
-            // of the preceding one.
-            port.postMessage(null);
-          }
-        } catch (error) {
-          // If a scheduler task throws, exit the current browser task so the
-          // error can be observed.
+        if (!hasMoreWork) {
+          isMessageLoopRunning = false;
+          scheduledHostCallback = null;
+        } else {
+          // If there's more work, schedule the next message event at the end
+          // of the preceding one.
           port.postMessage(null);
-          throw error;
         }
-      } else {
-        isMessageLoopRunning = false;
-      } // Yielding to the browser will give it a chance to paint, so we can
-      // reset this.
-
-
-      needsPaint = false;
+      } catch (error) {
+        // If a scheduler task throws, exit the current browser task so the
+        // error can be observed.
+        port.postMessage(null);
+        throw error;
+      }
     } else {
-      if (scheduledHostCallback !== null) {
-        var _currentTime = exports.unstable_now();
-
-        var _hasTimeRemaining = frameDeadline - _currentTime > 0;
-
-        try {
-          var _hasMoreWork = scheduledHostCallback(_hasTimeRemaining, _currentTime);
-
-          if (!_hasMoreWork) {
-            scheduledHostCallback = null;
-          }
-        } catch (error) {
-          // If a scheduler task throws, exit the current browser task so the
-          // error can be observed, and post a new task as soon as possible
-          // so we can continue where we left off.
-          port.postMessage(null);
-          throw error;
-        }
-      } // Yielding to the browser will give it a chance to paint, so we can
-      // reset this.
+      isMessageLoopRunning = false;
+    } // Yielding to the browser will give it a chance to paint, so we can
+    // reset this.
 
 
-      needsPaint = false;
-    }
+    needsPaint = false;
   };
 
   var channel = new MessageChannel();
   var port = channel.port2;
   channel.port1.onmessage = performWorkUntilDeadline;
 
-  var onAnimationFrame = function (rAFTime) {
-    if (scheduledHostCallback === null) {
-      // No scheduled work. Exit.
-      prevRAFTime = -1;
-      prevRAFInterval = -1;
-      isRAFLoopRunning = false;
-      return;
-    } // Eagerly schedule the next animation callback at the beginning of the
-    // frame. If the scheduler queue is not empty at the end of the frame, it
-    // will continue flushing inside that callback. If the queue *is* empty,
-    // then it will exit immediately. Posting the callback at the start of the
-    // frame ensures it's fired within the earliest possible frame. If we
-    // waited until the end of the frame to post the callback, we risk the
-    // browser skipping a frame and not firing the callback until the frame
-    // after that.
-
-
-    isRAFLoopRunning = true;
-    requestAnimationFrame(function (nextRAFTime) {
-      _clearTimeout(rAFTimeoutID);
-
-      onAnimationFrame(nextRAFTime);
-    }); // requestAnimationFrame is throttled when the tab is backgrounded. We
-    // don't want to stop working entirely. So we'll fallback to a timeout loop.
-    // TODO: Need a better heuristic for backgrounded work.
-
-    var onTimeout = function () {
-      frameDeadline = exports.unstable_now() + frameLength / 2;
-      performWorkUntilDeadline();
-      rAFTimeoutID = _setTimeout(onTimeout, frameLength * 3);
-    };
-
-    rAFTimeoutID = _setTimeout(onTimeout, frameLength * 3);
-
-    if (prevRAFTime !== -1 && // Make sure this rAF time is different from the previous one. This check
-    // could fail if two rAFs fire in the same frame.
-    rAFTime - prevRAFTime > 0.1) {
-      var rAFInterval = rAFTime - prevRAFTime;
-
-      if (!fpsLocked && prevRAFInterval !== -1) {
-        // We've observed two consecutive frame intervals. We'll use this to
-        // dynamically adjust the frame rate.
-        //
-        // If one frame goes long, then the next one can be short to catch up.
-        // If two frames are short in a row, then that's an indication that we
-        // actually have a higher frame rate than what we're currently
-        // optimizing. For example, if we're running on 120hz display or 90hz VR
-        // display. Take the max of the two in case one of them was an anomaly
-        // due to missed frame deadlines.
-        if (rAFInterval < frameLength && prevRAFInterval < frameLength) {
-          frameLength = rAFInterval < prevRAFInterval ? prevRAFInterval : rAFInterval;
-
-          if (frameLength < 8.33) {
-            // Defensive coding. We don't support higher frame rates than 120hz.
-            // If the calculated frame length gets lower than 8, it is probably
-            // a bug.
-            frameLength = 8.33;
-          }
-        }
-      }
-
-      prevRAFInterval = rAFInterval;
-    }
-
-    prevRAFTime = rAFTime;
-    frameDeadline = rAFTime + frameLength; // We use the postMessage trick to defer idle work until after the repaint.
-
-    port.postMessage(null);
-  };
-
   requestHostCallback = function (callback) {
     scheduledHostCallback = callback;
 
-    if (enableMessageLoopImplementation) {
-      if (!isMessageLoopRunning) {
-        isMessageLoopRunning = true;
-        port.postMessage(null);
-      }
-    } else {
-      if (!isRAFLoopRunning) {
-        // Start a rAF loop.
-        isRAFLoopRunning = true;
-        requestAnimationFrame(function (rAFTime) {
-          onAnimationFrame(rAFTime);
-        });
-      }
+    if (!isMessageLoopRunning) {
+      isMessageLoopRunning = true;
+      port.postMessage(null);
     }
   };
 
@@ -79081,7 +80346,7 @@ module.exports = function(module) {
 /*!***************************************!*\
   !*** ./resources/js/actions/index.js ***!
   \***************************************/
-/*! exports provided: userActions */
+/*! exports provided: userActions, orderActions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79089,8 +80354,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/actions/user.actions.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "userActions", function() { return _user_actions__WEBPACK_IMPORTED_MODULE_0__["userActions"]; });
 
+/* harmony import */ var _saveorder_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./saveorder.action */ "./resources/js/actions/saveorder.action.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "orderActions", function() { return _saveorder_action__WEBPACK_IMPORTED_MODULE_1__["orderActions"]; });
+
 // export * from './Login'
 
+
+
+/***/ }),
+
+/***/ "./resources/js/actions/saveorder.action.js":
+/*!**************************************************!*\
+  !*** ./resources/js/actions/saveorder.action.js ***!
+  \**************************************************/
+/*! exports provided: orderActions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "orderActions", function() { return orderActions; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/constants/index.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/services/index.js");
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var orderActions = {
+  feedOrderPage: feedOrderPage
+};
+
+function feedOrderPage() {
+  return function (dispatch) {
+    dispatch(fetching(true));
+    _services__WEBPACK_IMPORTED_MODULE_1__["orderService"].orderPage().then(function (data) {
+      return dispatch(fetchSuccess(data));
+    }, function (err) {
+      return dispatch(fetchFailure());
+    });
+  };
+}
+
+var fetching = function fetching(bool) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__["FeedConstants"].FEED_REQUEST,
+    fetching: bool
+  };
+};
+
+var fetchSuccess = function fetchSuccess(data) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__["FeedConstants"].FEED_SUCCESS,
+    payload: data
+  };
+};
+
+var fetchFailure = function fetchFailure(bool) {
+  react_notifications__WEBPACK_IMPORTED_MODULE_2__["NotificationManager"].error('ไม่สามารถเชื่อมต่อได้', 'Error', 5000);
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__["FeedConstants"].FEED_FAILURE
+  };
+};
 
 /***/ }),
 
@@ -79125,7 +80449,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var userActions = {
   login: login,
   logout: logout,
-  getAll: getAll,
   getAuthUser: getAuthUser
 };
 
@@ -79138,7 +80461,7 @@ function login(username, password) {
       dispatch(success(user));
       _helpers__WEBPACK_IMPORTED_MODULE_3__["history"].push('/officer/home');
     }, function (error) {
-      dispatch(failure(error)); // dispatch(alertActions.error(error));
+      dispatch(failure(error));
     });
   };
 
@@ -79173,7 +80496,34 @@ function logout() {
 
 function getAuthUser() {
   return _getAuthUser.apply(this, arguments);
-}
+} // function getAll() {
+//     return dispatch => {
+//         dispatch(request());
+//         userService.getAll()
+//             .then(
+//                 users => dispatch(success(users)),
+//                 error => dispatch(failure(error))
+//             );
+//     };
+//     function request() {
+//         return {
+//             type: userConstants.GETALL_REQUEST
+//         }
+//     }
+//     function success(users) {
+//         return {
+//             type: userConstants.GETALL_SUCCESS,
+//             users
+//         }
+//     }
+//     function failure(error) {
+//         return {
+//             type: userConstants.GETALL_FAILURE,
+//             error
+//         }
+//     }
+// }
+
 
 function _getAuthUser() {
   _getAuthUser = _asyncToGenerator(
@@ -79188,16 +80538,13 @@ function _getAuthUser() {
               return res.json();
             }).then(function (data) {
               if (data.error) {
-                // console.log(data)
-                react_notifications__WEBPACK_IMPORTED_MODULE_4__["NotificationManager"].error(data.error, 'Error', 5000);
+                console.log(data.error);
                 location.reload(true);
+                react_notifications__WEBPACK_IMPORTED_MODULE_4__["NotificationManager"].error(data.error, 'Error', 5000);
               }
             });
 
           case 2:
-            return _context.abrupt("return", {});
-
-          case 3:
           case "end":
             return _context.stop();
         }
@@ -79205,37 +80552,6 @@ function _getAuthUser() {
     }, _callee);
   }));
   return _getAuthUser.apply(this, arguments);
-}
-
-function getAll() {
-  return function (dispatch) {
-    dispatch(request());
-    _services__WEBPACK_IMPORTED_MODULE_2__["userService"].getAll().then(function (users) {
-      return dispatch(success(users));
-    }, function (error) {
-      return dispatch(failure(error));
-    });
-  };
-
-  function request() {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_1__["userConstants"].GETALL_REQUEST
-    };
-  }
-
-  function success(users) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_1__["userConstants"].GETALL_SUCCESS,
-      users: users
-    };
-  }
-
-  function failure(error) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_1__["userConstants"].GETALL_FAILURE,
-      error: error
-    };
-  }
 }
 
 /***/ }),
@@ -79261,7 +80577,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 // require('./components/Example');
 
 
-__webpack_require__(/*! ./components/index */ "./resources/js/components/index.js");
+__webpack_require__(/*! ./pages/index */ "./resources/js/pages/index.js");
 
 /***/ }),
 
@@ -79314,821 +80630,21 @@ window.axios.defaults.headers.common = {
 
 /***/ }),
 
-/***/ "./resources/js/components/Home.js":
-/*!*****************************************!*\
-  !*** ./resources/js/components/Home.js ***!
-  \*****************************************/
-/*! exports provided: default */
+/***/ "./resources/js/constants/Feeddata.constants.js":
+/*!******************************************************!*\
+  !*** ./resources/js/constants/Feeddata.constants.js ***!
+  \******************************************************/
+/*! exports provided: FeedConstants */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Home; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function Home() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "content-header"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Dashboard", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Version 2.0")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-    className: "breadcrumb"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-dashboard"
-  }), " Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "active"
-  }, "Dashboard"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-aqua"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-gear-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "CPU Traffic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "90", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "%"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-google-plus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Likes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "41,410")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "clearfix visible-sm-block"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-cart-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Sales"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "760")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-people-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "New Members"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "2,000"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Monthly Recap Report"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "btn-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool dropdown-toggle",
-    "data-toggle": "dropdown"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-wrench"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "dropdown-menu",
-    role: "menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Action")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Another action")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Something else here")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "divider"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Separated link")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Sales: 1 Jan, 2014 - 30 Jul, 2014")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "chart"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
-    id: "salesChart",
-    style: {
-      height: 180
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Goal Completion")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Add Products to Cart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "160"), "/200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-aqua",
-    style: {
-      width: '80%'
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Complete Purchase"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "310"), "/400"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-red",
-    style: {
-      width: '80%'
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Visit Premium Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "480"), "/800"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-green",
-    style: {
-      width: '80%'
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Send Inquiries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "250"), "/500"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-yellow",
-    style: {
-      width: '80%'
-    }
-  })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block border-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-up"
-  }), " 17%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "$35,210.43"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "TOTAL REVENUE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block border-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-left"
-  }), " 0%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "$10,390.90"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "TOTAL COST"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block border-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-up"
-  }), " 20%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "$24,813.53"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "TOTAL PROFIT"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-down"
-  }), " 18%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "1200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "GOAL COMPLETIONS")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-success"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Visitors Report"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body no-padding"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-9 col-sm-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pad"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "world-map-markers",
-    style: {
-      height: 325
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pad box-pane-right bg-green",
-    style: {
-      minHeight: 280
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block margin-bottom"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar pad",
-    "data-color": "#fff"
-  }, "90,70,90,70,75,80,70"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "8390"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "Visits")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block margin-bottom"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar pad",
-    "data-color": "#fff"
-  }, "90,50,90,70,61,83,63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "30%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "Referrals")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar pad",
-    "data-color": "#fff"
-  }, "90,50,90,70,61,83,63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "70%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "Organic"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Latest Orders"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "table-responsive"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-    className: "table no-margin"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Order ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Item"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Popularity"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR9842")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Call of Duty IV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-success"
-  }, "Shipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#00a65a",
-    "data-height": 20
-  }, "90,80,90,-70,61,-83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR1848")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-warning"
-  }, "Pending")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f39c12",
-    "data-height": 20
-  }, "90,80,-90,70,61,-83,68"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "iPhone 6 Plus"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger"
-  }, "Delivered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f56954",
-    "data-height": 20
-  }, "90,-80,90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-info"
-  }, "Processing")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#00c0ef",
-    "data-height": 20
-  }, "90,80,-90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR1848")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-warning"
-  }, "Pending")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f39c12",
-    "data-height": 20
-  }, "90,80,-90,70,61,-83,68"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "iPhone 6 Plus"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger"
-  }, "Delivered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f56954",
-    "data-height": 20
-  }, "90,-80,90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR9842")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Call of Duty IV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-success"
-  }, "Shipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#00a65a",
-    "data-height": 20
-  }, "90,80,90,-70,61,-83,63"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "btn btn-sm btn-info btn-flat pull-left"
-  }, "Place New Order"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "btn btn-sm btn-default btn-flat pull-right"
-  }, "View All Orders")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-pricetag-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Inventory"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "5,200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '50%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "50% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-heart-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Mentions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "92,050"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '20%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "20% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-cloud-download-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Downloads"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "114,381"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '70%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "70% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-aqua"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion-ios-chatbubble-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Direct Messages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "163,921"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '40%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "40% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Recently Added Products"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "products-list product-list-in-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "Samsung TV", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-warning pull-right"
-  }, "$1800")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "Samsung 32\" 1080p 60Hz LED Smart HDTV."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "Bicycle", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-info pull-right"
-  }, "$700")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "26\" Mongoose Dolomite Men's 7-speed, Navy Blue."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "Xbox One ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger pull-right"
-  }, "$350")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "Xbox One Console Bundle with Halo Master Chief Collection."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "PlayStation 4", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-success pull-right"
-  }, "$399")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "PlayStation 4 500GB Console (PS4)"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "uppercase"
-  }, "View All Products")))))));
-}
-
-/***/ }),
-
-/***/ "./resources/js/components/Login.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Login.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers/index.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./resources/js/actions/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
- // import { login } from '../actions';
-
-
-
-var Login = function Login() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState2 = _slicedToArray(_useState, 2),
-      user = _useState2[0],
-      setUser = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState4 = _slicedToArray(_useState3, 2),
-      pass = _useState4[0],
-      setPass = _useState4[1]; // useEffect(() => {
-  //     console.log('useEffect');
-  //     return () => {
-  //     console.log('cleanup');
-  //     };
-  // });
-
-
-  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
-  var authentication = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
-    return state.authentication;
-  });
-
-  if (authentication.loggedIn) {
-    setTimeout(_helpers__WEBPACK_IMPORTED_MODULE_2__["history"].push('/officer/home'), 100);
-  }
-
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(_actions__WEBPACK_IMPORTED_MODULE_3__["userActions"].login(user, pass));
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "login-box login-page"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "login-logo"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "../../index2.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Soat"), "Officer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "login-box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "login-box-msg"
-  }, "Sign in to start your session "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: function onSubmit(e) {
-      return handleSubmit(e);
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-group has-feedback"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "email",
-    onChange: function onChange(event) {
-      return setUser(event.target.value);
-    },
-    className: "form-control",
-    placeholder: "Email",
-    required: true
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "glyphicon glyphicon-envelope form-control-feedback"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-group has-feedback"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "password",
-    onChange: function onChange(event) {
-      return setPass(event.target.value);
-    },
-    className: "form-control",
-    placeholder: "Password",
-    required: true
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "glyphicon glyphicon-lock form-control-feedback"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xs-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "submit",
-    className: "btn btn-primary btn-block btn-flat"
-  }, "Sign In"))))));
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FeedConstants", function() { return FeedConstants; });
+var FeedConstants = {
+  FEED_REQUEST: 'FEED_LOGIN_REQUEST',
+  FEED_SUCCESS: 'FEED_LOGIN_SUCCESS',
+  FEED_FAILURE: 'FEED_LOGIN_FAILURE'
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (Login);
-
-/***/ }),
-
-/***/ "./resources/js/components/index.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/index.js ***!
-  \******************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _layout_PrivateRoute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../layout/PrivateRoute */ "./resources/js/layout/PrivateRoute.js");
-/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
-/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-notifications/lib/notifications.css */ "./node_modules/react-notifications/lib/notifications.css");
-/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
-/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_8__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
- // React Notification
-
-
-
-
-var Index =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Index, _Component);
-
-  function Index() {
-    _classCallCheck(this, Index);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Index).apply(this, arguments));
-  }
-
-  _createClass(Index, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
-        store: _helpers__WEBPACK_IMPORTED_MODULE_3__["store"]
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Router"], {
-        history: _helpers__WEBPACK_IMPORTED_MODULE_3__["history"]
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-        path: "/officer/login",
-        exact: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_PrivateRoute__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        exact: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-        path: "*"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
-        to: "/officer/home"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_8__["NotificationContainer"], null)));
-    }
-  }]);
-
-  return Index;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // export function Index() {
-//     return (
-//         <Provider store={store}>
-//             <Router history={history}>
-//                 <Switch>
-//                     <Route path="/officer/login">
-//                         <Login/>
-//                     </Route>
-//                     <PrivateRoute />
-//                 </Switch>
-//                 <NotificationContainer />
-//             </Router>
-//         </Provider>
-//     )
-// }
-
-
-if (document.getElementById('root')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Index, null), document.getElementById('root'));
-}
 
 /***/ }),
 
@@ -80136,7 +80652,7 @@ if (document.getElementById('root')) {
 /*!*****************************************!*\
   !*** ./resources/js/constants/index.js ***!
   \*****************************************/
-/*! exports provided: userConstants */
+/*! exports provided: userConstants, FeedConstants */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80144,7 +80660,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.constants */ "./resources/js/constants/user.constants.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "userConstants", function() { return _user_constants__WEBPACK_IMPORTED_MODULE_0__["userConstants"]; });
 
+/* harmony import */ var _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Feeddata.constants */ "./resources/js/constants/Feeddata.constants.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FeedConstants", function() { return _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__["FeedConstants"]; });
+
 // export * from './Login'
+
 
 
 /***/ }),
@@ -80197,92 +80717,6 @@ function authHeader() {
 
 /***/ }),
 
-/***/ "./resources/js/helpers/fake-backend.js":
-/*!**********************************************!*\
-  !*** ./resources/js/helpers/fake-backend.js ***!
-  \**********************************************/
-/*! exports provided: configureFakeBackend */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "configureFakeBackend", function() { return configureFakeBackend; });
-function configureFakeBackend() {
-  var users = [{
-    id: 1,
-    username: 'test',
-    password: 'test',
-    firstName: 'Test',
-    lastName: 'User'
-  }];
-  var realFetch = window.fetch;
-
-  window.fetch = function (url, opts) {
-    return new Promise(function (resolve, reject) {
-      // wrap in timeout to simulate server api call
-      setTimeout(function () {
-        // authenticate
-        if (url.endsWith('/users/authenticate') && opts.method === 'POST') {
-          // get parameters from post request
-          var params = JSON.parse(opts.body); // find if any user matches login credentials
-
-          var filteredUsers = users.filter(function (user) {
-            return user.username === params.username && user.password === params.password;
-          });
-
-          if (filteredUsers.length) {
-            // if login details are valid return user details and fake jwt token
-            var user = filteredUsers[0];
-            var responseJson = {
-              id: user.id,
-              username: user.username,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              token: 'fake-jwt-token'
-            };
-            resolve({
-              ok: true,
-              text: function text() {
-                return Promise.resolve(JSON.stringify(responseJson));
-              }
-            });
-          } else {
-            // else return error
-            reject('Username or password is incorrect');
-          }
-
-          return;
-        } // get users
-
-
-        if (url.endsWith('/users') && opts.method === 'GET') {
-          // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-          if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
-            resolve({
-              ok: true,
-              text: function text() {
-                return Promise.resolve(JSON.stringify(users));
-              }
-            });
-          } else {
-            // return 401 not authorised if token is null or invalid
-            reject('Unauthorised');
-          }
-
-          return;
-        } // pass through any requests not handled above
-
-
-        realFetch(url, opts).then(function (response) {
-          return resolve(response);
-        });
-      }, 500);
-    });
-  };
-}
-
-/***/ }),
-
 /***/ "./resources/js/helpers/history.js":
 /*!*****************************************!*\
   !*** ./resources/js/helpers/history.js ***!
@@ -80303,22 +80737,27 @@ var history = Object(history__WEBPACK_IMPORTED_MODULE_0__["createBrowserHistory"
 /*!***************************************!*\
   !*** ./resources/js/helpers/index.js ***!
   \***************************************/
-/*! exports provided: configureFakeBackend, history, store, authHeader */
+/*! exports provided: history, store, authHeader, useScript, useStyle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _fake_backend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fake-backend */ "./resources/js/helpers/fake-backend.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "configureFakeBackend", function() { return _fake_backend__WEBPACK_IMPORTED_MODULE_0__["configureFakeBackend"]; });
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./history */ "./resources/js/helpers/history.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "history", function() { return _history__WEBPACK_IMPORTED_MODULE_0__["history"]; });
 
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./history */ "./resources/js/helpers/history.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "history", function() { return _history__WEBPACK_IMPORTED_MODULE_1__["history"]; });
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/helpers/store.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "store", function() { return _store__WEBPACK_IMPORTED_MODULE_1__["store"]; });
 
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/helpers/store.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "store", function() { return _store__WEBPACK_IMPORTED_MODULE_2__["store"]; });
+/* harmony import */ var _auth_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth-header */ "./resources/js/helpers/auth-header.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authHeader", function() { return _auth_header__WEBPACK_IMPORTED_MODULE_2__["authHeader"]; });
 
-/* harmony import */ var _auth_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth-header */ "./resources/js/helpers/auth-header.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authHeader", function() { return _auth_header__WEBPACK_IMPORTED_MODULE_3__["authHeader"]; });
+/* harmony import */ var _useScript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useScript */ "./resources/js/helpers/useScript.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useScript", function() { return _useScript__WEBPACK_IMPORTED_MODULE_3__["useScript"]; });
+
+/* harmony import */ var _useStyle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./useStyle */ "./resources/js/helpers/useStyle.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStyle", function() { return _useStyle__WEBPACK_IMPORTED_MODULE_4__["useStyle"]; });
+
+// export * from './fake-backend';
 
 
 
@@ -80346,980 +80785,78 @@ __webpack_require__.r(__webpack_exports__);
 
  // import { createLogger } from 'redux-logger';
 
- // const loggerMiddleware = createLogger();
+ // import { userConstants } from '../constants';
+// import { userActions } from "../actions";
+// import { useDispatch } from "react-redux";
+// const loggerMiddleware = createLogger();
 
-var middleware = Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_3__["default"], Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(middleware));
+var createStoreWithMiddleware = Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]); // const Store = createStoreWithMiddleware(reducers);
+// let user = JSON.parse(localStorage.getItem('user'));
+// function name() {
+//     const dispatch = useDispatch();
+//     if (user && user.token) {
+//         dispatch(userActions.getAuthUser());
+//         console.log("testse");
+//     }
+// }
+// export const store = Store;
+
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_3__["default"], Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(createStoreWithMiddleware));
 
 /***/ }),
 
-/***/ "./resources/js/layout/Content.js":
-/*!****************************************!*\
-  !*** ./resources/js/layout/Content.js ***!
-  \****************************************/
-/*! exports provided: default */
+/***/ "./resources/js/helpers/useScript.js":
+/*!*******************************************!*\
+  !*** ./resources/js/helpers/useScript.js ***!
+  \*******************************************/
+/*! exports provided: useScript */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useScript", function() { return useScript; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
-var Content = function Content() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "content-header"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Dashboard", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Version 2.0")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-    className: "breadcrumb"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-dashboard"
-  }), " Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "active"
-  }, "Dashboard"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-aqua"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-gear-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "CPU Traffic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "90", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "%"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-google-plus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Likes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "41,410")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "clearfix visible-sm-block"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-cart-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Sales"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "760")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-6 col-xs-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon bg-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-people-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "New Members"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "2,000"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Monthly Recap Report"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "btn-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool dropdown-toggle",
-    "data-toggle": "dropdown"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-wrench"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "dropdown-menu",
-    role: "menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Action")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Another action")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Something else here")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "divider"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "Separated link")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Sales: 1 Jan, 2014 - 30 Jul, 2014")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "chart"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
-    id: "salesChart",
-    style: {
-      height: 180
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Goal Completion")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Add Products to Cart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "160"), "/200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-aqua",
-    style: {
-      width: '80%'
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Complete Purchase"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "310"), "/400"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-red",
-    style: {
-      width: '80%'
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Visit Premium Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "480"), "/800"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-green",
-    style: {
-      width: '80%'
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-text"
-  }, "Send Inquiries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-number"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "250"), "/500"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress sm"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar progress-bar-yellow",
-    style: {
-      width: '80%'
-    }
-  })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block border-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-up"
-  }), " 17%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "$35,210.43"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "TOTAL REVENUE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block border-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-left"
-  }), " 0%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "$10,390.90"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "TOTAL COST"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block border-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-up"
-  }), " 20%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "$24,813.53"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "TOTAL PROFIT"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-3 col-xs-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-percentage text-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-down"
-  }), " 18%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "1200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "GOAL COMPLETIONS")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-success"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Visitors Report"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body no-padding"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-9 col-sm-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pad"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "world-map-markers",
-    style: {
-      height: 325
-    }
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-3 col-sm-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pad box-pane-right bg-green",
-    style: {
-      minHeight: 280
-    }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block margin-bottom"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar pad",
-    "data-color": "#fff"
-  }, "90,70,90,70,75,80,70"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "8390"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "Visits")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block margin-bottom"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar pad",
-    "data-color": "#fff"
-  }, "90,50,90,70,61,83,63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "30%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "Referrals")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar pad",
-    "data-color": "#fff"
-  }, "90,50,90,70,61,83,63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "description-header"
-  }, "70%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "description-text"
-  }, "Organic"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-warning direct-chat direct-chat-warning"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Direct Chat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    "data-toggle": "tooltip",
-    title: "3 New Messages",
-    className: "badge bg-yellow"
-  }, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-toggle": "tooltip",
-    title: "Contacts",
-    "data-widget": "chat-pane-toggle"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-comments"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-messages"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-msg"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-info clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-name pull-left"
-  }, "Alexander Pierce"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-timestamp pull-right"
-  }, "23 Jan 2:00 pm")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "direct-chat-img",
-    src: "dist/img/user1-128x128.jpg",
-    alt: "message user image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-text"
-  }, "Is this template really for free? That's unbelievable!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-msg right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-info clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-name pull-right"
-  }, "Sarah Bullock"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-timestamp pull-left"
-  }, "23 Jan 2:05 pm")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "direct-chat-img",
-    src: "dist/img/user3-128x128.jpg",
-    alt: "message user image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-text"
-  }, "You better believe it!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-msg"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-info clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-name pull-left"
-  }, "Alexander Pierce"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-timestamp pull-right"
-  }, "23 Jan 5:37 pm")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "direct-chat-img",
-    src: "dist/img/user1-128x128.jpg",
-    alt: "message user image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-text"
-  }, "Working with AdminLTE on a great new app! Wanna join?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-msg right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-info clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-name pull-right"
-  }, "Sarah Bullock"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "direct-chat-timestamp pull-left"
-  }, "23 Jan 6:10 pm")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "direct-chat-img",
-    src: "dist/img/user3-128x128.jpg",
-    alt: "message user image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-text"
-  }, "I would love to."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "direct-chat-contacts"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "contacts-list"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "contacts-list-img",
-    src: "dist/img/user1-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "contacts-list-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-name"
-  }, "Count Dracula", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "contacts-list-date pull-right"
-  }, "2/28/2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-msg"
-  }, "How have you been? I was...")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "contacts-list-img",
-    src: "dist/img/user7-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "contacts-list-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-name"
-  }, "Sarah Doe", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "contacts-list-date pull-right"
-  }, "2/23/2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-msg"
-  }, "I will be waiting for...")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "contacts-list-img",
-    src: "dist/img/user3-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "contacts-list-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-name"
-  }, "Nadia Jolie", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "contacts-list-date pull-right"
-  }, "2/20/2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-msg"
-  }, "I'll call you back at...")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "contacts-list-img",
-    src: "dist/img/user5-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "contacts-list-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-name"
-  }, "Nora S. Vans", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "contacts-list-date pull-right"
-  }, "2/10/2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-msg"
-  }, "Where is your new...")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "contacts-list-img",
-    src: "dist/img/user6-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "contacts-list-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-name"
-  }, "John K.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "contacts-list-date pull-right"
-  }, "1/27/2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-msg"
-  }, "Can I take a look at...")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "contacts-list-img",
-    src: "dist/img/user8-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "contacts-list-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-name"
-  }, "Kenneth M.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "contacts-list-date pull-right"
-  }, "1/4/2015")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "contacts-list-msg"
-  }, "Never mind I found..."))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    action: "#",
-    method: "post"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "input-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "message",
-    placeholder: "Type Message ...",
-    className: "form-control"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "input-group-btn"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-warning btn-flat"
-  }, "Send"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-6"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-danger"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Latest Members"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger"
-  }, "8 New Members"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body no-padding"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "users-list clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user1-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Alexander Pierce"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user8-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Norman"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "Yesterday")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user7-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Jane"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "12 Jan")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user6-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "John"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "12 Jan")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user2-160x160.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Alexander"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "13 Jan")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user5-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Sarah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "14 Jan")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user4-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Nora"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "15 Jan")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/user3-128x128.jpg",
-    alt: "User Image"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "users-list-name",
-    href: "#"
-  }, "Nadia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "users-list-date"
-  }, "15 Jan")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "uppercase"
-  }, "View All Users"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Latest Orders"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "table-responsive"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-    className: "table no-margin"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Order ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Item"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Popularity"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR9842")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Call of Duty IV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-success"
-  }, "Shipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#00a65a",
-    "data-height": 20
-  }, "90,80,90,-70,61,-83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR1848")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-warning"
-  }, "Pending")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f39c12",
-    "data-height": 20
-  }, "90,80,-90,70,61,-83,68"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "iPhone 6 Plus"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger"
-  }, "Delivered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f56954",
-    "data-height": 20
-  }, "90,-80,90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-info"
-  }, "Processing")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#00c0ef",
-    "data-height": 20
-  }, "90,80,-90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR1848")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-warning"
-  }, "Pending")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f39c12",
-    "data-height": 20
-  }, "90,80,-90,70,61,-83,68"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "iPhone 6 Plus"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger"
-  }, "Delivered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#f56954",
-    "data-height": 20
-  }, "90,-80,90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, "OR9842")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Call of Duty IV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-success"
-  }, "Shipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sparkbar",
-    "data-color": "#00a65a",
-    "data-height": 20
-  }, "90,80,90,-70,61,-83,63"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "btn btn-sm btn-info btn-flat pull-left"
-  }, "Place New Order"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "btn btn-sm btn-default btn-flat pull-right"
-  }, "View All Orders")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-pricetag-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Inventory"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "5,200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '50%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "50% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-heart-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Mentions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "92,050"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '20%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "20% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion ion-ios-cloud-download-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Downloads"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "114,381"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '70%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "70% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box bg-aqua"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-icon"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "ion-ios-chatbubble-outline"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "info-box-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-text"
-  }, "Direct Messages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "info-box-number"
-  }, "163,921"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "progress-bar",
-    style: {
-      width: '40%'
-    }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "progress-description"
-  }, "40% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-default"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Browser Usage"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "chart-responsive"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
-    id: "pieChart",
-    height: 150
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "chart-legend clearfix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-red"
-  }), " Chrome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-green"
-  }), " IE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-yellow"
-  }), " FireFox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-aqua"
-  }), " Safari"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-light-blue"
-  }), " Opera"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-gray"
-  }), " Navigator"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer no-padding"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "nav nav-pills nav-stacked"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "United States of America", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right text-red"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-down"
-  }), " 12%"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "India ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right text-green"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-up"
-  }), " 4%"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, "China", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right text-yellow"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left"
-  }), " 0%")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box box-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-header with-border"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "box-title"
-  }, "Recently Added Products"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-tools pull-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "collapse"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-minus"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-box-tool",
-    "data-widget": "remove"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-times"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "products-list product-list-in-box"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "Samsung TV", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-warning pull-right"
-  }, "$1800")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "Samsung 32\" 1080p 60Hz LED Smart HDTV."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "Bicycle", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-info pull-right"
-  }, "$700")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "26\" Mongoose Dolomite Men's 7-speed, Navy Blue."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "Xbox One ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-danger pull-right"
-  }, "$350")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "Xbox One Console Bundle with Halo Master Chief Collection."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-img"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "dist/img/default-50x50.gif",
-    alt: "Product Image"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "product-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "product-title"
-  }, "PlayStation 4", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-success pull-right"
-  }, "$399")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "product-description"
-  }, "PlayStation 4 500GB Console (PS4)"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "box-footer text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "uppercase"
-  }, "View All Products")))))));
+var useScript = function useScript(url) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+    document.body.appendChild(script);
+    return function () {
+      document.body.removeChild(script);
+    };
+  }, [url]);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Content);
+/***/ }),
+
+/***/ "./resources/js/helpers/useStyle.js":
+/*!******************************************!*\
+  !*** ./resources/js/helpers/useStyle.js ***!
+  \******************************************/
+/*! exports provided: useStyle */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStyle", function() { return useStyle; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var useStyle = function useStyle(url) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var link = document.createElement('link');
+    link.rel = "stylesheet";
+    link.href = url;
+    link.async = true;
+    document.head.appendChild(link);
+    return function () {
+      document.head.removeChild(link);
+    };
+  }, [url]);
+};
 
 /***/ }),
 
@@ -81670,8 +81207,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layout/Header */ "./resources/js/layout/Header.js");
 /* harmony import */ var _layout_Sidebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../layout/Sidebar */ "./resources/js/layout/Sidebar.js");
 /* harmony import */ var _layout_Footer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../layout/Footer */ "./resources/js/layout/Footer.js");
-/* harmony import */ var _Content__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Content */ "./resources/js/layout/Content.js");
-/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Home */ "./resources/js/components/Home.js");
+/* harmony import */ var _pages_Home_Home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/Home/Home */ "./resources/js/pages/Home/Home.js");
+/* harmony import */ var _pages_Order_Saveorder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/Order/Saveorder */ "./resources/js/pages/Order/Saveorder.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -81684,23 +81221,12 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+ // import Content from './Content'
 
 
 
 
 var PrivateRoute = function PrivateRoute() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FadingContentRoute, {
-    path: "/officer/home",
-    component: _components_Home__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }));
-}; // wrapping/composing
-// You can spread routeProps to make them available to your rendered Component
-
-
-function FadingContentRoute(_ref) {
-  var Component = _ref.component,
-      rest = _objectWithoutProperties(_ref, ["component"]);
-
   var authentication = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.authentication;
   });
@@ -81709,6 +81235,22 @@ function FadingContentRoute(_ref) {
     Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])(_actions__WEBPACK_IMPORTED_MODULE_3__["userActions"].getAuthUser());
   }
 
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FadingContentRoute, {
+    path: "/officer/home",
+    component: _pages_Home_Home__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FadingContentRoute, {
+    path: "/officer/saveorder",
+    component: _pages_Order_Saveorder__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }));
+};
+
+function FadingContentRoute(_ref) {
+  var Component = _ref.component,
+      rest = _objectWithoutProperties(_ref, ["component"]);
+
+  var authentication = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
+    return state.authentication;
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], _extends({}, rest, {
     render: function render(routeProps) {
       return authentication.loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Header__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, routeProps), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
@@ -81792,299 +81334,15 @@ var Sidebar = function Sidebar() {
     "data-widget": "tree"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "header"
-  }, "MAIN NAVIGATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ListItemLink, {
+  }, "\u0E40\u0E21\u0E19\u0E39\u0E2B\u0E25\u0E31\u0E01"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ListItemLink, {
     to: "/officer/home",
     icon: "fa fa-circle-o",
     name: "\u0E2B\u0E19\u0E49\u0E32\u0E41\u0E23\u0E01"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-files-o"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Layout Options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "label label-primary pull-right"
-  }, "4"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/layout/top-nav.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Top Navigation")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/layout/boxed.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Boxed")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/layout/fixed.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Fixed")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/layout/collapsed-sidebar.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Collapsed Sidebar")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/widgets.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-th"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Widgets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "label pull-right bg-green"
-  }, "new")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-pie-chart"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Charts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/charts/chartjs.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " ChartJS")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/charts/morris.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Morris")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/charts/flot.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Flot")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/charts/inline.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Inline charts")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-laptop"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "UI Elements"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/UI/general.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " General")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/UI/icons.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/UI/buttons.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Buttons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/UI/sliders.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Sliders")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/UI/timeline.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Timeline")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/UI/modals.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Modals")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-edit"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Forms"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/forms/general.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " General Elements")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/forms/advanced.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Advanced Elements")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/forms/editors.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Editors")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-table"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Tables"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/tables/simple.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Simple tables")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/tables/data.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Data tables")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/calendar.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-calendar"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Calendar"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "label pull-right bg-red"
-  }, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "label pull-right bg-blue"
-  }, "17")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/mailbox/mailbox.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-envelope"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Mailbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "label pull-right bg-yellow"
-  }, "12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "label pull-right bg-green"
-  }, "16"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "label pull-right bg-red"
-  }, "5")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-folder"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Examples"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/invoice.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Invoice")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/profile.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/login.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/register.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Register")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/lockscreen.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Lockscreen")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/404.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " 404 Error")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/500.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " 500 Error")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/blank.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Blank Page")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "pages/examples/pace.html"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Pace Page")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-share"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Multilevel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level One")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level One", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level Two")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "treeview"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level Two", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "pull-right-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-angle-left pull-right"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "treeview-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level Three")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level Three")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o"
-  }), " Level One")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "https://adminlte.io/docs"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-book"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Documentation"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "header"
-  }, "LABELS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-red"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Important"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-yellow"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Warning"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-o text-aqua"
-  }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Information"))))));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ListItemLink, {
+    to: "/officer/saveorder",
+    icon: "fa fa-files-o",
+    name: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E41\u0E08\u0E49\u0E07 Order \u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19"
+  }))));
 };
 
 function ListItemLink(_ref) {
@@ -82103,12 +81361,1394 @@ function ListItemLink(_ref) {
         to: to
       }, rest), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: icon
-      }), " ", name));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, name)));
     }
   });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Sidebar);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Home/Home.js":
+/*!*****************************************!*\
+  !*** ./resources/js/pages/Home/Home.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Home; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers */ "./resources/js/helpers/index.js");
+
+
+function Home() {
+  Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["useScript"])("/officer/dist/js/pages/dashboard2.js");
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "content-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "content-header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Dashboard", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Version 2.0")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+    className: "breadcrumb"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-dashboard"
+  }), " Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "active"
+  }, "Dashboard"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3 col-sm-6 col-xs-12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon bg-aqua"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion ion-ios-gear-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "CPU Traffic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "90", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "%"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3 col-sm-6 col-xs-12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon bg-red"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-google-plus"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "Likes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "41,410")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "clearfix visible-sm-block"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3 col-sm-6 col-xs-12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon bg-green"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion ion-ios-cart-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "Sales"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "760")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3 col-sm-6 col-xs-12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon bg-yellow"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion ion-ios-people-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "New Members"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "2,000"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-header with-border"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "box-title"
+  }, "Monthly Recap Report"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-tools pull-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "collapse"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-minus"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "btn-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool dropdown-toggle",
+    "data-toggle": "dropdown"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-wrench"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "dropdown-menu",
+    role: "menu"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, "Action")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, "Another action")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, "Something else here")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "divider"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, "Separated link")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "remove"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-times"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Sales: 1 Jan, 2014 - 30 Jul, 2014")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "chart"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+    id: "salesChart",
+    style: {
+      height: 180
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Goal Completion")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-text"
+  }, "Add Products to Cart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-number"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "160"), "/200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress sm"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar progress-bar-aqua",
+    style: {
+      width: '80%'
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-text"
+  }, "Complete Purchase"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-number"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "310"), "/400"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress sm"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar progress-bar-red",
+    style: {
+      width: '80%'
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-text"
+  }, "Visit Premium Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-number"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "480"), "/800"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress sm"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar progress-bar-green",
+    style: {
+      width: '80%'
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-text"
+  }, "Send Inquiries"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-number"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "250"), "/500"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress sm"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar progress-bar-yellow",
+    style: {
+      width: '80%'
+    }
+  })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-footer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-3 col-xs-6"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block border-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-percentage text-green"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-up"
+  }), " 17%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "$35,210.43"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "TOTAL REVENUE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-3 col-xs-6"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block border-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-percentage text-yellow"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-left"
+  }), " 0%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "$10,390.90"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "TOTAL COST"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-3 col-xs-6"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block border-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-percentage text-green"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-up"
+  }), " 20%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "$24,813.53"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "TOTAL PROFIT"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-3 col-xs-6"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-percentage text-red"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-down"
+  }), " 18%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "1200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "GOAL COMPLETIONS")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-8"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box box-success"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-header with-border"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "box-title"
+  }, "Visitors Report"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-tools pull-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "collapse"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-minus"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "remove"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-times"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-body no-padding"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-9 col-sm-8"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pad"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "world-map-markers",
+    style: {
+      height: 325
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3 col-sm-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pad box-pane-right bg-green",
+    style: {
+      minHeight: 280
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block margin-bottom"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar pad",
+    "data-color": "#fff"
+  }, "90,70,90,70,75,80,70"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "8390"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "Visits")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block margin-bottom"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar pad",
+    "data-color": "#fff"
+  }, "90,50,90,70,61,83,63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "30%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "Referrals")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "description-block"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar pad",
+    "data-color": "#fff"
+  }, "90,50,90,70,61,83,63"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+    className: "description-header"
+  }, "70%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "description-text"
+  }, "Organic"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box box-info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-header with-border"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "box-title"
+  }, "Latest Orders"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-tools pull-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "collapse"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-minus"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "remove"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-times"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "table-responsive"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table no-margin"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Order ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Item"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Popularity"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR9842")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Call of Duty IV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-success"
+  }, "Shipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#00a65a",
+    "data-height": 20
+  }, "90,80,90,-70,61,-83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR1848")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-warning"
+  }, "Pending")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#f39c12",
+    "data-height": 20
+  }, "90,80,-90,70,61,-83,68"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "iPhone 6 Plus"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-danger"
+  }, "Delivered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#f56954",
+    "data-height": 20
+  }, "90,-80,90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-info"
+  }, "Processing")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#00c0ef",
+    "data-height": 20
+  }, "90,80,-90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR1848")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Samsung Smart TV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-warning"
+  }, "Pending")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#f39c12",
+    "data-height": 20
+  }, "90,80,-90,70,61,-83,68"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR7429")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "iPhone 6 Plus"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-danger"
+  }, "Delivered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#f56954",
+    "data-height": 20
+  }, "90,-80,90,70,-61,83,63"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "pages/examples/invoice.html"
+  }, "OR9842")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Call of Duty IV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-success"
+  }, "Shipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sparkbar",
+    "data-color": "#00a65a",
+    "data-height": 20
+  }, "90,80,90,-70,61,-83,63"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-footer clearfix"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "btn btn-sm btn-info btn-flat pull-left"
+  }, "Place New Order"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "btn btn-sm btn-default btn-flat pull-right"
+  }, "View All Orders")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box bg-yellow"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion ion-ios-pricetag-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "Inventory"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "5,200"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: '50%'
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-description"
+  }, "50% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box bg-green"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion ion-ios-heart-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "Mentions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "92,050"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: '20%'
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-description"
+  }, "20% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box bg-red"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion ion-ios-cloud-download-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "Downloads"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "114,381"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: '70%'
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-description"
+  }, "70% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box bg-aqua"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-icon"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "ion-ios-chatbubble-outline"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "info-box-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-text"
+  }, "Direct Messages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "info-box-number"
+  }, "163,921"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "progress-bar",
+    style: {
+      width: '40%'
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "progress-description"
+  }, "40% Increase in 30 Days"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box box-primary"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-header with-border"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "box-title"
+  }, "Recently Added Products"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-tools pull-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "collapse"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-minus"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-box-tool",
+    "data-widget": "remove"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-times"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "products-list product-list-in-box"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-img"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "dist/img/default-50x50.gif",
+    alt: "Product Image"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "product-title"
+  }, "Samsung TV", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-warning pull-right"
+  }, "$1800")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "product-description"
+  }, "Samsung 32\" 1080p 60Hz LED Smart HDTV."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-img"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "dist/img/default-50x50.gif",
+    alt: "Product Image"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "product-title"
+  }, "Bicycle", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-info pull-right"
+  }, "$700")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "product-description"
+  }, "26\" Mongoose Dolomite Men's 7-speed, Navy Blue."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-img"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "dist/img/default-50x50.gif",
+    alt: "Product Image"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "product-title"
+  }, "Xbox One ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-danger pull-right"
+  }, "$350")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "product-description"
+  }, "Xbox One Console Bundle with Halo Master Chief Collection."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-img"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "dist/img/default-50x50.gif",
+    alt: "Product Image"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "product-info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "product-title"
+  }, "PlayStation 4", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "label label-success pull-right"
+  }, "$399")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "product-description"
+  }, "PlayStation 4 500GB Console (PS4)"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box-footer text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "uppercase"
+  }, "View All Products")))))));
+}
+
+/***/ }),
+
+/***/ "./resources/js/pages/Login/Login.js":
+/*!*******************************************!*\
+  !*** ./resources/js/pages/Login/Login.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers */ "./resources/js/helpers/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions */ "./resources/js/actions/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+ // import { login } from '../actions';
+
+
+
+var Login = function Login() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState2 = _slicedToArray(_useState, 2),
+      user = _useState2[0],
+      setUser = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      pass = _useState4[0],
+      setPass = _useState4[1]; // useEffect(() => {
+  //     console.log('useEffect');
+  //     return () => {
+  //     console.log('cleanup');
+  //     };
+  // });
+
+
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  var authentication = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
+    return state.authentication;
+  });
+
+  if (authentication.loggedIn) {
+    setTimeout(_helpers__WEBPACK_IMPORTED_MODULE_2__["history"].push('/officer/home'), 100);
+  }
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(_actions__WEBPACK_IMPORTED_MODULE_3__["userActions"].login(user, pass));
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "login-box login-page"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "login-logo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "../../index2.html"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Soat"), "Officer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "login-box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "login-box-msg"
+  }, "Sign in to start your session "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: function onSubmit(e) {
+      return handleSubmit(e);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group has-feedback"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "email",
+    onChange: function onChange(event) {
+      return setUser(event.target.value);
+    },
+    className: "form-control",
+    placeholder: "Email",
+    required: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "glyphicon glyphicon-envelope form-control-feedback"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group has-feedback"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "password",
+    onChange: function onChange(event) {
+      return setPass(event.target.value);
+    },
+    className: "form-control",
+    placeholder: "Password",
+    required: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "glyphicon glyphicon-lock form-control-feedback"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-xs-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
+    className: "btn btn-primary btn-block btn-flat"
+  }, "Sign In"))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Login);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Order/Saveorder.js":
+/*!***********************************************!*\
+  !*** ./resources/js/pages/Order/Saveorder.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/react-hook-form.es.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers */ "./resources/js/helpers/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions */ "./resources/js/actions/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+function Saveorder() {
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
+  var feedData = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
+    return state.feedData;
+  });
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(['ma_coop']),
+      _useState2 = _slicedToArray(_useState, 2),
+      inputs = _useState2[0],
+      setInputs = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      coopid = _useState4[0],
+      setCoopid = _useState4[1];
+
+  Object(_helpers__WEBPACK_IMPORTED_MODULE_4__["useScript"])("/officer/dist/js/pages/saveorder.js");
+  Object(_helpers__WEBPACK_IMPORTED_MODULE_4__["useScript"])("/officer/bower_components/ckeditor/ckeditor.js");
+  Object(_helpers__WEBPACK_IMPORTED_MODULE_4__["useScript"])("/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js");
+
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["default"])(),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      watch = _useForm.watch,
+      errors = _useForm.errors;
+
+  var onSubmit = function onSubmit(data) {
+    console.log(data);
+    console.log(coopid);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    function feedData() {
+      return _feedData.apply(this, arguments);
+    } // Execute the created function directly
+
+
+    function _feedData() {
+      _feedData = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return dispatch(_actions__WEBPACK_IMPORTED_MODULE_5__["orderActions"].feedOrderPage());
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _feedData.apply(this, arguments);
+    }
+
+    feedData();
+  }, []); // useEffect(() => {
+  //     if (coopid != "") {
+  //         alert(coopid);    
+  //     }
+  // }, [coopid])
+  // $(document).ready(function(){
+  //     document.getElementById("Detail").style.display = "none";
+  // });
+
+  $(function () {
+    $(document.body).on("change", "#coopid", function () {
+      if (coopid == null) {
+        console.log(coopid);
+        document.getElementById("Detail").style.display = "block";
+        $('.select2').select2();
+        CKEDITOR.replace('editor1'); //bootstrap WYSIHTML5 - text editor
+
+        $('.textarea').wysihtml5();
+        document.getElementById("informer").disabled = false;
+      }
+
+      setCoopid(this.value);
+    });
+  });
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "content-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("section", {
+    className: "content"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box box-default"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    onSubmit: handleSubmit(onSubmit)
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-header with-border"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "box-title"
+  }, "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E01\u0E32\u0E23\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07\u0E23\u0E32\u0E22\u0E07\u0E32\u0E19\u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-tools pull-right"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "submit",
+    className: "btn btn-lg btn-success"
+  }, "\u0E1A\u0E31\u0E17\u0E17\u0E36\u0E01"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid #3c8dbc',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-reorder"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    readOnly: true,
+    type: "text",
+    name: "inform_no",
+    className: "form-control",
+    value: "",
+    ref: register
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group receiver"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    name: "receiver",
+    className: "form-control select2",
+    ref: register,
+    required: true
+  }, feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.officer_id
+    }, "[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name);
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid #3c8dbc',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    name: "receive_date",
+    className: "form-control",
+    "data-inputmask": "'alias': 'dd/mm/yyyy'",
+    "data-mask": true,
+    ref: register
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E19\u0E31\u0E14\u0E2B\u0E21\u0E32\u0E22")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid blue',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    name: "appointment_date",
+    className: "form-control",
+    "data-inputmask": "'alias': 'dd/mm/yyyy'",
+    "data-mask": true,
+    ref: register
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-9"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group coopid"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C\u0E2F"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    name: "coopid",
+    id: "coopid",
+    className: "form-control select2",
+    ref: register,
+    required: true
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.coop_id
+    }, val.coop_id, "  ", val.coop_name);
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-6"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group receiver"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1C\u0E39\u0E49\u0E41\u0E08\u0E49\u0E07"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    disabled: true,
+    name: "informer",
+    id: "informer",
+    className: "form-control select2",
+    ref: register
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.contact_no
+    }, "[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name);
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E2D\u0E49\u0E32\u0E07\u0E2D\u0E34\u0E07"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    name: "doc_make",
+    className: "form-control",
+    style: {
+      border: '1.5px solid #3c8dbc',
+      borderRadius: 2
+    },
+    ref: register({
+      required: true
+    })
+  }), errors.doc_make && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "This field is required")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E40\u0E27\u0E25\u0E32\u0E19\u0E31\u0E14\u0E2B\u0E21\u0E32\u0E22"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid blue',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    name: "dateRevice",
+    className: "form-control pull-right",
+    id: "reservation",
+    ref: register({
+      required: true
+    })
+  }), errors.dateRevice && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "This field is required")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-6"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group blueselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1C\u0E39\u0E49\u0E41\u0E01\u0E49\u0E44\u0E02"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.officer_id
+    }, "[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name);
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E40\u0E23\u0E34\u0E48\u0E21")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid blue',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    "data-inputmask": "'alias': 'dd/mm/yyyy'",
+    "data-mask": true
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E41\u0E25\u0E49\u0E27\u0E40\u0E2A\u0E23\u0E47\u0E08")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid blue',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    "data-inputmask": "'alias': 'dd/mm/yyyy'",
+    "data-mask": true
+  })))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-9"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E27\u0E34\u0E18\u0E35\u0E01\u0E32\u0E23\u0E41\u0E01\u0E49\u0E44\u0E02"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "radio",
+    name: "r3",
+    className: "flat-red"
+  }), "\xA0\xA0\xA0\xA0 \u0E44\u0E21\u0E48\u0E23\u0E30\u0E1A\u0E38\xA0\xA0\xA0\xA0"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "radio",
+    name: "r3",
+    className: "flat-red"
+  }), "\xA0\xA0\xA0\xA0 Telephone\xA0\xA0\xA0\xA0"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "radio",
+    name: "r3",
+    className: "flat-red"
+  }), "\xA0\xA0\xA0\xA0 Modem\xA0\xA0\xA0\xA0"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "radio",
+    name: "r3",
+    className: "flat-red"
+  }), "\xA0\xA0\xA0\xA0 Onsite\xA0\xA0\xA0\xA0")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group blueselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17\u0E07\u0E32\u0E19"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_inform_type && feedData.data.ucf_inform_type.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.inform_type
+    }, "[".concat(val.inform_type, "]"), "\xA0\xA0\xA0", val.type_desc);
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-4"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group orangeselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "SA"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.officer_id
+    }, "[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name);
+  }))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box box-primary",
+    style: {
+      border: '2px solid #0000008c'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-header"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "box-title"
+  }, "\u0E2A\u0E33\u0E2B\u0E23\u0E31\u0E1A Order \u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E2A\u0E31\u0E48\u0E07\u0E0B\u0E37\u0E49\u0E2D"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid #f39c12',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    "data-inputmask": "'alias': 'dd/mm/yyyy'",
+    "data-mask": true
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E08\u0E33\u0E19\u0E27\u0E19\u0E27\u0E31\u0E19\u0E15\u0E32\u0E21\u0E2A\u0E31\u0E0D\u0E0D\u0E32"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    style: {
+      border: '1.5px solid #f39c12',
+      borderRadius: 2
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E21\u0E35\u0E2A\u0E31\u0E0D\u0E0D\u0E32\u0E08\u0E49\u0E32\u0E07"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "checkbox",
+    className: "flat-red",
+    style: {
+      border: '1.5px solid #f39c12',
+      borderRadius: 2
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E21\u0E39\u0E25\u0E04\u0E48\u0E32\u0E07\u0E32\u0E19"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    style: {
+      border: '1.5px solid #f39c12',
+      borderRadius: 2,
+      textAlign: "right"
+    }
+  }))))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group blueselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1C\u0E39\u0E49\u0E14\u0E39\u0E41\u0E25"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.officer_id
+    }, "[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name);
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "(\u0E13 \u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E41\u0E08\u0E49\u0E07\u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19)")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-6"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group greenselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E23\u0E30\u0E1A\u0E1A\u0E07\u0E32\u0E19 Service"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.app_no
+    }, "[".concat(val.app_no, "]"), "\xA0\xA0\xA0", val.application, "\xA0\xA0\xA0", "[".concat(val.version, "]"));
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-6"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1D\u0E48\u0E32\u0E22\u0E07\u0E32\u0E19\u0E17\u0E35\u0E48\u0E14\u0E39\u0E41\u0E25"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    readOnly: true,
+    type: "text",
+    className: "form-control",
+    style: {
+      border: '1.5px solid #0000008c',
+      borderRadius: 2
+    }
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box box-danger",
+    id: "Detail",
+    style: {
+      border: '2px solid #dd4b39',
+      display: 'none'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-header"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "box-title"
+  }, "\u0E23\u0E32\u0E22\u0E25\u0E30\u0E40\u0E2D\u0E35\u0E22\u0E14")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "box-body"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group prinkselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E42\u0E1B\u0E23\u0E41\u0E01\u0E23\u0E21"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.app_no
+    }, "[".concat(val.app_no, "]"), "\xA0\xA0\xA0", val.application, "\xA0\xA0\xA0", "[".concat(val.version, "]"));
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E2A\u0E20\u0E32\u0E19\u0E30"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    style: {
+      border: '1.5px solid #3c8dbc',
+      borderRadius: 2
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group prinkselect"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E23\u0E2B\u0E31\u0E2A\u0E1B\u0E31\u0E0D\u0E2B\u0E32"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "form-control select2"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      key: i,
+      value: val.app_no
+    }, "[".concat(val.app_no, "]"), "\xA0\xA0\xA0", val.application, "\xA0\xA0\xA0", "[".concat(val.version, "]"));
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E40\u0E27\u0E25\u0E32(\u0E19\u0E32\u0E17\u0E35)"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group",
+    style: {
+      border: '1.5px solid #3c8dbc',
+      borderRadius: 2
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "input-group-addon"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-calendar"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    "data-inputmask": "'alias': 'dd/mm/yyyy'",
+    "data-mask": true
+  }))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E23\u0E32\u0E22\u0E25\u0E30\u0E40\u0E2D\u0E35\u0E22\u0E14 :"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+    id: "editor1",
+    name: "editor1",
+    rows: 10,
+    cols: 80
+  })))))))), feedData.fetching && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "overlay"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fa fa-refresh fa-spin"
+  })))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Saveorder);
+
+/***/ }),
+
+/***/ "./resources/js/pages/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/pages/index.js ***!
+  \*************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _layout_PrivateRoute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../layout/PrivateRoute */ "./resources/js/layout/PrivateRoute.js");
+/* harmony import */ var _Login_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Login/Login */ "./resources/js/pages/Login/Login.js");
+/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-notifications/lib/notifications.css */ "./node_modules/react-notifications/lib/notifications.css");
+/* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_8__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+ // React Notification
+
+
+
+
+var Index =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Index, _Component);
+
+  function Index() {
+    _classCallCheck(this, Index);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Index).apply(this, arguments));
+  }
+
+  _createClass(Index, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
+        store: _helpers__WEBPACK_IMPORTED_MODULE_3__["store"]
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Router"], {
+        history: _helpers__WEBPACK_IMPORTED_MODULE_3__["history"]
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+        path: "/officer/login",
+        exact: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_PrivateRoute__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        exact: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+        path: "*"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
+        to: "/officer/home"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_8__["NotificationContainer"], null)));
+    }
+  }]);
+
+  return Index;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // export function Index() {
+//     return (
+//         <Provider store={store}>
+//             <Router history={history}>
+//                 <Switch>
+//                     <Route path="/officer/login">
+//                         <Login/>
+//                     </Route>
+//                     <PrivateRoute />
+//                 </Switch>
+//                 <NotificationContainer />
+//             </Router>
+//         </Provider>
+//     )
+// }
+
+
+if (document.getElementById('root')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Index, null), document.getElementById('root'));
+}
 
 /***/ }),
 
@@ -82128,7 +82768,10 @@ var user = JSON.parse(localStorage.getItem('user'));
 var initialState = user ? {
   loggedIn: true,
   user: user
-} : {};
+} : {
+  loggedIn: false,
+  user: []
+};
 function authentication() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -82159,6 +82802,60 @@ function authentication() {
 
 /***/ }),
 
+/***/ "./resources/js/reducers/feedData.reducer.js":
+/*!***************************************************!*\
+  !*** ./resources/js/reducers/feedData.reducer.js ***!
+  \***************************************************/
+/*! exports provided: feedData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "feedData", function() { return feedData; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/constants/index.js");
+
+var initialState = {
+  fetching: false,
+  fetchSuccess: false,
+  fetchFailure: false,
+  data: []
+};
+function feedData() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var type = action.type,
+      payload = action.payload;
+
+  switch (type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["FeedConstants"].FEED_REQUEST:
+      return {
+        fetching: action.fetching,
+        fetchSuccess: false,
+        fetchFailure: false
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["FeedConstants"].FEED_SUCCESS:
+      return {
+        fetchSuccess: true,
+        fetching: false,
+        fetchFailure: false,
+        data: payload
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["FeedConstants"].FEED_FAILURE:
+      return {
+        fetching: false,
+        fetchSuccess: false,
+        fetchFailure: true
+      };
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/js/reducers/index.js":
 /*!****************************************!*\
   !*** ./resources/js/reducers/index.js ***!
@@ -82171,13 +82868,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _authentication_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authentication.reducer */ "./resources/js/reducers/authentication.reducer.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users.reducer */ "./resources/js/reducers/users.reducer.js");
+/* harmony import */ var _feedData_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./feedData.reducer */ "./resources/js/reducers/feedData.reducer.js");
  // import Login from "./Login";
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   authentication: _authentication_reducer__WEBPACK_IMPORTED_MODULE_1__["authentication"],
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["users"] // login: Login,
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["users"],
+  feedData: _feedData_reducer__WEBPACK_IMPORTED_MODULE_3__["feedData"] // login: Login,
 
 }));
 
@@ -82226,7 +82926,7 @@ function users() {
 /*!****************************************!*\
   !*** ./resources/js/services/index.js ***!
   \****************************************/
-/*! exports provided: userService */
+/*! exports provided: userService, orderService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82234,7 +82934,146 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.service */ "./resources/js/services/user.service.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "userService", function() { return _user_service__WEBPACK_IMPORTED_MODULE_0__["userService"]; });
 
+/* harmony import */ var _savereder_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./savereder.service */ "./resources/js/services/savereder.service.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "orderService", function() { return _savereder_service__WEBPACK_IMPORTED_MODULE_1__["orderService"]; });
 
+
+
+
+/***/ }),
+
+/***/ "./resources/js/services/savereder.service.js":
+/*!****************************************************!*\
+  !*** ./resources/js/services/savereder.service.js ***!
+  \****************************************************/
+/*! exports provided: orderService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "orderService", function() { return orderService; });
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services */ "./resources/js/services/services.js");
+
+var service = new _services__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+function orderPage(data) {
+  var requestOptions = {
+    method: 'GET' // body:   {}
+
+  };
+  return service.fetch("/api/orderPage", requestOptions).then(function (res) {
+    return res;
+  });
+}
+
+var orderService = {
+  orderPage: orderPage
+};
+
+/***/ }),
+
+/***/ "./resources/js/services/services.js":
+/*!*******************************************!*\
+  !*** ./resources/js/services/services.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import { authHeader } from '../helpers';
+
+
+var Services =
+/*#__PURE__*/
+function () {
+  function Services() {
+    _classCallCheck(this, Services);
+  }
+
+  _createClass(Services, [{
+    key: "getToken",
+    value: function getToken() {
+      var user = JSON.parse(localStorage.getItem('user')); // Retrieves the user token from localStorage
+      // return localStorage.getItem('user')
+
+      if (user && user.token) {
+        return user.token;
+      }
+    }
+  }, {
+    key: "fetch",
+    value: function (_fetch) {
+      function fetch(_x, _x2) {
+        return _fetch.apply(this, arguments);
+      }
+
+      fetch.toString = function () {
+        return _fetch.toString();
+      };
+
+      return fetch;
+    }(function (url, options) {
+      // performs api calls sending the required authentication headers
+      var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }; // Setting Authorization header
+      // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+
+      if (this.getToken()) {
+        headers['Authorization'] = 'Bearer ' + this.getToken();
+      } // if (this.loggedIn()) {
+      //     headers['Authorization'] = 'Bearer ' + authHeader()
+      // }
+
+
+      return fetch(url, _objectSpread({
+        headers: headers
+      }, options)).then(this._handleResponse);
+    })
+  }, {
+    key: "_handleResponse",
+    value: function _handleResponse(response) {
+      return response.text().then(function (text) {
+        var data = text && JSON.parse(text);
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            location.reload(true);
+          }
+
+          if (data.error) {
+            react_notifications__WEBPACK_IMPORTED_MODULE_0__["NotificationManager"].error(data.error, 'Error', 5000);
+          }
+
+          var error = data && data.message || response.statusText;
+          return Promise.reject(error);
+        }
+
+        return data;
+      });
+    }
+  }]);
+
+  return Services;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Services);
 
 /***/ }),
 
@@ -82257,7 +83096,6 @@ __webpack_require__.r(__webpack_exports__);
 var userService = {
   login: login,
   logout: logout,
-  getAll: getAll,
   getAuthUser: getAuthUser
 };
 
@@ -82308,20 +83146,19 @@ function getAuthUser() {
   };
   return fetch("/api/auth/getAuthUser", requestOptions).then(function (res) {
     if (res.status === 400) {
-      logout();
+      localStorage.removeItem('user');
     }
 
     return res;
-  }); // localStorage.removeItem('user');
-}
+  });
+} // function getAll() {
+//     const requestOptions = {
+//         method: 'GET',
+//         headers: authHeader()
+//     };
+//     return fetch(`api/user`, requestOptions).then(handleResponse);
+// }
 
-function getAll() {
-  var requestOptions = {
-    method: 'GET',
-    headers: Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["authHeader"])()
-  };
-  return fetch("api/user", requestOptions).then(handleResponse);
-}
 
 function handleResponse(response) {
   return response.text().then(function (text) {

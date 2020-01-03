@@ -1,9 +1,9 @@
 import React ,  { useState , useEffect } from 'react'
 import { useDispatch , useSelector } from "react-redux";
-import { history } from '../helpers';
+import { history } from '../../helpers';
 // import { login } from '../actions';
 
-import { userActions } from "../actions";
+import { userActions } from "../../actions";
 
 const Login = () => {
     const [user, setUser] = useState();
@@ -38,28 +38,28 @@ const Login = () => {
             <div className="login-box-body">
                 <p className="login-box-msg">Sign in to start your session </p>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="form-group has-feedback">
-                    <input type="email" onChange={event => setUser(event.target.value)} className="form-control" placeholder="Email" required/>
-                    <span className="glyphicon glyphicon-envelope form-control-feedback" />
-                </div>
-                <div className="form-group has-feedback">
-                    <input type="password" onChange={event => setPass(event.target.value)} className="form-control" placeholder="Password" required/>
-                    <span className="glyphicon glyphicon-lock form-control-feedback" />
-                </div>
-                <div className="row">
-                    {/* <div className="col-xs-8">
-                    <div className="checkbox icheck">
-                        <label>
-                        <input type="checkbox" /> Remember Me
-                        </label>
+                    <div className="form-group has-feedback">
+                        <input type="email" onChange={event => setUser(event.target.value)} className="form-control" placeholder="Email" required/>
+                        <span className="glyphicon glyphicon-envelope form-control-feedback" />
                     </div>
-                    </div> */}
-                    {/* /.col */}
-                    <div className="col-xs-4">
-                    <button type="submit" className="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <div className="form-group has-feedback">
+                        <input type="password" onChange={event => setPass(event.target.value)} className="form-control" placeholder="Password" required/>
+                        <span className="glyphicon glyphicon-lock form-control-feedback" />
                     </div>
-                    {/* /.col */}
-                </div>
+                    <div className="row">
+                        {/* <div className="col-xs-8">
+                        <div className="checkbox icheck">
+                            <label>
+                            <input type="checkbox" /> Remember Me
+                            </label>
+                        </div>
+                        </div> */}
+                        {/* /.col */}
+                        <div className="col-xs-4">
+                        <button type="submit" className="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                        {/* /.col */}
+                    </div>
                 </form>
                 {/* <div className="social-auth-links text-center">
                 <p>- OR -</p>

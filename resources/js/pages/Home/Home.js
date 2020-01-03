@@ -1,6 +1,10 @@
-import React from 'react'
+import React , { useEffect } from 'react'
+import { history, useScript , useStyle } from '../../helpers';
 
 export default function Home() {
+
+    useScript("/officer/dist/js/pages/dashboard2.js");
+
     return (
         <div className="content-wrapper">
             {/* Content Header (Page header) */}
