@@ -53,7 +53,7 @@ function ListItemLink({ to, icon, name , ...rest }) {
         )}
       />
     );
-  }
+}
 
 
 

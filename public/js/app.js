@@ -81235,7 +81235,7 @@ var PrivateRoute = function PrivateRoute() {
     Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])(_actions__WEBPACK_IMPORTED_MODULE_3__["userActions"].getAuthUser());
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FadingContentRoute, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FadingContentRoute, {
     path: "/officer/home",
     component: _pages_Home_Home__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FadingContentRoute, {
@@ -81253,7 +81253,7 @@ function FadingContentRoute(_ref) {
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], _extends({}, rest, {
     render: function render(routeProps) {
-      return authentication.loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Header__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, routeProps), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+      return authentication.loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Header__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, routeProps), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: {
           pathname: '/officer/login',
           state: {
@@ -82317,11 +82317,11 @@ function Saveorder() {
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group receiver"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "\u0E1C\u0E39\u0E49\u0E41\u0E08\u0E49\u0E07"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-    disabled: true,
     name: "informer",
     id: "informer",
     className: "form-control select2",
-    ref: register
+    ref: register,
+    required: true
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null), feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
       key: i,
@@ -82668,24 +82668,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_notifications_lib_notifications_css__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_notifications__WEBPACK_IMPORTED_MODULE_8__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -82695,56 +82677,36 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  // React Notification
 
 
-
-
-var Index =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Index, _Component);
-
-  function Index() {
-    _classCallCheck(this, Index);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Index).apply(this, arguments));
-  }
-
-  _createClass(Index, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
-        store: _helpers__WEBPACK_IMPORTED_MODULE_3__["store"]
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Router"], {
-        history: _helpers__WEBPACK_IMPORTED_MODULE_3__["history"]
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-        path: "/officer/login",
-        exact: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_PrivateRoute__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        exact: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
-        path: "*"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
-        to: "/officer/home"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_8__["NotificationContainer"], null)));
-    }
-  }]);
-
-  return Index;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // export function Index() {
-//     return (
-//         <Provider store={store}>
-//             <Router history={history}>
-//                 <Switch>
-//                     <Route path="/officer/login">
-//                         <Login/>
-//                     </Route>
-//                     <PrivateRoute />
-//                 </Switch>
-//                 <NotificationContainer />
-//             </Router>
-//         </Provider>
-//     )
+ // class Index extends Component {
+//     render() {
+//         return (
+//             <Provider store={store}>
+//                 <Router history={history}>
+//                     <Switch>
+//                         <Route path="/officer/login" exact>
+//                             <Login/>
+//                         </Route>
+//                         <PrivateRoute exact/>
+//                         <Route path="*">
+//                             <Redirect to="/officer/home"/>
+//                         </Route>
+//                     </Switch>
+//                     <NotificationContainer />
+//                 </Router>
+//             </Provider>
+//         )
+//     }
 // }
 
+function Index() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
+    store: _helpers__WEBPACK_IMPORTED_MODULE_3__["store"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Router"], {
+    history: _helpers__WEBPACK_IMPORTED_MODULE_3__["history"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+    path: "/officer/login"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_PrivateRoute__WEBPACK_IMPORTED_MODULE_5__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notifications__WEBPACK_IMPORTED_MODULE_8__["NotificationContainer"], null)));
+}
 
 if (document.getElementById('root')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Index, null), document.getElementById('root'));

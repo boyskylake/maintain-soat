@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 /*
@@ -21,7 +22,7 @@ Route::group(['namespace' => 'Api'], function () {
 
         Route::get('/orderPage', 'OrderPageController@editOrder');
 
-       
+
 
     });
     Route::get('/refresh', 'AuthController@refresh');

@@ -22,10 +22,10 @@ const PrivateRoute = () => {
   }
   
     return (
-        <div>
-            <FadingContentRoute path="/officer/home" component={Home}/>
-            <FadingContentRoute path="/officer/saveorder" component={Saveorder}/>
-        </div>
+        <>
+          <FadingContentRoute path="/officer/home" component={Home}/>
+          <FadingContentRoute path="/officer/saveorder" component={Saveorder}/>
+        </>
     )
 }
 
@@ -37,12 +37,12 @@ function FadingContentRoute({ component: Component, ...rest }) {
     <Route
       {...rest} render={routeProps => (
         authentication.loggedIn
-          ? <div>
+          ? <>
               <Header/>
               <Sidebar/>
               <Component {...routeProps} />
               <Footer/>
-            </div>
+            </>
           : <Redirect to={{ pathname: '/officer/login', state: { from: routeProps.location } }} />
       )}
     />

@@ -140,7 +140,7 @@ function Saveorder() {
                                     <div className="col-md-6">
                                         <div className="form-group receiver">
                                             <label>ผู้แจ้ง</label>
-                                            <select disabled={true} name="informer" id="informer" className="form-control select2" ref={register}>
+                                            <select name="informer" id="informer" className="form-control select2" ref={register} required>
                                                 <option></option>
                                                 {feedData.data && feedData.data.ucf_customer_contact && ((feedData.data.ucf_customer_contact).map((val,i) => {
                                                         return (    

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +35,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //  })->where('any', '.*');
 
 Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');
+
+// Route::get( '/{any}', function () {
+//     return view('index');
+// })->where('any', '.*');
