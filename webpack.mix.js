@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -10,6 +10,84 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+const RemovePlugin = require("remove-files-webpack-plugin");
+// const TargetsPlugin = require("targets-webpack-plugin");
 
-mix.react('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+const removePlugin = new RemovePlugin({
+    before: {
+        test: [
+            {
+                folder: "public",
+                method: filePath => {
+                    return new RegExp(
+                        /(?:.*\.js|.*\.map|mix-manifest\.json)$/,
+                        "m"
+                    ).test(filePath);
+                }
+            },
+            {
+                folder: "public/js",
+                method: filePath => {
+                    return new RegExp(/(?:.*\.js|.*\.map)$/, "m").test(
+                        filePath
+                    );
+                },
+                recursive: true
+            },
+            {
+                folder: "public/css",
+                method: filePath => {
+                    return new RegExp(/(?:.*\.css|.*\.map)$/, "m").test(
+                        filePath
+                    );
+                }
+            }
+        ]
+    },
+
+    after: {}
+});
+
+mix.webpackConfig({
+    plugins: [
+        removePlugin
+        // new TargetsPlugin({
+        //     browsers: ["last 2 versions", "chrome >= 41", "IE 11", "IE 7"]
+        // })
+    ]
+});
+
+mix.react("resources/js/app.js", "public/js")
+    .react()
+    .extract([
+        "@popperjs/core",
+        "axios",
+        "bootstrap",
+        "clsx",
+        "history",
+        "jquery",
+        "lodash",
+        "moment",
+        "popper.js",
+        "prop-types",
+        "react",
+        "react-dom",
+        "react-hook-form",
+        "react-loadable",
+        "react-notifications",
+        "react-redux",
+        "react-router-dom",
+        "redux",
+        "redux-thunk"
+    ])
+    .sass("resources/sass/app.scss", "public/css")
+    .sourceMaps(false, "source-map")
+    .disableNotifications()
+
+if (mix.inProduction()) {
+    mix.version();
+}
+
+if (!mix.inProduction()) {
+    mix.browserSync('http://localhost:8000')
+  }

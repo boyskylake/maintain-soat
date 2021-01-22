@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
-    
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     {{-- <!-- CSRF Token --> --}}
@@ -10,8 +11,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-     {{-- <!-- Styles --> --}}
-     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    {{-- <!-- Styles --> --}}
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
     {{-- <!-- Bootstrap 3.3.7 --> --}}
     <link rel="stylesheet" href="{{ asset('officer/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -24,11 +25,13 @@
     {{-- <!-- daterange picker --> --}}
     <link rel="stylesheet" href="{{ asset('officer/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
     {{-- <!-- bootstrap datepicker --> --}}
-    <link rel="stylesheet" href="{{ asset('officer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('officer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     {{-- <!-- iCheck for checkboxes and radio inputs --> --}}
     <link rel="stylesheet" href="{{ asset('officer/plugins/iCheck/all.css') }}">
     {{-- <!-- Bootstrap Color Picker --> --}}
-    <link rel="stylesheet" href="{{ asset('officer/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('officer/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     {{-- <!-- Bootstrap time Picker --> --}}
     <link rel="stylesheet" href="{{ asset('officer/plugins/timepicker/bootstrap-timepicker.min.css') }}">
     {{-- <!-- Select2 --> --}}
@@ -42,9 +45,11 @@
     {{-- style --}}
     <link rel="stylesheet" href="{{ asset('officer/dist/css/style.css') }}">
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-   
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
 </head>
+
 <body class="hold-transition skin-yellow sidebar-mini">
 
     <div id="root" class="wrapper"></div>
@@ -73,9 +78,12 @@
     {{-- <!-- Select2 --> --}}
     <script src="{{ asset('officer/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     {{-- <!-- InputMask --> --}}
-    <script src="{{ asset('officer/bower_components/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js') }}"></script>
+    <script
+        src="{{ asset('officer/bower_components/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js') }}">
+    </script>
     <script src="{{ asset('officer/bower_components/inputmask/dist/inputmask/inputmask.js') }}"></script>
-    <script src="{{ asset('officer/bower_components/inputmask/dist/inputmask/inputmask.date.extensions.js') }}"></script>
+    <script src="{{ asset('officer/bower_components/inputmask/dist/inputmask/inputmask.date.extensions.js') }}">
+    </script>
 
     {{-- <script src="{{ asset('officer/plugins/input-mask/jquery.inputmask.js') }}"></script>
     <script src="{{ asset('officer/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
@@ -84,14 +92,18 @@
     <script src="{{ asset('officer/bower_components/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('officer/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     {{-- <!-- bootstrap datepicker --> --}}
-    <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker-custom.js') }}"></script>
+    <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}">
+    </script>
+    <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker-custom.js') }}">
+    </script>
     {{-- <!-- thai extension --> --}}
-    <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.th.min.js') }}" charset="UTF-8"></script>
- 
+    <script
+        src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.th.min.js') }}"
+        charset="UTF-8"></script>
 
     {{-- <!-- bootstrap color picker --> --}}
-    <script src="{{ asset('officer/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('officer/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}">
+    </script>
     {{-- <!-- bootstrap time picker --> --}}
     <script src="{{ asset('officer/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
 
@@ -100,7 +112,9 @@
     {{-- <!-- AdminLTE for demo purposes --> --}}
     {{-- <script src="{{ asset('officer/dist/js/demo.js') }}"></script> --}}
 
-    {{-- <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/js/locales/bootstrap-datepicker.th.min.js') }}" charset="UTF-8"></script> --}}
+    {{-- <script src="{{ asset('officer/bower_components/bootstrap-datepicker/dist/js/locales/bootstrap-datepicker.th.min.js') }}"
+    charset="UTF-8"></script> --}}
 
 </body>
+
 </html>

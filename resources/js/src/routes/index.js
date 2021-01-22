@@ -12,8 +12,9 @@ import ScrollToTop from "../helpers/ScrollToTop";
 
 // import components
 import routes from "./routes";
-import PublicRoute from "./Public";
-import PrivateRoute from "./Private";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
+import NoMatch from "../pages/Nomatch/NoMatch";
 
 import Layout from "./layout";
 
@@ -29,7 +30,8 @@ const Routes = () => (
                     return <PublicRoute key={i} {...route} />;
                 })}
                 <Route path="*">
-                    <Redirect to="/officer/home" />
+                    {/* <Redirect to="/officer/home" /> */}
+                    <NoMatch />
                 </Route>
             </Switch>
         </Layout>

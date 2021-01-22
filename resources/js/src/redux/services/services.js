@@ -1,66 +1,50 @@
-// import { authHeader } from '../helpers';
-import {
-    NotificationManager
-} from 'react-notifications';
-
+// import { authHeader } from '../../helpers';
+import { NotificationManager } from "react-notifications";
 
 class Services {
-
     getToken() {
-        let user = JSON.parse(localStorage.getItem('user'));
-
-        // Retrieves the user token from localStorage
-        // return localStorage.getItem('user')
+        let user = JSON.parse(localStorage.getItem("user"));
 
         if (user && user.token) {
             return user.token;
         }
     }
 
-    fetch(url, options) {
-        // performs api calls sending the required authentication headers
+    API(url, options) {
         const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        };
 
-        // Setting Authorization header
-        // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
         if (this.getToken()) {
-            headers['Authorization'] = 'Bearer ' + this.getToken()
+            headers["Authorization"] = "Bearer " + this.getToken();
         }
 
-        // if (this.loggedIn()) {
-        //     headers['Authorization'] = 'Bearer ' + authHeader()
+        return axios(url, {
+            headers,
+            ...options
+        })
+            .then(this._handleResponseAPIsuc)
+            .catch(this._handleResponseAPIerr);
+    }
+
+    _handleResponseAPIsuc(response) {
+        const data = response.data;
+        return data;
+    }
+
+    _handleResponseAPIerr(err) {
+        const errors = err.response;
+        // if (errors.status === 401) {
+        //     location.reload(true);
         // }
+        if (errors.data.error) {
+            NotificationManager.error(errors.data.error, "Error", 5000);
+        }
+        const error = (errors.data && errors.data.message) || errors.statusText;
 
-        return fetch(url, {
-                headers,
-                ...options
-            })
-            .then(this._handleResponse)
+        return Promise.reject(error);
     }
-
-    _handleResponse(response) {
-        return response.text().then(text => {
-            const data = text && JSON.parse(text);
-            if (!response.ok) {
-                if (response.status === 401) {
-                    location.reload(true);
-                }
-                if (data.error) {
-                    NotificationManager.error(data.error, 'Error', 5000);
-                }
-
-                const error = (data && data.message) || response.statusText;
-                return Promise.reject(error);
-            }
-
-            return data;
-        });
-    }
-
 }
-
 
 export default Services;

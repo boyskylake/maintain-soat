@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function ScrollToTop() {

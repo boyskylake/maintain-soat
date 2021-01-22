@@ -1,7 +1,7 @@
 import React , { useEffect } from 'react'
 import { history, useScript , useStyle } from '../../helpers';
 
-export default function Home() {
+function Home() {
 
     useScript("/officer/dist/js/pages/dashboard2.js");
 
@@ -252,7 +252,7 @@ export default function Home() {
                             {/* /.box-body */}
                         </div>
                         {/* /.box */}
-                        
+
                         {/* TABLE: LATEST ORDERS */}
                         <div className="box box-info">
                             <div className="box-header with-border">
@@ -408,7 +408,7 @@ export default function Home() {
                             </div>
                             {/* /.info-box-content */}
                         </div>
-                        
+
                         {/* PRODUCT LIST */}
                         <div className="box box-primary">
                             <div className="box-header with-border">
@@ -491,3 +491,6 @@ export default function Home() {
         </div>
     )
 }
+
+
+export default Home;
