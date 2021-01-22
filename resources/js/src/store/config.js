@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 // import { createLogger } from 'redux-logger'
 import rootReducer from "./../redux/reducers";
 
-export default function(initialState = {}) {
+export default function (initialState = {}) {
     // Middleware and store enhancers
     const enhancers = [applyMiddleware(thunk)];
 

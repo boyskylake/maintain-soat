@@ -11,6 +11,7 @@ const mix = require("laravel-mix");
  |
  */
 const RemovePlugin = require("remove-files-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 // const TargetsPlugin = require("targets-webpack-plugin");
 
 const removePlugin = new RemovePlugin({
@@ -18,46 +19,47 @@ const removePlugin = new RemovePlugin({
         test: [
             {
                 folder: "public",
-                method: filePath => {
+                method: (filePath) => {
                     return new RegExp(
                         /(?:.*\.js|.*\.map|mix-manifest\.json)$/,
                         "m"
                     ).test(filePath);
-                }
+                },
             },
             {
                 folder: "public/js",
-                method: filePath => {
+                method: (filePath) => {
                     return new RegExp(/(?:.*\.js|.*\.map)$/, "m").test(
                         filePath
                     );
                 },
-                recursive: true
+                recursive: true,
             },
             {
                 folder: "public/css",
-                method: filePath => {
+                method: (filePath) => {
                     return new RegExp(/(?:.*\.css|.*\.map)$/, "m").test(
                         filePath
                     );
-                }
-            }
-        ]
+                },
+            },
+        ],
     },
 
-    after: {}
+    after: {},
 });
 
 mix.webpackConfig({
     plugins: [
-        removePlugin
+        removePlugin,
+        new ESLintPlugin(),
         // new TargetsPlugin({
         //     browsers: ["last 2 versions", "chrome >= 41", "IE 11", "IE 7"]
         // })
-    ]
+    ],
 });
 
-mix.react("resources/js/app.js", "public/js")
+mix.js("resources/js/app.js", "public/js")
     .react()
     .extract([
         "@popperjs/core",
@@ -78,16 +80,16 @@ mix.react("resources/js/app.js", "public/js")
         "react-redux",
         "react-router-dom",
         "redux",
-        "redux-thunk"
+        "redux-thunk",
     ])
     .sass("resources/sass/app.scss", "public/css")
     .sourceMaps(false, "source-map")
-    .disableNotifications()
+    .disableNotifications();
 
 if (mix.inProduction()) {
     mix.version();
 }
 
 if (!mix.inProduction()) {
-    mix.browserSync('http://localhost:8000')
-  }
+    mix.browserSync("http://maintain.com");
+}

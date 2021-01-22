@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
 } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 
@@ -30,7 +30,6 @@ const Routes = () => (
                     return <PublicRoute key={i} {...route} />;
                 })}
                 <Route path="*">
-                    {/* <Redirect to="/officer/home" /> */}
                     <NoMatch />
                 </Route>
             </Switch>
