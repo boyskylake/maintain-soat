@@ -1,12 +1,11 @@
 {
-    "name": "SoatMaintain",
+    "name": "soat-maintain",
     "version": "v1.0.1",
     "author": "soatsolution .co,tld",
     "license": "SOAT",
     "browserslist": [
         ">0.2%",
         "not dead",
-        "not ie <= 11",
         "not op_mini all"
     ],
     "scripts": {
@@ -21,7 +20,7 @@
     "dependencies": {
         "@popperjs/core": "^2.6.0",
         "axios": "^0.21.1",
-        "bootstrap": "^4.6.0",
+        "bootstrap": "^4.5.3",
         "clsx": "^1.1.1",
         "history": "^5.0.0",
         "jquery": "^3.5.1",

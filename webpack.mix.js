@@ -83,8 +83,7 @@ mix.js("resources/js/app.js", "public/js")
         "redux-thunk",
     ])
     .sass("resources/sass/app.scss", "public/css")
-    .sourceMaps(false, "source-map")
-    .disableNotifications();
+    .sourceMaps(false, "source-map");
 
 if (mix.inProduction()) {
     mix.version();
