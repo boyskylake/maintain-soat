@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 // import Routes from "./routes";
 
 // React Notification
-import "react-notifications/lib/notifications.css";
+// import "react-notifications/lib/notifications.css";
 
 const App = () => {
     return (

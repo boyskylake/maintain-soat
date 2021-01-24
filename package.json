@@ -1,13 +1,5 @@
 {
     "name": "soat-maintain",
-    "version": "v1.0.1",
-    "author": "soatsolution .co,tld",
-    "license": "SOAT",
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-    ],
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -17,11 +9,19 @@
         "prod": "npm run production",
         "production": "mix --production"
     },
+    "author": "Soat Solution",
+    "license": "ISC",
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+    ],
     "dependencies": {
         "@popperjs/core": "^2.6.0",
         "axios": "^0.21.1",
         "bootstrap": "^4.5.3",
         "clsx": "^1.1.1",
+        "font-awesome": "^4.7.0",
         "history": "^5.0.0",
         "jquery": "^3.5.1",
         "lodash": "^4.17.20",
@@ -46,24 +46,25 @@
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "browser-sync": "^2.26.13",
         "browser-sync-webpack-plugin": "^2.3.0",
-        "cross-env": "^5.1",
+        "cross-env": "^5.2.1",
         "eslint": "^7.18.0",
         "eslint-config-standard": "^16.0.2",
         "eslint-friendly-formatter": "^4.0.1",
-        "eslint-loader": "^4.0.2",
         "eslint-plugin-html": "^6.1.1",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.22.0",
-        "eslint-webpack-plugin": "^2.4.1",
-        "laravel-mix": "^6.0.9",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-webpack-plugin": "^2.4.3",
+        "laravel-mix": "^6.0.10",
         "laravel-mix-polyfill": "^3.0.0",
         "postcss": "^8.2.4",
         "redux-logger": "^3.0.6",
         "remove-files-webpack-plugin": "^1.4.4",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.5",
-        "sass-loader": "^10.1.0"
+        "sass-loader": "^10.1.1",
+        "targets-webpack-plugin": "^3.0.0"
     }
 }
