@@ -6,6 +6,13 @@ RUN apk update && apk upgrade
 # Install basic dependencies
 RUN apk -u add bash git
 
+# Install Oracle Instantclient
+RUN mkdir /opt/oracle \
+    && cd /opt/oracle
+
+ADD ./.docker/instantclient-basic-linux.x64-19.10.0.0.0dbru.zip /opt/oracle/instantclient-basic-linux.x64-19.10.0.0.0dbru.zip
+ADD ./.docker/instantclient-sdk-linux.x64-19.10.0.0.0dbru.zip /opt/oracle/instantclient-sdk-linux.x64-19.10.0.0.0dbru.zip
+
 # Install PHP extensions
 ADD ./.docker/install-php.sh /usr/sbin/install-php.sh
 RUN chmod +x /usr/sbin/install-php.sh

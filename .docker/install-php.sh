@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 apk add bzip2 file re2c freetds freetype icu libintl libldap libjpeg libmcrypt libpng libpq libwebp libzip nodejs npm
 
@@ -22,10 +22,18 @@ TMP="autoconf \
 
 apk add $TMP
 
+unzip /opt/oracle/instantclient-basic-linux.x64-19.10.0.0.0dbru.zip -d /opt/oracle \
+    && unzip /opt/oracle/instantclient-sdk-linux.x64-19.10.0.0.0dbru.zip -d /opt/oracle \
+    && ln -sf /opt/oracle/instantclient_19_10/libclntsh.so.19.1 /opt/oracle/instantclient_19_10/libclntsh.so \
+    && ln -sf /opt/oracle/instantclient_19_10/libclntshcore.so.19.1 /opt/oracle/instantclient_19_10/libclntshcore.so \
+    && ln -sf /opt/oracle/instantclient_19_10/libocci.so.19.1 /opt/oracle/instantclient_19_10/libocci.so \
+    && rm -rf /opt/oracle/*.zip
+
 # Configure extensions
 docker-php-ext-configure gd --with-jpeg-dir=usr/ --with-freetype-dir=usr/ --with-webp-dir=usr/
 docker-php-ext-configure ldap --with-libdir=lib/
 docker-php-ext-configure pdo_dblib --with-libdir=lib/
+docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient_19_10,19.1
 
 docker-php-ext-install \
     bz2 \
@@ -39,10 +47,14 @@ docker-php-ext-install \
     xmlrpc \
     zip \
     mysqli \
-    pdo_mysql
+    pdo_mysql \
+    pdo_oci
+
+echo 'instantclient,/opt/oracle/instantclient_19_10/' | pecl install oci8
 
 # Install Xdebug
 pecl install xdebug \
+    && docker-php-ext-enable oci8 \
     && docker-php-ext-enable xdebug \
     && echo "remote_host=docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
