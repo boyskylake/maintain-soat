@@ -1,0 +1,16 @@
+// auth action types
+const AUTH_CHECK = "AUTH_CHECK";
+const AUTH_LOGIN = "AUTH_LOGIN";
+const AUTH_LOGOUT = "AUTH_LOGOUT";
+const AUTH_REFRESH_TOKEN = "AUTH_REFRESH_TOKEN";
+const AUTH_RESET_PASSWORD = "AUTH_RESET_PASSWORD";
+const AUTH_USER = "AUTH_USER";
+
+export const authConstants = {
+    AUTH_CHECK,
+    AUTH_LOGIN,
+    AUTH_LOGOUT,
+    AUTH_REFRESH_TOKEN,
+    AUTH_RESET_PASSWORD,
+    AUTH_USER,
+};

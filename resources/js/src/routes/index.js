@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect,
+    useLocation,
 } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 
@@ -12,9 +12,8 @@ import ScrollToTop from "../helpers/ScrollToTop";
 
 // import components
 import routes from "./routes";
-import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
-import NoMatch from "../pages/Nomatch/NoMatch";
+import PublicRoute from "./Public";
+import PrivateRoute from "./Private";
 
 import Layout from "./layout";
 
@@ -37,5 +36,17 @@ const Routes = () => (
         <NotificationContainer />
     </Router>
 );
+
+function NoMatch() {
+    let location = useLocation();
+
+    return (
+        <div>
+            <h3>
+                No match for <code>{location.pathname}</code>
+            </h3>
+        </div>
+    );
+}
 
 export default Routes;

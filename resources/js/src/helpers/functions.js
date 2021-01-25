@@ -1,10 +1,9 @@
 import React from "react";
 import * as moment from "moment";
-import LoadingOverlay from "react-loading-overlay";
 
 export const number_format = (val, digit = 2) => {
     var nf = new Intl.NumberFormat("th", {
-        minimumFractionDigits: digit
+        minimumFractionDigits: digit,
     });
     return nf.format(val);
 };
@@ -24,7 +23,7 @@ export const convert_to_Thaidate = (
     }
 };
 
-export const convert_to_Thaidatetime = val => {
+export const convert_to_Thaidatetime = (val) => {
     let date = moment(val, "YYYY-MM-DD HH:mm:ss", "th", true);
     if (date.isValid()) {
         date.add(543, "years");
@@ -35,7 +34,7 @@ export const convert_to_Thaidatetime = val => {
 export const createMarkup = (html, success = true) => {
     if (!success) {
         return {
-            __html: "<center><h3>Loading ...</h3></center>"
+            __html: "<center><h3>Loading ...</h3></center>",
         };
     }
     return { __html: html };
@@ -54,7 +53,7 @@ export const useEventListener = (target, type, listener, ...options) => {
     }, [target, type, listener, options]);
 };
 
-export const Wordcount = e => {
+export const Wordcount = (e) => {
     e.preventDefault();
     let newWrd;
     let txtbox = $("#membership_no");
@@ -78,7 +77,7 @@ export const Wordcount = e => {
     }
 };
 
-export const isInputNumber = e => {
+export const isInputNumber = (e) => {
     var char = String.fromCharCode(e.which);
     if (!/[0-9]/.test(char)) {
         e.preventDefault();

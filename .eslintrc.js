@@ -10,6 +10,11 @@ module.exports = {
     },
     globals: {
         React: true,
+        $: true,
+        axios: true,
+        _: true,
+        Popper: true,
+        CKEDITOR: true,
     },
     parserOptions: {
         ecmaFeatures: {
@@ -37,5 +42,7 @@ module.exports = {
 
         "no-empty": ["error", { allowEmptyCatch: true }],
         "react/no-unescaped-entities": 0,
+        "no-prototype-builtins": 0,
+        "no-unused-vars": 0,
     },
 };
