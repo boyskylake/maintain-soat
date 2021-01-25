@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     {{-- <!-- Styles --> --}}
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
     {{-- <!-- Bootstrap 3.3.7 --> --}}
     <link rel="stylesheet" href="{{ asset('officer/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -55,7 +55,9 @@
     <div id="root" class="wrapper"></div>
 
     {{-- <!-- Scripts --> --}}
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('/js/manifest.js') }}"></script>
+    <script src="{{ mix('/js/vendor.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
     {{-- <!-- jQuery 3 --> --}}
     <script src="{{ asset('officer/bower_components/jquery/dist/jquery.min.js') }}"></script>
     {{-- <!-- Bootstrap 3.3.7 --> --}}
