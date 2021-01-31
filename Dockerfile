@@ -11,7 +11,6 @@ RUN apk -u add bash git
 
 # Install Oracle Instantclient
 RUN apk add --update --no-cache \
-    bash \
     curl \
     vim \
     unzip \
