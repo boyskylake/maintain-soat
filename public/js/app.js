@@ -753,7 +753,7 @@ __webpack_require__.r(__webpack_exports__);
 var officerRoute = [{
   path: "/officer/home",
   exact: true,
-  auth: true,
+  auth: false,
   layout: "officer",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Home_Home_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Home/Home */ "./resources/js/src/Officer/pages/Home/Home.js"));
@@ -761,7 +761,7 @@ var officerRoute = [{
 }, {
   path: "/officer/saveorder",
   exact: true,
-  auth: true,
+  auth: false,
   layout: "officer",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Order_Saveorder_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Order/Saveorder */ "./resources/js/src/Officer/pages/Order/Saveorder.js"));

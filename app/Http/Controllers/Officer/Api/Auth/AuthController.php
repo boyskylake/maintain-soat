@@ -50,7 +50,7 @@ class AuthController extends Controller
         $data = $request->json()->all();
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
 
