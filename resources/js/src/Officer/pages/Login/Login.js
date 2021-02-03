@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { history } from "../../../helpers";
+import { useHistory } from "react-router-dom";
+// import { history } from "../../../helpers";
+import toastr from "toastr";
 // import { login } from '../actions';
 
 import { userActions } from "../../redux/actions";
@@ -10,15 +12,20 @@ const Login = () => {
     const [pass, setPass] = useState();
 
     const dispatch = useDispatch();
-    const authentication = useSelector((state) => state.authentication);
 
-    if (authentication.loggedIn) {
-        setTimeout(history.push("/officer/home"), 100);
-    }
+    const authentication = useSelector((state) => state.authentication);
+    let history = useHistory();
+
+    useEffect(() => {
+        if (authentication.loggedIn) {
+            history.push("/officer/home");
+        }
+    }, [authentication, history]);
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(userActions.login(user, pass));
+        toastr.info("Are you the 6 fingered man?\n dfmadskfmsd;flmsdflsad; \n adkfadskfl;sdk;l");
+        // dispatch(userActions.login(user, pass));
     };
 
     return (

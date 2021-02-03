@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/deploy', function () {
@@ -34,8 +35,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //      return view('officer.home');
 //  })->where('any', '.*');
 
-Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');
+// Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');
 
-// Route::get( '/{any}', function () {
-//     return view('index');
-// })->where('any', '.*');
+Route::get('/{any}', function () {
+    // return view('index');
+    return view('officer.home');
+})->where('any', '.*');

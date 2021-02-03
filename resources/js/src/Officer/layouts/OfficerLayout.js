@@ -15,14 +15,12 @@ function OfficerLayout({ children }) {
         <Fragment>
             <Header />
             <Sidebar />
-            <div className="content-wrapper">
-                {children}
-                {feedData.fetching && (
-                    <div className="overlay">
-                        <i className="fa fa-refresh fa-spin" />
-                    </div>
-                )}
-            </div>
+            {children}
+            {feedData.fetching && (
+                <div className="overlay">
+                    <i className="fa fa-refresh fa-spin" />
+                </div>
+            )}
             <Footer />
         </Fragment>
     );

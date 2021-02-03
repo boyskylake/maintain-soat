@@ -42,9 +42,9 @@ return [
         ],
 
         'api' => [
-            'driver' => 'jwt',
+            'driver' => 'passport',
             'provider' => 'users-api',
-            // 'hash' => false,
+            'hash' => false,
         ],
     ],
 
@@ -73,7 +73,7 @@ return [
 
         'users-api' => [
             'driver' => 'eloquent',
-            'model' => App\Model\User::class,
+            'model' => App\Model\Officer\User::class,
         ],
 
         // 'users' => [

@@ -6,7 +6,7 @@ import {
     Route,
     useLocation,
 } from "react-router-dom";
-import { NotificationContainer } from "react-notifications";
+// import { NotificationContainer } from "react-notifications";
 
 import ScrollToTop from "../helpers/ScrollToTop";
 
@@ -20,7 +20,7 @@ import Layout from "./layout";
 const Routes = () => (
     <Router>
         <Layout>
-            <ScrollToTop />
+            {/* <ScrollToTop /> */}
             <Switch>
                 {routes.map((route, i) => {
                     if (route.auth) {
@@ -33,7 +33,7 @@ const Routes = () => (
                 </Route>
             </Switch>
         </Layout>
-        <NotificationContainer />
+        {/* <NotificationContainer /> */}
     </Router>
 );
 

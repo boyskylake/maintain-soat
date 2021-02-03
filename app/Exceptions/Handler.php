@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-// use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -45,16 +45,38 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Throwable $exception)
-    {
-        if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
-            return response()->json(['error' => 'token is expired'], 400);
-        } elseif ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
-            return response()->json(['error' => 'token is invalid'], 400);
-        } elseif ($exception instanceof \Tymon\JWTAuth\Exceptions\JWTException) {
-            return response()->json(['error' => 'token absent'], 400);
-        }
+    // public function render($request, Throwable $exception)
+    // {
+    //     return parent::render($request, $exception);
+    // }
 
-        return parent::render($request, $exception);
-    }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Illuminate\Http\Response
+     */
+    // protected function unauthenticated($request, AuthenticationException $exception)
+    // {
+    //     if ($request->expectsJson()) {
+    //         return response()->json(['message' => 'Unauthenticated.'], 401);
+    //     }
+
+    //     $guard = array_get($exception->guards(), 0);
+    //     switch ($guard) {
+    //         case 'admin':
+    //             return redirect()->guest(route('admin.login'));
+    //             break;
+    //         case 'web':
+    //             return redirect()->guest(route('member.login'));
+    //             break;
+
+    //         default:
+    //             // return redirect()->guest(url('/home'));
+    //             abort('401', 'Unauthenticated.');
+    //             break;
+    //     }
+    // }
 }

@@ -9,7 +9,7 @@ function orderPage(data) {
         // body:   {}
     };
 
-    return service.fetch(`/api/orderPage`, requestOptions)
+    return service.API(`/api/orderPage`, requestOptions)
         .then(res => {
             return res;
         });

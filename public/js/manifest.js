@@ -35,6 +35,13 @@
 /******/ 	// It's empty as some runtime module handles the default behavior
 /******/ 	__webpack_require__.x = function() {}
 /************************************************************************/
+/******/ 	/* webpack/runtime/amd define */
+/******/ 	!function() {
+/******/ 		__webpack_require__.amdD = function () {
+/******/ 			throw new Error('define cannot be used indirect');
+/******/ 		};
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	!function() {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules

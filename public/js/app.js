@@ -721,14 +721,11 @@ function OfficerLayout(_ref) {
     return state.feedData;
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Sidebar__WEBPACK_IMPORTED_MODULE_5__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-      className: "content-wrapper",
-      children: [children, feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        className: "overlay",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
-          className: "fa fa-refresh fa-spin"
-        })
-      })]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Sidebar__WEBPACK_IMPORTED_MODULE_5__.default, {}), children, feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "overlay",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
+        className: "fa fa-refresh fa-spin"
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Footer__WEBPACK_IMPORTED_MODULE_6__.default, {})]
   });
 }
@@ -756,6 +753,7 @@ __webpack_require__.r(__webpack_exports__);
 var officerRoute = [{
   path: "/officer/home",
   exact: true,
+  auth: true,
   layout: "officer",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Home_Home_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Home/Home */ "./resources/js/src/Officer/pages/Home/Home.js"));
@@ -763,6 +761,7 @@ var officerRoute = [{
 }, {
   path: "/officer/saveorder",
   exact: true,
+  auth: true,
   layout: "officer",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Order_Saveorder_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Order/Saveorder */ "./resources/js/src/Officer/pages/Order/Saveorder.js"));
@@ -1424,7 +1423,7 @@ function orderPage(data) {
     method: 'GET' // body:   {}
 
   };
-  return service.fetch("/api/orderPage", requestOptions).then(function (res) {
+  return service.API("/api/orderPage", requestOptions).then(function (res) {
     return res;
   });
 }
@@ -1980,7 +1979,7 @@ var PrivateRoute = function PrivateRoute(_ref) {
         }),
         children: isAuthenticated ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, _objectSpread({}, props)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Redirect, {
           to: {
-            pathname: "/officer/logon",
+            pathname: "/officer/login",
             state: {
               from: props.location
             }
@@ -2065,14 +2064,13 @@ PublicRoute.propTypes = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-notifications */ "./node_modules/react-notifications/lib/index.js");
-/* harmony import */ var _helpers_ScrollToTop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/ScrollToTop */ "./resources/js/src/helpers/ScrollToTop.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes */ "./resources/js/src/routes/routes.js");
-/* harmony import */ var _Public__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Public */ "./resources/js/src/routes/Public.js");
-/* harmony import */ var _Private__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Private */ "./resources/js/src/routes/Private.js");
-/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layout */ "./resources/js/src/routes/layout.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _helpers_ScrollToTop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/ScrollToTop */ "./resources/js/src/helpers/ScrollToTop.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes */ "./resources/js/src/routes/routes.js");
+/* harmony import */ var _Public__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Public */ "./resources/js/src/routes/Public.js");
+/* harmony import */ var _Private__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Private */ "./resources/js/src/routes/Private.js");
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./layout */ "./resources/js/src/routes/layout.js");
 
 
 
@@ -2084,7 +2082,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 // import libs
 
-
+ // import { NotificationContainer } from "react-notifications";
 
  // import components
 
@@ -2094,26 +2092,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var Routes = function Routes() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_layout__WEBPACK_IMPORTED_MODULE_7__.default, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_helpers_ScrollToTop__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
-        children: [_routes__WEBPACK_IMPORTED_MODULE_4__.default.map(function (route, i) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_layout__WEBPACK_IMPORTED_MODULE_6__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, {
+        children: [_routes__WEBPACK_IMPORTED_MODULE_3__.default.map(function (route, i) {
           if (route.auth) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Private__WEBPACK_IMPORTED_MODULE_6__.default, _objectSpread({}, route), i);
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Private__WEBPACK_IMPORTED_MODULE_5__.default, _objectSpread({}, route), i);
           }
 
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Public__WEBPACK_IMPORTED_MODULE_5__.default, _objectSpread({}, route), i);
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Public__WEBPACK_IMPORTED_MODULE_4__.default, _objectSpread({}, route), i);
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
           path: "*",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(NoMatch, {})
         })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_notifications__WEBPACK_IMPORTED_MODULE_2__.NotificationContainer, {})]
+      })
+    })
   });
 };
 
 function NoMatch() {
-  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useLocation)();
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h3", {
       children: ["No match for ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("code", {

@@ -27,8 +27,8 @@ class HomeController extends Controller
         // $ora = DB::connection('oracle')->executeProcedure();
         $data = DB::connection('oracle')->select("select * from UCF_STATUS");
 
-        dd($data);
-        
+        // dd($data);
+
         return view('home');
     }
 }
