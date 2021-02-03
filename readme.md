@@ -1,5 +1,3 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
@@ -29,7 +27,8 @@ run following commands
 1. `composer install && composer update`
 2. `php artisan cron:refresh-database`
 3. `php artisan key:gen`
-4. `npm install && npm run dev`
+4. `php artisan passport:keys`
+5. `npm install && npm run dev`
 
 open browser and check the following address
 
