@@ -43,7 +43,7 @@ return [
 
         'api' => [
             'driver' => 'passport',
-            'provider' => 'users-api',
+            'provider' => 'officer-api',
             'hash' => false,
         ],
     ],
@@ -71,7 +71,7 @@ return [
             'model' => App\User::class,
         ],
 
-        'users-api' => [
+        'officer-api' => [
             'driver' => 'eloquent',
             'model' => App\Model\Officer\User::class,
         ],
@@ -105,8 +105,8 @@ return [
             'throttle' => 60,
         ],
 
-        'users-api' => [
-            'provider' => 'users-api',
+        'officer-api' => [
+            'provider' => 'officer-api',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

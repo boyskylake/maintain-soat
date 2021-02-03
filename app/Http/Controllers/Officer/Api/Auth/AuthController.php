@@ -182,7 +182,7 @@ class AuthController extends Controller
 
     public function user()
     {
-        dd('fesdsvv');
+        // dd('fesdsvv');
         return response()->json($this->guard()->user());
     }
 
