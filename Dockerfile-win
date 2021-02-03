@@ -1,0 +1,143 @@
+FROM php:7.4-fpm-alpine
+
+ENV LD_LIBRARY_PATH=/usr/local/instantclient
+ENV ORACLE_HOME=/usr/local/instantclient
+
+# Comment this to improve stability on "auto deploy" environments
+RUN apk update && apk upgrade
+
+# Install basic dependencies
+RUN apk -u add bash git
+
+# Install Oracle Instantclient
+RUN apk add --update --no-cache \
+    curl \
+    vim \
+    unzip \
+    g++ \
+    gcc \
+    make \
+    php7-ctype \
+    php7-session \
+    php7-dom \
+    php7-zlib \
+    php7-mbstring \
+    php7-mcrypt \
+    php7-openssl \
+    php7-xml \
+    php7-json \
+    php7-gd \
+    php7-opcache \
+    php7-pdo \
+    php7-iconv \
+    php7-curl \
+    php7-phar \
+    php7-xmlreader \
+    php7-intl \
+    php7-pear \
+    php7-dom \
+    php7-common \
+    php7-tokenizer \
+    php7-fileinfo \
+    gcompat \
+    musl-dev \
+    libaio-dev \
+    libnsl \
+    gettext-dev \
+    automake \
+    libtool \
+    libc6-compat
+
+RUN apk add wget libarchive-tools && \
+    wget -qO- https://raw.githubusercontent.com/caffeinalab/php-fpm-oci8/master/oracle/instantclient-basic-linux.x64-12.2.0.1.0.zip | bsdtar -xvf- -C /usr/local && \
+    wget -qO- https://raw.githubusercontent.com/caffeinalab/php-fpm-oci8/master/oracle/instantclient-sdk-linux.x64-12.2.0.1.0.zip | bsdtar -xvf-  -C /usr/local && \
+    wget -qO- https://raw.githubusercontent.com/caffeinalab/php-fpm-oci8/master/oracle/instantclient-sqlplus-linux.x64-12.2.0.1.0.zip | bsdtar -xvf- -C /usr/local && \
+    ln -s /usr/local/instantclient_12_2 /${ORACLE_HOME} && \
+    ln -s /${ORACLE_HOME}/libclntsh.so.* /${ORACLE_HOME}/libclntsh.so && \
+    ln -s /${ORACLE_HOME}/libocci.so.* /${ORACLE_HOME}/libocci.so && \
+    ln -s /${ORACLE_HOME}/lib* /usr/lib && \
+    ln -s /${ORACLE_HOME}/sqlplus /usr/bin/sqlplus && \
+    ln -s /usr/lib/libnsl.so.2  /usr/lib/libnsl.so.1 && \
+    ln -s /usr/lib/libnsl.so.2  /${ORACLE_HOME}/libnsl.so.1 && \
+    ln -s /usr/lib/libc.so /usr/lib/libresolv.so.2 && \
+    ln -s /usr/lib/libc.so  /${ORACLE_HOME}/libresolv.so.2 && \
+    docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/local/instantclient && \
+    docker-php-ext-install oci8
+
+# Install PHP extensions
+# ADD ./.docker/install-php.sh /usr/sbin/install-php.sh
+# RUN chmod +x /usr/sbin/install-php.sh
+# RUN /usr/sbin/install-php.sh
+RUN apk add bzip2 file re2c freetds freetype icu libintl libldap libjpeg libmcrypt libpng libpq libwebp libzip nodejs npm
+
+RUN TMP="autoconf \
+    bzip2-dev \
+    freetds-dev \
+    freetype-dev \
+    g++ \
+    gcc \
+    gettext-dev \
+    icu-dev \
+    jpeg-dev \
+    libmcrypt-dev \
+    libpng-dev \
+    libwebp-dev \
+    libxml2-dev \
+    libzip-dev \
+    make \
+    openldap-dev \
+    postgresql-dev"
+
+RUN apk add $TMP
+
+# Configure extensions
+RUN docker-php-ext-configure gd --with-jpeg-dir=usr/ --with-freetype-dir=usr/ --with-webp-dir=usr/
+RUN docker-php-ext-configure ldap --with-libdir=lib/
+RUN docker-php-ext-configure pdo_dblib --with-libdir=lib/
+
+RUN docker-php-ext-install \
+    bz2 \
+    exif \
+    gd \
+    gettext \
+    intl \
+    ldap \
+    pdo_dblib \
+    pdo_pgsql \
+    xmlrpc \
+    zip \
+    mysqli \
+    pdo_mysql
+
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && echo "remote_host=docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "idekey=IDE_DEBUG" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "error_reporting=E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "display_startup_errors=On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "display_errors=On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Install composer
+RUN cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php && \
+	mv composer.phar /usr/bin/composer && \
+	chmod +x /usr/bin/composer
+
+RUN apk del $TMP
+RUN rm -rf /var/cache/apk/*
+
+# Install PHPUnit
+RUN curl -sSL -o /usr/bin/phpunit https://phar.phpunit.de/phpunit.phar && chmod +x /usr/bin/phpunit
+
+# Copy existing application directory contents
+COPY ./.docker/*.ini /usr/local/etc/php/conf.d/
+COPY . .
+
+# Change current user to www-data
+USER www-data
+
+# Expose ports and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
