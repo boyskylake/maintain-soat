@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Officer\User as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 // use Jenssegers\Agent\Agent;
@@ -79,11 +79,11 @@ class AuthController extends Controller
         // ]);
 
         // if ($user) {
-            // $this->addHistoryMember($request, 'register');
-            // return response()->json([
-            //     'rc_code' => '1',
-            //     'messages' => 'ลงทะเบียนสำเร็จ'
-            // ]);
+        // $this->addHistoryMember($request, 'register');
+        // return response()->json([
+        //     'rc_code' => '1',
+        //     'messages' => 'ลงทะเบียนสำเร็จ'
+        // ]);
         // }
 
         return $this->issueToken($request, 'password');
@@ -93,17 +93,7 @@ class AuthController extends Controller
     {
         $req = $request->json()->all();
         $rules = [
-            'membership_no' => 'required|exists:sm_mem_m_membership_registered,membership_no,member_status_code,0|exists:sc_confirm_register,membership_no,mem_confirm,1|max:7',
-            'id_card' => [
-                'required',
-                'exists:sm_mem_m_membership_registered',
-                Rule::exists('sm_mem_m_membership_registered')->where('membership_no', $req['membership_no']),
-            ],
-            'date_of_birth' => [
-                'required',
-                'exists:sm_mem_m_membership_registered',
-                Rule::exists('sm_mem_m_membership_registered')->where('membership_no', $req['membership_no']),
-            ]
+            'username' => 'required|exists:users,email',
         ];
 
         $this->validate($request, $rules, $this->messages());

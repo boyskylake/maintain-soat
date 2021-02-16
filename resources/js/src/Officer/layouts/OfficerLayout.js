@@ -12,7 +12,7 @@ function OfficerLayout({ children }) {
     const feedData = useSelector((state) => state.feedData);
 
     return (
-        <Fragment>
+        <div className="wrapper">
             <Header />
             <Sidebar />
             {children}
@@ -22,7 +22,7 @@ function OfficerLayout({ children }) {
                 </div>
             )}
             <Footer />
-        </Fragment>
+        </div>
     );
 }
 

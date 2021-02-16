@@ -24,11 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $ora = DB::connection('oracle')->executeProcedure();
-        $data = DB::connection('oracle')->select("select * from UCF_STATUS");
-
-        // dd($data);
-
         return view('home');
     }
 }

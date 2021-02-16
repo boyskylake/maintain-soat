@@ -17,6 +17,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Home() {
+  // <!-- jvectormap  -->
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.useScript)("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.useScript)("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
   (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.useScript)("/officer/dist/js/pages/dashboard2.js");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "content-wrapper",

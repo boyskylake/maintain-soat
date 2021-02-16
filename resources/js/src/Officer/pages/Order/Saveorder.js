@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import Inputmask from "inputmask";
 
 import { useScript } from "../../../helpers";
 import { orderActions } from "../../redux/actions";
+// import { Helmet } from "react-helmet";
 
 function Saveorder() {
     const dispatch = useDispatch();
@@ -20,18 +22,16 @@ function Saveorder() {
 
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = (data) => {
-        console.log(data);
-        console.log(coopid);
+        // console.log(data);
+        // console.log(coopid);
     };
 
     useEffect(() => {
         async function feedData() {
             await dispatch(orderActions.feedOrderPage());
         }
-        // Execute the created function directly
         feedData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dispatch]);
 
     // useEffect(() => {
     //     if (coopid != "") {
@@ -47,7 +47,7 @@ function Saveorder() {
     $(function () {
         $(document.body).on("change", "#coopid", function () {
             if (coopid == null) {
-                console.log(coopid);
+                // console.log(coopid);
 
                 document.getElementById("Detail").style.display = "block";
                 $(".select2").select2();
@@ -63,7 +63,6 @@ function Saveorder() {
 
     return (
         <div className="content-wrapper">
-            {/* Main content */}
             <section className="content">
                 {/* SELECT2 EXAMPLE */}
                 <div className="box box-default">
@@ -159,8 +158,8 @@ function Saveorder() {
                                                 type="text"
                                                 name="receive_date"
                                                 className="form-control"
-                                                data-inputmask="'alias': 'dd/mm/yyyy'"
-                                                data-mask
+                                                data-provide="datepicker"
+                                                data-date-language="th-th"
                                                 ref={register}
                                             />
                                         </div>

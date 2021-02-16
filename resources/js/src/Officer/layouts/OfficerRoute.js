@@ -4,14 +4,14 @@ const officerRoute = [
     {
         path: "/officer/home",
         exact: true,
-        auth: false,
+        auth: true,
         layout: "officer",
         component: lazy(() => import("../pages/Home/Home")),
     },
     {
         path: "/officer/saveorder",
         exact: true,
-        auth: false,
+        auth: true,
         layout: "officer",
         component: lazy(() => import("../pages/Order/Saveorder")),
     },
@@ -20,6 +20,12 @@ const officerRoute = [
         exact: true,
         layout: "",
         component: lazy(() => import("../pages/Login/Login")),
+    },
+    {
+        path: "/officer/lookscreen",
+        exact: true,
+        layout: "",
+        component: lazy(() => import("../pages/Lookscreen/Lookscreen")),
     },
 ];
 

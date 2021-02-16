@@ -39,7 +39,8 @@ docker-php-ext-install \
     xmlrpc \
     zip \
     mysqli \
-    pdo_mysql
+    pdo_mysql \
+    sockets
 
 # Install Xdebug
 pecl install xdebug \
@@ -47,7 +48,7 @@ pecl install xdebug \
     && echo "remote_host=docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "idekey=IDE_DEBUG" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "idekey=VSCODE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "error_reporting=E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "display_startup_errors=On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "display_errors=On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

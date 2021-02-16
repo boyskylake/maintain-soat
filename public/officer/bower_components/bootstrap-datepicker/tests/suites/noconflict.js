@@ -2,10 +2,6 @@ module('NoConflict', {
     setup: function(){
         var datepicker = $.fn.datepicker.noConflict();
         $.fn.bootstrapDP = datepicker;
-    },
-    teardown: function(){
-        $.fn.datepicker = $.fn.bootstrapDP;
-        delete $.fn.bootstrapDP;
     }
 });
 

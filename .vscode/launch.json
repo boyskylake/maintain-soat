@@ -15,7 +15,7 @@
             "type": "php",
             "request": "launch",
             "program": "${file}",
-            "cwd": "${fileDirname}",
+            "cwd": "run -it -v $(pwd):/var/www/app/ app",
             "port": 9001
         }
     ]

@@ -13,20 +13,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/deploy', function () {
-    Artisan::call('cache:clear');
-    Artisan::call('config:cache');
-});
+// Route::get('/deploy', function () {
+//     Artisan::call('cache:clear');
+//     Artisan::call('config:cache');
+// });
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/officer/login');
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -38,6 +39,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');
 
 Route::get('/{any}', function () {
-    // return view('index');
-    return view('officer.home');
+    return view('index');
+    // return view('officer.home');
 })->where('any', '.*');

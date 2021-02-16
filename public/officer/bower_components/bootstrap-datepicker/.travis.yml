@@ -1,7 +1,4 @@
-language: node_js
-
-node_js:
-  - "12"
-
 before_script:
-  - npm install -g grunt-cli
+  - cd ./tests
+  - echo "new Date().toString();" | phantomjs
+script: phantomjs run-qunit.js tests.html

@@ -1,12 +1,13 @@
 import { userConstants } from "../constants";
 import { userService } from "../services";
-// import { alertActions } from './';
-import { history } from "../../../helpers";
-import { NotificationManager } from "react-notifications";
+
+// import { history } from "../../../helpers";
+// import { NotificationManager } from "react-notifications";
 
 export const userActions = {
     login,
     logout,
+    refresh,
     getAuthUser,
 };
 
@@ -21,7 +22,7 @@ function login(username, password) {
         userService.login(username, password).then(
             (user) => {
                 dispatch(success(user));
-                history.push("/officer/home");
+                // history.push("/officer/home");
             },
             (error) => {
                 dispatch(failure(error));
@@ -51,6 +52,45 @@ function login(username, password) {
     }
 }
 
+function refresh() {
+    return (dispatch) => {
+        dispatch(request());
+
+        let user = JSON.parse(localStorage.getItem("user"));
+
+        if (user && user.refresh_token) {
+            userService.refresh(user.refresh_token).then(
+                (user) => {
+                    dispatch(success(user));
+                },
+                (error) => {
+                    dispatch(failure(error));
+                }
+            );
+        }
+    };
+
+    function request() {
+        return {
+            type: userConstants.REFRESH_REQUEST,
+        };
+    }
+
+    function success(user) {
+        return {
+            type: userConstants.REFRESH_TOKEN,
+            user,
+        };
+    }
+
+    function failure(error) {
+        return {
+            type: userConstants.LOGIN_FAILURE,
+            error,
+        };
+    }
+}
+
 function logout() {
     userService.logout();
     return {
@@ -58,47 +98,17 @@ function logout() {
     };
 }
 
-async function getAuthUser() {
-    await userService
-        .getAuthUser()
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.error) {
-                console.log(data.error);
-                location.reload(true);
-                NotificationManager.error(data.error, "Error", 5000);
-            }
+function getAuthUser() {
+    return (dispatch) =>
+        new Promise((resolve, reject) => {
+            userService.getAuthUser().then((data) => {
+                if (data.status == 401) {
+                    dispatch({
+                        type: userConstants.EXPIRE_TOKEN,
+                    });
+                    return reject(data);
+                }
+                return resolve(data);
+            });
         });
 }
-
-// function getAll() {
-//     return dispatch => {
-//         dispatch(request());
-
-//         userService.getAll()
-//             .then(
-//                 users => dispatch(success(users)),
-//                 error => dispatch(failure(error))
-//             );
-//     };
-
-//     function request() {
-//         return {
-//             type: userConstants.GETALL_REQUEST
-//         }
-//     }
-
-//     function success(users) {
-//         return {
-//             type: userConstants.GETALL_SUCCESS,
-//             users
-//         }
-//     }
-
-//     function failure(error) {
-//         return {
-//             type: userConstants.GETALL_FAILURE,
-//             error
-//         }
-//     }
-// }

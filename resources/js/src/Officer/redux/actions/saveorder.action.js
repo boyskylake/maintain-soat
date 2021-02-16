@@ -1,6 +1,6 @@
 import { FeedConstants } from "../constants";
 import { orderService } from "../services";
-import { NotificationManager } from "react-notifications";
+// import { NotificationManager } from "react-notifications";
 
 export const orderActions = {
     feedOrderPage,
@@ -32,7 +32,7 @@ const fetchSuccess = (data) => {
 };
 
 const fetchFailure = (bool) => {
-    NotificationManager.error("ไม่สามารถเชื่อมต่อได้", "Error", 5000);
+    // NotificationManager.error("ไม่สามารถเชื่อมต่อได้", "Error", 5000);
     return {
         type: FeedConstants.FEED_FAILURE,
     };

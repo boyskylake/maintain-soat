@@ -4,9 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const isAuthenticated = useSelector(
-        (state) => state.authentication.loggedIn
-    );
+    const auth = useSelector((state) => state.authentication);
 
     return (
         <Route
@@ -20,8 +18,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                             </div>
                         }
                     >
-                        {isAuthenticated ? (
+                        {auth.loggedIn && auth.refreshIn ? (
                             <Component {...props} />
+                        ) : !auth.loggedIn && auth.refreshIn ? (
+                            <Redirect
+                                to={{
+                                    pathname: "/officer/lookscreen",
+                                    state: { from: props.location },
+                                }}
+                            />
                         ) : (
                             <Redirect
                                 to={{

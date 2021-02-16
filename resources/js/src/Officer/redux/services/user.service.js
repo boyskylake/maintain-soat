@@ -1,24 +1,48 @@
 import { authHeader } from "../../../helpers";
 // import axios from 'axios';
-import { NotificationManager } from "react-notifications";
+// import { NotificationManager } from "react-notifications";
+import toastr from "toastr";
 
 function login(username, password) {
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        data: JSON.stringify({ email: username, password }),
+        data: JSON.stringify({ username, password }),
     };
 
-    return axios(`/api/auth/login`, requestOptions)
+    return axios(`/api/v1/officer/auth/login`, requestOptions)
+        .then(_handleResponseAPIsuc)
+        .catch(_handleResponseAPIerr)
+        .then((user) => {
+            // login successful if there's a oauth token in the response
+            if (user.access_token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem("user", JSON.stringify(user));
+
+                toastr.success("login success", "Success");
+            }
+
+            return user;
+        });
+}
+
+function refresh(refresh_token) {
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify({ refresh_token }),
+    };
+
+    return axios(`/api/v1/officer/auth/refresh`, requestOptions)
         .then(_handleResponseAPIsuc)
         .catch(_handleResponseAPIerr)
         .then((user) => {
             // login successful if there's a jwt token in the response
-            if (user.token) {
+            if (user.access_token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem("user", JSON.stringify(user));
 
-                NotificationManager.success("login success", "Success", 5000);
+                toastr.success("refresh success", "Success");
             }
 
             return user;
@@ -32,11 +56,11 @@ function logout() {
         headers: authHeader(),
     };
 
-    axios(`/api/auth/logout`, requestOptions)
+    axios(`/api/v1/officer/auth/logout`, requestOptions)
         .then((res) => res.data)
         .then((res) => {
             if (res.message) {
-                NotificationManager.success(res.message, "success", 5000);
+                toastr.success(res.message, "success");
             }
         })
         .catch((err) => {
@@ -48,18 +72,18 @@ function logout() {
 function getAuthUser() {
     // remove user from local storage to log user out
     const requestOptions = {
-        method: "POST",
+        method: "GET",
         headers: authHeader(),
     };
 
-    return axios(`/api/auth/getAuthUser`, requestOptions)
+    return axios(`/api/v1/officer/user`, requestOptions)
         .then((res) => {
             return res.data;
         })
         .catch((err) => {
-            if (err.response.status == 400) {
-                localStorage.removeItem("user");
-            }
+            // if (err.response.status == 401) {
+            //     localStorage.removeItem("user");
+            // }
             return err.response;
         });
 }
@@ -74,16 +98,15 @@ function _handleResponseAPIerr(err) {
     if (errors.status === 401) {
         logout();
     }
-    if (errors.data.error) {
-        NotificationManager.error(errors.data.error, "Error", 5000);
-    }
     const error = (errors.data && errors.data.message) || errors.statusText;
+    error && toastr.error(errors.data.message, "Error");
 
     return Promise.reject(error);
 }
 
 export const userService = {
     login,
+    refresh,
     logout,
     getAuthUser,
 };

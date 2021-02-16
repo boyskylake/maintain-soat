@@ -2,6 +2,10 @@ import React from "react";
 import { useScript } from "../../../helpers";
 
 function Home() {
+    // <!-- jvectormap  -->
+    useScript("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
+    useScript("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
+
     useScript("/officer/dist/js/pages/dashboard2.js");
 
     return (

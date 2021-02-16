@@ -1,12 +1,12 @@
 // import { authHeader } from '../../helpers';
-import { NotificationManager } from "react-notifications";
+// import { NotificationManager } from "react-notifications";
 
 class Services {
     getToken() {
         let user = JSON.parse(localStorage.getItem("user"));
 
-        if (user && user.token) {
-            return user.token;
+        if (user && user.access_token) {
+            return user.access_token;
         }
     }
 
@@ -38,9 +38,9 @@ class Services {
         // if (errors.status === 401) {
         //     location.reload(true);
         // }
-        if (errors.data.error) {
-            NotificationManager.error(errors.data.error, "Error", 5000);
-        }
+        // if (errors.data.error) {
+        //     NotificationManager.error(errors.data.error, "Error", 5000);
+        // }
         const error = (errors.data && errors.data.message) || errors.statusText;
 
         return Promise.reject(error);

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 // import { NotificationContainer } from "react-notifications";
 
-import ScrollToTop from "../helpers/ScrollToTop";
+// import ScrollToTop from "../helpers/ScrollToTop";
 
 // import components
 import routes from "./routes";

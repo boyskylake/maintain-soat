@@ -19,22 +19,12 @@ $api_version = config('api.api_version');
 Route::group(["prefix" => "{$api_version}"], function () {
 
     // Officer
-    Route::group(['namespace' => 'Officer\Api', 'middleware' => 'api'], function () {
+    Route::prefix('officer')
+        ->group(base_path('routes/api/officers.php'));
 
-        Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
-            Route::post('login', 'AuthController@login');
-            Route::post('register', 'AuthController@register');
-            Route::post('forget', 'AuthController@forget');
-            Route::post('refresh', 'AuthController@refresh');
-            Route::post('logout', 'AuthController@logout');
-        });
-
-        Route::group(['middleware' => 'auth:api'], function () {
-            Route::get('user', 'Auth\AuthController@user');
-
-            Route::get('orderPage', 'OrderPageController@editOrder');
-        });
-    });
+    // LINEBot
+    Route::prefix('linebot')
+        ->group(base_path('routes/api/linebot.php'));
 });
 
 // Route::group(['namespace' => 'Api'], function () {

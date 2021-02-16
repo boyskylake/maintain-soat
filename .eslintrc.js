@@ -12,6 +12,7 @@ module.exports = {
         React: true,
         $: true,
         axios: true,
+        moment: true,
         _: true,
         Popper: true,
         CKEDITOR: true,
