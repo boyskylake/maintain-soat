@@ -34,7 +34,7 @@ function login(username, password) {
     function success(user) {
         return {
             type: userConstants.LOGIN_SUCCESS,
-            token: accessToken,
+            token: "",
             user,
         };
     }
@@ -42,7 +42,7 @@ function login(username, password) {
     function failure(error) {
         return {
             type: userConstants.LOGIN_FAILURE,
-            token: accessToken,
+            token: "",
             error,
         };
     }

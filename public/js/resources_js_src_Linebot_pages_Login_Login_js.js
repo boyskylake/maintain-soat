@@ -274,7 +274,7 @@ function login(username, password) {
   function success(user) {
     return {
       type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_SUCCESS,
-      token: accessToken,
+      token: "",
       user: user
     };
   }
@@ -282,7 +282,7 @@ function login(username, password) {
   function failure(error) {
     return {
       type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_FAILURE,
-      token: accessToken,
+      token: "",
       error: error
     };
   }
