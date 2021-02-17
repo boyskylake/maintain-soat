@@ -1235,6 +1235,14 @@ var officerRoute = [{
     return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Order_Saveorder_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Order/Saveorder */ "./resources/js/src/Officer/pages/Order/Saveorder.js"));
   })
 }, {
+  path: "/officer/listorder",
+  exact: true,
+  auth: true,
+  layout: "officer",
+  component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+    return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Listorder_Listorder_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Listorder/Listorder */ "./resources/js/src/Officer/pages/Listorder/Listorder.js"));
+  })
+}, {
   path: "/officer/login",
   exact: true,
   layout: "",
@@ -1344,6 +1352,10 @@ var Sidebar = function Sidebar() {
           to: "/officer/saveorder",
           icon: "fa fa-files-o",
           name: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E41\u0E08\u0E49\u0E07 Order \u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ListItemLink, {
+          to: "/officer/listorder",
+          icon: "fa fa-files-o",
+          name: "Order \u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
         })]
       })]
     })

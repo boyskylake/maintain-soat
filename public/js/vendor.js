@@ -80896,7 +80896,7 @@ var removeAllEventListeners = (ref, validateWithStateUpdate) => {
 
 const defaultReturn = {
     isValid: false,
-    value: '',
+    value: null,
 };
 var getRadioValue = (options) => Array.isArray(options)
     ? options.reduce((previous, option) => option && option.ref.checked
@@ -80944,7 +80944,7 @@ var getCheckboxValue = (options) => {
     return defaultResult;
 };
 
-function getFieldValue(fieldsRef, name, shallowFieldsStateRef, excludeDisabled) {
+function getFieldValue(fieldsRef, name, shallowFieldsStateRef, excludeDisabled, shouldKeepRawValue) {
     const field = fieldsRef.current[name];
     if (field) {
         const { ref: { value, disabled }, ref, valueAsNumber, valueAsDate, setValueAs, } = field;
@@ -80963,13 +80963,17 @@ function getFieldValue(fieldsRef, name, shallowFieldsStateRef, excludeDisabled) 
         if (isCheckBoxInput(ref)) {
             return getCheckboxValue(field.options).value;
         }
-        return valueAsNumber
-            ? +value
-            : valueAsDate
-                ? ref.valueAsDate
-                : setValueAs
-                    ? setValueAs(value)
-                    : value;
+        return shouldKeepRawValue
+            ? value
+            : valueAsNumber
+                ? value === ''
+                    ? NaN
+                    : +value
+                : valueAsDate
+                    ? ref.valueAsDate
+                    : setValueAs
+                        ? setValueAs(value)
+                        : value;
     }
     if (shallowFieldsStateRef) {
         return get(shallowFieldsStateRef.current, name);
@@ -81276,7 +81280,7 @@ var validateField = async (fieldsRef, validateAllFieldCriteria, { ref, ref: { va
         }
     }
     if (validate) {
-        const fieldValue = getFieldValue(fieldsRef, name, shallowFieldsStateRef);
+        const fieldValue = getFieldValue(fieldsRef, name, shallowFieldsStateRef, false, true);
         const validateRef = isRadioOrCheckbox && options ? options[0].ref : ref;
         if (isFunction(validate)) {
             const result = await validate(fieldValue);
@@ -81844,14 +81848,9 @@ function useForm({ mode = VALIDATION_MODE.onSubmit, reValidateMode = VALIDATION_
             : watchFieldsRef.current;
         let fieldValues = getFieldsValues(fieldsRef, cloneObject(shallowFieldsStateRef.current), shouldUnregister, false, fieldNames);
         if (isString(fieldNames)) {
-            if (fieldArrayNamesRef.current.has(fieldNames)) {
-                const fieldArrayValue = get(fieldArrayValuesRef.current, fieldNames, []);
-                fieldValues =
-                    !fieldArrayValue.length ||
-                        fieldArrayValue.length !==
-                            compact(get(fieldValues, fieldNames, [])).length
-                        ? fieldArrayValuesRef.current
-                        : fieldValues;
+            const parentNodeName = getFieldArrayParentName(fieldNames) || fieldNames;
+            if (fieldArrayNamesRef.current.has(parentNodeName)) {
+                fieldValues = Object.assign(Object.assign({}, fieldArrayValuesRef.current), fieldValues);
             }
             return assignWatchFields(fieldValues, fieldNames, watchFields, isUndefined(get(defaultValuesRef.current, fieldNames))
                 ? defaultValue
