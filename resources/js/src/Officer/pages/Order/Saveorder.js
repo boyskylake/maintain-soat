@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Inputmask from "inputmask";
 
 import { useScript } from "../../../helpers";
-import { orderActions } from "../../redux/actions";
+import { feedDataActions } from "../../redux/actions";
 // import { Helmet } from "react-helmet";
 
 function Saveorder() {
@@ -28,7 +28,9 @@ function Saveorder() {
 
     useEffect(() => {
         async function feedData() {
-            await dispatch(orderActions.feedOrderPage());
+            await dispatch(
+                feedDataActions.feedDataGet("/api/v1/officer/orderPage")
+            );
         }
         feedData();
     }, [dispatch]);

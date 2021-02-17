@@ -1240,7 +1240,7 @@ var officerRoute = [{
   auth: true,
   layout: "officer",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
-    return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Listorder_Listorder_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Listorder/Listorder */ "./resources/js/src/Officer/pages/Listorder/Listorder.js"));
+    return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Listorder_Listorder_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Listorder/Listorder */ "./resources/js/src/Officer/pages/Listorder/Listorder.js"));
   })
 }, {
   path: "/officer/login",
@@ -1394,49 +1394,43 @@ function ListItemLink(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/src/Officer/redux/actions/index.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/Officer/redux/actions/index.js ***!
-  \*********************************************************/
+/***/ "./resources/js/src/Officer/redux/actions/feedData.action.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/Officer/redux/actions/feedData.action.js ***!
+  \*******************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; },
-/* harmony export */   "orderActions": function() { return /* reexport safe */ _saveorder_action__WEBPACK_IMPORTED_MODULE_1__.orderActions; }
-/* harmony export */ });
-/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/src/Officer/redux/actions/user.actions.js");
-/* harmony import */ var _saveorder_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./saveorder.action */ "./resources/js/src/Officer/redux/actions/saveorder.action.js");
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/actions/saveorder.action.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/actions/saveorder.action.js ***!
-  \********************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "orderActions": function() { return /* binding */ orderActions; }
+/* harmony export */   "feedDataActions": function() { return /* binding */ feedDataActions; }
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Officer/redux/constants/index.js");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/src/Officer/redux/services/index.js");
 
  // import { NotificationManager } from "react-notifications";
 
-var orderActions = {
-  feedOrderPage: feedOrderPage
+var feedDataActions = {
+  feedDataGet: feedDataGet,
+  feedDataPost: feedDataPost
 };
 
-function feedOrderPage() {
+function feedDataGet(url) {
   return function (dispatch) {
     dispatch(fetching(true));
-    _services__WEBPACK_IMPORTED_MODULE_1__.orderService.orderPage().then(function (data) {
+    _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataGet(url).then(function (data) {
+      return dispatch(fetchSuccess(data));
+    }, function (err) {
+      return dispatch(fetchFailure());
+    });
+  };
+}
+
+function feedDataPost(url) {
+  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return function (dispatch) {
+    dispatch(fetching(true));
+    _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataPost(url, body).then(function (data) {
       return dispatch(fetchSuccess(data));
     }, function (err) {
       return dispatch(fetchFailure());
@@ -1464,6 +1458,25 @@ var fetchFailure = function fetchFailure(bool) {
     type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_FAILURE
   };
 };
+
+/***/ }),
+
+/***/ "./resources/js/src/Officer/redux/actions/index.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/src/Officer/redux/actions/index.js ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; },
+/* harmony export */   "feedDataActions": function() { return /* reexport safe */ _feedData_action__WEBPACK_IMPORTED_MODULE_1__.feedDataActions; }
+/* harmony export */ });
+/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/src/Officer/redux/actions/user.actions.js");
+/* harmony import */ var _feedData_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.action */ "./resources/js/src/Officer/redux/actions/feedData.action.js");
+
+
 
 /***/ }),
 
@@ -1834,6 +1847,49 @@ var officerReducers = {
 
 /***/ }),
 
+/***/ "./resources/js/src/Officer/redux/services/feeddata.service.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/Officer/redux/services/feeddata.service.js ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "feedDataService": function() { return /* binding */ feedDataService; }
+/* harmony export */ });
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services */ "./resources/js/src/Officer/redux/services/services.js");
+
+var service = new _services__WEBPACK_IMPORTED_MODULE_0__.default();
+
+function feedDataGet(url) {
+  var requestOptions = {
+    method: "GET" // body: {},
+
+  };
+  return service.API(url, requestOptions).then(function (res) {
+    return res;
+  });
+}
+
+function feedDataPost(url) {
+  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var requestOptions = {
+    method: "POST",
+    body: body
+  };
+  return service.API(url, requestOptions).then(function (res) {
+    return res;
+  });
+}
+
+var feedDataService = {
+  feedDataGet: feedDataGet,
+  feedDataPost: feedDataPost
+};
+
+/***/ }),
+
 /***/ "./resources/js/src/Officer/redux/services/index.js":
 /*!**********************************************************!*\
   !*** ./resources/js/src/Officer/redux/services/index.js ***!
@@ -1844,43 +1900,12 @@ var officerReducers = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "userService": function() { return /* reexport safe */ _user_service__WEBPACK_IMPORTED_MODULE_0__.userService; },
-/* harmony export */   "orderService": function() { return /* reexport safe */ _savereder_service__WEBPACK_IMPORTED_MODULE_1__.orderService; }
+/* harmony export */   "feedDataService": function() { return /* reexport safe */ _feeddata_service__WEBPACK_IMPORTED_MODULE_1__.feedDataService; }
 /* harmony export */ });
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.service */ "./resources/js/src/Officer/redux/services/user.service.js");
-/* harmony import */ var _savereder_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./savereder.service */ "./resources/js/src/Officer/redux/services/savereder.service.js");
+/* harmony import */ var _feeddata_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feeddata.service */ "./resources/js/src/Officer/redux/services/feeddata.service.js");
 
 
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/services/savereder.service.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/services/savereder.service.js ***!
-  \**********************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "orderService": function() { return /* binding */ orderService; }
-/* harmony export */ });
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services */ "./resources/js/src/Officer/redux/services/services.js");
-
-var service = new _services__WEBPACK_IMPORTED_MODULE_0__.default();
-
-function orderPage(data) {
-  var requestOptions = {
-    method: 'GET' // body:   {}
-
-  };
-  return service.API("/api/v1/officer/orderPage", requestOptions).then(function (res) {
-    return res;
-  });
-}
-
-var orderService = {
-  orderPage: orderPage
-};
 
 /***/ }),
 

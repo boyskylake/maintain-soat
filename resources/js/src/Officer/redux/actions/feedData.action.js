@@ -1,16 +1,28 @@
 import { FeedConstants } from "../constants";
-import { orderService } from "../services";
+import { feedDataService } from "../services";
 // import { NotificationManager } from "react-notifications";
 
-export const orderActions = {
-    feedOrderPage,
+export const feedDataActions = {
+    feedDataGet,
+    feedDataPost,
 };
 
-function feedOrderPage() {
+function feedDataGet(url) {
     return (dispatch) => {
         dispatch(fetching(true));
 
-        orderService.orderPage().then(
+        feedDataService.feedDataGet(url).then(
+            (data) => dispatch(fetchSuccess(data)),
+            (err) => dispatch(fetchFailure())
+        );
+    };
+}
+
+function feedDataPost(url, body = {}) {
+    return (dispatch) => {
+        dispatch(fetching(true));
+
+        feedDataService.feedDataPost(url, body).then(
             (data) => dispatch(fetchSuccess(data)),
             (err) => dispatch(fetchFailure())
         );
