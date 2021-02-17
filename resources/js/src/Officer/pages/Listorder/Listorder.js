@@ -35,7 +35,7 @@ function Listorder() {
         //     $("#example2").DataTable();
         // }
         $("#example2").DataTable().row().data();
-        console.log("test active");
+        // console.log("test active");
         // return () => {
         //     $("#example2").DataTable().destroy();
         //     console.log("test detroy");
