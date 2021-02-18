@@ -1,2 +1,2 @@
 export * from './user.service';
-export * from './savereder.service';
+export * from './feeddata.service';

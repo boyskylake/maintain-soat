@@ -57,6 +57,11 @@ const Sidebar = () => {
                         icon="fa fa-files-o"
                         name="บันทึกแจ้ง Order แก้ไขงาน"
                     />
+                    <ListItemLink
+                        to="/officer/listorder"
+                        icon="fa fa-files-o"
+                        name="Order ทั้งหมด"
+                    />
                 </ul>
             </section>
             {/* /.sidebar */}

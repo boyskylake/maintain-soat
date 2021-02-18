@@ -16,6 +16,13 @@ const officerRoute = [
         component: lazy(() => import("../pages/Order/Saveorder")),
     },
     {
+        path: "/officer/listorder",
+        exact: true,
+        auth: true,
+        layout: "officer",
+        component: lazy(() => import("../pages/Listorder/Listorder")),
+    },
+    {
         path: "/officer/login",
         exact: true,
         layout: "",

@@ -25,7 +25,7 @@ now you will be inside container
 
 run following commands
 1. `composer install && composer update`
-2. `php artisan cron:refresh-database`
+2. `php artisan migrate`
 3. `php artisan key:gen`
 4. `php artisan passport:keys`
 5. `npm install && npm run dev`

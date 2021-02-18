@@ -12,6 +12,7 @@ const Verify = () => {
 
     useEffect(() => {
         let path = new URLSearchParams(search);
+        localStorage.setItem("path", path.get("path"));
 
         async function initialize() {
             await liff.init({ liffId: "1655658567-YmdRmAVg" });
@@ -21,18 +22,25 @@ const Verify = () => {
                     const accessToken = liff.getAccessToken();
 
                     if (accessToken) {
-                        dispatch(userActions.getAuthUser(accessToken))
+                        localStorage.setItem("linetoken", accessToken);
+
+                        dispatch(userActions.getAuthUser())
                             .then(() => {
                                 history.push(path.get("path"));
                             })
                             .catch(() => {
                                 history.push(
-                                    "/linebot/login?path=" + path.get("path")
+                                    "/linebot/login?path=" +
+                                        localStorage.getItem("path")
                                 );
                             });
                     }
                 } else {
-                    liff.login();
+                    // localStorage.setItem("path", path.get("path"));
+                    liff.login({
+                        redirectUri:
+                            "https://6be7805c3720.ngrok.io/linebot/verify?path=" + path.get("path"),
+                    });
                 }
             });
         }

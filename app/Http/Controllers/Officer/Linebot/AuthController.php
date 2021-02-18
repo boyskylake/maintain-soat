@@ -23,17 +23,18 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $req = $request->json()->all();
+        // $req = $request->json()->all();
         $this->validate($request, [
-            'username' => ['required', 'string', 'email', 'max:255', 'exists:users,email,line_active,0'],
+            'username' => ['required', 'string', 'email', 'max:255'],
         ]);
 
         $user = User::where('email', $request->username);
+
         if (!Hash::check($request->password, $user->first()->password)) {
             return response()->json(['message' => 'The specified password does not match the database password'], 422);
         }
 
-        if ($res = $this->verify($request)) {
+        if ($this->verify($request)) {
             $profile = $this->profile($request);
             // db save userId
             $db = $user->update(array(
@@ -60,6 +61,7 @@ class AuthController extends Controller
             if ($user->first() && $user->first()->line_active == 1) {
                 return response()->json(['massage' => 'Success.', 'user' => $user->first()]);
             }
+            // dd($profile);
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         return response()->json(['error' => 'Unauthenticated.'], 401);
@@ -81,7 +83,7 @@ class AuthController extends Controller
     public function verify(Request $request)
     {
         $token = $request->bearerToken();
-
+        // dd($token);
         $response = $this->http->get("https://api.line.me/oauth2/v2.1/verify?access_token=" . $token);
 
         if ($response->isSucceeded()) {

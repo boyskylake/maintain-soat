@@ -26,20 +26,20 @@ function login(username, password) {
         });
 }
 
-function getAuthUser(access_token) {
+function getAuthUser() {
     // remove user from local storage to log user out
     const requestOptions = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json, text/plain, */*",
-            Authorization: "Bearer " + access_token,
+            Authorization: "Bearer " + localStorage.getItem("linetoken"),
         },
     };
 
     return axios(`/api/v1/linebot/user`, requestOptions)
         .then((res) => {
-            localStorage.setItem("linetoken", access_token);
+            // localStorage.setItem("linetoken", access_token);
             return res.data;
         })
         .catch((err) => {
