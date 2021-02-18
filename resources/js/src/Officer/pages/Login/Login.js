@@ -89,7 +89,7 @@ const Login = () => {
             <div className="login-box login-page">
                 <div className="login-logo">
                     <a href="../../index2.html">
-                        
+
                         <br></br>
                         <b>Soat</b>Officer
                     </a>
