@@ -5853,7 +5853,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     font-family: "Kanit", sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .container {
     background-color: #fff;
