@@ -23,5 +23,8 @@ class OrderPageController extends Controller
 
 
         return response()->json(compact('ma_coop', 'ucf_officer','ucf_inform_type','ucf_customer_contact','ucf_application'));
+
+
     }
+
 }

@@ -1,27 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import Inputmask from "inputmask";
+//import { useForm } from "react-hook-form";
+//import Inputmask from "inputmask";
 
-import { useScript } from "../../../helpers";
+//import { useScript } from "../../../helpers";
 // import { orderActions } from "../../redux/actions";
 
 import "datatables.net-dt/css/jquery.dataTables.css";
+import { feedDataAction } from "../../redux/actions";
 $.DataTable = require("datatables.net");
 
 function Listorder() {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
 
-    // const [inputs, setInputs] = useState(["ma_coop"]);
-    // const [coopid, setCoopid] = useState(null);
-
-    // useScript(
-    //     "/officer/bower_components/datatables.net/js/jquery.dataTables.min.js"
-    // );
-    // useScript(
-    //     "/officer/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"
-    // );
 
     // const { register, handleSubmit, watch, errors } = useForm();
     // const onSubmit = (data) => {
@@ -30,32 +22,26 @@ function Listorder() {
     // };
     const main = useRef(null);
 
+
     useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(orderActions.feedOrderPage());
-        // }
-        // feedData();
+        async function feedData() {
+            await dispatch(feedDataAction.feedDataGet("/api/v1/officer/Listorder"));
+        }
+        feedData();
 
         $("#example2").DataTable({});
 
-        // $(main).DataTable({
-        //     dom: '<"data-table-wrapper"t>',
-        //     data: [{ name: "rerser", nickname: "sutaname" }],
-        //     columns: [
-        //         {
-        //             title: "Name",
-        //             width: 120,
-        //             data: "name",
-        //         },
-        //         {
-        //             title: "Nickname",
-        //             width: 180,
-        //             data: "nickname",
-        //         },
-        //     ],
-        //     ordering: false,
-        // });
     }, []);
+
+    // useEffect(() => {
+    //     if (feedData.fetchSuccess){
+    //         $("#example2").DataTable({});
+    //     }
+    //     return () => {
+    //         cleanup;
+    //     }
+
+    // },[feedData]);
 
     return (
         <div className="content-wrapper">
@@ -102,57 +88,35 @@ function Listorder() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 4.0</td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 5.0</td>
-                                            <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 5.5</td>
-                                            <td>Win 95+</td>
-                                            <td>5.5</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 6</td>
-                                            <td>Win 98+</td>
-                                            <td>6</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 7</td>
-                                            <td>Win XP SP2+</td>
-                                            <td>7</td>
-                                            <td>A</td>
-                                        </tr>
+                                        {feedData.data && feedData.data.infrom && feedData.data.infrom.map((val,i) => {
+                                            return(
+                                            <tr key={i}>
+                                                <td>{val.inform_no}</td>
+                                                <td>{val.coop_shortname}</td>
+                                                <td>{val.receive_date}</td>
+                                                <td>{val.editor_id}</td>
+                                                <td>x</td>
+
+
+                                            </tr>
+
+                                            );
+                                        }
+
+                                    )}
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
+                                {feedData.fetching && (
+                        <div className="overlay">
+                            <i className="fa fa-refresh fa-spin" />
+                        </div>
+                    )}
                             </div>
                             {/* /.box-body */}
                         </div>
                     </div>
                     {/* /.col */}
+
                 </div>
                 {/* /.row */}
             </section>
