@@ -1,10 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 //import { useForm } from "react-hook-form";
 //import Inputmask from "inputmask";
 
 //import { useScript } from "../../../helpers";
 // import { orderActions } from "../../redux/actions";
+=======
+// import { useForm } from "react-hook-form";
+// import Inputmask from "inputmask";
+
+// import { useScript } from "../../../helpers";
+import { feedDataActions } from "../../redux/actions";
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
 
 import "datatables.net-dt/css/jquery.dataTables.css";
 import { feedDataAction } from "../../redux/actions";
@@ -14,24 +22,47 @@ function Listorder() {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
     // const { register, handleSubmit, watch, errors } = useForm();
     // const onSubmit = (data) => {
     //     // console.log(data);
     //     // console.log(coopid);
     // };
-    const main = useRef(null);
 
 
     useEffect(() => {
         async function feedData() {
+<<<<<<< HEAD
             await dispatch(feedDataAction.feedDataGet("/api/v1/officer/Listorder"));
+=======
+            await dispatch(
+                feedDataActions.feedDataGet("/api/v1/officer/listorder")
+            );
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
         }
         feedData();
 
-        $("#example2").DataTable({});
+        // $("#example2").DataTable({});
+    }, [dispatch]);
 
+<<<<<<< HEAD
     }, []);
+=======
+    useEffect(() => {
+        // if (feedData.fetchSuccess) {
+        //     $("#example2").DataTable();
+        // }
+        $("#example2").DataTable().row().data();
+        // console.log("test active");
+        // return () => {
+        //     $("#example2").DataTable().destroy();
+        //     console.log("test detroy");
+        // };
+    }, [feedData]);
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
 
     // useEffect(() => {
     //     if (feedData.fetchSuccess){
@@ -88,6 +119,7 @@ function Listorder() {
                                         </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                         {feedData.data && feedData.data.infrom && feedData.data.infrom.map((val,i) => {
                                             return(
                                             <tr key={i}>
@@ -104,6 +136,35 @@ function Listorder() {
                                         }
 
                                     )}
+=======
+                                        {feedData.data &&
+                                            feedData.data.inform &&
+                                            feedData.data.inform.map(
+                                                (val, i) => {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td>
+                                                                {val.inform_no}
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    val.coop_shortname
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    val.receive_date
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {val.editor_id}
+                                                            </td>
+                                                            <td>X</td>
+                                                        </tr>
+                                                    );
+                                                }
+                                            )}
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
                                     </tbody>
                                 </table>
                                 {feedData.fetching && (
@@ -116,7 +177,15 @@ function Listorder() {
                         </div>
                     </div>
                     {/* /.col */}
+<<<<<<< HEAD
 
+=======
+                    {feedData.fetching && (
+                        <div className="overlay">
+                            <i className="fa fa-refresh fa-spin" />
+                        </div>
+                    )}
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
                 </div>
                 {/* /.row */}
             </section>

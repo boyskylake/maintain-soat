@@ -45,7 +45,7 @@ const Layout = ({ children, ...props }) => {
     switch (layout) {
         case "officer":
             return <OfficerLayout {...props}>{children}</OfficerLayout>;
-        case "line":
+        case "linebot":
             return <LinebotLayout {...props}>{children}</LinebotLayout>;
         default:
             return <Fragment>{children}</Fragment>;

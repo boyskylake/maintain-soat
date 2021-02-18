@@ -16,7 +16,11 @@ Route::group(['namespace' => 'Officer\Api'], function () {
         Route::get('user', 'Auth\AuthController@user');
 
         Route::get('orderPage', 'OrderPageController@editOrder');
+<<<<<<< HEAD
         Route::get('Listorder', 'OrderListController@feedInform');
 
+=======
+        Route::get('listorder', 'OrderListController@feedInform');
+>>>>>>> e51d39e894a38546c7c69a488567dfa1a749d57f
     });
 });

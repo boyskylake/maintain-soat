@@ -39,7 +39,7 @@ const Verify = () => {
                     // localStorage.setItem("path", path.get("path"));
                     liff.login({
                         redirectUri:
-                            "https://4ab4695dea85.ngrok.io" + path.get("path"),
+                            "https://6be7805c3720.ngrok.io/linebot/verify?path=" + path.get("path"),
                     });
                 }
             });
