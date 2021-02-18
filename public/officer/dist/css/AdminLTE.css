@@ -5936,9 +5936,10 @@ a.site-logo {
     transform: translateY(-3px) rotate(-45deg);
 }
 .pic-login-2 {
-    height: 75vh;
+    height: 50vh;
 }
 .login-form {
+    padding-top:90px;
     margin: auto;
 }
 .login-form h4 {
