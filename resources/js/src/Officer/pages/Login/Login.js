@@ -51,7 +51,7 @@ const Login = () => {
                     content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
                 />
                 <meta
-                    property="og:description"
+                    property="og:descrpition"
                     content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
                 />
                 <meta property="og:url" content={window.location.href} />
@@ -89,9 +89,12 @@ const Login = () => {
             <div className="login-box login-page">
                 <div className="login-logo">
                     <a href="../../index2.html">
+                        
+                        <br></br>
                         <b>Soat</b>Officer
                     </a>
                 </div>
+
                 {/* /.login-logo */}
                 <div className="login-box-body">
                     <p className="login-box-msg">
