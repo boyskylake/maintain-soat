@@ -5883,6 +5883,7 @@ a.site-logo {
     padding-right: 10px;
     display: block;
     text-decoration: none;
+    font-size: 18px;
 }
 .site-navbar .sign-in-btn {
     color: #fff !important;
@@ -5953,7 +5954,7 @@ a.site-logo {
 }
 .login-form input[type="text"],
 input[type="password"] {
-    height: 50px;
+    height: 45px;
 }
 .login-form input:focus {
     box-shadow: none !important;
