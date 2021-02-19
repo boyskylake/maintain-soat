@@ -23,17 +23,12 @@ function Listorder() {
                 feedDataAction.feedDataGet("/api/v1/officer/Listorder")
             );
         }
+        $("#example2").DataTable({
+
+        });
         feedData();
     }, [dispatch]);
 
-    useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(orderActions.feedOrderPage());
-        // }
-        // feedData();
-
-        $("#example2").DataTable({});
-    }, []);
 
     return (
         <div className="content-wrapper">
@@ -81,8 +76,8 @@ function Listorder() {
                                     </thead>
                                     <tbody>
                                         {feedData.data &&
-                                            feedData.data.inform &&
-                                            feedData.data.inform.map(
+                                            feedData.data.infrom &&
+                                            feedData.data.infrom.map(
                                                 (val, i) => {
                                                     return (
                                                         <tr key={i}>
@@ -98,16 +93,18 @@ function Listorder() {
                                             )}
                                     </tbody>
                                 </table>
+
                             </div>
-                            {/* /.box-body */}
-                        </div>
-                    </div>
-                    {/* /.col */}
-                    {feedData.fetching && (
+                            {feedData.fetching && (
                         <div className="overlay">
                             <i className="fa fa-refresh fa-spin" />
                         </div>
                     )}
+                            {/* /.box-body */}
+                        </div>
+                    </div>
+                    {/* /.col */}
+
                 </div>
                 {/* /.row */}
             </section>
