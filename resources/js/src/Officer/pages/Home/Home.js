@@ -71,6 +71,11 @@ function Home() {
                             );
                         })}
                     </div>
+                    {feedData.fetching && (
+                        <div className="overlay">
+                            <i className="fa fa-refresh fa-spin" />
+                        </div>
+                    )}
                 {/* /.row */}
                 <div className="row">
                     <div className="col-md-12">
@@ -815,6 +820,7 @@ function Home() {
                                     View All Products
                                 </a>
                             </div>
+
                             {/* /.box-footer */}
                         </div>
                         {/* /.box */}
