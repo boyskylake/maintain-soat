@@ -16,18 +16,31 @@ function Listorder() {
     //     // console.log(data);
     //     // console.log(coopid);
     // };
+    let user = JSON.parse(localStorage.getItem("user"));
+
 
     useEffect(() => {
-        async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/Listorder")
-            );
-        }
-        $("#example2").DataTable({
+        // async function feedData() {
+        //     await dispatch(
+        //         feedDataAction.feedDataGet("/api/v1/officer/Listorder")
+        //     );
+        // }
 
-        });
-        feedData();
-    }, [dispatch]);
+            $('#example2').DataTable({
+                    serverSide: true,
+                    "ajax": {
+                        "url": "/api/v1/officer/Listorder",
+                        "type": "GET",
+                        headers: {
+                            'Authorization': "Bearer " +  user.access_token
+                        },
+                }
+            });
+
+        // feedData();
+    }, [user]);
+
+
 
 
     return (
