@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { feedDataAction } from "../../redux/actions";
 
-
+import "datatables.net-dt/css/jquery.dataTables.css";
+$.DataTable = require("datatables.net");
 
 function Listorder() {
     const dispatch = useDispatch();
@@ -22,12 +23,17 @@ function Listorder() {
                 feedDataAction.feedDataGet("/api/v1/officer/Listorder")
             );
         }
-        $("#example2").DataTable({
-
-        });
         feedData();
     }, [dispatch]);
 
+    useEffect(() => {
+        // async function feedData() {
+        //     await dispatch(orderActions.feedOrderPage());
+        // }
+        // feedData();
+
+        $("#example2").DataTable({});
+    }, []);
 
     return (
         <div className="content-wrapper">
@@ -75,8 +81,8 @@ function Listorder() {
                                     </thead>
                                     <tbody>
                                         {feedData.data &&
-                                            feedData.data.infrom &&
-                                            feedData.data.infrom.map(
+                                            feedData.data.inform &&
+                                            feedData.data.inform.map(
                                                 (val, i) => {
                                                     return (
                                                         <tr key={i}>
@@ -92,26 +98,16 @@ function Listorder() {
                                             )}
                                     </tbody>
                                 </table>
-
                             </div>
-                            {feedData.fetching && (
-                        <div className="overlay">
-                            <i className="fa fa-refresh fa-spin" />
-                        </div>
-                    )}
                             {/* /.box-body */}
                         </div>
                     </div>
                     {/* /.col */}
-<<<<<<< HEAD
                     {feedData.fetching && (
                         <div className="overlay">
                             <i className="fa fa-refresh fa-spin" />
                         </div>
                     )}
-=======
-
->>>>>>> 43cf5831a644c12e1745051428ee0ef98e0e405e
                 </div>
                 {/* /.row */}
             </section>

@@ -257,10 +257,13 @@ a:focus {
     background-color: transparent;
     background-image: none;
     padding: 15px 15px;
-    font-family: "Kanit", sans-serif;
+    /* font-family: "Kanit", sans-serif; */
+    /* font-family: "Font Awesome\ 5 Pro"; */
+    font-family: "fontAwesome";
 }
 .main-header .sidebar-toggle:before {
     content: "\f0c9";
+    /* font-weight: 900; cjr */
 }
 .main-header .sidebar-toggle:hover {
     color: #fff;
@@ -322,7 +325,7 @@ a:focus {
     max-height: 50px;
 }
 .main-header .logo .logo-lg .brandlogo-image {
-    margin-top: 8px;
+    margin-top: 10px;
     margin-right: 10px;
     margin-left: -5px;
 }
@@ -330,8 +333,8 @@ a:focus {
     display: none;
 }
 .main-header .logo .logo-mini img {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 100px;
+    max-height: 100px;
 }
 .main-header .logo .logo-mini .brandlogo-image {
     margin-top: 8px;
@@ -1216,7 +1219,7 @@ a:focus {
     clear: both;
 }
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-default {
-    color: #666666;
+    color: #ffffff;
 }
 @media (max-width: 991px) {
     .navbar-nav

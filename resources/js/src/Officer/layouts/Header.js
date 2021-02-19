@@ -59,7 +59,11 @@ const Header = () => {
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap-daterangepicker/daterangepicker.css"
                 />
-                <link href="/officer/bower_components/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" media="screen"></link>
+                <link
+                    href="/officer/bower_components/bootstrap-datepicker/css/datepicker.css"
+                    rel="stylesheet"
+                    media="screen"
+                ></link>
                 {/* <link
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
@@ -96,7 +100,12 @@ const Header = () => {
                 </span>
                 {/* logo for regular state and mobile devices */}
                 <span className="logo-lg">
-                    <b>Admin</b>LTE
+                    {/* <b>โซแอ็ทโซลูชั่น</b> จำกัด */}
+                    <img
+                        src="dist/img/logo.png"
+                        className="logo-lg"
+                        alt="Logo soat"
+                    />
                 </span>
             </a>
             {/* Header Navbar: style can be found in header.less */}
@@ -478,7 +487,7 @@ const Header = () => {
                                     <div className="pull-left">
                                         <a
                                             href="#"
-                                            className="btn btn-default btn-flat"
+                                            className="btn btn-default btn-info"
                                         >
                                             Profile
                                         </a>
@@ -489,7 +498,7 @@ const Header = () => {
                                             onClick={() =>
                                                 dispatch(userActions.logout())
                                             }
-                                            className="btn btn-default btn-flat"
+                                            className="btn btn-default btn-danger"
                                         >
                                             Sign out
                                         </a>
