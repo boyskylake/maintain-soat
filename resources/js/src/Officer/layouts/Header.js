@@ -96,7 +96,7 @@ const Header = () => {
                 </span>
                 {/* logo for regular state and mobile devices */}
                 <span className="logo-lg">
-                    <b>Admin</b>LTE
+                    <b>โซแอ็ทโซลูชั่น</b> จำกัด
                 </span>
             </a>
             {/* Header Navbar: style can be found in header.less */}
