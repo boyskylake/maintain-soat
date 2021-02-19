@@ -486,6 +486,49 @@ function Saveorder() {
                                 </div>
                             </div>
 
+
+
+                            {/* --------------------------บารเปิด-------------------------- */}
+                            <div className="nav-tabs-custom">
+                            <ul className="nav nav-tabs">
+                            <li><a href="#settings" data-toggle="tab"><h5>บันทึก</h5></a></li>
+                            <li><a href="#settings2" data-toggle="tab"><h5>สำหรับ Order สั่งซื้อ</h5></a></li>
+                            </ul>
+                            <div className="tab-content">
+                            {/* ---------------------------ข้อมูล1เปิด-------------------------- */}
+                            <div className="tab-pane" id="settings">
+                            <form className="form-horizontal">
+                            <div className="form-group">
+
+                            <h1>EIEI</h1>
+
+                            </div>
+                            </form>
+                            </div>
+                            {/* ---------------------------ข้อมูล1ปิด-------------------------- */}
+
+                            {/* ---------------------------ข้อมูล2เปิด-------------------------- */}
+                            <div className="tab-pane" id="settings2">
+                            <form className="form-horizontal">
+                            <div className="form-group">
+
+                            <h1>Hello</h1>
+
+                            </div>
+                            </form>
+                            </div>
+                            {/* ---------------------------ข้อมูล2ปิด-------------------------- */}
+
+
+
+                            </div>
+                            </div>
+                            {/* --------------------------บารปิด-------------------------- */}
+
+
+
+
+
                             <div className="row">
                                 <div className="col-md-12">
                                     <div
