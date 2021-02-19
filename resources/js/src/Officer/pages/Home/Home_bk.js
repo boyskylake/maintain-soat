@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { useScript } from "../../../helpers";
+import { feedDataAction } from "../../redux/actions";
 
 function Home() {
+    const dispatch = useDispatch();
+    const feedData = useSelector((state) => state.feedData);
+
+    // const [inputs, setInputs] = useState(["ma_coop"]);
+    const [coopid, setCoopid] = useState(null);
     // <!-- jvectormap  -->
     useScript("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
     useScript("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
-
     useScript("/officer/dist/js/pages/dashboard2.js");
 
+    useEffect(() => {
+        async function feedData() {
+            await dispatch(feedDataAction.feedDataGet("/api/v1/officer/Home"));
+        }
+        feedData();
+    }, [dispatch]);
+
+
     return (
+
         <div className="content-wrapper">
             {/* Content Header (Page header) */}
             <section className="content-header">
@@ -29,71 +45,39 @@ function Home() {
             <section className="content">
                 {/* Info boxes */}
                 <div className="row">
-                    <div className="col-md-3 col-sm-6 col-xs-12">
-                        <div className="info-box">
-                            <span className="info-box-icon bg-aqua">
-                                <i className="ion ion-ios-gear-outline" />
-                            </span>
-                            <div className="info-box-content">
-                                <span className="info-box-text">
-                                    CPU Traffic
-                                </span>
-                                <span className="info-box-number">
-                                    90<small>%</small>
-                                </span>
+                    {feedData.data &&
+                        feedData.data.ma_coop &&
+                        feedData.data.ma_coop.map((val, i) => {
+                            return (
+                                <div key={i}>
+
+                                    <div className="col-md-3 col-sm-6 col-xs-12">
+                                        <div className="small-box bg-aqua">
+                                            <div className="inner">
+                                                <h3>{val.countcoop}</h3>
+                                                <p>จำนวนสหกรณ์ทั้งหมด</p>
+                                            </div>
+                                            <div className="icon">
+                                                <i className="fa fa-folder-open"></i>
+                                            </div>
+                                            <a
+                                                href="#"
+                                                className="small-box-footer"
+                                            >
+                                                รายละเอียด{" "}
+                                                <i className="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                    </div>
+                                </div>
                             </div>
-                            {/* /.info-box-content */}
-                        </div>
-                        {/* /.info-box */}
+                            );
+                        })}
                     </div>
-                    {/* /.col */}
-                    <div className="col-md-3 col-sm-6 col-xs-12">
-                        <div className="info-box">
-                            <span className="info-box-icon bg-red">
-                                <i className="fa fa-google-plus" />
-                            </span>
-                            <div className="info-box-content">
-                                <span className="info-box-text">Likes</span>
-                                <span className="info-box-number">41,410</span>
-                            </div>
-                            {/* /.info-box-content */}
+                    {feedData.fetching && (
+                        <div className="overlay">
+                            <i className="fa fa-refresh fa-spin" />
                         </div>
-                        {/* /.info-box */}
-                    </div>
-                    {/* /.col */}
-                    {/* fix for small devices only */}
-                    <div className="clearfix visible-sm-block" />
-                    <div className="col-md-3 col-sm-6 col-xs-12">
-                        <div className="info-box">
-                            <span className="info-box-icon bg-green">
-                                <i className="ion ion-ios-cart-outline" />
-                            </span>
-                            <div className="info-box-content">
-                                <span className="info-box-text">Sales</span>
-                                <span className="info-box-number">760</span>
-                            </div>
-                            {/* /.info-box-content */}
-                        </div>
-                        {/* /.info-box */}
-                    </div>
-                    {/* /.col */}
-                    <div className="col-md-3 col-sm-6 col-xs-12">
-                        <div className="info-box">
-                            <span className="info-box-icon bg-yellow">
-                                <i className="ion ion-ios-people-outline" />
-                            </span>
-                            <div className="info-box-content">
-                                <span className="info-box-text">
-                                    New Members
-                                </span>
-                                <span className="info-box-number">2,000</span>
-                            </div>
-                            {/* /.info-box-content */}
-                        </div>
-                        {/* /.info-box */}
-                    </div>
-                    {/* /.col */}
-                </div>
+                    )}
                 {/* /.row */}
                 <div className="row">
                     <div className="col-md-12">
@@ -838,6 +822,7 @@ function Home() {
                                     View All Products
                                 </a>
                             </div>
+
                             {/* /.box-footer */}
                         </div>
                         {/* /.box */}
@@ -850,5 +835,4 @@ function Home() {
         </div>
     );
 }
-
 export default Home;
