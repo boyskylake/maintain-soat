@@ -103,15 +103,6 @@ function Listorder() {
                         </div>
                     </div>
                     {/* /.col */}
-<<<<<<< HEAD
-                    {feedData.fetching && (
-                        <div className="overlay">
-                            <i className="fa fa-refresh fa-spin" />
-                        </div>
-                    )}
-=======
-
->>>>>>> 43cf5831a644c12e1745051428ee0ef98e0e405e
                 </div>
                 {/* /.row */}
             </section>

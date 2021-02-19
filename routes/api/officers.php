@@ -17,14 +17,7 @@ Route::group(['namespace' => 'Officer\Api'], function () {
 
         Route::get('Home', 'HomeController@allMacoop');
         Route::get('orderPage', 'OrderPageController@editOrder');
-<<<<<<< HEAD
-
-        Route::get('Listorder', 'OrderListController@feedInform');
-        Route::get('listorder', 'OrderListController@feedInform');
-
-=======
         Route::get('Listorder', 'OrderListController@feedInform');
 
->>>>>>> 43cf5831a644c12e1745051428ee0ef98e0e405e
     });
 });

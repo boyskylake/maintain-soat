@@ -126,6 +126,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common = {
   "X-Requested-With": "XMLHttpRequest",
@@ -161,6 +162,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers */ "./resources/js/src/helpers/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
+
+
+
+
 var Footer = function Footer() {
   // <!-- Bootstrap 3.3.7 -->
   (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.useScript)("/officer/bower_components/bootstrap/dist/js/bootstrap.min.js"); // <!-- FastClick -->
@@ -190,6 +195,7 @@ var Footer = function Footer() {
   //     "/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"
   // );
   // <!-- bootstrap color picker -->
+
   (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.useScript)("/officer/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"); // <!-- bootstrap time picker -->
 
   (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.useScript)("/officer/plugins/timepicker/bootstrap-timepicker.min.js");
@@ -208,6 +214,7 @@ var Footer = function Footer() {
     }), " ", "All rights reserved."]
   });
 };
+
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
@@ -330,10 +337,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "./resources/js/src/Linebot/layouts/Header.js");
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Footer */ "./resources/js/src/Linebot/layouts/Footer.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-//import libs
+/* harmony import */ var _LinebotRoute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LinebotRoute */ "./resources/js/src/Linebot/layouts/LinebotRoute.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/src/Linebot/redux/actions/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
@@ -345,6 +355,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+//import libs
 
 
 
@@ -362,9 +373,45 @@ function LinebotLayout(_ref) {
     return state.userline.loggedIn;
   });
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)(),
+      pathname = _useLocation.pathname;
+
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      path = _useState2[0],
+      setPath = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (path == null) {
+      for (var i = 0; i < _LinebotRoute__WEBPACK_IMPORTED_MODULE_5__.default.length; i++) {
+        var _path = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.matchPath)(pathname, {
+          path: _LinebotRoute__WEBPACK_IMPORTED_MODULE_5__.default[i].path
+        });
+
+        if (_path != null) {
+          setPath(_LinebotRoute__WEBPACK_IMPORTED_MODULE_5__.default[i]);
+          break; // stop the loop
+        }
+      }
+    }
+
+    if (path && path.authliff && !isAuth) {
+      dispatch(_redux_actions__WEBPACK_IMPORTED_MODULE_6__.userActions.getAuthUser()).catch(function () {
+        history.push("/linebot/verify?path=" + path.path);
+      });
+    }
+  }, [dispatch, isAuth, pathname, path, history]);
+  return isAuth ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "wrapper",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_3__.default, {}), children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Footer__WEBPACK_IMPORTED_MODULE_4__.default, {})]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_3__.default, {}), children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Footer__WEBPACK_IMPORTED_MODULE_4__.default, {})]
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    className: "overlay",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+      className: "fa fa-refresh fa-spin"
+    })
   });
 }
 
