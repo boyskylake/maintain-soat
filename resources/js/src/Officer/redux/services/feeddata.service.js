@@ -3,25 +3,25 @@ import Services from './services';
 const service = new Services();
 
 function feedDataGet(url) {
-
     const requestOptions = {
-        method: 'GET',
-         //body:   {}
+        method: 'Get',
+        //  body:   {}
     };
 
-    return service.API(url, requestOptions).then(res => {
+    return service.API(url, requestOptions)
+        .then(res => {
             return res;
         });
 }
 
-function feedDataPost(url,body ={}) {
-
+function feedDataPost(url, body = {}) {
     const requestOptions = {
-        method: 'POST',
-         body: body,
+        method: "Post",
+        body:body,
     };
 
-    return service.API(url, requestOptions).then(res => {
+    return service.API(url, requestOptions)
+        .then(res => {
             return res;
         });
 }
@@ -29,5 +29,5 @@ function feedDataPost(url,body ={}) {
 
 export const feedDataService = {
     feedDataGet,
-    feedDataPost
+    feedDataPost,
 };
