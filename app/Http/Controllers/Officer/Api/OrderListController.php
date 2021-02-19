@@ -54,7 +54,7 @@ class OrderListController extends Controller
                 -- AND ( inform_head.receive_date BETWEEN :adtm_start AND :adtm_stop )
                     AND ucf_inform_type.inform_type = inform_head.inform_type
                     -- and inform_no = '6312020040'
-                    and EXTRACT(year FROM receive_date) > 2020
+                    and EXTRACT(year FROM receive_date) = 2021
             ORDER BY
                 inform_head.receive_date DESC");
 
