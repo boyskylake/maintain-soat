@@ -28,9 +28,7 @@ function Saveorder() {
 
     useEffect(() => {
         async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-            );
+            await dispatch(feedDataAction.feedDataGet("/api/v1/officer/orderPage"));
         }
         feedData();
     }, [dispatch]);
@@ -84,23 +82,7 @@ function Saveorder() {
                         </div>
                         {/* /.box-header */}
                         <div className="box-body">
-
-                            {/* --------------------------บารเปิด-------------------------- */}
-                            <div className="nav-tabs-custom">
-                                <ul className="nav nav-tabs">
-                                <li  className="active"><a href="#settings" data-toggle="tab"> <h5>บันทึกข้อมูล</h5></a></li>
-                                <li><a href="#settings2" data-toggle="tab"><h5>สำหรับ Order สั่งซื้อ</h5></a></li>
-                                </ul>
-                                <div className="tab-content">
-                                    {/* ---------------------------ข้อมูล1เปิด-------------------------- */}
-                                    <div className="active tab-pane" id="settings">
-
-                                            {/* <div className="form-group"> */}
-                                                {/* ---------------------------เนื้อหา1เปิด-------------------------- */}
-                                                <div className="box-header">
-
-
-                                                <div className="row">
+                            <div className="row">
                                 <div className="col-md-3">
                                     <div className="form-group">
                                         <label>เลขที่</label>
@@ -506,232 +488,239 @@ function Saveorder() {
 
 
 
-                                                </div>
-                                                {/* ---------------------------เนื้อหา1ปิด-------------------------- */}
-                                            {/* </div> */}
+                            {/* --------------------------บารเปิด-------------------------- */}
+                            <div className="nav-tabs-custom">
+                            <ul className="nav nav-tabs">
+                            <li><a href="#settings" data-toggle="tab"><h5>บันทึก</h5></a></li>
+                            <li><a href="#settings2" data-toggle="tab"><h5>สำหรับ Order สั่งซื้อ</h5></a></li>
+                            </ul>
+                            <div className="tab-content">
+                            {/* ---------------------------ข้อมูล1เปิด-------------------------- */}
+                            <div className="tab-pane" id="settings">
+                            <form className="form-horizontal">
+                            <div className="form-group">
+                            {/* ---------------------------เนื้อหา1เปิด-------------------------- */}
+                            <div className="box-header">
 
-                                    </div>
-                                    {/* ---------------------------ข้อมูล1ปิด-------------------------- */}
 
-                                    {/* ---------------------------ข้อมูล2เปิด-------------------------- */}
-                                    <div className="tab-pane" id="settings2">
-                                        {/* <div className="form-group"> */}
-                                            {/* ---------------------------เนื้อหา2เปิด-------------------------- */}
-                                            <div className="box-header">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div
-                                                            className="box box-primary"
-                                                            style={{
-                                                                border:
-                                                                    "2px solid #0000008c",
-                                                            }}
-                                                        >
-                                                            <div className="box-header">
-                                                                <h3 className="box-title">
-                                                                    สำหรับ Order
-                                                                    สั่งซื้อ
-                                                                </h3>
-                                                            </div>
-                                                            <div className="box-body">
-                                                                <div className="col-md-3">
-                                                                    <div className="form-group">
-                                                                        <label>
-                                                                            วันที่สั่งซื้อ
-                                                                        </label>
-                                                                        <div
-                                                                            className="input-group"
-                                                                            style={{
-                                                                                border:
-                                                                                    "1.5px solid #f39c12",
-                                                                                borderRadius: 2,
-                                                                            }}
-                                                                        >
-                                                                            <div className="input-group-addon">
-                                                                                <i className="fa fa-calendar" />
-                                                                            </div>
-                                                                            <input
-                                                                                type="text"
-                                                                                className="form-control"
-                                                                                data-inputmask="'alias': 'dd/mm/yyyy'"
-                                                                                data-mask
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-3">
-                                                                    <div className="form-group">
-                                                                        <label>
-                                                                            จำนวนวันตามสัญญา
-                                                                        </label>
-                                                                        <input
-                                                                            type="text"
-                                                                            className="form-control"
-                                                                            style={{
-                                                                                border:
-                                                                                    "1.5px solid #f39c12",
-                                                                                borderRadius: 2,
-                                                                            }}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-3">
-                                                                    <div className="form-group">
-                                                                        <label>
-                                                                            มีสัญญาจ้าง
-                                                                        </label>
-                                                                        <br />
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            className="flat-red"
-                                                                            style={{
-                                                                                border:
-                                                                                    "1.5px solid #f39c12",
-                                                                                borderRadius: 2,
-                                                                            }}
-                                                                        />
-                                                                        {/* <input type="text" className="form-control" /> */}
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-3">
-                                                                    <div className="form-group">
-                                                                        <label>
-                                                                            มูลค่างาน
-                                                                        </label>
-                                                                        <br />
-                                                                        <input
-                                                                            type="text"
-                                                                            className="form-control"
-                                                                            style={{
-                                                                                border:
-                                                                                    "1.5px solid #f39c12",
-                                                                                borderRadius: 2,
-                                                                                textAlign:
-                                                                                    "right",
-                                                                            }}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {/* === start */}
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <div className="form-group blueselect">
-                                                            <label>
-                                                                ผู้ดูแล
-                                                            </label>
-                                                            <select className="form-control select2" id="ownerjobselect">
-                                                                <option></option>
-                                                                {feedData.data &&
-                                                                    feedData
-                                                                        .data
-                                                                        .ucf_officer &&
-                                                                    feedData.data.ucf_officer.map(
-                                                                        (
-                                                                            val,
-                                                                            i
-                                                                        ) => {
-                                                                            return (
-                                                                                <option
-                                                                                    key={
-                                                                                        i
-                                                                                    }
-                                                                                    value={
-                                                                                        val.officer_id
-                                                                                    }
-                                                                                >
-                                                                                    {`[${val.officer_id}]`}
-                                                                                    &nbsp;&nbsp;&nbsp;
-                                                                                    {
-                                                                                        val.officer_name
-                                                                                    }
-                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                    {
-                                                                                        val.officer_full_name
-                                                                                    }
-                                                                                </option>
-                                                                            );
-                                                                        }
-                                                                    )}
-                                                            </select>
-                                                            <p>
-                                                                (ณ
-                                                                วันที่แจ้งแก้ไขงาน)
-                                                            </p>
-                                                        </div>
-                                                    </div>
 
-                                                    <div className="col-md-4">
-                                                        <div className="form-group greenselect">
-                                                            <label>
-                                                                ระบบงาน Service
-                                                            </label>
-                                                            <select className="form-control select2">
-                                                                <option></option>
-                                                                {feedData.data &&
-                                                                    feedData
-                                                                        .data
-                                                                        .ucf_application &&
-                                                                    feedData.data.ucf_application.map(
-                                                                        (
-                                                                            val,
-                                                                            i
-                                                                        ) => {
-                                                                            return (
-                                                                                <option
-                                                                                    key={
-                                                                                        i
-                                                                                    }
-                                                                                    value={
-                                                                                        val.app_no
-                                                                                    }
-                                                                                >
-                                                                                    {`[${val.app_no}]`}
-                                                                                    &nbsp;&nbsp;&nbsp;
-                                                                                    {
-                                                                                        val.application
-                                                                                    }
-                                                                                    &nbsp;&nbsp;&nbsp;
-                                                                                    {`[${val.version}]`}
-                                                                                </option>
-                                                                            );
-                                                                        }
-                                                                    )}
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <div className="form-group">
-                                                            <label>
-                                                                ฝ่ายงานที่ดูแล
-                                                            </label>
-                                                            <input
-                                                                readOnly={true}
-                                                                type="text"
-                                                                className="form-control"
-                                                                style={{
-                                                                    border:
-                                                                        "1.5px solid #0000008c",
-                                                                    borderRadius: 2,
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                            <h1>EIEI</h1>
 
-                                                {/* ===== end  */}
-                                            {/* </div> */}
-                                            {/* ---------------------------เนื้อหา2ปิด-------------------------- */}
-                                        </div>
-                                    </div>
-                                    {/* ---------------------------ข้อมูล2ปิด-------------------------- */}
-                                </div>
+                            </div>
+
+
+
+                            {/* ---------------------------เนื้อหา1ปิด-------------------------- */}
+                            </div>
+                            </form>
+                            </div>
+                            {/* ---------------------------ข้อมูล1ปิด-------------------------- */}
+
+
+
+                            {/* ---------------------------ข้อมูล2เปิด-------------------------- */}
+                            <div className="tab-pane" id="settings2">
+                            <form className="form-horizontal">
+                            <div className="form-group">
+                            {/* ---------------------------เนื้อหา2เปิด-------------------------- */}
+                            <div className="box-header">
+
+
+                            <h1>Hello</h1>
+
+
+
+                            </div>
+                            {/* ---------------------------เนื้อหา1ปิด-------------------------- */}
+                            </div>
+                            </form>
+                            </div>
+                            {/* ---------------------------ข้อมูล2ปิด-------------------------- */}
+
+
+
+                            </div>
                             </div>
                             {/* --------------------------บารปิด-------------------------- */}
 
+
+
+
+
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div
+                                        className="box box-primary"
+                                        style={{
+                                            border: "2px solid #0000008c",
+                                        }}
+                                    >
+                                        <div className="box-header">
+                                            <h3 className="box-title">
+                                                สำหรับ Order สั่งซื้อ
+                                            </h3>
+                                        </div>
+                                        <div className="box-body">
+                                            <div className="col-md-3">
+                                                <div className="form-group">
+                                                    <label>
+                                                        วันที่สั่งซื้อ
+                                                    </label>
+                                                    <div
+                                                        className="input-group"
+                                                        style={{
+                                                            border:
+                                                                "1.5px solid #f39c12",
+                                                            borderRadius: 2,
+                                                        }}
+                                                    >
+                                                        <div className="input-group-addon">
+                                                            <i className="fa fa-calendar" />
+                                                        </div>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            data-inputmask="'alias': 'dd/mm/yyyy'"
+                                                            data-mask
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3">
+                                                <div className="form-group">
+                                                    <label>
+                                                        จำนวนวันตามสัญญา
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        style={{
+                                                            border:
+                                                                "1.5px solid #f39c12",
+                                                            borderRadius: 2,
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3">
+                                                <div className="form-group">
+                                                    <label>มีสัญญาจ้าง</label>
+                                                    <br />
+                                                    <input
+                                                        type="checkbox"
+                                                        className="flat-red"
+                                                        style={{
+                                                            border:
+                                                                "1.5px solid #f39c12",
+                                                            borderRadius: 2,
+                                                        }}
+                                                    />
+                                                    {/* <input type="text" className="form-control" /> */}
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3">
+                                                <div className="form-group">
+                                                    <label>มูลค่างาน</label>
+                                                    <br />
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        style={{
+                                                            border:
+                                                                "1.5px solid #f39c12",
+                                                            borderRadius: 2,
+                                                            textAlign: "right",
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <div className="form-group blueselect">
+                                        <label>ผู้ดูแล</label>
+                                        <select className="form-control select2">
+                                            <option></option>
+                                            {feedData.data &&
+                                                feedData.data.ucf_officer &&
+                                                feedData.data.ucf_officer.map(
+                                                    (val, i) => {
+                                                        return (
+                                                            <option
+                                                                key={i}
+                                                                value={
+                                                                    val.officer_id
+                                                                }
+                                                            >
+                                                                {`[${val.officer_id}]`}
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                {
+                                                                    val.officer_name
+                                                                }
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                {
+                                                                    val.officer_full_name
+                                                                }
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
+                                        </select>
+                                        <p>(ณ วันที่แจ้งแก้ไขงาน)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="form-group greenselect">
+                                        <label>ระบบงาน Service</label>
+                                        <select className="form-control select2">
+                                            <option></option>
+                                            {feedData.data &&
+                                                feedData.data.ucf_application &&
+                                                feedData.data.ucf_application.map(
+                                                    (val, i) => {
+                                                        return (
+                                                            <option
+                                                                key={i}
+                                                                value={
+                                                                    val.app_no
+                                                                }
+                                                            >
+                                                                {`[${val.app_no}]`}
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                {
+                                                                    val.application
+                                                                }
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                {`[${val.version}]`}
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label>ฝ่ายงานที่ดูแล</label>
+                                        <input
+                                            readOnly={true}
+                                            type="text"
+                                            className="form-control"
+                                            style={{
+                                                border: "1.5px solid #0000008c",
+                                                borderRadius: 2,
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
 
                             <div
                                 className="box box-danger"
