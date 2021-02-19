@@ -34,7 +34,7 @@ function login(username, password) {
     function success(user) {
         return {
             type: userConstants.LOGIN_SUCCESS,
-            token: localStorage.getItem("path"),
+            token: localStorage.getItem("linetoken"),
             user,
         };
     }
@@ -42,7 +42,7 @@ function login(username, password) {
     function failure(error) {
         return {
             type: userConstants.LOGIN_FAILURE,
-            token: localStorage.getItem("path"),
+            token: localStorage.getItem("linetoken"),
             error,
         };
     }
@@ -55,13 +55,13 @@ function getAuthUser() {
                 if (data.status == 401) {
                     dispatch({
                         type: userConstants.LOGIN_FAILURE,
-                        token: localStorage.getItem("path"),
+                        token: localStorage.getItem("linetoken"),
                     });
                     return reject(data);
                 }
                 dispatch({
                     type: userConstants.LOGIN_SUCCESS,
-                    token: localStorage.getItem("path"),
+                    token: localStorage.getItem("linetoken"),
                     user: data.user,
                 });
                 return resolve(data);

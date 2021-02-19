@@ -126,7 +126,6 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common = {
   "X-Requested-With": "XMLHttpRequest",
@@ -162,10 +161,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers */ "./resources/js/src/helpers/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-
-
-
-
 var Footer = function Footer() {
   // <!-- Bootstrap 3.3.7 -->
   (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.useScript)("/officer/bower_components/bootstrap/dist/js/bootstrap.min.js"); // <!-- FastClick -->
@@ -195,7 +190,6 @@ var Footer = function Footer() {
   //     "/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"
   // );
   // <!-- bootstrap color picker -->
-
   (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.useScript)("/officer/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"); // <!-- bootstrap time picker -->
 
   (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.useScript)("/officer/plugins/timepicker/bootstrap-timepicker.min.js");
@@ -214,7 +208,6 @@ var Footer = function Footer() {
     }), " ", "All rights reserved."]
   });
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
@@ -342,6 +335,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 //import libs
 
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
 
 
 
@@ -353,13 +360,7 @@ function LinebotLayout(_ref) {
   var children = _ref.children;
   var isAuth = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.userline.loggedIn;
-  }); // useEffect(() => {
-  //     if (isAuth) {
-  //         dispatch(userActions.getAuthUser()).catch(() => {
-  //             // NotificationManager.error(err.data.error, "Error", 5000);
-  //         });
-  //     }
-  // }, [dispatch, isAuth]);
+  });
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "wrapper",
@@ -388,7 +389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var linebotRoute = [{
-  path: "/linebot",
+  path: "/linebot/verify",
   exact: true,
   layout: "",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
@@ -397,7 +398,8 @@ var linebotRoute = [{
 }, {
   path: "/linebot/setting",
   exact: true,
-  layout: "line",
+  authliff: true,
+  layout: "linebot",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_src_Linebot_pages_Setting_Setting_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Setting/Setting */ "./resources/js/src/Linebot/pages/Setting/Setting.js"));
   })
@@ -410,6 +412,103 @@ var linebotRoute = [{
   })
 }];
 /* harmony default export */ __webpack_exports__["default"] = (linebotRoute);
+
+/***/ }),
+
+/***/ "./resources/js/src/Linebot/redux/actions/index.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/actions/index.js ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; }
+/* harmony export */ });
+/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/src/Linebot/redux/actions/user.actions.js");
+
+
+/***/ }),
+
+/***/ "./resources/js/src/Linebot/redux/actions/user.actions.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/actions/user.actions.js ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "userActions": function() { return /* binding */ userActions; }
+/* harmony export */ });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Linebot/redux/constants/index.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/src/Linebot/redux/services/index.js");
+
+
+var userActions = {
+  getAuthUser: getAuthUser,
+  login: login
+};
+
+function login(username, password) {
+  return function (dispatch) {
+    dispatch(request({
+      username: username
+    }));
+    _services__WEBPACK_IMPORTED_MODULE_1__.userService.login(username, password).then(function (data) {
+      dispatch(success(data.user));
+    }, function (error) {
+      dispatch(failure(error));
+    });
+  };
+
+  function request(user) {
+    return {
+      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_REQUEST,
+      user: user
+    };
+  }
+
+  function success(user) {
+    return {
+      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_SUCCESS,
+      token: localStorage.getItem("linetoken"),
+      user: user
+    };
+  }
+
+  function failure(error) {
+    return {
+      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_FAILURE,
+      token: localStorage.getItem("linetoken"),
+      error: error
+    };
+  }
+}
+
+function getAuthUser() {
+  return function (dispatch) {
+    return new Promise(function (resolve, reject) {
+      _services__WEBPACK_IMPORTED_MODULE_1__.userService.getAuthUser().then(function (data) {
+        if (data.status == 401) {
+          dispatch({
+            type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_FAILURE,
+            token: localStorage.getItem("linetoken")
+          });
+          return reject(data);
+        }
+
+        dispatch({
+          type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_SUCCESS,
+          token: localStorage.getItem("linetoken"),
+          user: data.user
+        });
+        return resolve(data);
+      });
+    });
+  };
+}
 
 /***/ }),
 
@@ -527,6 +626,105 @@ function userline() {
       return state;
   }
 }
+
+/***/ }),
+
+/***/ "./resources/js/src/Linebot/redux/services/index.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/services/index.js ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "userService": function() { return /* reexport safe */ _user_service__WEBPACK_IMPORTED_MODULE_0__.userService; }
+/* harmony export */ });
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.service */ "./resources/js/src/Linebot/redux/services/user.service.js");
+
+
+/***/ }),
+
+/***/ "./resources/js/src/Linebot/redux/services/user.service.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/services/user.service.js ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "userService": function() { return /* binding */ userService; }
+/* harmony export */ });
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function login(username, password) {
+  var requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json, text/plain, */*",
+      Authorization: "Bearer " + localStorage.getItem("linetoken")
+    },
+    data: JSON.stringify({
+      username: username,
+      password: password
+    })
+  };
+  return axios("/api/v1/linebot/login", requestOptions).then(_handleResponseAPIsuc).catch(_handleResponseAPIerr).then(function (res) {
+    // login successful if there's a oauth token in the response
+    if (res) {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem("user", res.user);
+      toastr__WEBPACK_IMPORTED_MODULE_0___default().success("login success", "Success");
+    }
+
+    return res;
+  });
+}
+
+function getAuthUser() {
+  // remove user from local storage to log user out
+  var requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json, text/plain, */*",
+      Authorization: "Bearer " + localStorage.getItem("linetoken")
+    }
+  };
+  return axios("/api/v1/linebot/user", requestOptions).then(function (res) {
+    // localStorage.setItem("linetoken", access_token);
+    return res.data;
+  }).catch(function (err) {
+    // if (err.response.status == 401) {
+    //     localStorage.removeItem("user");
+    // }
+    return err.response;
+  });
+}
+
+function _handleResponseAPIsuc(response) {
+  var data = response.data;
+  return data;
+}
+
+function _handleResponseAPIerr(err) {
+  var errors = err.response; // if (errors.status === 400) {
+  //     logout();
+  // }
+
+  var error = errors.data && errors.data.message || errors.statusText;
+  error && toastr__WEBPACK_IMPORTED_MODULE_0___default().error(error, "Error");
+  return Promise.reject(error);
+}
+
+var userService = {
+  getAuthUser: getAuthUser,
+  login: login
+};
 
 /***/ }),
 
@@ -1402,19 +1600,19 @@ function ListItemLink(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "feedDataActions": function() { return /* binding */ feedDataActions; }
+/* harmony export */   "feedDataAction": function() { return /* binding */ feedDataAction; }
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Officer/redux/constants/index.js");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/src/Officer/redux/services/index.js");
 
  // import { NotificationManager } from "react-notifications";
 
-var feedDataActions = {
-  feedDataGat: feedDataGat,
+var feedDataAction = {
+  feedDataGet: feedDataGet,
   feedDataPost: feedDataPost
 };
 
-function feedDataGat(url) {
+function feedDataGet(url) {
   return function (dispatch) {
     dispatch(fetching(true));
     _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataGet(url).then(function (data) {
@@ -1470,7 +1668,7 @@ var fetchFailure = function fetchFailure(bool) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; },
-/* harmony export */   "feedDataActions": function() { return /* reexport safe */ _feedData_action__WEBPACK_IMPORTED_MODULE_1__.feedDataActions; }
+/* harmony export */   "feedDataAction": function() { return /* reexport safe */ _feedData_action__WEBPACK_IMPORTED_MODULE_1__.feedDataAction; }
 /* harmony export */ });
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/src/Officer/redux/actions/user.actions.js");
 /* harmony import */ var _feedData_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.action */ "./resources/js/src/Officer/redux/actions/feedData.action.js");
@@ -1706,7 +1904,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Officer/redux/constants/index.js");
 
-var user = JSON.parse(localStorage.getItem("user"));
+var user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
 var initialState = user ? {
   loggedIn: true,
   refreshIn: true,
@@ -1846,9 +2044,9 @@ var officerReducers = {
 
 /***/ }),
 
-/***/ "./resources/js/src/Officer/redux/services/feedData.service.js":
+/***/ "./resources/js/src/Officer/redux/services/feeddata.service.js":
 /*!*********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/services/feedData.service.js ***!
+  !*** ./resources/js/src/Officer/redux/services/feeddata.service.js ***!
   \*********************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -1863,7 +2061,7 @@ var service = new _services__WEBPACK_IMPORTED_MODULE_0__.default();
 
 function feedDataGet(url) {
   var requestOptions = {
-    method: 'Get' //  body:   {}
+    method: 'GET' //body:   {}
 
   };
   return service.API(url, requestOptions).then(function (res) {
@@ -1874,7 +2072,7 @@ function feedDataGet(url) {
 function feedDataPost(url) {
   var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var requestOptions = {
-    method: "Post",
+    method: 'POST',
     body: body
   };
   return service.API(url, requestOptions).then(function (res) {
@@ -1899,10 +2097,10 @@ var feedDataService = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "userService": function() { return /* reexport safe */ _user_service__WEBPACK_IMPORTED_MODULE_0__.userService; },
-/* harmony export */   "feedDataService": function() { return /* reexport safe */ _feedData_service__WEBPACK_IMPORTED_MODULE_1__.feedDataService; }
+/* harmony export */   "feedDataService": function() { return /* reexport safe */ _feeddata_service__WEBPACK_IMPORTED_MODULE_1__.feedDataService; }
 /* harmony export */ });
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.service */ "./resources/js/src/Officer/redux/services/user.service.js");
-/* harmony import */ var _feedData_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.service */ "./resources/js/src/Officer/redux/services/feedData.service.js");
+/* harmony import */ var _feeddata_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feeddata.service */ "./resources/js/src/Officer/redux/services/feeddata.service.js");
 
 
 
@@ -2707,7 +2905,7 @@ var Layout = function Layout(_ref) {
         children: children
       }));
 
-    case "line":
+    case "linebot":
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Linebot_layouts_LinebotLayout__WEBPACK_IMPORTED_MODULE_6__.default, _objectSpread(_objectSpread({}, props), {}, {
         children: children
       }));

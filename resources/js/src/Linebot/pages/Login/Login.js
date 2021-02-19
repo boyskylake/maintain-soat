@@ -26,6 +26,10 @@ const Login = () => {
     useEffect(() => {
         let path = new URLSearchParams(search);
 
+        if (!localStorage.getItem("linetoken")) {
+            history.push("/linebot/verify?path=" + path.get("path"));
+        }
+
         if (userAuth.loggedIn) {
             history.push(path.get("path"));
         }
@@ -34,11 +38,7 @@ const Login = () => {
     let handleSubmit = (e) => {
         e.preventDefault();
 
-        const accessToken = liff.getAccessToken();
-        // toastr.info(
-        //     "Are you the 6 fingered man?\n dfmadskfmsd;flmsdflsad; \n adkfadskfl;sdk;l"
-        // );
-        dispatch(userActions.login(user, pass, accessToken));
+        dispatch(userActions.login(user, pass));
     };
 
     return (

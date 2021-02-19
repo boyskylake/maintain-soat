@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 const linebotRoute = [
     {
-        path: "/linebot",
+        path: "/linebot/verify",
         exact: true,
         layout: "",
         component: lazy(() => import("../pages/Verify/Verify")),
@@ -10,7 +10,8 @@ const linebotRoute = [
     {
         path: "/linebot/setting",
         exact: true,
-        layout: "line",
+        authliff: true,
+        layout: "linebot",
         component: lazy(() => import("../pages/Setting/Setting")),
     },
     {

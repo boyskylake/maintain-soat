@@ -2,12 +2,12 @@ import { FeedConstants } from "../constants";
 import { feedDataService } from "../services";
 // import { NotificationManager } from "react-notifications";
 
-export const feedDataActions = {
-    feedDataGat,
-    feedDataPost,
+export const feedDataAction = {
+    feedDataGet,
+    feedDataPost
 };
 
-function feedDataGat(url) {
+function feedDataGet(url) {
     return (dispatch) => {
         dispatch(fetching(true));
 
@@ -18,11 +18,11 @@ function feedDataGat(url) {
     };
 }
 
-function feedDataPost(url, body = {}) {
+function feedDataPost(url,body ={}) {
     return (dispatch) => {
         dispatch(fetching(true));
 
-        feedDataService.feedDataPost(url, body).then(
+        feedDataService.feedDataPost(url,body).then(
             (data) => dispatch(fetchSuccess(data)),
             (err) => dispatch(fetchFailure())
         );
