@@ -13,7 +13,7 @@ const Verify = () => {
     useEffect(() => {
         let path = new URLSearchParams(search);
         localStorage.setItem("path", path.get("path"));
-
+// ตรงนี้ต้องเอา Liff login ที่ได้จากการสร้างใน line dev มาใส่ในแถวที่ 18
         async function initialize() {
             await liff.init({ liffId: "1655658567-YmdRmAVg" });
             // console.log(path.get("path"));
