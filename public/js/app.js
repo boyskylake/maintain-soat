@@ -959,11 +959,13 @@ var Header = function Header() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
           children: "A"
         }), "LT"]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
         className: "logo-lg",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
-          children: "\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17\u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19"
-        }), " \u0E08\u0E33\u0E01\u0E31\u0E14"]
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+          src: "dist/img/logo.png",
+          className: "logo-lg",
+          alt: "Logo soat"
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("nav", {
       className: "navbar navbar-static-top",
@@ -1366,7 +1368,7 @@ var Header = function Header() {
                   className: "pull-left",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
                     href: "#",
-                    className: "btn btn-default btn-flat",
+                    className: "btn btn-default btn-info",
                     children: "Profile"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -1376,7 +1378,7 @@ var Header = function Header() {
                     onClick: function onClick() {
                       return dispatch(_redux_actions__WEBPACK_IMPORTED_MODULE_4__.userActions.logout());
                     },
-                    className: "btn btn-default btn-flat",
+                    className: "btn btn-default btn-danger",
                     children: "Sign out"
                   })
                 })]
