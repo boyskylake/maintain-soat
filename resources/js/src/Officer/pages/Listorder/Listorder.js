@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { feedDataAction } from "../../redux/actions";
 
-
+import "datatables.net-dt/css/jquery.dataTables.css";
+$.DataTable = require("datatables.net");
 
 function Listorder() {
     const dispatch = useDispatch();
@@ -27,7 +28,6 @@ function Listorder() {
         });
         feedData();
     }, [dispatch]);
-
 
 
     return (
@@ -104,6 +104,7 @@ function Listorder() {
                         </div>
                     </div>
                     {/* /.col */}
+
                 </div>
                 {/* /.row */}
             </section>
