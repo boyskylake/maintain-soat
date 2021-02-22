@@ -10,6 +10,7 @@ Route::group(['namespace' => 'Officer\Linebot'], function () {
     Route::middleware('verifylinebot')->group(function () {
         Route::post('user', 'AuthController@user');
         Route::post('profile', 'ProfileController@getProfile');
+        Route::post('setting', 'SettingController@setting');
     });
 
 });
