@@ -12,12 +12,12 @@ Route::group(['namespace' => 'Officer\Api'], function () {
         Route::post('logout', 'AuthController@logout');
     });
 
-    Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('user', 'Auth\AuthController@user');
+    // Route::group(['middleware' => 'auth:api'], function () {
+    //     Route::get('user', 'Auth\AuthController@user');
 
-        Route::get('Home', 'HomeController@allMacoop');
-        Route::get('orderPage', 'OrderPageController@editOrder');
-        Route::get('Listorder', 'OrderListController@feedInform');
+    //     Route::get('Home', 'HomeController@allMacoop');
+    //     Route::get('orderPage', 'OrderPageController@editOrder');
+    //     Route::get('Listorder', 'OrderListController@feedInform');
 
-    });
+    // });
 });
