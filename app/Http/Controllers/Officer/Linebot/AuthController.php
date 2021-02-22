@@ -30,8 +30,6 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->username);
 
-        dd($user->first());
-
         if (!Hash::check($request->password, $user->first()->password)) {
             return response()->json(['message' => 'The specified password does not match the database password'], 422);
         }
