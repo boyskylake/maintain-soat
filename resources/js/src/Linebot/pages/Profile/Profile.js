@@ -11,7 +11,9 @@ const Profile = () => {
     useEffect(() => {
         async function feedData() {
             await dispatch(
-                feedDataAction.feedDataPost("/api/v1/linebot/profile")
+                feedDataAction.feedDataPost("/api/v1/linebot/profile",{
+                    username: 'view@view.com'
+                })
             );
         }
         feedData();
@@ -28,7 +30,7 @@ const Profile = () => {
                         <small>soat officer 2.0</small>
                     </h1>
                 </section>
-                {feedData.data && feedData.data}
+                {feedData.data && feedData.data.user && feedData.data.name}
             </div>
             {/* /.container */}
         </div>
