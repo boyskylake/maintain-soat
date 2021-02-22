@@ -15,7 +15,7 @@ const Verify = () => {
         localStorage.setItem("path", path.get("path"));
 // ตรงนี้ต้องเอา Liff login ที่ได้จากการสร้างใน line dev มาใส่ในแถวที่ 18
         async function initialize() {
-            await liff.init({ liffId: "1655658567-YmdRmAVg" });
+            await liff.init({ liffId: "1655676615-n3ezlN0P" });
             // console.log(path.get("path"));
             liff.ready.then(() => {
                 if (liff.isLoggedIn()) {
@@ -39,7 +39,7 @@ const Verify = () => {
                     // localStorage.setItem("path", path.get("path"));
                     liff.login({
                         redirectUri:
-                            "https://6be7805c3720.ngrok.io/linebot/verify?path=" + path.get("path"),
+                            "https://maintain.soat-development.com/linebot/verify?path=" + path.get("path"),
                     });
                 }
             });

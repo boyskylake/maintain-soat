@@ -443,6 +443,13 @@ var linebotRoute = [{
     return __webpack_require__.e(/*! import() */ "resources_js_src_Linebot_pages_Verify_Verify_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Verify/Verify */ "./resources/js/src/Linebot/pages/Verify/Verify.js"));
   })
 }, {
+  path: "/linebot/login",
+  exact: true,
+  layout: "",
+  component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+    return __webpack_require__.e(/*! import() */ "resources_js_src_Linebot_pages_Login_Login_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Login/Login */ "./resources/js/src/Linebot/pages/Login/Login.js"));
+  })
+}, {
   path: "/linebot/setting",
   exact: true,
   authliff: true,
@@ -451,14 +458,82 @@ var linebotRoute = [{
     return __webpack_require__.e(/*! import() */ "resources_js_src_Linebot_pages_Setting_Setting_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Setting/Setting */ "./resources/js/src/Linebot/pages/Setting/Setting.js"));
   })
 }, {
-  path: "/linebot/login",
+  path: "/linebot/profile",
   exact: true,
-  layout: "",
+  authliff: true,
+  layout: "linebot",
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
-    return __webpack_require__.e(/*! import() */ "resources_js_src_Linebot_pages_Login_Login_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Login/Login */ "./resources/js/src/Linebot/pages/Login/Login.js"));
+    return __webpack_require__.e(/*! import() */ "resources_js_src_Linebot_pages_Profile_Profile_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Profile/Profile */ "./resources/js/src/Linebot/pages/Profile/Profile.js"));
   })
 }];
 /* harmony default export */ __webpack_exports__["default"] = (linebotRoute);
+
+/***/ }),
+
+/***/ "./resources/js/src/Linebot/redux/actions/feedData.action.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/actions/feedData.action.js ***!
+  \*******************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "feedDataAction": function() { return /* binding */ feedDataAction; }
+/* harmony export */ });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Linebot/redux/constants/index.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/src/Linebot/redux/services/index.js");
+
+ // import { NotificationManager } from "react-notifications";
+
+var feedDataAction = {
+  feedDataGet: feedDataGet,
+  feedDataPost: feedDataPost
+};
+
+function feedDataGet(url) {
+  return function (dispatch) {
+    dispatch(fetching(true));
+    _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataGet(url).then(function (data) {
+      return dispatch(fetchSuccess(data));
+    }, function (err) {
+      return dispatch(fetchFailure());
+    });
+  };
+}
+
+function feedDataPost(url) {
+  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return function (dispatch) {
+    dispatch(fetching(true));
+    _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataPost(url, body).then(function (data) {
+      return dispatch(fetchSuccess(data));
+    }, function (err) {
+      return dispatch(fetchFailure());
+    });
+  };
+}
+
+var fetching = function fetching(bool) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_REQUEST,
+    fetching: bool
+  };
+};
+
+var fetchSuccess = function fetchSuccess(data) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_SUCCESS,
+    payload: data
+  };
+};
+
+var fetchFailure = function fetchFailure(bool) {
+  // NotificationManager.error("ไม่สามารถเชื่อมต่อได้", "Error", 5000);
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_FAILURE
+  };
+};
 
 /***/ }),
 
@@ -471,9 +546,12 @@ var linebotRoute = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; }
+/* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; },
+/* harmony export */   "feedDataAction": function() { return /* reexport safe */ _feedData_action__WEBPACK_IMPORTED_MODULE_1__.feedDataAction; }
 /* harmony export */ });
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/src/Linebot/redux/actions/user.actions.js");
+/* harmony import */ var _feedData_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.action */ "./resources/js/src/Linebot/redux/actions/feedData.action.js");
+
 
 
 /***/ }),
@@ -559,6 +637,25 @@ function getAuthUser() {
 
 /***/ }),
 
+/***/ "./resources/js/src/Linebot/redux/constants/Feeddata.constants.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/constants/Feeddata.constants.js ***!
+  \************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FeedConstants": function() { return /* binding */ FeedConstants; }
+/* harmony export */ });
+var FeedConstants = {
+  FEED_REQUEST: 'FEED_LINE_REQUEST',
+  FEED_SUCCESS: 'FEED_LINE_SUCCESS',
+  FEED_FAILURE: 'FEED_LINE_FAILURE'
+};
+
+/***/ }),
+
 /***/ "./resources/js/src/Linebot/redux/constants/index.js":
 /*!***********************************************************!*\
   !*** ./resources/js/src/Linebot/redux/constants/index.js ***!
@@ -568,9 +665,12 @@ function getAuthUser() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userConstants": function() { return /* reexport safe */ _user_constants__WEBPACK_IMPORTED_MODULE_0__.userConstants; }
+/* harmony export */   "userConstants": function() { return /* reexport safe */ _user_constants__WEBPACK_IMPORTED_MODULE_0__.userConstants; },
+/* harmony export */   "FeedConstants": function() { return /* reexport safe */ _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__.FeedConstants; }
 /* harmony export */ });
 /* harmony import */ var _user_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.constants */ "./resources/js/src/Linebot/redux/constants/user.constants.js");
+/* harmony import */ var _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Feeddata.constants */ "./resources/js/src/Linebot/redux/constants/Feeddata.constants.js");
+
 
 
 /***/ }),
@@ -595,6 +695,61 @@ var userConstants = {
 
 /***/ }),
 
+/***/ "./resources/js/src/Linebot/redux/reducers/feedData.reducer.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/reducers/feedData.reducer.js ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "feedData": function() { return /* binding */ feedData; }
+/* harmony export */ });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Linebot/redux/constants/index.js");
+
+var initialState = {
+  fetching: false,
+  fetchSuccess: false,
+  fetchFailure: false,
+  data: []
+};
+function feedData() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var type = action.type,
+      payload = action.payload;
+
+  switch (type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_REQUEST:
+      return {
+        fetching: action.fetching,
+        fetchSuccess: false,
+        fetchFailure: false
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_SUCCESS:
+      return {
+        fetchSuccess: true,
+        fetching: false,
+        fetchFailure: false,
+        data: payload
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_FAILURE:
+      return {
+        fetching: false,
+        fetchSuccess: false,
+        fetchFailure: true
+      };
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/js/src/Linebot/redux/reducers/index.js":
 /*!**********************************************************!*\
   !*** ./resources/js/src/Linebot/redux/reducers/index.js ***!
@@ -607,10 +762,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "linebotReducers": function() { return /* binding */ linebotReducers; }
 /* harmony export */ });
 /* harmony import */ var _user_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.reducer */ "./resources/js/src/Linebot/redux/reducers/user.reducer.js");
- // import { feedData } from "./feedData.reducer";
+/* harmony import */ var _feedData_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.reducer */ "./resources/js/src/Linebot/redux/reducers/feedData.reducer.js");
+
 
 var linebotReducers = {
-  userline: _user_reducer__WEBPACK_IMPORTED_MODULE_0__.userline
+  userline: _user_reducer__WEBPACK_IMPORTED_MODULE_0__.userline,
+  feedData: _feedData_reducer__WEBPACK_IMPORTED_MODULE_1__.feedData
 };
 
 /***/ }),
@@ -676,6 +833,49 @@ function userline() {
 
 /***/ }),
 
+/***/ "./resources/js/src/Linebot/redux/services/feeddata.service.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/services/feeddata.service.js ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "feedDataService": function() { return /* binding */ feedDataService; }
+/* harmony export */ });
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services */ "./resources/js/src/Linebot/redux/services/services.js");
+
+var service = new _services__WEBPACK_IMPORTED_MODULE_0__.default();
+
+function feedDataGet(url) {
+  var requestOptions = {
+    method: 'Get' //  body:   {}
+
+  };
+  return service.API(url, requestOptions).then(function (res) {
+    return res;
+  });
+}
+
+function feedDataPost(url) {
+  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var requestOptions = {
+    method: "Post",
+    body: body
+  };
+  return service.API(url, requestOptions).then(function (res) {
+    return res;
+  });
+}
+
+var feedDataService = {
+  feedDataGet: feedDataGet,
+  feedDataPost: feedDataPost
+};
+
+/***/ }),
+
 /***/ "./resources/js/src/Linebot/redux/services/index.js":
 /*!**********************************************************!*\
   !*** ./resources/js/src/Linebot/redux/services/index.js ***!
@@ -685,10 +885,91 @@ function userline() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userService": function() { return /* reexport safe */ _user_service__WEBPACK_IMPORTED_MODULE_0__.userService; }
+/* harmony export */   "userService": function() { return /* reexport safe */ _user_service__WEBPACK_IMPORTED_MODULE_0__.userService; },
+/* harmony export */   "feedDataService": function() { return /* reexport safe */ _feeddata_service__WEBPACK_IMPORTED_MODULE_1__.feedDataService; }
 /* harmony export */ });
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.service */ "./resources/js/src/Linebot/redux/services/user.service.js");
+/* harmony import */ var _feeddata_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feeddata.service */ "./resources/js/src/Linebot/redux/services/feeddata.service.js");
 
+
+
+/***/ }),
+
+/***/ "./resources/js/src/Linebot/redux/services/services.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/src/Linebot/redux/services/services.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Services = /*#__PURE__*/function () {
+  function Services() {
+    _classCallCheck(this, Services);
+  }
+
+  _createClass(Services, [{
+    key: "getToken",
+    value: function getToken() {
+      var user = localStorage.getItem("linetoken");
+
+      if (user) {
+        return user;
+      }
+    }
+  }, {
+    key: "API",
+    value: function API(url, options) {
+      var headers = {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      };
+
+      if (this.getToken()) {
+        headers["Authorization"] = "Bearer " + this.getToken();
+      }
+
+      return axios(url, _objectSpread({
+        headers: headers
+      }, options)).then(this._handleResponseAPIsuc).catch(this._handleResponseAPIerr);
+    }
+  }, {
+    key: "_handleResponseAPIsuc",
+    value: function _handleResponseAPIsuc(response) {
+      var data = response.data;
+      return data;
+    }
+  }, {
+    key: "_handleResponseAPIerr",
+    value: function _handleResponseAPIerr(err) {
+      var errors = err.response; // if (errors.status === 401) {
+      //     location.reload(true);
+      // }
+      // if (errors.data.error) {
+      //     NotificationManager.error(errors.data.error, "Error", 5000);
+      // }
+
+      var error = errors.data && errors.data.message || errors.statusText;
+      return Promise.reject(error);
+    }
+  }]);
+
+  return Services;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Services);
 
 /***/ }),
 
@@ -771,571 +1052,6 @@ function _handleResponseAPIerr(err) {
 var userService = {
   getAuthUser: getAuthUser,
   login: login
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/actions/feedData.action.js":
-/*!*******************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/actions/feedData.action.js ***!
-  \*******************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "feedDataAction": function() { return /* binding */ feedDataAction; }
-/* harmony export */ });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Officer/redux/constants/index.js");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/src/Officer/redux/services/index.js");
-
- // import { NotificationManager } from "react-notifications";
-
-var feedDataAction = {
-  feedDataGet: feedDataGet,
-  feedDataPost: feedDataPost
-};
-
-function feedDataGet(url) {
-  return function (dispatch) {
-    dispatch(fetching(true));
-    _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataGet(url).then(function (data) {
-      return dispatch(fetchSuccess(data));
-    }, function (err) {
-      return dispatch(fetchFailure());
-    });
-  };
-}
-
-function feedDataPost(url) {
-  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return function (dispatch) {
-    dispatch(fetching(true));
-    _services__WEBPACK_IMPORTED_MODULE_1__.feedDataService.feedDataPost(url, body).then(function (data) {
-      return dispatch(fetchSuccess(data));
-    }, function (err) {
-      return dispatch(fetchFailure());
-    });
-  };
-}
-
-var fetching = function fetching(bool) {
-  return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_REQUEST,
-    fetching: bool
-  };
-};
-
-var fetchSuccess = function fetchSuccess(data) {
-  return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_SUCCESS,
-    payload: data
-  };
-};
-
-var fetchFailure = function fetchFailure(bool) {
-  // NotificationManager.error("ไม่สามารถเชื่อมต่อได้", "Error", 5000);
-  return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_FAILURE
-  };
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/actions/index.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/Officer/redux/actions/index.js ***!
-  \*********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userActions": function() { return /* reexport safe */ _user_actions__WEBPACK_IMPORTED_MODULE_0__.userActions; },
-/* harmony export */   "feedDataAction": function() { return /* reexport safe */ _feedData_action__WEBPACK_IMPORTED_MODULE_1__.feedDataAction; }
-/* harmony export */ });
-/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.actions */ "./resources/js/src/Officer/redux/actions/user.actions.js");
-/* harmony import */ var _feedData_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.action */ "./resources/js/src/Officer/redux/actions/feedData.action.js");
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/actions/user.actions.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/actions/user.actions.js ***!
-  \****************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userActions": function() { return /* binding */ userActions; }
-/* harmony export */ });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Officer/redux/constants/index.js");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services */ "./resources/js/src/Officer/redux/services/index.js");
-
- // import { history } from "../../../helpers";
-// import { NotificationManager } from "react-notifications";
-
-var userActions = {
-  login: login,
-  logout: logout,
-  refresh: refresh,
-  getAuthUser: getAuthUser
-};
-
-function login(username, password) {
-  return function (dispatch) {
-    dispatch(request({
-      username: username
-    }));
-    _services__WEBPACK_IMPORTED_MODULE_1__.userService.login(username, password).then(function (user) {
-      dispatch(success(user)); // history.push("/officer/home");
-    }, function (error) {
-      dispatch(failure(error));
-    });
-  };
-
-  function request(user) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_REQUEST,
-      user: user
-    };
-  }
-
-  function success(user) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_SUCCESS,
-      user: user
-    };
-  }
-
-  function failure(error) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_FAILURE,
-      error: error
-    };
-  }
-}
-
-function refresh() {
-  return function (dispatch) {
-    dispatch(request());
-    var user = JSON.parse(localStorage.getItem("user"));
-
-    if (user && user.refresh_token) {
-      _services__WEBPACK_IMPORTED_MODULE_1__.userService.refresh(user.refresh_token).then(function (user) {
-        dispatch(success(user));
-      }, function (error) {
-        dispatch(failure(error));
-      });
-    }
-  };
-
-  function request() {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.REFRESH_REQUEST
-    };
-  }
-
-  function success(user) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.REFRESH_TOKEN,
-      user: user
-    };
-  }
-
-  function failure(error) {
-    return {
-      type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_FAILURE,
-      error: error
-    };
-  }
-}
-
-function logout() {
-  _services__WEBPACK_IMPORTED_MODULE_1__.userService.logout();
-  return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGOUT
-  };
-}
-
-function getAuthUser() {
-  return function (dispatch) {
-    return new Promise(function (resolve, reject) {
-      _services__WEBPACK_IMPORTED_MODULE_1__.userService.getAuthUser().then(function (data) {
-        if (data.status == 401) {
-          dispatch({
-            type: _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.EXPIRE_TOKEN
-          });
-          return reject(data);
-        }
-
-        return resolve(data);
-      });
-    });
-  };
-}
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/constants/Feeddata.constants.js":
-/*!************************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/constants/Feeddata.constants.js ***!
-  \************************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FeedConstants": function() { return /* binding */ FeedConstants; }
-/* harmony export */ });
-var FeedConstants = {
-  FEED_REQUEST: 'FEED_LOGIN_REQUEST',
-  FEED_SUCCESS: 'FEED_LOGIN_SUCCESS',
-  FEED_FAILURE: 'FEED_LOGIN_FAILURE'
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/constants/auth.constants.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/constants/auth.constants.js ***!
-  \********************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "authConstants": function() { return /* binding */ authConstants; }
-/* harmony export */ });
-// auth action types
-var AUTH_CHECK = "AUTH_CHECK";
-var AUTH_LOGIN = "AUTH_LOGIN";
-var AUTH_LOGOUT = "AUTH_LOGOUT";
-var AUTH_REFRESH_TOKEN = "AUTH_REFRESH_TOKEN";
-var AUTH_RESET_PASSWORD = "AUTH_RESET_PASSWORD";
-var AUTH_USER = "AUTH_USER";
-var authConstants = {
-  AUTH_CHECK: AUTH_CHECK,
-  AUTH_LOGIN: AUTH_LOGIN,
-  AUTH_LOGOUT: AUTH_LOGOUT,
-  AUTH_REFRESH_TOKEN: AUTH_REFRESH_TOKEN,
-  AUTH_RESET_PASSWORD: AUTH_RESET_PASSWORD,
-  AUTH_USER: AUTH_USER
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/constants/index.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/src/Officer/redux/constants/index.js ***!
-  \***********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userConstants": function() { return /* reexport safe */ _user_constants__WEBPACK_IMPORTED_MODULE_0__.userConstants; },
-/* harmony export */   "FeedConstants": function() { return /* reexport safe */ _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__.FeedConstants; },
-/* harmony export */   "authConstants": function() { return /* reexport safe */ _auth_constants__WEBPACK_IMPORTED_MODULE_2__.authConstants; }
-/* harmony export */ });
-/* harmony import */ var _user_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.constants */ "./resources/js/src/Officer/redux/constants/user.constants.js");
-/* harmony import */ var _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Feeddata.constants */ "./resources/js/src/Officer/redux/constants/Feeddata.constants.js");
-/* harmony import */ var _auth_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth.constants */ "./resources/js/src/Officer/redux/constants/auth.constants.js");
-// export * from './Login'
-
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/constants/user.constants.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/constants/user.constants.js ***!
-  \********************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userConstants": function() { return /* binding */ userConstants; }
-/* harmony export */ });
-var userConstants = {
-  LOGIN_REQUEST: "USERS_LOGIN_REQUEST",
-  LOGIN_SUCCESS: "USERS_LOGIN_SUCCESS",
-  LOGIN_FAILURE: "USERS_LOGIN_FAILURE",
-  REFRESH_REQUEST: "AUTH_REFRESH_REQUEST",
-  EXPIRE_TOKEN: "AUTH_EXPIRE_TOKEN",
-  REFRESH_TOKEN: "AUTH_REFRESH_TOKEN",
-  RESET_PASSWORD: "AUTH_RESET_PASSWORD",
-  LOGOUT: "USERS_LOGOUT"
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/services/feeddata.service.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/services/feeddata.service.js ***!
-  \*********************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "feedDataService": function() { return /* binding */ feedDataService; }
-/* harmony export */ });
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services */ "./resources/js/src/Officer/redux/services/services.js");
-
-var service = new _services__WEBPACK_IMPORTED_MODULE_0__.default();
-
-function feedDataGet(url) {
-  var requestOptions = {
-    method: 'Get' //  body:   {}
-
-  };
-  return service.API(url, requestOptions).then(function (res) {
-    return res;
-  });
-}
-
-function feedDataPost(url) {
-  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var requestOptions = {
-    method: "Post",
-    body: body
-  };
-  return service.API(url, requestOptions).then(function (res) {
-    return res;
-  });
-}
-
-var feedDataService = {
-  feedDataGet: feedDataGet,
-  feedDataPost: feedDataPost
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/services/index.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/src/Officer/redux/services/index.js ***!
-  \**********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userService": function() { return /* reexport safe */ _user_service__WEBPACK_IMPORTED_MODULE_0__.userService; },
-/* harmony export */   "feedDataService": function() { return /* reexport safe */ _feeddata_service__WEBPACK_IMPORTED_MODULE_1__.feedDataService; }
-/* harmony export */ });
-/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.service */ "./resources/js/src/Officer/redux/services/user.service.js");
-/* harmony import */ var _feeddata_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feeddata.service */ "./resources/js/src/Officer/redux/services/feeddata.service.js");
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/services/services.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/services/services.js ***!
-  \*************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-// import { authHeader } from '../../helpers';
-// import { NotificationManager } from "react-notifications";
-var Services = /*#__PURE__*/function () {
-  function Services() {
-    _classCallCheck(this, Services);
-  }
-
-  _createClass(Services, [{
-    key: "getToken",
-    value: function getToken() {
-      var user = JSON.parse(localStorage.getItem("user"));
-
-      if (user && user.access_token) {
-        return user.access_token;
-      }
-    }
-  }, {
-    key: "API",
-    value: function API(url, options) {
-      var headers = {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      };
-
-      if (this.getToken()) {
-        headers["Authorization"] = "Bearer " + this.getToken();
-      }
-
-      return axios(url, _objectSpread({
-        headers: headers
-      }, options)).then(this._handleResponseAPIsuc).catch(this._handleResponseAPIerr);
-    }
-  }, {
-    key: "_handleResponseAPIsuc",
-    value: function _handleResponseAPIsuc(response) {
-      var data = response.data;
-      return data;
-    }
-  }, {
-    key: "_handleResponseAPIerr",
-    value: function _handleResponseAPIerr(err) {
-      var errors = err.response; // if (errors.status === 401) {
-      //     location.reload(true);
-      // }
-      // if (errors.data.error) {
-      //     NotificationManager.error(errors.data.error, "Error", 5000);
-      // }
-
-      var error = errors.data && errors.data.message || errors.statusText;
-      return Promise.reject(error);
-    }
-  }]);
-
-  return Services;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (Services);
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/services/user.service.js":
-/*!*****************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/services/user.service.js ***!
-  \*****************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userService": function() { return /* binding */ userService; }
-/* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers */ "./resources/js/src/helpers/index.js");
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_1__);
- // import axios from 'axios';
-// import { NotificationManager } from "react-notifications";
-
-
-
-function login(username, password) {
-  var requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    data: JSON.stringify({
-      username: username,
-      password: password
-    })
-  };
-  return axios("/api/v1/officer/auth/login", requestOptions).then(_handleResponseAPIsuc).catch(_handleResponseAPIerr).then(function (user) {
-    // login successful if there's a oauth token in the response
-    if (user.access_token) {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(user));
-      toastr__WEBPACK_IMPORTED_MODULE_1___default().success("login success", "Success");
-    }
-
-    return user;
-  });
-}
-
-function refresh(refresh_token) {
-  var requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    data: JSON.stringify({
-      refresh_token: refresh_token
-    })
-  };
-  return axios("/api/v1/officer/auth/refresh", requestOptions).then(_handleResponseAPIsuc).catch(_handleResponseAPIerr).then(function (user) {
-    // login successful if there's a jwt token in the response
-    if (user.access_token) {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(user));
-      toastr__WEBPACK_IMPORTED_MODULE_1___default().success("refresh success", "Success");
-    }
-
-    return user;
-  });
-}
-
-function logout() {
-  // remove user from local storage to log user out
-  var requestOptions = {
-    method: "POST",
-    headers: (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.authHeader)()
-  };
-  axios("/api/v1/officer/auth/logout", requestOptions).then(function (res) {
-    return res.data;
-  }).then(function (res) {
-    if (res.message) {
-      toastr__WEBPACK_IMPORTED_MODULE_1___default().success(res.message, "success");
-    }
-  }).catch(function (err) {// console.log(err);
-  });
-  localStorage.removeItem("user");
-}
-
-function getAuthUser() {
-  // remove user from local storage to log user out
-  var requestOptions = {
-    method: "GET",
-    headers: (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.authHeader)()
-  };
-  return axios("/api/v1/officer/user", requestOptions).then(function (res) {
-    return res.data;
-  }).catch(function (err) {
-    // if (err.response.status == 401) {
-    //     localStorage.removeItem("user");
-    // }
-    return err.response;
-  });
-}
-
-function _handleResponseAPIsuc(response) {
-  var data = response.data;
-  return data;
-}
-
-function _handleResponseAPIerr(err) {
-  var errors = err.response;
-
-  if (errors.status === 401) {
-    logout();
-  }
-
-  var error = errors.data && errors.data.message || errors.statusText;
-  error && toastr__WEBPACK_IMPORTED_MODULE_1___default().error(errors.data.message, "Error");
-  return Promise.reject(error);
-}
-
-var userService = {
-  login: login,
-  refresh: refresh,
-  logout: logout,
-  getAuthUser: getAuthUser
 };
 
 /***/ }),
@@ -1812,10 +1528,9 @@ var Routes = function Routes() {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_layout__WEBPACK_IMPORTED_MODULE_4__.default, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, {
         children: [_routes__WEBPACK_IMPORTED_MODULE_1__.default.map(function (route, i) {
-          if (route.auth) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Private__WEBPACK_IMPORTED_MODULE_3__.default, _objectSpread({}, route), i);
-          }
-
+          // if (route.auth) {
+          //     return <PrivateRoute key={i} {...route} />;
+          // }
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Public__WEBPACK_IMPORTED_MODULE_2__.default, _objectSpread({}, route), i);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
           path: "*",
@@ -1853,11 +1568,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _Officer_redux_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../Officer/redux/actions */ "./resources/js/src/Officer/redux/actions/index.js");
-/* harmony import */ var _routes_routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../routes/routes */ "./resources/js/src/routes/routes.js");
-/* harmony import */ var _Linebot_layouts_LinebotLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Linebot/layouts/LinebotLayout */ "./resources/js/src/Linebot/layouts/LinebotLayout.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _routes_routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../routes/routes */ "./resources/js/src/routes/routes.js");
+/* harmony import */ var _Linebot_layouts_LinebotLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Linebot/layouts/LinebotLayout */ "./resources/js/src/Linebot/layouts/LinebotLayout.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1885,8 +1599,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
  // import services actions
-
- // import components
+// import { userActions } from "./../Officer/redux/actions";
+// import components
 
  // import OfficerLayout from "../Officer/layouts/OfficerLayout";
 
@@ -1897,12 +1611,11 @@ var Layout = function Layout(_ref) {
   var children = _ref.children,
       props = _objectWithoutProperties(_ref, ["children"]);
 
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  var isAuthenticated = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
-    return state.authentication.loggedIn;
-  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)(); // const isAuthenticated = useSelector(
+  //     (state) => state.authentication.loggedIn
+  // );
 
-  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useLocation)(),
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useLocation)(),
       pathname = _useLocation.pathname;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
@@ -1911,34 +1624,34 @@ var Layout = function Layout(_ref) {
       setPath = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (isAuthenticated) {
-      dispatch(_Officer_redux_actions__WEBPACK_IMPORTED_MODULE_3__.userActions.getAuthUser()).catch(function () {// NotificationManager.error(err.data.error, "Error", 5000);
-      });
-    }
-
-    for (var i = 0; i < _routes_routes__WEBPACK_IMPORTED_MODULE_4__.default.length; i++) {
-      var _path = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.matchPath)(pathname, {
-        path: _routes_routes__WEBPACK_IMPORTED_MODULE_4__.default[i].path
+    // if (isAuthenticated) {
+    //     dispatch(userActions.getAuthUser()).catch(() => {
+    //         // NotificationManager.error(err.data.error, "Error", 5000);
+    //     });
+    // }
+    for (var i = 0; i < _routes_routes__WEBPACK_IMPORTED_MODULE_3__.default.length; i++) {
+      var _path = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.matchPath)(pathname, {
+        path: _routes_routes__WEBPACK_IMPORTED_MODULE_3__.default[i].path
       });
 
       if (_path != null) {
-        setPath(_routes_routes__WEBPACK_IMPORTED_MODULE_4__.default[i]);
+        setPath(_routes_routes__WEBPACK_IMPORTED_MODULE_3__.default[i]);
         break; // stop the loop
       }
     }
-  }, [dispatch, isAuthenticated, pathname]);
+  }, [dispatch, pathname]);
   var layout = path && path.layout;
 
   switch (layout) {
     // case "officer":
     //     return <OfficerLayout {...props}>{children}</OfficerLayout>;
     case "linebot":
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Linebot_layouts_LinebotLayout__WEBPACK_IMPORTED_MODULE_5__.default, _objectSpread(_objectSpread({}, props), {}, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Linebot_layouts_LinebotLayout__WEBPACK_IMPORTED_MODULE_4__.default, _objectSpread(_objectSpread({}, props), {}, {
         children: children
       }));
 
     default:
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: children
       });
   }
@@ -1948,7 +1661,7 @@ Layout.displayName = "Layout";
 Layout.propTypes = {
   children: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().node.isRequired)
 };
-/* harmony default export */ __webpack_exports__["default"] = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.withRouter)(Layout));
+/* harmony default export */ __webpack_exports__["default"] = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(Layout));
 
 /***/ }),
 

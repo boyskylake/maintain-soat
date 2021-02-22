@@ -89,7 +89,7 @@ class AuthController extends Controller
         if ($response->isSucceeded()) {
             $result = $response->getJSONDecodedBody();
 
-            if (($result['client_id'] == env('LINE_LOGIN_CHANNEL_ID')) && ($result['expires_in'] > 0)) {
+            if (($result['client_id'] == 1655676615) && ($result['expires_in'] > 0)) {
                 return $result;
             }
         }

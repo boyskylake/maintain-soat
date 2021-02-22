@@ -13,10 +13,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/deploy', function () {
-//     Artisan::call('cache:clear');
-//     Artisan::call('config:cache');
-// });
+Route::get('/deploy', function () {
+    Artisan::call('optimize');
+});
 
 Route::get('/', function () {
     // return view('welcome');

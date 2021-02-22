@@ -84,7 +84,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_src_Linebot_pages_Verify_Verify_js":1,"resources_js_src_Linebot_pages_Setting_Setting_js":1,"resources_js_src_Linebot_pages_Login_Login_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_src_Linebot_pages_Verify_Verify_js":1,"resources_js_src_Linebot_pages_Login_Login_js":1,"resources_js_src_Linebot_pages_Setting_Setting_js":1,"resources_js_src_Linebot_pages_Profile_Profile_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

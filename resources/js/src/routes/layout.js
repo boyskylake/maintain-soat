@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { withRouter, matchPath, useLocation } from "react-router-dom";
 
 // import services actions
-import { userActions } from "./../Officer/redux/actions";
+// import { userActions } from "./../Officer/redux/actions";
 
 // import components
 import routes from "../routes/routes";
@@ -14,19 +14,19 @@ import LinebotLayout from "../Linebot/layouts/LinebotLayout";
 
 const Layout = ({ children, ...props }) => {
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector(
-        (state) => state.authentication.loggedIn
-    );
+    // const isAuthenticated = useSelector(
+    //     (state) => state.authentication.loggedIn
+    // );
 
     const { pathname } = useLocation();
     const [path, setPath] = useState(null);
 
     useEffect(() => {
-        if (isAuthenticated) {
-            dispatch(userActions.getAuthUser()).catch(() => {
-                // NotificationManager.error(err.data.error, "Error", 5000);
-            });
-        }
+        // if (isAuthenticated) {
+        //     dispatch(userActions.getAuthUser()).catch(() => {
+        //         // NotificationManager.error(err.data.error, "Error", 5000);
+        //     });
+        // }
 
         for (var i = 0; i < routes.length; i++) {
             let path = matchPath(pathname, {
@@ -38,7 +38,7 @@ const Layout = ({ children, ...props }) => {
                 break; // stop the loop
             }
         }
-    }, [dispatch, isAuthenticated, pathname]);
+    }, [dispatch, pathname]);
 
     const layout = path && path.layout;
 

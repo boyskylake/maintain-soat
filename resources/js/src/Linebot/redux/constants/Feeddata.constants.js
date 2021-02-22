@@ -1,0 +1,5 @@
+export const FeedConstants = {
+    FEED_REQUEST: 'FEED_LINE_REQUEST',
+    FEED_SUCCESS: 'FEED_LINE_SUCCESS',
+    FEED_FAILURE: 'FEED_LINE_FAILURE',
+};

@@ -1,9 +1,9 @@
 class Services {
     getToken() {
-        let user = JSON.parse(localStorage.getItem("user"));
+        let user = localStorage.getItem("linetoken");
 
-        if (user && user.access_token) {
-            return user.access_token;
+        if (user) {
+            return user;
         }
     }
 

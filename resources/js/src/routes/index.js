@@ -23,9 +23,9 @@ const Routes = () => (
             {/* <ScrollToTop /> */}
             <Switch>
                 {routes.map((route, i) => {
-                    if (route.auth) {
-                        return <PrivateRoute key={i} {...route} />;
-                    }
+                    // if (route.auth) {
+                    //     return <PrivateRoute key={i} {...route} />;
+                    // }
                     return <PublicRoute key={i} {...route} />;
                 })}
                 <Route path="*">
