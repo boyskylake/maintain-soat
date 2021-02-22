@@ -36,8 +36,6 @@ class AuthController extends Controller
 
         if ($this->verify($request)) {
             $profile = $this->profile($request);
-
-            dd($request);
             // db save userId
             $db = $user->update(array(
                 'userId' => $profile->userId,
