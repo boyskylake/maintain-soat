@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useForm } from "react-hook-form";
 
@@ -10,38 +10,35 @@ $.DataTable = require("datatables.net");
 function Listorder() {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
-
+    const [tableloading, settableloading] = useState(true)
     // const { register, handleSubmit, watch, errors } = useForm();
     // const onSubmit = (data) => {
     //     // console.log(data);
     //     // console.log(coopid);
     // };
-    let user = JSON.parse(localStorage.getItem("user"));
-
 
     useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(
-        //         feedDataAction.feedDataGet("/api/v1/officer/Listorder")
-        //     );
-        // }
+        async function feedData() {
+            await dispatch(
+                feedDataAction.feedDataGet("/api/v1/officer/Listorder")
+            );
+        }
+        // $("#example2").DataTable({
 
-            $('#example2').DataTable({
-                    serverSide: true,
-                    "ajax": {
-                        "url": "/api/v1/officer/Listorder",
-                        "type": "GET",
-                        headers: {
-                            'Authorization': "Bearer " +  user.access_token
-                        },
-                }
+        // });
+
+        feedData();
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (feedData.data && feedData.data.infrom && feedData.data.infrom[0]) {
+            $(document).ready(function () {
+                $("#example2").DataTable();
             });
+            settableloading(false)
 
-        // feedData();
-    }, [user]);
-
-
-
+        }
+    }, [feedData]);
 
     return (
         <div className="content-wrapper">
@@ -73,21 +70,28 @@ function Listorder() {
                             </div>
                             {/* /.box-header */}
                             <div className="box-body">
-                                {/* <table ref={main} /> */}
+
+
+                                    {!tableloading &&(
                                 <table
                                     id="example2"
-                                    className="table table-bordered table-hover"
+                                    className="display"
+                                    style={{ width: "100%" }}
                                 >
                                     <thead>
                                         <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
+
+
                                         {feedData.data &&
                                             feedData.data.infrom &&
                                             feedData.data.infrom.map(
@@ -95,29 +99,48 @@ function Listorder() {
                                                     return (
                                                         <tr key={i}>
                                                             <td>{val.inform_no}</td>
-                                                            <td>{val.coop_shortname}
-                                                            </td>
-                                                            <td>{val.receive_data}</td>
+                                                            <td>{val.coop_shortname}</td>
                                                             <td>{val.editor_id}</td>
-                                                            <td>X</td>
+                                                            <td>{val.editor_id}</td>
+                                                            <td>{val.editor_id}</td>
+                                                            <td>{val.editor_id}</td>
+
                                                         </tr>
                                                     );
                                                 }
                                             )}
+                                            <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
-
+                                )}
+                                {/* )} */}
                             </div>
                             {feedData.fetching && (
-                        <div className="overlay">
-                            <i className="fa fa-refresh fa-spin" />
-                        </div>
-                    )}
+                                <div className="overlay">
+                                    <i className="fa fa-refresh fa-spin" />
+                                </div>
+                            )}
                             {/* /.box-body */}
                         </div>
                     </div>
                     {/* /.col */}
-
                 </div>
                 {/* /.row */}
             </section>
