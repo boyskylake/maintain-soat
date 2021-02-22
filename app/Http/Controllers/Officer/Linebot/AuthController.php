@@ -30,6 +30,8 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->username);
 
+        dd($user->first());
+
         if (!Hash::check($request->password, $user->first()->password)) {
             return response()->json(['message' => 'The specified password does not match the database password'], 422);
         }
@@ -46,7 +48,7 @@ class AuthController extends Controller
                 // logger("linebot login verify : ", $profile);
                 return response()->json(['massage' => 'Success.', 'user' => $user->first()]);
             }
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         return response()->json(['error' => 'Unauthenticated.'], 401);
     }
