@@ -30,7 +30,7 @@ const Profile = () => {
                         <small>soat officer 2.0</small>
                     </h1>
                 </section>
-                {feedData.data && feedData.data.user && feedData.data.name}
+                {feedData.data && feedData.data.user && feedData.data.user.name}
             </div>
             {/* /.container */}
         </div>
