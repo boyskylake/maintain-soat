@@ -95,7 +95,7 @@ function Listorder() {
                                                             <td>X</td>
                                                             <td>X</td>
                                                             <td>X</td>
-                                                            <td>X</td>
+                                                             <td>X</td>
                                                         </tr>
                                         {feedData.data &&
                                             feedData.data.infrom &&

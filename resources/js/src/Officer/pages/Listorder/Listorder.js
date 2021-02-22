@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useForm } from "react-hook-form";
 
@@ -10,35 +10,56 @@ $.DataTable = require("datatables.net");
 function Listorder() {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
-    const [tableloading, settableloading] = useState(true)
+
     // const { register, handleSubmit, watch, errors } = useForm();
     // const onSubmit = (data) => {
     //     // console.log(data);
     //     // console.log(coopid);
     // };
+    let user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
-        async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/Listorder")
-            );
-        }
-        // $("#example2").DataTable({
+        // async function feedData() {
+        //     await dispatch(
+        //         feedDataAction.feedDataGet("/api/v1/officer/Listorder")
+        //     );
+        // }
 
-        // });
+        $("#example2").DataTable({
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"],
+            ],
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: {
+                url: "/api/v1/officer/Listorder",
+                type: "POST",
+                headers: {
+                    Authorization: "Bearer " + user.access_token,
+                },
+            },
+            columns: [
+                { data: "inform_no" },
+                { data: "coop_name" },
+                {
+                    data: "coop_shortname",
+                    orderable: false,
+                },
+                {
+                    data: "receiver",
+                    orderable: false,
+                },
+                {
+                    data: "receive_date",
+                    orderable: false,
+                },
+            ],
+        });
 
-        feedData();
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (feedData.data && feedData.data.infrom && feedData.data.infrom[0]) {
-            $(document).ready(function () {
-                $("#example2").DataTable();
-            });
-            settableloading(false)
-
-        }
-    }, [feedData]);
+        // feedData();
+    }, [user]);
 
     return (
         <div className="content-wrapper">
@@ -70,67 +91,22 @@ function Listorder() {
                             </div>
                             {/* /.box-header */}
                             <div className="box-body">
-
-
-                                    {!tableloading &&(
+                                {/* <table ref={main} /> */}
                                 <table
                                     id="example2"
-                                    className="display"
-                                    style={{ width: "100%" }}
+                                    className="table table-bordered table-hover"
                                 >
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>inform_no</th>
+                                            <th>coop_name</th>
+                                            <th>coop_shortname</th>
+                                            <th>receiver</th>
+                                            <th>receive_date</th>
                                         </tr>
+
                                     </thead>
-                                    <tbody>
-
-
-
-                                        {feedData.data &&
-                                            feedData.data.infrom &&
-                                            feedData.data.infrom.map(
-                                                (val, i) => {
-                                                    return (
-                                                        <tr key={i}>
-                                                            <td>{val.inform_no}</td>
-                                                            <td>{val.coop_shortname}</td>
-                                                            <td>{val.editor_id}</td>
-                                                            <td>{val.editor_id}</td>
-                                                            <td>{val.editor_id}</td>
-                                                            <td>{val.editor_id}</td>
-
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                            <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
-                                )}
-                                {/* )} */}
                             </div>
                             {feedData.fetching && (
                                 <div className="overlay">
