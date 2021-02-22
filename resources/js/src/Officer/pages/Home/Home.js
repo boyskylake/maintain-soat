@@ -71,10 +71,10 @@ function Home() {
                                     </div>
                                 </div>
                                 <div className="col-md-3 col-sm-6 col-xs-12">
-                                        <div className="small-box bg-aqua">
+                                        <div className="small-box bg-purple">
                                             <div className="inner">
-                                                <h3>{val.countcoop}</h3>
-                                                <p>จำนวนสหกรณ์ทั้งหมด</p>
+                                                <h3>{val.contract_remark}</h3>
+                                                <p>จำนวนสัญญาทั้งหมด</p>
                                             </div>
                                             <div className="icon">
                                                 <i className="fa fa-folder-open"></i>
@@ -88,11 +88,11 @@ function Home() {
                                             </a>
                                     </div>
                                 </div>
-                                <div className="col-md-3 col-sm-6 col-xs-12">
+                                {/* <div className="col-md-3 col-sm-6 col-xs-12">
                                         <div className="small-box bg-aqua">
                                             <div className="inner">
                                                 <h3>{val.countcoop}</h3>
-                                                <p>จำนวนสหกรณ์ทั้งหมด</p>
+                                                <p>ยอดทั้งหมด</p>
                                             </div>
                                             <div className="icon">
                                                 <i className="fa fa-folder-open"></i>
@@ -105,7 +105,7 @@ function Home() {
                                                 <i className="fa fa-arrow-circle-right"></i>
                                             </a>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             );
                         })}
