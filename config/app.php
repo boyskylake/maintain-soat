@@ -178,7 +178,7 @@ return [
 
         // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
-        Yajra\Oci8\Oci8ServiceProvider::class,
+        // Yajra\Oci8\Oci8ServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
 
     ],

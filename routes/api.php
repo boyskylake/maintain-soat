@@ -19,8 +19,8 @@ $api_version = config('api.api_version');
 Route::group(["prefix" => "{$api_version}"], function () {
 
     // Officer
-    Route::prefix('officer')
-        ->group(base_path('routes/api/officers.php'));
+    // Route::prefix('officer')
+    //     ->group(base_path('routes/api/officers.php'));
 
     // LINEBot
     Route::prefix('linebot')
