@@ -36,6 +36,8 @@ class AuthController extends Controller
 
         if ($this->verify($request)) {
             $profile = $this->profile($request);
+
+            dd($request);
             // db save userId
             $db = $user->update(array(
                 'userId' => $profile->userId,
@@ -46,7 +48,7 @@ class AuthController extends Controller
                 // logger("linebot login verify : ", $profile);
                 return response()->json(['massage' => 'Success.', 'user' => $user->first()]);
             }
-            // return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         return response()->json(['error' => 'Unauthenticated.'], 401);
     }
