@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 
-// import { userActions } from "../../redux/actions";
+import { feedDataAction } from "../../redux/actions";
 
 const Profile = () => {
+
+    const dispatch = useDispatch();
+    const feedData = useSelector((state) => state.feedData);
+
+    useEffect(() => {
+        async function feedData() {
+            await dispatch(
+                feedDataAction.feedDataPost("/api/v1/linebot/profile")
+            );
+        }
+        feedData();
+    }, [dispatch]);
+
+
     return (
         <div className="content-wrapper">
             <div className="container">
@@ -16,7 +28,7 @@ const Profile = () => {
                         <small>soat officer 2.0</small>
                     </h1>
                 </section>
-
+                {feedData.data && feedData.data}
             </div>
             {/* /.container */}
         </div>
