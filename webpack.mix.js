@@ -11,7 +11,7 @@ const mix = require("laravel-mix");
  |
  */
 const RemovePlugin = require("remove-files-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
+// const ESLintPlugin = require("eslint-webpack-plugin");
 // const TargetsPlugin = require("targets-webpack-plugin");
 
 const removePlugin = new RemovePlugin({
@@ -52,7 +52,7 @@ const removePlugin = new RemovePlugin({
 mix.webpackConfig({
     plugins: [
         removePlugin,
-        new ESLintPlugin(),
+        // new ESLintPlugin(),
         // new TargetsPlugin({
         //     browsers: ["last 2 versions", "chrome >= 41", "IE 11", "IE 7"]
         // })
@@ -92,5 +92,5 @@ if (mix.inProduction()) {
 }
 
 if (!mix.inProduction()) {
-    mix.browserSync("http://maintain.com");
+    mix.browserSync("http://maintain.test");
 }
