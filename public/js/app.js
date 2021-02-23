@@ -1503,6 +1503,13 @@ var officerRoute = [{
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Lookscreen_Lookscreen_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Lookscreen/Lookscreen */ "./resources/js/src/Officer/pages/Lookscreen/Lookscreen.js"));
   })
+}, {
+  path: "/officer/saveorder3",
+  exact: true,
+  layout: "officer",
+  component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+    return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Order_component_SaveorderComponent_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Order/component/SaveorderComponent */ "./resources/js/src/Officer/pages/Order/component/SaveorderComponent.js"));
+  })
 }];
 /* harmony default export */ __webpack_exports__["default"] = (officerRoute);
 
