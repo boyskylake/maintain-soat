@@ -272,6 +272,13 @@ span.select2 {
           user-select: none;
 }
 
+p {
+  margin: 0 0 10px;
+  margin-top: 3px !important;
+  margin-left: 5px !important;
+  font-size: 20px !important;
+}
+
 span.select2 {
   width: 100% !important;
 }

@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { useScript } from "../../helpers";
+import { feedDataAction } from "../redux/actions";
+import Services from "../redux/services/services";
+
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const feedData = useSelector((state) => state.feedData);
+    const service = new Services();
+    // const [inputs, setInputs] = useState(["ma_coop"]);
+    const [coopid, setCoopid] = useState(null);
+    const [FeedMenu, setFeedMenu] = useState();
+
+    useEffect(() => {
+        async function feedData() {
+            // await dispatch(feedDataAction.feedDataGet("/api/v1/officer/menu"));
+
+            service
+                .API("/api/v1/officer/menu", { method: "Get" })
+                .then((res) => {
+                    setFeedMenu(res);
+                });
+        }
+        feedData();
+    }, [dispatch]);
+    // console.log("feedData", feedData);
     return (
         <aside className="main-sidebar">
             {/* sidebar: style can be found in sidebar.less */}
@@ -15,12 +41,24 @@ const Sidebar = () => {
                             alt="User Image"
                         />
                     </div>
-                    <div className="pull-left info">
+                    {FeedMenu && FeedMenu[1] && (
+                        <div>
+                            <div className="pull-left info">
+                               <center><p>{FeedMenu[1].name}</p></center>
+                                {/*< <p>Alexander Pierce</p> */}
+                                <a href="#">
+                                    <i className="fa fa-circle text-success" />{" "}
+                                    Online
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                    {/* <div className="pull-left info">
                         <p>Alexander Pierce</p>
                         <a href="#">
                             <i className="fa fa-circle text-success" /> Online
                         </a>
-                    </div>
+                    </div> */}
                 </div>
                 {/* search form */}
                 <form action="#" method="get" className="sidebar-form">

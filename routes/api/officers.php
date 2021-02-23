@@ -15,6 +15,9 @@ Route::group(['namespace' => 'Officer\Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('user', 'Auth\AuthController@user');
 
+        Route::get('menu', 'MenuController@menu');
+
+
         Route::get('Home', 'HomeController@allMacoop');
         Route::get('orderPage', 'OrderPageController@editOrder');
         Route::post('Listorder', 'OrderListController@feedInform');

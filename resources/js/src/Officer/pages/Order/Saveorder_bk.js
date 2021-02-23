@@ -452,8 +452,8 @@ function Saveorder() {
                                         <select className="form-control select2">
                                             <option></option>
                                             {feedData.data &&
-                                                feedData.data.ucf_inform_type &&
-                                                feedData.data.ucf_inform_type.map(
+                                                feedData.data.menu &&
+                                                feedData.data.menu.map(
                                                     (val, i) => {
                                                         return (
                                                             <option
