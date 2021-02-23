@@ -77,8 +77,10 @@ function Saveorder() {
                                 <button
                                     type="submit"
                                     className="btn btn-lg btn-success"
+
                                 >
-                                    บัททึก
+                                  <i className="fa fa-save"></i>
+                                &nbsp; บันทึก
                                 </button>
                             </div>
                         </div>

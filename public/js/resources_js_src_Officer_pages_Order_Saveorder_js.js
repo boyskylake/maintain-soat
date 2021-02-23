@@ -146,10 +146,12 @@ function Saveorder() {
               children: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E01\u0E32\u0E23\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07\u0E23\u0E32\u0E22\u0E07\u0E32\u0E19\u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
               className: "box-tools pull-right",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
                 type: "submit",
                 className: "btn btn-lg btn-success",
-                children: "\u0E1A\u0E31\u0E17\u0E17\u0E36\u0E01"
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                  className: "fa fa-save"
+                }), "\xA0 \u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01"]
               })
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
