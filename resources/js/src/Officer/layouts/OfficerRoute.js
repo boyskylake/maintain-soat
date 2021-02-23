@@ -40,6 +40,12 @@ const officerRoute = [
         layout: "officer",
         component: lazy(() => import("../pages/Order/component/SaveorderComponent")),
     },
+    {
+        path: "/officer/detail",
+        exact: true,
+        layout: "officer",
+        component: lazy(() => import("../pages/Order/component/Detail")),
+    },
 ];
 
 export default officerRoute;

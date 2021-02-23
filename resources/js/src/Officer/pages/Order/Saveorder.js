@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Inputmask from "inputmask";
 
-// import { orderActions } from "../../redux/actions";
 import { useScript } from "../../../helpers";
 import { feedDataAction } from "../../redux/actions";
-// import Saveorderlist from "../Order/component/Saveorder";
-// import { Helmet } from "react-helmet";
+
 
 // steppp
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import {  StepButton } from "@material-ui/core";
+
+//ประการศหน้ามาตาม Step
 import SaveorderComponent from "./component/SaveorderComponent";
+import Detail from "./component/Detail"
 
 function Saveorder() {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function Saveorder() {
     const [confirmSubmit, setconfirmSubmit] = useState(false);
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
+
 
     useScript("/officer/dist/js/pages/saveorder.js");
     useScript("/officer/bower_components/ckeditor/ckeditor.js");
@@ -192,38 +194,11 @@ function Saveorder() {
                             )}
                         </div>
                     )}
-                    {/* {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
-              </Button>
-              {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-
-                >
-                  Skip
-                </Button>
-              )}
-                </div> </div>
-              )} */}
-                    {/* <div>
-
-                <Saveorderlist></Saveorderlist>
-                </div> */}
+                  {feedData.fetching && (
+                        <div className="overlay">
+                            <i className="fa fa-refresh fa-spin" />
+                        </div>
+                    )}
                 </div>
             </section>
             {/* /.content */}
@@ -233,7 +208,11 @@ function Saveorder() {
 
 export default Saveorder;
 function getSteps() {
-    return ["Select campaign settings", "Create an ad group", "Create an ad"];
+    return [
+        "บันทึกออเดอร์",
+        "สำหรับ Order สั่งซื้อ",
+        "ตรวจสอบความถูกต้อง"
+    ];
 }
 function getStepContent(
     step,
@@ -263,7 +242,16 @@ function getStepContent(
                 />
             );
         case 1:
-            return "Step 2: What is an ad group anyways?";
+            return (
+                <Detail
+                props={data}
+                setCompleted={setCompleted}
+                completed={completed}
+                setActiveStep={setActiveStep}
+                activeStep={activeStep}
+                step={step}
+                />
+            );
         case 2:
             return "Step 3: This is the bit I really care about!";
         default:
