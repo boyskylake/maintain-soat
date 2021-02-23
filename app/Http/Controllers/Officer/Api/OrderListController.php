@@ -104,9 +104,9 @@ class OrderListController extends Controller
             }
         } else {
             if (empty($request->input('search.value'))) {
-                // $posts = DB::connection('oracle')->select($sql . " and rownum > $start and rownum <= " . ($limit + $start) . "  ORDER BY $order $dir");
+                $posts = DB::connection('oracle')->select($sql . " and rownum > $start and rownum <= " . ($limit + $start) . "  ORDER BY $order $dir");
 
-                dd($sql . " and numrow > $start and numrow <= " . ($limit + $start) . "  ORDER BY $order $dir");
+                // dd($sql . " and numrow > $start and numrow <= " . ($limit + $start) . "  ORDER BY $order $dir");
             } else {
                 $search = $request->input('search.value');
 
