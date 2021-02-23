@@ -16,7 +16,6 @@ function SaveorderComponent(
     const [confirmSubmit, setconfirmSubmit] = useState(false);
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
-
     // useScript("/officer/dist/js/pages/saveorder.js");
     useScript("/officer/dist/js/pages/saveorder.js");
     useScript("/officer/bower_components/ckeditor/ckeditor.js");
@@ -30,6 +29,8 @@ function SaveorderComponent(
         console.log(coopid);
         // $('#myModal').modal('show')
     };
+
+    //data
     useEffect(() => {
         async function feedData() {
             await dispatch(
@@ -74,12 +75,12 @@ function SaveorderComponent(
                 <div className="row">
                     <div className="col-md-3">
                         <div className="form-group">
-                            <label>เลขที่</label>
+                            <label>เลขที่รายการ</label>
                             <div
                                 className="input-group"
                                 style={{
                                     border: "1.5px solid #3c8dbc",
-                                    borderRadius: 2,
+                                    borderRadius: 5,
                                 }}
                             >
                                 <div className="input-group-addon">
@@ -95,7 +96,6 @@ function SaveorderComponent(
                                 />
                             </div>
                         </div>
-
                         <div className="form-group receiver">
                             <label>ผู้รับแจ้ง</label>
                             <select
@@ -432,9 +432,9 @@ function SaveorderComponent(
                                     })}
                             </select>
 
-                            <button onClick={handleComplete} >
+                            {/* <button onClick={handleComplete} >
                                  next
-                                </button>
+                                </button> */}
                         </div>
                     </div>
                 </div>
