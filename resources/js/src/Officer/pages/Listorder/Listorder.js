@@ -30,6 +30,7 @@ function Listorder() {
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, "All"],
             ],
+            order:[[0,'desc']],
             processing: true,
             serverSide: true,
             responsive: true,
@@ -39,6 +40,7 @@ function Listorder() {
                 headers: {
                     Authorization: "Bearer " + user.access_token,
                 },
+
             },
             columns: [
                 { data: "inform_no" },
