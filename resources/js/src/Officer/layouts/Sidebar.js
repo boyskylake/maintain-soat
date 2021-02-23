@@ -59,7 +59,7 @@ const Sidebar = () => {
                     />
                     <ListItemLink
                         to="/officer/listorder"
-                        icon="fa fa-files-o"
+                        icon="fa fa-file-text"
                         name="Order ทั้งหมด"
                     />
                 </ul>

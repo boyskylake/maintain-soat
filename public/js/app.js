@@ -1597,7 +1597,7 @@ var Sidebar = function Sidebar() {
           name: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E41\u0E08\u0E49\u0E07 Order \u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ListItemLink, {
           to: "/officer/listorder",
-          icon: "fa fa-files-o",
+          icon: "fa fa-file-text",
           name: "Order \u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
         })]
       })]
