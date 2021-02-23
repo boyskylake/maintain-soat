@@ -41,7 +41,6 @@ function Listorder() {
     // }
     $("#example2").DataTable({
       lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-      order: [[0, 'desc']],
       processing: true,
       serverSide: true,
       responsive: true,
