@@ -24,7 +24,6 @@ const Header = () => {
     useEffect(() => {
         async function feedData() {
             // await dispatch(feedDataAction.feedDataGet("/api/v1/officer/menu"));
-
             service
                 .API("/api/v1/officer/menu", { method: "Get" })
                 .then((res) => {
@@ -160,27 +159,8 @@ const Header = () => {
                                     {/* inner menu: contains the actual data */}
                                     <ul className="menu">
                                         <li>
-                                            {/* start message */}
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img
-                                                        src="dist/img/user2-160x160.jpg"
-                                                        className="img-circle"
-                                                        alt="User Image"
-                                                    />
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small>
-                                                        <i className="fa fa-clock-o" />{" "}
-                                                        5 mins
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    Why not buy a new awesome
-                                                    theme?
-                                                </p>
-                                            </a>
+                                            start message
+                                            <a href="#"></a>
                                         </li>
                                         {/* end message */}
                                         <li>
@@ -467,15 +447,24 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <img
+                                {/* <img
                                     src="dist/img/user2-160x160.jpg"
                                     className="user-image"
                                     alt="User Image"
-                                />
+                                /> */}
                                 {FeedMenu && FeedMenu[1] && (
-                                        <span className="hidden-xs">
-                                            {FeedMenu[1].name}
-                                        </span>
+                                    <div className="pull-left image">
+                                        <img
+                                            src={`/storage/${FeedMenu[1].avatar}`}
+                                            className="user-image"
+                                            alt="User Image"
+                                        />
+                                    </div>
+                                )}
+                                {FeedMenu && FeedMenu[1] && (
+                                    <span className="hidden-xs">
+                                        {FeedMenu[1].name}
+                                    </span>
                                 )}
                                 {/* <span className="hidden-xs">
                                     Alexander Pierce
@@ -484,15 +473,31 @@ const Header = () => {
                             <ul className="dropdown-menu">
                                 {/* User image */}
                                 <li className="user-header">
-                                    <img
+                                    {/* <img
                                         src="dist/img/user2-160x160.jpg"
                                         className="img-circle"
                                         alt="User Image"
-                                    />
-                                    <p>
+                                    /> */}
+                                    {FeedMenu && FeedMenu[1] && (
+                                        <img
+                                            src={`/storage/${FeedMenu[1].avatar}`}
+                                            className="img-circle"
+                                            alt="User Image"
+                                        />
+                                    )}
+                                    {FeedMenu && FeedMenu[1] && (
+                                        <p>
+                                            {FeedMenu[1].name}
+
+                                            <small>
+                                                {FeedMenu[1].email}
+                                            </small>
+                                        </p>
+                                    )}
+                                    {/* <p>
                                         Alexander Pierce - Web Developer
                                         <small>Member since Nov. 2012</small>
-                                    </p>
+                                    </p> */}
                                 </li>
                                 {/* Menu Body */}
                                 <li className="user-body">
