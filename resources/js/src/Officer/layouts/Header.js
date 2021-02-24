@@ -1,9 +1,13 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useBodyClass } from "../../helpers";
 import { userActions } from "../redux/actions";
 
+// import { useScript } from "../../helpers";
+// import { feedDataAction } from "../redux/actions";
+import Services from "../redux/services/services";
 
 const Header = () => {
     // const login = useSelector(state => state.login);
@@ -12,6 +16,23 @@ const Header = () => {
     useBodyClass("skin-yellow");
     useBodyClass("sidebar-mini");
 
+    const feedData = useSelector((state) => state.feedData);
+    const service = new Services();
+    // const [inputs, setInputs] = useState(["ma_coop"]);
+    const [coopid, setCoopid] = useState(null);
+    const [FeedMenu, setFeedMenu] = useState();
+    useEffect(() => {
+        async function feedData() {
+            // await dispatch(feedDataAction.feedDataGet("/api/v1/officer/menu"));
+
+            service
+                .API("/api/v1/officer/menu", { method: "Get" })
+                .then((res) => {
+                    setFeedMenu(res);
+                });
+        }
+        feedData();
+    }, [dispatch]);
     return (
         <header className="main-header">
             <Helmet>
@@ -92,8 +113,6 @@ const Header = () => {
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
                 />
-
-                
             </Helmet>
             {/* Logo */}
             <a href="index2.html" className="logo">
@@ -453,9 +472,14 @@ const Header = () => {
                                     className="user-image"
                                     alt="User Image"
                                 />
-                                <span className="hidden-xs">
+                                {FeedMenu && FeedMenu[1] && (
+                                        <span className="hidden-xs">
+                                            {FeedMenu[1].name}
+                                        </span>
+                                )}
+                                {/* <span className="hidden-xs">
                                     Alexander Pierce
-                                </span>
+                                </span> */}
                             </a>
                             <ul className="dropdown-menu">
                                 {/* User image */}
