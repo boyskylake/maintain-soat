@@ -44,7 +44,9 @@ const Sidebar = () => {
                     {FeedMenu && FeedMenu[1] && (
                         <div>
                             <div className="pull-left info">
-                               <center><p>{FeedMenu[1].name}</p></center>
+                                <center>
+                                    <p>{FeedMenu[1].name}</p>
+                                </center>
                                 {/*< <p>Alexander Pierce</p> */}
                                 <a href="#">
                                     <i className="fa fa-circle text-success" />{" "}
@@ -83,8 +85,13 @@ const Sidebar = () => {
                 </form>
                 {/* /.search form */}
                 {/* sidebar menu: : style can be found in sidebar.less */}
+                {FeedMenu && FeedMenu[2] && (
+                    <div>
+                        <span className="hidden-xs">{FeedMenu[1].name}</span>
+                    </div>
+                )}
                 <ul className="sidebar-menu" data-widget="tree">
-                    {/* <li className="header">เมนูหลัก</li> */}
+                    {/* <li className="header">เมนูหลัก</li>
                     <ListItemLink
                         to="/officer/home"
                         icon="fa fa-circle-o"
@@ -99,7 +106,19 @@ const Sidebar = () => {
                         to="/officer/listorder"
                         icon="fa fa-file-text"
                         name="Order ทั้งหมด"
-                    />
+                    /> */}
+                    {FeedMenu &&
+                        FeedMenu[0] &&
+                        FeedMenu[0].map((val, i) => {
+                            return (
+                                <ListItemLink
+                                key={i}
+                                to={val.url}
+                                icon={val.url}
+                                name={val.title}
+                            />
+                            );
+                        })}
                 </ul>
             </section>
             {/* /.sidebar */}

@@ -1758,22 +1758,21 @@ var Sidebar = function Sidebar() {
             })
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ul", {
+      }), FeedMenu && FeedMenu[2] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          className: "hidden-xs",
+          children: FeedMenu[1].name
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ul", {
         className: "sidebar-menu",
         "data-widget": "tree",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {
-          to: "/officer/home",
-          icon: "fa fa-circle-o",
-          name: "\u0E2B\u0E19\u0E49\u0E32\u0E41\u0E23\u0E01"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {
-          to: "/officer/saveorder",
-          icon: "fa fa-files-o",
-          name: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E41\u0E08\u0E49\u0E07 Order \u0E41\u0E01\u0E49\u0E44\u0E02\u0E07\u0E32\u0E19"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {
-          to: "/officer/listorder",
-          icon: "fa fa-file-text",
-          name: "Order \u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
-        })]
+        children: FeedMenu && FeedMenu[0] && FeedMenu[0].map(function (val, i) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {
+            to: val.url,
+            icon: val.url,
+            name: val.title
+          }, i);
+        })
       })]
     })
   });
