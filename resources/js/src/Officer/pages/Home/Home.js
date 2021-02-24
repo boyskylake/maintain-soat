@@ -87,6 +87,7 @@ function Home() {
                                                 <i className="fa fa-arrow-circle-right"></i>
                                             </a>
                                     </div>
+
                                 </div>
                                 {/* <div className="col-md-3 col-sm-6 col-xs-12">
                                         <div className="small-box bg-aqua">
@@ -110,13 +111,44 @@ function Home() {
                             );
                         })}
                     </div>
+
                     {feedData.fetching && (
                         <div className="overlay">
                             <i className="fa fa-refresh fa-spin" />
                         </div>
                     )}
+
+                <div class="col-md-6">
+                <div className="box box-success">
+                        <div className="box-header with-border">
+                        <h3 className="box-title">Bar Chart</h3>
+
+                        <div className="box-tools pull-right">
+                            <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus"></i>
+                            </button>
+                            {/* <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times"></i></button> */}
+                        </div>
+                        </div>
+                        <div className="box-body chart-responsive">
+                        <h1>5555555555555555555555555555</h1>
+                        <h1>5555555555555555555555555555</h1>
+                        <h1>5555555555555555555555555555</h1>
+                        <h1>5555555555555555555555555555</h1>
+                        <h1>5555555555555555555555555555</h1>
+                        {/* <div className="chart" id="bar-chart" style="height: 300px;"></div> */}
+
+                        </div>
+
+                    </div>
+                    </div>
             </section>
+            <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+            <script src="../../bower_components/raphael/raphael.min.js"></script>
+            <script src="../../bower_components/morris.js/morris.min.js"></script>
+            <script src="../../dist/js/adminlte.min.js"></script>
+            
         </div>
+
     );
 }
 export default Home;
