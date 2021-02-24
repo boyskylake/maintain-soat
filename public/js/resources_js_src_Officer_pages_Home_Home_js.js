@@ -165,12 +165,91 @@ function Home() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
           className: "fa fa-refresh fa-spin"
         })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        "class": "col-md-6",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "box box-success",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "box-header with-border",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+              className: "box-title",
+              children: "Bar Chart"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "box-tools pull-right",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                type: "button",
+                className: "btn btn-box-tool",
+                "data-widget": "collapse",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                  className: "fa fa-minus"
+                })
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "box-body chart-responsive",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "chart",
+              id: "bar-chart",
+              style: "height: 300px;"
+            })
+          })]
+        })
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("script", {
+      src: "../../bower_components/jquery/dist/jquery.min.js"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("script", {
+      src: "../../bower_components/raphael/raphael.min.js"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("script", {
+      src: "../../bower_components/morris.js/morris.min.js"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("script", {
+      src: "../../dist/js/adminlte.min.js"
     })]
   });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
+$(function () {
+  "use strict"; //BAR CHART
+
+  var bar = new Morris.Bar({
+    element: 'bar-chart',
+    resize: true,
+    data: [{
+      y: '2006',
+      a: 100,
+      b: 90
+    }, {
+      y: '2007',
+      a: 75,
+      b: 65
+    }, {
+      y: '2008',
+      a: 50,
+      b: 40
+    }, {
+      y: '2009',
+      a: 75,
+      b: 65
+    }, {
+      y: '2010',
+      a: 50,
+      b: 40
+    }, {
+      y: '2011',
+      a: 75,
+      b: 65
+    }, {
+      y: '2012',
+      a: 100,
+      b: 90
+    }],
+    barColors: ['#00a65a', '#f56954'],
+    xkey: 'y',
+    ykeys: ['a', 'b'],
+    labels: ['CPU', 'DISK'],
+    hideHover: 'auto'
+  });
+});
 
 /***/ })
 
