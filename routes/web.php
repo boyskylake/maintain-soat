@@ -13,15 +13,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 // Route::get('/deploy', function () {
 //     Artisan::call('cache:clear');
 //     Artisan::call('config:cache');
 // });
+//refresh auto
 
-Route::get('/', function () {
-    // return view('welcome');
-    return redirect('/officer/login');
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return redirect('/officer/login');
+// });
 
 // Route::get('/test', function () {
 //     return view('test');
@@ -46,6 +48,5 @@ Route::get('/{any}', function () {
     return view('index');
     // return view('officer.home');
 })->where('any', '.*');
-
 
 
