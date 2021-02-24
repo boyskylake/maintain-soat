@@ -119,6 +119,7 @@ const Sidebar = () => {
                             />
                             );
                         })}
+
                 </ul>
             </section>
             {/* /.sidebar */}
