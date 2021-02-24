@@ -118,7 +118,7 @@ function Home() {
                         </div>
                     )}
 
-                <div class="col-md-6">
+                <div className="col-md-6">
                 <div className="box box-success">
                         <div className="box-header with-border">
                         <h3 className="box-title">Bar Chart</h3>
@@ -146,9 +146,32 @@ function Home() {
             <script src="../../bower_components/raphael/raphael.min.js"></script>
             <script src="../../bower_components/morris.js/morris.min.js"></script>
             <script src="../../dist/js/adminlte.min.js"></script>
-            
+
         </div>
 
     );
 }
 export default Home;
+
+$(function () {
+
+    //BAR CHART
+    var bar = new Morris.Bar({
+      element: 'bar-chart',
+      resize: true,
+      data: [
+        {y: '2006', a: 100, b: 90},
+        {y: '2007', a: 75, b: 65},
+        {y: '2008', a: 50, b: 40},
+        {y: '2009', a: 75, b: 65},
+        {y: '2010', a: 50, b: 40},
+        {y: '2011', a: 75, b: 65},
+        {y: '2012', a: 100, b: 90}
+      ],
+      barColors: ['#00a65a', '#f56954'],
+      xkey: 'y',
+      ykeys: ['a', 'b'],
+      labels: ['CPU', 'DISK'],
+      hideHover: 'auto'
+    });
+  });
