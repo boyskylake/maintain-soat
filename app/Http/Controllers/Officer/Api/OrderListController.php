@@ -64,7 +64,9 @@ class OrderListController extends Controller
         ucf_inform_type.group_type,
         inform_head.appointment_date,
         '        '  AS appointment_date_tdate,
-        entry_date
+        entry_date,
+        ucf_officer.officer_name as namereceiver,
+                ucf_officer.officer_id as id
     FROM
             (
             SELECT
@@ -79,12 +81,13 @@ class OrderListController extends Controller
 
 
             $sql2 = ") inform_head,
-        ma_coop,
+        ma_coop,ucf_officer,
         ucf_inform_type
     WHERE
             inform_head.coop_id = ma_coop.coop_id
         -- AND ( inform_head.receive_date BETWEEN :adtm_start AND :adtm_stop )
             AND ucf_inform_type.inform_type = inform_head.inform_type
+            AND ucf_officer.officer_id = inform_head.receiver
             -- and inform_no = '6312020040'
     ";
 
@@ -137,5 +140,6 @@ class OrderListController extends Controller
         );
 
         return response()->json($json_data);
+        // return response()->json(compact($json_data));
     }
 }
