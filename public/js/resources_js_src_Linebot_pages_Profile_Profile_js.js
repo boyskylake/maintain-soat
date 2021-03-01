@@ -77,7 +77,7 @@ var Profile = function Profile() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("section", {
         className: "content-header",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
-          children: ["\u0E2A\u0E27\u0E31\u0E2A\u0E14\u0E35", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("small", {
+          children: ["Profile", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("small", {
             children: "soat officer 2.0"
           })]
         })
