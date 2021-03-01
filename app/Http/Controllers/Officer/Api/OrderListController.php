@@ -66,7 +66,22 @@ class OrderListController extends Controller
         '        '  AS appointment_date_tdate,
         entry_date,
         ucf_officer.officer_name as namereceiver,
-                ucf_officer.officer_id as id
+                ucf_officer.officer_id as id,
+                ucf_status.status_des as name_status,
+                case when ucf_status.status = 4 then
+                -- '<span style=\"color:#00a65a;\">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 17px;background-color:#19a63d; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 2 then
+                '<span  style=\"font-size: 17px;background-color:#fa9a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 5 then
+                '<span  style=\"font-size: 17px;background-color:#fa2a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 0 then
+                '<span  style=\"font-size: 17px;background-color:#fc660f; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 3 then
+                '<span  style=\"font-size: 17px;background-color:#193ae0; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                else
+                ucf_status.status_des
+                end as name_status_des
     FROM
             (
             SELECT
@@ -80,14 +95,15 @@ class OrderListController extends Controller
             // $sh
 
 
-            $sql2 = ") inform_head,
+            $sql2 = ")inform_head,
         ma_coop,ucf_officer,
-        ucf_inform_type
+        ucf_inform_type,ucf_status
     WHERE
             inform_head.coop_id = ma_coop.coop_id
         -- AND ( inform_head.receive_date BETWEEN :adtm_start AND :adtm_stop )
             AND ucf_inform_type.inform_type = inform_head.inform_type
             AND ucf_officer.officer_id = inform_head.receiver
+            AND ucf_status.status = inform_head.finished_status
             -- and inform_no = '6312020040'
     ";
 
@@ -130,8 +146,6 @@ class OrderListController extends Controller
                 $totalFiltered = $num[0]->num;
             }
         }
-
-
         $json_data = array(
             "draw"            => intval($request->input('draw')),
             "recordsTotal"    => intval($totalData),
