@@ -6329,32 +6329,24 @@ var refType = prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
-/* harmony import */ var inputmask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! inputmask */ "./node_modules/inputmask/index.js");
-/* harmony import */ var inputmask__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(inputmask__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helpers */ "./resources/js/src/helpers/index.js");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions */ "./resources/js/src/Officer/redux/actions/index.js");
-/* harmony import */ var _material_ui_core_Stepper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Stepper */ "./node_modules/@material-ui/core/esm/Stepper/Stepper.js");
-/* harmony import */ var _material_ui_core_Step__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Step */ "./node_modules/@material-ui/core/esm/Step/Step.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/StepButton/StepButton.js");
-/* harmony import */ var _component_SaveorderComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./component/SaveorderComponent */ "./resources/js/src/Officer/pages/Order/component/SaveorderComponent.js");
-/* harmony import */ var _component_Detail__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./component/Detail */ "./resources/js/src/Officer/pages/Order/component/Detail.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var inputmask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! inputmask */ "./node_modules/inputmask/index.js");
+/* harmony import */ var inputmask__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(inputmask__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../helpers */ "./resources/js/src/helpers/index.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions */ "./resources/js/src/Officer/redux/actions/index.js");
+/* harmony import */ var _material_ui_core_Stepper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Stepper */ "./node_modules/@material-ui/core/esm/Stepper/Stepper.js");
+/* harmony import */ var _material_ui_core_Step__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Step */ "./node_modules/@material-ui/core/esm/Step/Step.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/StepButton/StepButton.js");
+/* harmony import */ var _component_SaveorderComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./component/SaveorderComponent */ "./resources/js/src/Officer/pages/Order/component/SaveorderComponent.js");
+/* harmony import */ var _component_Detail__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./component/Detail */ "./resources/js/src/Officer/pages/Order/component/Detail.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -6385,27 +6377,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Saveorder() {
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  var feedData = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var feedData = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.feedData;
   });
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       confirmSubmit = _useState2[0],
       setconfirmSubmit = _useState2[1]; // const [inputs, setInputs] = useState(["ma_coop"]);
 
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       coopid = _useState4[0],
       setCoopid = _useState4[1];
 
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_5__.useScript)("/officer/dist/js/pages/saveorder.js");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_5__.useScript)("/officer/bower_components/ckeditor/ckeditor.js");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_5__.useScript)("/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/dist/js/pages/saveorder.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/bower_components/ckeditor/ckeditor.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js");
 
-  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_3__.useForm)(),
+  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useForm)(),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
       watch = _useForm.watch,
@@ -6418,17 +6410,17 @@ function Saveorder() {
   }; //steppppppppppp
 
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
       activeStep = _useState6[0],
       setActiveStep = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Set()),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Set()),
       _useState8 = _slicedToArray(_useState7, 2),
       completed = _useState8[0],
       setCompleted = _useState8[1];
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(new Set()),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(new Set()),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       skipped = _React$useState2[0],
       setSkipped = _React$useState2[1];
@@ -6500,39 +6492,21 @@ function Saveorder() {
   ////////////////////////////////////////////////
 
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (confirmSubmit) {
       console.log("Submit success");
     }
 
     return function () {};
   }, [confirmSubmit]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    function feedData() {
-      return _feedData.apply(this, arguments);
-    } // Execute the created function directly
-
-
-    function _feedData() {
-      _feedData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return dispatch(_redux_actions__WEBPACK_IMPORTED_MODULE_6__.feedDataAction.feedDataGet("/api/v1/officer/orderPage"));
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-      return _feedData.apply(this, arguments);
-    }
-
-    feedData(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {// async function feedData() {
+    //     await dispatch(
+    //         feedDataAction.feedDataGet("/api/v1/officer/orderPage")
+    //     );
+    // }
+    // // Execute the created function directly
+    // feedData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // useEffect(() => {
   //     if (coopid != "") {
   //         alert(coopid);
@@ -6557,13 +6531,13 @@ function Saveorder() {
       setCoopid(this.value);
     });
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
     className: "content-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("section", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("section", {
       className: "content",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
         className: "box box-default",
-        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_material_ui_core_Stepper__WEBPACK_IMPORTED_MODULE_10__.default, {
+        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Stepper__WEBPACK_IMPORTED_MODULE_9__.default, {
           alternativeLabel: true,
           nonLinear: true,
           activeStep: activeStep,
@@ -6576,12 +6550,12 @@ function Saveorder() {
               stepProps.completed = false;
             }
 
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_material_ui_core_Step__WEBPACK_IMPORTED_MODULE_11__.default, _objectSpread(_objectSpread({}, stepProps), {}, {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, _objectSpread(_objectSpread({
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Step__WEBPACK_IMPORTED_MODULE_10__.default, _objectSpread(_objectSpread({}, stepProps), {}, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, _objectSpread(_objectSpread({
                 onClick: handleStep(index),
                 completed: isStepComplete(index)
               }, buttonProps), {}, {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
                   className: "text-sm lg:text-lg text-gray-700 font-medium hover:font-bold",
                   style: {
                     fontFamily: "FontDefault"
@@ -6591,13 +6565,13 @@ function Saveorder() {
               }))
             }), label);
           })
-        }), activeStep === steps.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        }), activeStep === steps.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           children: " \u0E17\u0E48\u0E32\u0E19\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E04\u0E23\u0E1A\u0E17\u0E38\u0E01\u0E2A\u0E48\u0E27\u0E19\u0E41\u0E25\u0E49\u0E27"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           children: getStepContent(activeStep, setCompleted, completed, setActiveStep, activeStep)
-        }), feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        }), feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           className: "overlay",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("i", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("i", {
             className: "fa fa-refresh fa-spin"
           })
         })]
@@ -6623,7 +6597,7 @@ function getStepContent(step, setCompleted, completed, setActiveStep, activeStep
 
   switch (step) {
     case 0:
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_component_SaveorderComponent__WEBPACK_IMPORTED_MODULE_7__.default, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_component_SaveorderComponent__WEBPACK_IMPORTED_MODULE_6__.default, {
         props: data,
         setCompleted: setCompleted,
         completed: completed,
@@ -6633,7 +6607,7 @@ function getStepContent(step, setCompleted, completed, setActiveStep, activeStep
       });
 
     case 1:
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_component_Detail__WEBPACK_IMPORTED_MODULE_8__.default, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_component_Detail__WEBPACK_IMPORTED_MODULE_7__.default, {
         props: data,
         setCompleted: setCompleted,
         completed: completed,

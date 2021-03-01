@@ -1083,26 +1083,10 @@ var Header = function Header() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("li", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("ul", {
                   className: "menu",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("li", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("a", {
-                      href: "#",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                        className: "pull-left",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-                          src: "dist/img/user2-160x160.jpg",
-                          className: "img-circle",
-                          alt: "User Image"
-                        })
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h4", {
-                        children: ["Support Team", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                            className: "fa fa-clock-o"
-                          }), " ", "5 mins"]
-                        })]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-                        children: "Why not buy a new awesome theme?"
-                      })]
-                    })
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("li", {
+                    children: ["start message", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+                      href: "#"
+                    })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("li", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("a", {
                       href: "#",
@@ -1398,10 +1382,13 @@ var Header = function Header() {
               href: "#",
               className: "dropdown-toggle",
               "data-toggle": "dropdown",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-                src: "dist/img/user2-160x160.jpg",
-                className: "user-image",
-                alt: "User Image"
+              children: [FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "pull-left image",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                  src: "/storage/".concat(FeedMenu[1].avatar),
+                  className: "user-image",
+                  alt: "User Image"
+                })
               }), FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "hidden-xs",
                 children: FeedMenu[1].name
@@ -1410,13 +1397,13 @@ var Header = function Header() {
               className: "dropdown-menu",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("li", {
                 className: "user-header",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-                  src: "dist/img/user2-160x160.jpg",
+                children: [FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                  src: "/storage/".concat(FeedMenu[1].avatar),
                   className: "img-circle",
                   alt: "User Image"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
-                  children: ["Alexander Pierce - Web Developer", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
-                    children: "Member since Nov. 2012"
+                }), FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
+                  children: [FeedMenu[1].name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+                    children: FeedMenu[1].email
                   })]
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("li", {
@@ -1710,17 +1697,17 @@ var Sidebar = function Sidebar() {
     className: "main-sidebar",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("section", {
       className: "sidebar",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "user-panel",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "pull-left image",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-            src: "dist/img/user2-160x160.jpg",
-            className: "img-circle",
-            alt: "User Image"
-          })
-        }), FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        children: FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "pull-left image",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+              src: "/storage/".concat(FeedMenu[1].avatar),
+              className: "img-circle",
+              alt: "User Image"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "pull-left info",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("center", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
@@ -1728,12 +1715,12 @@ var Sidebar = function Sidebar() {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("a", {
               href: "#",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+              children: ["\xA0 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                 className: "fa fa-circle text-success"
               }), " ", "Online"]
             })]
-          })
-        })]
+          })]
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
         action: "#",
         method: "get",
@@ -1769,7 +1756,7 @@ var Sidebar = function Sidebar() {
         children: FeedMenu && FeedMenu[0] && FeedMenu[0].map(function (val, i) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {
             to: val.url,
-            icon: val.url,
+            icon: val.icon_class,
             name: val.title
           }, i);
         })

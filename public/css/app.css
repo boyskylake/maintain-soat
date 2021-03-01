@@ -279,6 +279,12 @@ p {
   font-size: 20px !important;
 }
 
+.img-circle {
+  border-radius: 0.5% !important;
+  width: 50px;
+  height: 60px;
+}
+
 span.select2 {
   width: 100% !important;
 }

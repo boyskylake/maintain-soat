@@ -34,23 +34,23 @@ const Sidebar = () => {
             <section className="sidebar">
                 {/* Sidebar user panel */}
                 <div className="user-panel">
-                    <div className="pull-left image">
-                        <img
-                            src="dist/img/user2-160x160.jpg"
-                            className="img-circle"
-                            alt="User Image"
-                        />
-                    </div>
                     {FeedMenu && FeedMenu[1] && (
                         <div>
+                            <div className="pull-left image">
+                                <img
+                                    src={`/storage/${FeedMenu[1].avatar}`}
+                                    className="img-circle"
+                                    alt="User Image"
+                                />
+                            </div>
                             <div className="pull-left info">
                                 <center>
                                     <p>{FeedMenu[1].name}</p>
                                 </center>
                                 {/*< <p>Alexander Pierce</p> */}
                                 <a href="#">
-                                    <i className="fa fa-circle text-success" />{" "}
-                                    Online
+                                &nbsp; <i className="fa fa-circle text-success" />{" "}
+                                     Online
                                 </a>
                             </div>
                         </div>
@@ -112,11 +112,11 @@ const Sidebar = () => {
                         FeedMenu[0].map((val, i) => {
                             return (
                                 <ListItemLink
-                                key={i}
-                                to={val.url}
-                                icon={val.url}
-                                name={val.title}
-                            />
+                                    key={i}
+                                    to={val.url}
+                                    icon={val.icon_class}
+                                    name={val.title}
+                                />
                             );
                         })}
                 </ul>

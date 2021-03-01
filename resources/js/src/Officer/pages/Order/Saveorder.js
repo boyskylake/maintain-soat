@@ -110,13 +110,13 @@ function Saveorder() {
         return () => {};
     }, [confirmSubmit]);
     useEffect(() => {
-        async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-            );
-        }
-        // Execute the created function directly
-        feedData();
+        // async function feedData() {
+        //     await dispatch(
+        //         feedDataAction.feedDataGet("/api/v1/officer/orderPage")
+        //     );
+        // }
+        // // Execute the created function directly
+        // feedData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     // useEffect(() => {
