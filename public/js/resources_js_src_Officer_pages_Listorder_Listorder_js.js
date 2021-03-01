@@ -55,15 +55,21 @@ function Listorder() {
       columns: [{
         data: "inform_no"
       }, {
-        data: "coop_name"
+        data: "coop_id"
       }, {
         data: "coop_shortname",
         orderable: false
       }, {
-        data: "receiver",
+        data: "receive_date",
         orderable: false
       }, {
-        data: "receive_date",
+        data: "namereceiver",
+        orderable: false
+      }, {
+        data: "express_status",
+        orderable: false
+      }, {
+        data: "method_status",
         orderable: false
       }]
     }); // feedData();
@@ -72,10 +78,8 @@ function Listorder() {
     className: "content-wrapper",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
       className: "content-header",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
-        children: ["Data Tables", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("small", {
-          children: "advanced tables"
-        })]
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+        children: "\u0E14\u0E39 order \u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ol", {
         className: "breadcrumb",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
@@ -107,7 +111,7 @@ function Listorder() {
               className: "box-header",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
                 className: "box-title",
-                children: "Hover Data Table"
+                children: "\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23 Order \u0E17\u0E31\u0E49\u0E07\u0E2B\u0E2B\u0E21\u0E14"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "box-body",
@@ -117,15 +121,19 @@ function Listorder() {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: "inform_no"
+                      children: "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: "coop_name"
+                      children: "\u0E40\u0E25\u0E02\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: "coop_shortname"
+                      children: "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: "receiver"
+                      children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: "receive_date"
+                      children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                      children: "\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17\u0E07\u0E32\u0E19"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                      children: "\u0E2A\u0E16\u0E32\u0E19\u0E30\u0E07\u0E32\u0E19"
                     })]
                   })
                 })

@@ -44,17 +44,25 @@ function Listorder() {
             },
             columns: [
                 { data: "inform_no" },
-                { data: "coop_name" },
+                { data: "coop_id" },
                 {
                     data: "coop_shortname",
                     orderable: false,
                 },
                 {
-                    data: "receiver",
+                    data: "receive_date",
                     orderable: false,
                 },
                 {
-                    data: "receive_date",
+                    data: "namereceiver",
+                    orderable: false,
+                },
+                {
+                    data: "express_status",
+                    orderable: false,
+                },
+                {
+                    data: "method_status",
                     orderable: false,
                 },
             ],
@@ -68,8 +76,8 @@ function Listorder() {
             {/* Content Header (Page header) */}
             <section className="content-header">
                 <h1>
-                    Data Tables
-                    <small>advanced tables</small>
+                   ดู order ทั้งหมด
+                    {/* <small>advanced tables</small> */}
                 </h1>
                 <ol className="breadcrumb">
                     <li>
@@ -89,7 +97,7 @@ function Listorder() {
                     <div className="col-xs-12">
                         <div className="box">
                             <div className="box-header">
-                                <h3 className="box-title">Hover Data Table</h3>
+                                <h3 className="box-title">รายการ Order ทั้งหหมด</h3>
                             </div>
                             {/* /.box-header */}
                             <div className="box-body">
@@ -100,11 +108,13 @@ function Listorder() {
                                 >
                                     <thead>
                                         <tr>
-                                            <th>inform_no</th>
-                                            <th>coop_name</th>
-                                            <th>coop_shortname</th>
-                                            <th>receiver</th>
-                                            <th>receive_date</th>
+                                            <th>เลขที่</th>
+                                            <th>เลขสหกรณ์</th>
+                                            <th>สหกรณ์</th>
+                                            <th>วันที่รับแจ้ง</th>
+                                            <th>ผู้รับแจ้ง</th>
+                                            <th>ประเภทงาน</th>
+                                            <th>สถานะงาน</th>
                                         </tr>
 
                                     </thead>
