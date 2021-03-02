@@ -11,8 +11,8 @@ class ProfileController extends Controller
     public function getProfile(Request $request)
     {
 
-        dd($request);
-        
+        // dd($request);
+
         $user = User::where('email', 'view@view.com')->first();
 
         return response()->json(['massage' => 'Success.', 'user' => $user]);
