@@ -28,6 +28,7 @@ class VerifyLinebot
             $result = $response->getJSONDecodedBody();
 
             if (($result['client_id'] == 1655676615) && ($result['expires_in'] > 0)) {
+                $request->request->add($result);
                 return $next($request);
 
             }
