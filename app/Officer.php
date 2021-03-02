@@ -9,4 +9,5 @@ class Officer extends Model
 {
     // protected $connection = 'mysql';
     // protected $table = 'officers';
+    // protected $table = 'roles_officer';
 }
