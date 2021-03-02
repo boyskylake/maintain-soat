@@ -62,7 +62,7 @@ function Listorder() {
                     orderable: false,
                 },
                 {
-                    data: "method_status",
+                    data: "name_status_des",
                     orderable: false,
                 },
             ],
