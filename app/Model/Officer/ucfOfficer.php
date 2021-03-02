@@ -15,4 +15,6 @@ class ucfOfficer extends Authenticatable
     protected $connection = 'mysql';
 
     protected $table = 'ucf_officer';
+
+    public $timestamps = false;
 }
