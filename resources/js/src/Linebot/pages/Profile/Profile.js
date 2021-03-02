@@ -26,7 +26,7 @@ const Profile = () => {
                 {/* Content Header (Page header) */}
                 <section className="content-header">
                     <h1>
-                        Profile
+                        Hello
                         <small>soat officer 2.0</small>
                     </h1>
                 </section>
