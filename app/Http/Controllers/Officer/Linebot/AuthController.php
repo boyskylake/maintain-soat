@@ -25,7 +25,7 @@ class AuthController extends Controller
     {
         // $req = $request->json()->all();
         $this->validate($request, [
-            'username' => ['required', 'string', 'email', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::where('user_name', $request->username);
