@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { feedDataAction } from "../../redux/actions";
 
 import "datatables.net-dt/css/jquery.dataTables.css";
+import { Button } from "bootstrap";
 $.DataTable = require("datatables.net");
 
 function Listorder() {
@@ -30,7 +31,7 @@ function Listorder() {
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, "All"],
             ],
-            order:[[0,'desc']],
+            order: [[0, "desc"]],
             processing: true,
             serverSide: true,
             responsive: true,
@@ -40,11 +41,10 @@ function Listorder() {
                 headers: {
                     Authorization: "Bearer " + user.access_token,
                 },
-
             },
             columns: [
                 { data: "inform_no" },
-                { data: "coop_id" },
+                // { data: "coop_id" },
                 {
                     data: "coop_shortname",
                     orderable: false,
@@ -57,13 +57,21 @@ function Listorder() {
                     data: "namereceiver",
                     orderable: false,
                 },
-                {
-                    data: "express_status",
-                    orderable: false,
-                },
+                // {
+                //     data: "express_status",
+                //     orderable: false,
+                // },
                 {
                     data: "name_status_des",
                     orderable: false,
+                },
+                {
+                    data: null,
+                    // className: "center",
+                    defaultContent:
+                        '<div style="padding-right: 30px;"><a href=" " title="ลบ" class="btn btn-sm btn-danger pull-right delete style="margin-right: 5px; "><i class="fa fa-trash-o"></i><span class="hidden-xs hidden-sm"> ลบ</span></a>' +
+                        '<a href=" " title="แก้ไข" class="btn btn-sm btn-warning pull-right edit" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> <span class="hidden-xs hidden-sm">แก้ไข</span></a></div>' +
+                        '<a href=" " title="View" class="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">View</span></a>',
                 },
             ],
         });
@@ -76,7 +84,7 @@ function Listorder() {
             {/* Content Header (Page header) */}
             <section className="content-header">
                 <h1>
-                   ดู order ทั้งหมด
+                    ดู order ทั้งหมด
                     {/* <small>advanced tables</small> */}
                 </h1>
                 <ol className="breadcrumb">
@@ -97,26 +105,81 @@ function Listorder() {
                     <div className="col-xs-12">
                         <div className="box">
                             <div className="box-header">
-                                <h3 className="box-title">รายการ Order ทั้งหหมด</h3>
+                                <h3 className="box-title">
+                                    รายการ Order ทั้งหมด
+                                </h3>
                             </div>
+                            {/* <br />
+                            <div className="col-md-3">
+                                <select
+                                    name="filter_year"
+                                    id="filter_year"
+                                    className="form-control"
+                                    required
+                                >
+                                    <option>เลือกปี</option>
+                                </select>
+                            </div>
+                            <br />
+                            <br />
+                            <br /> */}
                             {/* /.box-header */}
                             <div className="box-body">
                                 {/* <table ref={main} /> */}
                                 <table
                                     id="example2"
                                     className="table table-bordered table-hover"
+                                    style={{
+                                        textAlign: "center",
+                                    }}
                                 >
                                     <thead>
                                         <tr>
-                                            <th>เลขที่</th>
-                                            <th>เลขสหกรณ์</th>
-                                            <th>สหกรณ์</th>
-                                            <th>วันที่รับแจ้ง</th>
-                                            <th>ผู้รับแจ้ง</th>
-                                            <th>ประเภทงาน</th>
-                                            <th>สถานะงาน</th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                เลขที่
+                                            </th>
+                                            {/* <th>เลขสหกรณ์</th> */}
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                สหกรณ์
+                                            </th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                วันที่รับแจ้ง
+                                            </th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                ผู้รับแจ้ง
+                                            </th>
+                                            {/* <th>ประเภทงาน</th> */}
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                สถานะงาน
+                                            </th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                Action
+                                            </th>
                                         </tr>
-
                                     </thead>
                                 </table>
                             </div>

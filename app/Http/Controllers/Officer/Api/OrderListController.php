@@ -70,15 +70,25 @@ class OrderListController extends Controller
                 ucf_status.status_des as name_status,
                 case when ucf_status.status = 4 then
                 -- '<span style=\"color:#00a65a;\">'||ucf_status.status_des||'</span>'
-                '<span  style=\"font-size: 17px;background-color:#19a63d; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 14px;background-color:#19a63d; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
                 when ucf_status.status = 2 then
-                '<span  style=\"font-size: 17px;background-color:#fa9a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 14px;background-color:#fa9a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
                 when ucf_status.status = 5 then
-                '<span  style=\"font-size: 17px;background-color:#fa2a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 14px;background-color:#fa2a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
                 when ucf_status.status = 0 then
-                '<span  style=\"font-size: 17px;background-color:#fc660f; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 14px;background-color:#fc660f; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
                 when ucf_status.status = 3 then
-                '<span  style=\"font-size: 17px;background-color:#193ae0; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 14px;background-color:#193ae0; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 1 then
+                '<span  style=\"font-size: 14px;background-color:#e8cd1a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 6 then
+                '<span  style=\"font-size: 14px;background-color:#4798fc; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 7 then
+                '<span  style=\"font-size: 14px;background-color:#fa3741; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 8 then
+                '<span  style=\"font-size: 14px;background-color:#fa5137; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+
+
                 else
                 ucf_status.status_des
                 end as name_status_des
