@@ -27,6 +27,13 @@ const linebotRoute = [
         layout: "linebot",
         component: lazy(() => import("../pages/Profile/Profile")),
     },
+    {
+        path: "/linebot/orders",
+        exact: true,
+        authliff: true,
+        layout: "linebot",
+        component: lazy(() => import("../pages/Order/Orders")),
+    },
 ];
 
 export default linebotRoute;
