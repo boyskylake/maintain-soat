@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Officer\Linebot;
 
 use App\Http\Controllers\Controller;
-use App\Model\Officer\User;
+use App\Model\Officer\ucfOfficer as User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller

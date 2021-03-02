@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Officer\Linebot;
 
 use App\Helpers\LineNotify;
 use App\Http\Controllers\Controller;
-use App\Model\Officer\User;
+use App\Model\Officer\ucfOfficer as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -28,9 +28,9 @@ class AuthController extends Controller
             'username' => ['required', 'string', 'email', 'max:255'],
         ]);
 
-        $user = User::where('email', $request->username);
+        $user = User::where('user_name', $request->username);
 
-        if (!Hash::check($request->password, $user->first()->password)) {
+        if (!md5($request->password) ==  $user->first()->user_pwd) {
             return response()->json(['message' => 'The specified password does not match the database password'], 422);
         }
 
