@@ -107,12 +107,12 @@ const Login = () => {
                         <input id="token" hidden />
                         <div className="form-group has-feedback">
                             <input
-                                type="email"
+                                type="text"
                                 onChange={(event) =>
                                     setUser(event.target.value)
                                 }
                                 className="form-control"
-                                placeholder="Email"
+                                placeholder="Username"
                                 required
                             />
                             <span className="glyphicon glyphicon-envelope form-control-feedback" />
