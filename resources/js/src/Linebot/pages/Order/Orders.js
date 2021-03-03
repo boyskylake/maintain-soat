@@ -39,7 +39,7 @@ const Orders = () => {
                 { data: "inform_no" },
                 {
                     data: "receive_date",
-                    orderable: false,
+                    orderable: true,
                 },
                 {
                     data: "inform_description",

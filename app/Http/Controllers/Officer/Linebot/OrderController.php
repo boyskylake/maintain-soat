@@ -32,7 +32,7 @@ class OrderController extends Controller
 
     public function getOrder(Request $request){
         $user = User::where('userId', $request->userId)->first();
-        dd($user);
+        // dd($user);
         // $infrom = DB::connection('oracle')->select();
         $num = DB::select("SELECT
             count(1) as num
@@ -41,11 +41,11 @@ class OrderController extends Controller
 
         $columns = array(
             0 => 'c.inform_no',
-            1 => 'c.inform_description',
+            1 => 'c.receive_date',
         );
 
         $totalData = $num[0]->num;
-
+        dd($totalData);
         // dd($num[0]->num);
 
         $totalFiltered = $totalData;
