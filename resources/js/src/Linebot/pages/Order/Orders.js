@@ -31,8 +31,6 @@ const Orders = () => {
                 type: "POST",
                 headers: {
                     Authorization: "Bearer " + user,
-                    Accept: "application/json, text/plain, */*",
-                    "Content-Type": "application/json",
                 },
             },
             columns: [
