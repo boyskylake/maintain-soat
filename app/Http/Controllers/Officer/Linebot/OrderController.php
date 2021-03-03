@@ -45,7 +45,6 @@ class OrderController extends Controller
         );
 
         $totalData = $num[0]->num;
-        dd($totalData);
         // dd($num[0]->num);
 
         $totalFiltered = $totalData;
@@ -83,6 +82,7 @@ class OrderController extends Controller
         } else {
             if (empty($request->input('search.value'))) {
                 $posts = DB::select($sql.$orderby."limit ".$start." ".($limit + $start)." ");
+                dd($posts);
             } else {
                 $search = $request->input('search.value');
 
