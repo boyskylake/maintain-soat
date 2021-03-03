@@ -81,13 +81,13 @@ class OrderController extends Controller
             }
         } else {
             if (empty($request->input('search.value'))) {
-                $posts = DB::select($sql.$orderby."limit ".$start." ".($limit + $start)." ");
+                $posts = DB::select($sql.$orderby."  limit ".$start." ".($limit + $start)." ");
                 // dd($posts);
             } else {
                 $search = $request->input('search.value');
 
                 $sh = " AND inform_head.inform_no LIKE '%$search%'";
-                $posts = DB::select($sql.$sh.$orderby."limit ".$start." ".($limit + $start)." ");
+                $posts = DB::select($sql.$sh.$orderby."  limit ".$start." ".($limit + $start)." ");
 
 
                 $num = DB::select("SELECT
