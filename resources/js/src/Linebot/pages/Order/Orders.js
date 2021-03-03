@@ -9,7 +9,7 @@ $.DataTable = require("datatables.net");
 const Orders = () => {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
-
+    let user = localStorage.getItem("linetoken");
     useEffect(() => {
         // async function feedData() {
         //     await dispatch(
@@ -30,7 +30,9 @@ const Orders = () => {
                 url: "/api/v1/linebot/order",
                 type: "POST",
                 headers: {
-                    // Authorization: "Bearer " + user.access_token,
+                    Authorization: "Bearer " + user,
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
                 },
             },
             columns: [
