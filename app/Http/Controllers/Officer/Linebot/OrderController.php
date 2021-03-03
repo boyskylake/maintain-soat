@@ -9,28 +9,28 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function getOrder(Request $request)
-    {
-        $user = User::where('userId', $request->userId)->first();
+    // public function getOrder(Request $request)
+    // {
+    //     $user = User::where('userId', $request->userId)->first();
 
-        $data = DB::select("SELECT
-                    inform_head.inform_no,
-                    inform_head.coop_id,
-                    inform_head.receive_date,
-                    inform_detail.inform_description
-                FROM
-                    inform_head,
-                    inform_detail
-                where
-                    inform_head.inform_no = inform_detail.inform_no
-                    and inform_head.coop_id = :coopID
-                order by receive_date desc
-                    ", [ 'coopID' => $user->officer_id ]);
+    //     $data = DB::select("SELECT
+    //                 inform_head.inform_no,
+    //                 inform_head.coop_id,
+    //                 inform_head.receive_date,
+    //                 inform_detail.inform_description
+    //             FROM
+    //                 inform_head,
+    //                 inform_detail
+    //             where
+    //                 inform_head.inform_no = inform_detail.inform_no
+    //                 and inform_head.coop_id = :coopID
+    //             order by receive_date desc
+    //                 ", [ 'coopID' => $user->officer_id ]);
 
-        return response()->json(['massage' => 'Success.', 'data' => $data]);
-    }
+    //     return response()->json(['massage' => 'Success.', 'data' => $data]);
+    // }
 
-    public function getOrder2(Request $request){
+    public function getOrder(Request $request){
         $user = User::where('userId', $request->userId)->first();
 
         // $infrom = DB::connection('oracle')->select();
