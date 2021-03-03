@@ -40,8 +40,8 @@ class OrderController extends Controller
             inform_head");
 
         $columns = array(
-            0 => 'c.inform_no',
-            1 => 'c.receive_date',
+            0 => 'inform_head.inform_no',
+            1 => 'inform_head.receive_date',
         );
 
         $totalData = $num[0]->num;
