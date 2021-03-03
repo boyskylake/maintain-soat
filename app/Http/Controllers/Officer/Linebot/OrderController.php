@@ -30,7 +30,7 @@ class OrderController extends Controller
         return response()->json(['massage' => 'Success.', 'data' => $data]);
     }
 
-    public function Poporder(Request $request){
+    public function getOrder2(Request $request){
         $user = User::where('userId', $request->userId)->first();
 
         // $infrom = DB::connection('oracle')->select();

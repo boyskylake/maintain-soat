@@ -11,44 +11,44 @@ const Orders = () => {
     const feedData = useSelector((state) => state.feedData);
 
     useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(
-        //         feedDataAction.feedDataPost("/api/v1/linebot/order")
-        //     );
-        // }
-        // feedData();
-        $("#example2").DataTable({
-            lengthMenu: [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, "All"],
-            ],
-            order: [[0, "desc"]],
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: {
-                url: "/api/v1/linebot/poporder",
-                type: "POST",
-                headers: {
-                    // Authorization: "Bearer " + user.access_token,
-                },
-            },
-            columns: [
-                { data: "inform_no" },
-                {
-                    data: "receive_date",
-                    orderable: false,
-                },
-                {
-                    data: "inform_description",
-                    orderable: false,
-                },
-                {
-                    data: "status_des",
-                    orderable: false,
-                },
-            ],
-        });
+        async function feedData() {
+            await dispatch(
+                feedDataAction.feedDataPost("/api/v1/linebot/order")
+            );
+        }
+        feedData();
+        // $("#example2").DataTable({
+        //     lengthMenu: [
+        //         [10, 25, 50, 100, -1],
+        //         [10, 25, 50, 100, "All"],
+        //     ],
+        //     order: [[0, "desc"]],
+        //     processing: true,
+        //     serverSide: true,
+        //     responsive: true,
+        //     ajax: {
+        //         url: "/api/v1/linebot/order",
+        //         type: "POST",
+        //         headers: {
+        //             // Authorization: "Bearer " + user.access_token,
+        //         },
+        //     },
+        //     columns: [
+        //         { data: "inform_no" },
+        //         {
+        //             data: "receive_date",
+        //             orderable: false,
+        //         },
+        //         {
+        //             data: "inform_description",
+        //             orderable: false,
+        //         },
+        //         {
+        //             data: "status_des",
+        //             orderable: false,
+        //         },
+        //     ],
+        // });
 
     }, [dispatch]);
 

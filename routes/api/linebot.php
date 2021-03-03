@@ -12,7 +12,7 @@ Route::group(['namespace' => 'Officer\Linebot'], function () {
         Route::post('profile', 'ProfileController@getProfile');
         Route::post('setting', 'SettingController@setting');
         Route::post('order', 'OrderController@getOrder');
-        Route::post('poporder', 'OrderController@Poporder');
+
     });
 
 });
