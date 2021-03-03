@@ -49,7 +49,6 @@ const Orders = () => {
                 },
             ],
         });
-
     }, [dispatch]);
 
     // useEffect(() => {
@@ -101,46 +100,48 @@ const Orders = () => {
                             })}
                     </tbody>
                 </table> */}
-                   <table
-                                    id="example2"
-                                    className="table table-bordered table-hover"
+                <div style={{ overflowX: "auto" }}>
+                    <table
+                        id="example2"
+                        className="table table-bordered table-hover"
+                        style={{
+                            textAlign: "center",
+                        }}
+                    >
+                        <thead>
+                            <tr>
+                                <th
                                     style={{
                                         textAlign: "center",
                                     }}
                                 >
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                เลขที่
-                                            </th>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                วันที่รับแจ้ง
-                                            </th>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                รายละเอียด
-                                            </th>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                สถานะงาน
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                                    เลขที่
+                                </th>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    วันที่รับแจ้ง
+                                </th>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    รายละเอียด
+                                </th>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    สถานะงาน
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
             {/* /.container */}
         </div>
