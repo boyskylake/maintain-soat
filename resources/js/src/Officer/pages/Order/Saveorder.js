@@ -29,7 +29,6 @@ function Saveorder() {
     useScript(
         "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
     );
-
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = (data) => {
         console.log(data);

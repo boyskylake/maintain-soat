@@ -46,6 +46,12 @@ const officerRoute = [
         layout: "officer",
         component: lazy(() => import("../pages/Order/component/Detail")),
     },
+    {
+        path: "/officer/calenda",
+        exact: true,
+        layout: "officer",
+        component: lazy(() => import("../pages/Calenda/Calenda")),
+    },
 ];
 
 export default officerRoute;
