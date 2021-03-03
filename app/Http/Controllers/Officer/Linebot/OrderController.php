@@ -31,35 +31,41 @@ class OrderController extends Controller
     // }
 
     public function getOrder(Request $request){
+        // ดึงข้อมูล user จาก Request
         $user = User::where('userId', $request->userId)->first();
-        // dd($user);
-        // $infrom = DB::connection('oracle')->select();
+        // ดึง order ทั้งหมดมา นับจำนวนข้อมูล
         $num = DB::select("SELECT
             count(1) as num
             FROM
-            inform_head");
-
+            inform_head
+            where  inform_head.coop_id = '".$user->officer_id."'
+            ");
+ // กำหนด column ใน table มา search หรือ เรียงลำดับ
         $columns = array(
             0 => 'inform_head.inform_no',
             1 => 'inform_head.receive_date',
         );
-
+        // ตัวแปร จำนวนนับแถวทั้งหมด
         $totalData = $num[0]->num;
         // dd($num[0]->num);
-
+        // ตัวแปร จำนวนนับแถวทั้งหมด
         $totalFiltered = $totalData;
-
+        // จำนวนแถวที่ส่งมาจากหน้าบ้าน
         $limit = $request->input('length');
+        // จำนวนข้อมูลทีเริ่มแถว
         $start = $request->input('start');
+        // การเรียงลำดับ
         $order = $columns[$request->input('order.0.column')];
+        // ประเภทการเรียง มากไปน้อย หรือ น้อยไปมาก
         $dir = $request->input('order.0.dir');
-
+        // Select มาปกติ ------------
         $sql = "SELECT
         inform_head.inform_no as inform_no,
                     inform_head.coop_id as coop_id,
                     inform_head.receive_date as receive_date,
                     inform_detail.inform_description as inform_description,
-                    status_des as status_des
+                    status_des as status_des,
+                    onsite_date as onsite_date
                     FROM
                     soatdevp_soat.inform_head,
                     soatdevp_soat.inform_detail,
@@ -69,7 +75,10 @@ class OrderController extends Controller
                     and inform_head.finished_status = ucf_status.status
                     and inform_head.coop_id = '".$user->officer_id."'
                     ";
+        // -------------------------------- เรียงลำดับ
                     $orderby = "  ORDER BY $order $dir";
+
+        // ถ้าลูกค้่าเลือกแสดงข้อมูลทั้งหมดจะเป็น -1
         if ($limit === "-1") {
             if (empty($request->input('search.value'))) {
                 $posts = DB::select($sql.$orderby);
@@ -79,26 +88,37 @@ class OrderController extends Controller
                 $sh = " AND inform_head.inform_no LIKE '%$search%'";
                 $posts = DB::select($sql.$sh.$orderby);
             }
-        } else {
+
+        }
+    //    การแสดงแบบปกติ
+        else {
+            // ถ้าไม่มีการค้นหาให้ทำอันนี้
             if (empty($request->input('search.value'))) {
+                 // ดึงข้อมูลจาก database
                 $posts = DB::select($sql.$orderby."  limit ".$start." , ".($limit + $start)." ");
                 // dd($posts);
-            } else {
+            }
+            // ทำเมื่อมีการค้นหา
+            else {
+                // รับตัวแปรค้นหา
                 $search = $request->input('search.value');
-
+                // ตัวแปรค้นหาจาก input
                 $sh = " AND inform_head.inform_no LIKE '%$search%'";
+                // ดึงข้อมูลจาก database
                 $posts = DB::select($sql.$sh.$orderby."  limit ".$start." , ".($limit + $start)." ");
 
-
+                // นับข้อมูลที่ค้นหาได้
                 $num = DB::select("SELECT
                 count(1) as num
                 FROM
                 inform_head
                 where inform_head.inform_no LIKE '%$search%'");
-
+                // รวมจำนวนนับข้อมูลที่ค้นหาได้
                 $totalFiltered = $num[0]->num;
             }
         }
+
+        // ข้อมูลส่งกลับ ไม่จำเป็นไม่ต้องแก้
         $json_data = array(
             "draw"            => intval($request->input('draw')),
             "recordsTotal"    => intval($totalData),

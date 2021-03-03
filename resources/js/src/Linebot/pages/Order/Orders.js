@@ -40,6 +40,11 @@ const Orders = () => {
                     orderable: true,
                 },
                 {
+                    data: "onsite_date",
+                    orderable: true,
+                },
+
+                {
                     data: "inform_description",
                     orderable: false,
                 },
@@ -122,7 +127,14 @@ const Orders = () => {
                                         textAlign: "center",
                                     }}
                                 >
-                                    วันที่รับแจ้ง
+                                    วันที่รับ
+                                </th>
+                                <th
+                                    style={{
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    วันที่นัด
                                 </th>
                                 <th
                                     style={{
