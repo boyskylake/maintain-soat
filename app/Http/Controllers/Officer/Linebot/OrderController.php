@@ -32,7 +32,7 @@ class OrderController extends Controller
 
     public function getOrder(Request $request){
         $user = User::where('userId', $request->userId)->first();
-
+        dd($user);
         // $infrom = DB::connection('oracle')->select();
         $num = DB::select("SELECT
             count(1) as num
