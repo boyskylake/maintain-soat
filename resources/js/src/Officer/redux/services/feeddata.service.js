@@ -17,7 +17,7 @@ function feedDataGet(url) {
 function feedDataPost(url, body = {}) {
     const requestOptions = {
         method: "Post",
-        data:JSON.stringify(body),
+        body:body,
     };
 
     return service.API(url, requestOptions)
