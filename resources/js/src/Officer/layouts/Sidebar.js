@@ -43,9 +43,9 @@ const Sidebar = () => {
                                     alt="User Image"
                                 />
                             </div>
-                            <div className="pull-left info">
+                            <div className="pull-center info">
                                 <center>
-                                    <p>{FeedMenu[1].name}</p>
+                                   <h4>{FeedMenu[1].name}</h4>
                                 </center>
                                 {/*< <p>Alexander Pierce</p> */}
                                 <a href="#">
