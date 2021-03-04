@@ -26,5 +26,16 @@ class OrderPageController extends Controller
 
 
     }
+    public function page_one(Request $request)
+    {
+
+    //   $SESSION_TOKEN =  $request->session()->token()
+    //   $request->session()->put('key', 'value');
+
+
+        return response()->json(compact());
+
+
+    }
 
 }

@@ -10,7 +10,9 @@ function SaveorderComponent(
     { setCompleted, completed, setActiveStep, activeStep, step }
 ) {
     // function SaveorderComponent({ props }) {
-    console.log(props);
+    // console.log(props);
+
+
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const [confirmSubmit, setconfirmSubmit] = useState(false);
@@ -24,9 +26,10 @@ function SaveorderComponent(
     );
 
     const { register, handleSubmit, watch, errors } = useForm();
+
     const onSubmit = (data) => {
         console.log(data);
-        console.log(coopid);
+        // console.log(coopid);
         // $('#myModal').modal('show')
     };
 
@@ -72,6 +75,7 @@ function SaveorderComponent(
     return (
         <div className="box-body">
             <div className="box-header">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="row">
                     <div className="col-md-3">
                         <div className="form-group">
@@ -101,7 +105,7 @@ function SaveorderComponent(
                             <select
                                 name="receiver"
                                 className="form-control select2"
-                                ref={register}
+                                ref={register({ required: true })}
                                 required
                             >
                                 {feedData.data &&
@@ -121,6 +125,8 @@ function SaveorderComponent(
                                         );
                                     })}
                             </select>
+
+                            {errors.receiver && <span>กรุณาเลือกผู้รับแจ้ง</span>}
                         </div>
 
                         <div className="form-group">
@@ -179,7 +185,7 @@ function SaveorderComponent(
                                 name="coopid"
                                 id="coopid"
                                 className="form-control select2"
-                                ref={register}
+                                ref={register({ required: true })}
                                 required
                             >
                                 <option></option>
@@ -190,7 +196,7 @@ function SaveorderComponent(
                                             {val.coop_id} {val.coop_name}
                                         </option>
                                     ))}
-                            </select>
+                            </select>  {errors.coopid && <span>กรุณาเลือกผู้รับแจ้ง</span>}
                         </div>
                         <div className="col-md-6">
                             <div className="form-group receiver">
@@ -199,7 +205,7 @@ function SaveorderComponent(
                                     name="informer"
                                     id="informer"
                                     className="form-control select2"
-                                    ref={register}
+                                 ref={register({ required: true })}
                                     required
                                 >
                                     <option></option>
@@ -219,7 +225,7 @@ function SaveorderComponent(
                                                 );
                                             }
                                         )}
-                                </select>
+                                </select> {errors.informer && <span>กรุณาเลือกผู้รับแจ้ง</span>}
                             </div>
                             <div className="form-group">
                                 <label>เอกสารอ้างอิง</label>
@@ -310,6 +316,7 @@ function SaveorderComponent(
                                         className="form-control"
                                         data-inputmask="'alias': 'dd/mm/yyyy'"
                                         data-mask
+                                        ref={register}
                                     />
                                 </div>
                             </div>
@@ -332,6 +339,7 @@ function SaveorderComponent(
                                         className="form-control"
                                         data-inputmask="'alias': 'dd/mm/yyyy'"
                                         data-mask
+                                        ref={register}
                                     />
                                 </div>
                             </div>
@@ -349,6 +357,7 @@ function SaveorderComponent(
                                     type="radio"
                                     name="r3"
                                     className="flat-red"
+                                    ref={register}
                                 />
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 ไม่ระบุ&nbsp;&nbsp;&nbsp;&nbsp;
@@ -358,6 +367,7 @@ function SaveorderComponent(
                                     type="radio"
                                     name="r3"
                                     className="flat-red"
+                                    ref={register}
                                 />
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 Telephone&nbsp;&nbsp;&nbsp;&nbsp;
@@ -367,6 +377,7 @@ function SaveorderComponent(
                                     type="radio"
                                     name="r3"
                                     className="flat-red"
+                                    ref={register}
                                 />
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 Modem&nbsp;&nbsp;&nbsp;&nbsp;
@@ -376,6 +387,7 @@ function SaveorderComponent(
                                     type="radio"
                                     name="r3"
                                     className="flat-red"
+                                    ref={register}
                                 />
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 Onsite&nbsp;&nbsp;&nbsp;&nbsp;
@@ -388,7 +400,7 @@ function SaveorderComponent(
                     <div className="col-md-3">
                         <div className="form-group blueselect">
                             <label>ประเภทงาน</label>
-                            <select className="form-control select2">
+                            <select className="form-control select2" ref={register}>
                                 <option></option>
                                 {feedData.data &&
                                     feedData.data.ucf_inform_type &&
@@ -412,7 +424,7 @@ function SaveorderComponent(
                     <div className="col-md-4">
                         <div className="form-group orangeselect">
                             <label>SA</label>
-                            <select className="form-control select2">
+                            <select className="form-control select2" ref={register}>
                                 <option></option>
                                 {feedData.data &&
                                     feedData.data.ucf_officer &&
@@ -432,13 +444,157 @@ function SaveorderComponent(
                                     })}
                             </select>
 
-                            {/* <button onClick={handleComplete} >
-                                 next
-                                </button> */}
                         </div>
                     </div>
                 </div>
-            </div>
+                  <div className="box box-danger"
+                                id="Detail"
+                                style={{
+                                border: "2px solid #dd4b39",
+                                display: "none",
+                                }}>
+                                <div className="box-header">
+                                    <h3 className="box-title">รายละเอียด</h3>
+                                </div>
+                                 <div className="box-body">
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                            <div className="form-group prinkselect">
+                                                <label>โปรแกรม</label>
+                                                <select className="form-control select2" ref={register}>
+                                                    <option></option>
+                                                    {feedData.data &&
+                                                        feedData.data
+                                                            .ucf_application &&
+                                                        feedData.data.ucf_application.map(
+                                                            (val, i) => {
+                                                                return (
+                                                                    <option
+                                                                        key={i}
+                                                                        value={
+                                                                            val.app_no
+                                                                        }
+                                                                    >
+                                                                        {`[${val.app_no}]`}
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                        {
+                                                                            val.application
+                                                                        }
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                        {`[${val.version}]`}
+                                                                    </option>
+                                                                );
+                                                            }
+                                                        )}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <div className="form-group">
+                                                <label>สภานะ</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    ref={register}
+                                                    style={{
+                                                        border:
+                                                            "1.5px solid #3c8dbc",
+                                                        borderRadius: 2,
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <div className="form-group prinkselect">
+                                                <label>รหัสปัญหา</label>
+                                                <br />
+                                                <select className="form-control select2" ref={register}>
+                                                    <option></option>
+                                                    {feedData.data &&
+                                                        feedData.data
+                                                            .ucf_application &&
+                                                        feedData.data.ucf_application.map(
+                                                            (val, i) => {
+                                                                return (
+                                                                    <option
+                                                                        key={i}
+                                                                        value={
+                                                                            val.app_no
+                                                                        }
+                                                                    >
+                                                                        {`[${val.app_no}]`}
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                        {
+                                                                            val.application
+                                                                        }
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                        {`[${val.version}]`}
+                                                                    </option>
+                                                                );
+                                                            }
+                                                        )}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <div className="form-group">
+                                                <label>เวลา(นาที)</label>
+                                                <br />
+                                                <div
+                                                    className="input-group"
+                                                    style={{
+                                                        border:
+                                                            "1.5px solid #3c8dbc",
+                                                        borderRadius: 2,
+                                                    }}
+                                                >
+                                                    <div className="input-group-addon">
+                                                        <i className="fa fa-calendar" />
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        data-inputmask="'alias': 'dd/mm/yyyy'"
+                                                        data-mask
+                                                        ref={register}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="form-group">
+                                                <label>รายละเอียด :</label>
+                                                {/* <div className="input-group">
+                                                    <div className="input-group-addon">
+                                                    <i className="fa fa-calendar" />
+                                                    </div> */}
+                                                {/* <textarea type="text" className="form-control"  /> */}
+                                                <textarea
+                                                    id="editor1"
+                                                    name="editor1"
+                                                    rows={10}
+                                                    cols={80}
+                                                    ref={register}
+                                                />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <input type="submit" />
+                                    
+                                </div>
+                   </div></form>
+            </div> 
+            {/* <button class="btn btn-block btn-primary btn-lg" onClick={handleComplete}>
+                ดำเนินการต่อ
+            </button> */}
+            {/* <button onClick={handleComplete} >
+                ดำเนินการต่อ
+            </button> */}
         </div>
     );
 }

@@ -11,10 +11,11 @@ class MenuController extends Controller
 {
     public function menu()
     {
-        // dd();
         $user = Auth::user();
 
-        $menu = DB::table('roles')->where('id', '=', $user->role_id)->first();
+        $roles = DB::table('roles_officer')->where('id', '=', $user->role_id)->first();
+        $menu = DB::table('menus')->where('id', '=', $roles->menu_id)->first();
+        
 
         // dd($user->role_id);
 

@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     protected $connection = 'mysql';
 
-    protected $table = 'users';
+    protected $table = 'officers';
 
     /**
      * The attributes that are mass assignable.

@@ -30,12 +30,7 @@ function Saveorder() {
         "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
     );
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
-        console.log(coopid);
-        $("#myModal").modal("show");
-    };
-
+    
     //steppppppppppp
 
     const [activeStep, setActiveStep] = useState(0);
