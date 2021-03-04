@@ -28,8 +28,11 @@ class HomeController extends Controller
             from
                 ma_contract_head
                 left join ucf_category on ma_contract_head.group_type = ucf_category.category_TYPE
-            GROUP BY ma_contract_head.group_type, ucf_category.category_des");
+            GROUP BY ma_contract_head.group_type, ucf_category.category_des
+            ORDER by CATEGORY_DES asc
+            ");
 
+            // dd($grahp1);
         $grahp2 =DB::connection('oracle')->select("select
                 TO_CHAR(CONTRACT_DATE, 'YYYY') as years,
                 (select
