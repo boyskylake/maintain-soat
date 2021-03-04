@@ -6,15 +6,15 @@ import Inputmask from "inputmask";
 import { useScript } from "../../../helpers";
 import { feedDataAction } from "../../redux/actions";
 
-
 // steppp
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
-import {  StepButton } from "@material-ui/core";
+import { StepButton } from "@material-ui/core";
 
 //ประการศหน้ามาตาม Step
 import SaveorderComponent from "./component/SaveorderComponent";
-import Detail from "./component/Detail"
+import Detail from "./component/Detail";
+import ConfirmOrder from "./component/ConfirmOrder";
 
 function Saveorder() {
     const dispatch = useDispatch();
@@ -23,14 +23,13 @@ function Saveorder() {
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
 
-
     useScript("/officer/dist/js/pages/saveorder.js");
     useScript("/officer/bower_components/ckeditor/ckeditor.js");
     useScript(
         "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
     );
     const { register, handleSubmit, watch, errors } = useForm();
-    
+
     //steppppppppppp
 
     const [activeStep, setActiveStep] = useState(0);
@@ -128,7 +127,6 @@ function Saveorder() {
         $(document.body).on("change", "#coopid", function () {
             if (coopid == null) {
                 // console.log(coopid);
-
                 document.getElementById("Detail").style.display = "block";
                 $(".select2").select2();
                 CKEDITOR.replace("editor1");
@@ -188,7 +186,7 @@ function Saveorder() {
                             )}
                         </div>
                     )}
-                  {feedData.fetching && (
+                    {feedData.fetching && (
                         <div className="overlay">
                             <i className="fa fa-refresh fa-spin" />
                         </div>
@@ -202,11 +200,7 @@ function Saveorder() {
 
 export default Saveorder;
 function getSteps() {
-    return [
-        "บันทึกออเดอร์",
-        "สำหรับ Order สั่งซื้อ",
-        "ตรวจสอบความถูกต้อง"
-    ];
+    return ["บันทึกออเดอร์", "สำหรับ Order สั่งซื้อ", "ตรวจสอบความถูกต้อง"];
 }
 function getStepContent(
     step,
@@ -238,15 +232,24 @@ function getStepContent(
         case 1:
             return (
                 <Detail
-                props={data}
-                setCompleted={setCompleted}
-                completed={completed}
-                setActiveStep={setActiveStep}
-                activeStep={activeStep}
-                step={step}
+                    props={data}
+                    setCompleted={setCompleted}
+                    completed={completed}
+                    setActiveStep={setActiveStep}
+                    activeStep={activeStep}
+                    step={step}
                 />
             );
-        case 2:
+            case 2:
+            return <ConfirmOrder
+            props={data}
+            setCompleted={setCompleted}
+            completed={completed}
+            setActiveStep={setActiveStep}
+            activeStep={activeStep}
+            step={step}
+        />
+        case 3:
             return "Step 3: This is the bit I really care about!";
         default:
             return "Unknown step";

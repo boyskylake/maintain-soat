@@ -13,16 +13,16 @@ class Services {
     API(url, options) {
         const headers = {
             Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         };
 
         if (this.getToken()) {
             headers["Authorization"] = "Bearer " + this.getToken();
         }
-
+        // console.log(options);
         return axios(url, {
             headers,
-            ...options
+            ...options,
         })
             .then(this._handleResponseAPIsuc)
             .catch(this._handleResponseAPIerr);
