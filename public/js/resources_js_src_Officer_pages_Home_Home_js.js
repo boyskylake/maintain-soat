@@ -60,10 +60,7 @@ function Home() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     function feedData() {
       return _feedData.apply(this, arguments);
-    } //
-    //BAR CHART
-    //   });
-
+    }
 
     function _feedData() {
       _feedData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -87,59 +84,38 @@ function Home() {
     feedData();
   }, [dispatch]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (feedData && feedData.data && feedData.data.ma_coop) {
+    if (feedData && feedData.data) {
       $(function () {
-        var donut = new Morris.Donut({
-          element: 'sales-chart',
-          resize: true,
-          colors: ["#f88f58", "#363636"],
-          data: [{
-            label: "Hardware",
-            value: 5389
-          }, {
-            label: "Software",
-            value: 10853
-          }],
-          hideHover: 'auto'
+        var grahp1 = feedData.data.grahp1.map(function (val, i) {
+          if (val.category_des == null) {
+            return {
+              label: "other",
+              value: val.value
+            };
+          } else {
+            return {
+              label: val.category_des,
+              value: val.value
+            };
+          }
         });
-        var bar = document.getElementById("bar-chart");
-        bar = new Morris.Bar({
-          element: 'bar-chart',
+        new Morris.Donut({
+          element: "sales-chart",
           resize: true,
-          data: [{
-            y: '2014',
-            a: 1000,
-            b: 900
-          }, {
-            y: '2015',
-            a: 750,
-            b: 650
-          }, {
-            y: '2016',
-            a: 500,
-            b: 400
-          }, {
-            y: '2017',
-            a: 750,
-            b: 650
-          }, {
-            y: '2018',
-            a: 500,
-            b: 400
-          }, {
-            y: '2019',
-            a: 750,
-            b: 650
-          }, {
-            y: '2020',
-            a: 1000,
-            b: 900
-          }],
-          barColors: ['#f88f58', '#363636'],
-          xkey: 'y',
-          ykeys: ['a', 'b'],
-          labels: ['Hardware', 'Software'],
-          hideHover: 'auto'
+          colors: ["#fff81f", "#f10303", "#19caf3", "#fff81f"],
+          data: grahp1,
+          hideHover: "auto"
+        }); // var bar = document.getElementById("bar-chart");
+
+        new Morris.Bar({
+          element: "bar-chart",
+          resize: true,
+          data: feedData.data.grahp2,
+          barColors: ["#f10303", "#19caf3", "#fff81f"],
+          xkey: "years",
+          ykeys: ["software", "hardware", "other"],
+          labels: ["Software", "Hardware", "อื่นๆ"],
+          hideHover: "auto"
         });
       });
     }
@@ -150,13 +126,9 @@ function Home() {
     className: "content-wrapper",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_helmet__WEBPACK_IMPORTED_MODULE_2__.Helmet, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("script", {
-        src: "./bower_components/jquery/dist/jquery.min.js"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("script", {
         src: "./bower_components/raphael/raphael.min.js"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("script", {
         src: "./bower_components/morris.js/morris.min.js"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("script", {
-        src: "./officer/dist/js/adminlte.min.js"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("link", {
         rel: "stylesheet",
         href: "./bower_components/morris.js/morris.css"
@@ -285,7 +257,7 @@ function Home() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
               className: "box-title",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                children: "\u0E01\u0E23\u0E32\u0E1F\u0E2A\u0E34\u0E49\u0E19\u0E04\u0E49\u0E32\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
+                children: "\u0E01\u0E23\u0E32\u0E1F\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "box-tools pull-right",

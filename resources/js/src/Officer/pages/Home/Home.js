@@ -20,66 +20,60 @@ function Home() {
         async function feedData() {
             await dispatch(feedDataAction.feedDataGet("/api/v1/officer/Home"));
         }
-
-        //
-
-        //BAR CHART
-
-        //   });
-
         feedData();
     }, [dispatch]);
 
     useEffect(() => {
-        if (feedData && feedData.data && feedData.data.ma_coop) {
+        if (feedData && feedData.data) {
             $(function () {
+                let grahp1 = feedData.data.grahp1.map(function (val, i) {
+                    if (val.category_des == null) {
+                        return {
+                            label: "other",
+                            value: val.value,
+                        };
+                    } else {
+                        return {
+                            label: val.category_des,
+                            value: val.value,
+                        };
+                    }
+                });
 
-                var donut = new Morris.Donut({
-                    element: 'sales-chart',
+                new Morris.Donut({
+                    element: "sales-chart",
                     resize: true,
-                    colors: ["#f88f58", "#363636"],
-                    data: [
-                      {label: "Hardware", value: 5389},
-                      {label: "Software", value: 10853},
+                    colors: ["#fff81f", "#f10303", "#19caf3", "#fff81f"],
+                    data: grahp1,
+                    hideHover: "auto",
+                });
 
-                    ],
-                    hideHover: 'auto'
-                  });
-
-
-                var  bar = document.getElementById("bar-chart");
-                 bar = new Morris.Bar({
-                    element: 'bar-chart',
+                // var bar = document.getElementById("bar-chart");
+                new Morris.Bar({
+                    element: "bar-chart",
                     resize: true,
-                    data: [
-                      {y: '2014', a: 1000, b: 900},
-                      {y: '2015', a: 750, b: 650},
-                      {y: '2016', a: 500, b: 400},
-                      {y: '2017', a: 750, b: 650},
-                      {y: '2018', a: 500, b: 400},
-                      {y: '2019', a: 750, b: 650},
-                      {y: '2020', a: 1000, b: 900}
-                    ],
-                    barColors: ['#f88f58', '#363636'],
-                    xkey: 'y',
-                    ykeys: ['a', 'b'],
-                    labels: ['Hardware', 'Software'],
-                    hideHover: 'auto'
-                  });
+                    data: feedData.data.grahp2,
+                    barColors: ["#f10303", "#19caf3", "#fff81f"],
+                    xkey: "years",
+                    ykeys: ["software", "hardware", "other"],
+                    labels: ["Software", "Hardware", "อื่นๆ"],
+                    hideHover: "auto",
+                });
             });
         }
         return () => {};
     }, [feedData]);
+
     return (
         <div className="content-wrapper">
             {/* Content Header (Page header) */}
             <Helmet>
-                <script src="./bower_components/jquery/dist/jquery.min.js"></script>
                 <script src="./bower_components/raphael/raphael.min.js"></script>
                 <script src="./bower_components/morris.js/morris.min.js"></script>
-                <script src="./officer/dist/js/adminlte.min.js"></script>
-                <link rel="stylesheet" href="./bower_components/morris.js/morris.css"></link>
-
+                <link
+                    rel="stylesheet"
+                    href="./bower_components/morris.js/morris.css"
+                ></link>
             </Helmet>
             <section className="content-header">
                 <h1>
@@ -173,7 +167,9 @@ function Home() {
                 <div className="col-md-6">
                     <div className="box box-success">
                         <div className="box-header with-border">
-                            <h3 className="box-title"><strong>กราฟรายปี</strong></h3>
+                            <h3 className="box-title">
+                                <strong>กราฟรายปี</strong>
+                            </h3>
 
                             <div className="box-tools pull-right">
                                 <button
@@ -195,12 +191,12 @@ function Home() {
                     </div>
                 </div>
 
-
-
                 <div className="col-md-6">
-                <div className="box box-success">
+                    <div className="box box-success">
                         <div className="box-header with-border">
-                            <h3 className="box-title"><strong>กราฟสิ้นค้าทั้งหมด</strong></h3>
+                            <h3 className="box-title">
+                                <strong>กราฟสินค้าทั้งหมด</strong>
+                            </h3>
 
                             <div className="box-tools pull-right">
                                 <button
@@ -221,7 +217,6 @@ function Home() {
                         </div>
                     </div>
                 </div>
-
             </section>
         </div>
     );
