@@ -2458,7 +2458,7 @@ function feedDataPost(url) {
   var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var requestOptions = {
     method: "Post",
-    data: JSON.stringify(body)
+    body: body
   };
   return service.API(url, requestOptions).then(function (res) {
     return res;
