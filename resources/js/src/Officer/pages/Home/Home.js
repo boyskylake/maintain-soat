@@ -39,11 +39,11 @@ function Home() {
                         };
                     }
                 });
-
+                    console.log(grahp1)
                 new Morris.Donut({
                     element: "sales-chart",
                     resize: true,
-                    colors: ["#fff81f", "#f10303", "#19caf3", "#fff81f"],
+                    colors: ["#f10303", "#19caf3" , "#f88f58", "#f88f58"],
                     data: grahp1,
                     hideHover: "auto",
                 });
@@ -53,12 +53,49 @@ function Home() {
                     element: "bar-chart",
                     resize: true,
                     data: feedData.data.grahp2,
-                    barColors: ["#f10303", "#19caf3", "#fff81f"],
+                    barColors: [ "#19caf3", "#f10303", "#f88f58"],
                     xkey: "years",
-                    ykeys: ["software", "hardware", "other"],
+                    ykeys: [ "hardware" , "software", "other"],
                     labels: ["Software", "Hardware", "อื่นๆ"],
                     hideHover: "auto",
+
                 });
+
+
+                var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+                    var areaChart = new Chart(areaChartCanvas)
+
+                    var areaChartData = {
+                    labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [
+                        {
+                        label               : 'Software',
+                        fillColor           : '#8d90fd',
+                        pointColor          : '#fcff46',
+                        pointStrokeColor    : '#c1c7d1',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data                : [65, 59, 80, 81, 56, 55, 40]
+                        },
+                        {
+                        label               : 'Hardware',
+                        fillColor           : '#ffb2b2',
+                        pointColor          : '#3effb8',
+                        pointStrokeColor    : 'rgba(60,141,188,1)',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data                : [28, 48, 40, 19, 86, 27, 90]
+                        }
+                    ]
+                    }
+
+                    var areaChartOptions = {
+                    responsive              : true
+                    }
+
+                    areaChart.Line(areaChartData, areaChartOptions)
+
+
             });
         }
         return () => {};
@@ -164,11 +201,13 @@ function Home() {
                     </div>
                 )}
 
+                <div className="row">
+
                 <div className="col-md-6">
                     <div className="box box-success">
                         <div className="box-header with-border">
                             <h3 className="box-title">
-                                <strong>กราฟรายปี</strong>
+                                <strong>กราฟย้อนหลังปัจจุบัน 7 ปี</strong>
                             </h3>
 
                             <div className="box-tools pull-right">
@@ -185,7 +224,7 @@ function Home() {
                             <div
                                 className="chart"
                                 id="bar-chart"
-                                style={{ height: "300px" }}
+                                style={{ height: "250px" }}
                             ></div>
                         </div>
                     </div>
@@ -212,11 +251,48 @@ function Home() {
                             <div
                                 className="chart"
                                 id="sales-chart"
-                                style={{ height: "300px" }}
+                                style={{ height: "250px" }}
                             ></div>
                         </div>
                     </div>
                 </div>
+
+
+
+                <div className="col-md-12">
+                    <div className="box box-success">
+                        <div className="box-header with-border">
+                            <h3 className="box-title">
+                                <strong>กราฟเงินขาย</strong>
+                            </h3>
+
+                            <div className="box-tools pull-right">
+                                <button
+                                    type="button"
+                                    className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                >
+                                    <i className="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="box-body">
+                            <div className="chart">
+                                <canvas id="areaChart" style={{ height: "250px" }}></canvas>
+                            </div>
+                            </div>
+
+                    </div>
+                </div>
+
+
+
+
+                </div>
+
+
+
             </section>
         </div>
     );
