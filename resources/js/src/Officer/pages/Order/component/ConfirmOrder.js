@@ -135,24 +135,30 @@ function ConfirmOrder(
                                                         feedData.data
                                                             .ucf_officer &&
                                                         feedData.data.ucf_officer.map(
-                                                            (val, i) => {
-                                                                return (
-                                                                    <option
-                                                                        key={i}
-                                                                        value={val.officer_id} selected={cookies.pageone.receiver == val.officer_id}>
-                                                                         {val.officer_id} {val.officer_name} {val.officer_full_name}
-                                                                        {/* {`[${val.officer_id}]`}
-                                                                        &nbsp;&nbsp;&nbsp;
-                                                                        {
-                                                                            val.officer_name
-                                                                        }
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        {
-                                                                            val.officer_full_name
-                                                                        } */}
-                                                                    </option>
-                                                                );
-                                                            }
+                                                            (val, i) => (
+                                                                <option
+                                                                    key={i}
+                                                                    value={
+                                                                        val.officer_id
+                                                                    }
+                                                                    selected={
+                                                                        cookies
+                                                                            .pageone
+                                                                            .receiver ==
+                                                                        val.officer_id
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        val.officer_id
+                                                                    }{" "}
+                                                                    {
+                                                                        val.officer_name
+                                                                    }{" "}
+                                                                    {
+                                                                        val.officer_full_name
+                                                                    }
+                                                                </option>
+                                                            )
                                                         )}
                                                 </select>
                                             </div>
@@ -209,28 +215,59 @@ function ConfirmOrder(
                                         </div>
                                         {/* /.col */}
                                         <div className="col-md-9">
-                                          <div className="form-group coopid">
-                                              <label>สหกรณ์ฯ</label>
-                                              <select
-                                               disabled={true}
-                                                  name="coopid"
-                                                  id="coopid"
-                                                  className="form-control select2"
-                                                  ref={register({
-                                                      //  required: true
-                                                  })}
-                                                  // required
-                                              >
-
-                                                  {feedData.data &&
-                                                      feedData.data.ma_coop &&
-                                                      feedData.data.ma_coop.map((val, i) => (
-                                                          <option key={i} value={val.coop_id} selected={cookies.pageone.coopid == val.coop_id}>
-                                                              {val.coop_id} {val.coop_name}
-                                                          </option>
-                                                      ))}
-                                              </select>
-                                          </div>
+                                            <div className="form-group coopid">
+                                                <label>สหกรณ์ฯ</label>
+                                                <select
+                                                    // disabled={true}
+                                                    name="coopid"
+                                                    id="coopid"
+                                                    className="form-control select2"
+                                                    ref={register({
+                                                        //  required: true
+                                                    })}
+                                                    // required
+                                                >
+                                                    {feedData.data &&
+                                                        feedData.data.ma_coop &&
+                                                        feedData.data.ma_coop.map(
+                                                            (val, i) => {
+                                                                console.log(
+                                                                    val.coop_id,
+                                                                    " ",
+                                                                    cookies
+                                                                        .pageone
+                                                                        .coopid
+                                                                );
+                                                                return (
+                                                                    <option
+                                                                        key={i}
+                                                                        value={
+                                                                            val.coop_id
+                                                                        }
+                                                                        selected={
+                                                                            cookies
+                                                                                .pageone
+                                                                                .coopid ==
+                                                                                val.coop_id &&
+                                                                            "selected"
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            val.coop_id
+                                                                        }{" "}
+                                                                        {
+                                                                            val.coop_name
+                                                                        }
+                                                                    </option>
+                                                                );
+                                                            }
+                                                        )}
+                                                </select>
+                                                {console.log(
+                                                    feedData.data.ma_coop
+                                                )}
+                                                ;
+                                            </div>
                                             <div className="col-md-6">
                                                 <div className="form-group receiver">
                                                     <label>ผู้แจ้ง</label>
@@ -257,11 +294,18 @@ function ConfirmOrder(
                                                                             value={
                                                                                 val.contact_no
                                                                             }
+                                                                            selected={
+                                                                                cookies
+                                                                                    .pageone
+                                                                                    .informer ==
+                                                                                val.contact_no
+                                                                            }
                                                                         >
-                                                                            {`[${val.contact_no}]`}
-                                                                            &nbsp;&nbsp;&nbsp;
                                                                             {
-                                                                                val.contract_name
+                                                                                val.contact_no
+                                                                            }{" "}
+                                                                            {
+                                                                                val.contact_name
                                                                             }
                                                                         </option>
                                                                     );
