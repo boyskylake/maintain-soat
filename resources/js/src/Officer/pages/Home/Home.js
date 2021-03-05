@@ -317,7 +317,7 @@ function Home() {
                                 <canvas id="areaChart" style={{ height: "250px" }}></canvas>
                             </div>
                             </div>
-
+             555555
                     </div>
                 </div>
 
