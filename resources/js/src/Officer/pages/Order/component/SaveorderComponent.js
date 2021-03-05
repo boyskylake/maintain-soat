@@ -141,10 +141,50 @@ function SaveorderComponent(
                                 <label>ผู้รับแจ้ง</label>
                                 <select
                                     name="receiver"
+                                    id="receiver"
                                     className="form-control select2"
                                     ref={register({ required: true })}
                                     // required
                                 >
+                                    {/* <option></option> */}
+                                     {feedData.data &&
+                                        feedData.data.ucf_officer &&
+                                        feedData.data.ucf_officer.map((val, i) => (
+                                            <option key={i} value={val.officer_id}>
+                                               {`[${val.officer_id}]`}&nbsp;&nbsp;{val.officer_name}&nbsp;&nbsp;{val.officer_full_name}
+                                            </option>
+                                        ))}
+                                    {/* {feedData.data &&
+                                        feedData.data.ucf_officer &&
+                                        feedData.data.ucf_officer.map(
+                                            (val, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        // value={val.officer_id}
+                                                    >
+                                                        {`[${val.officer_id}]`}
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        {val.officer_name}
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        {val.officer_full_name}
+                                                    </option>
+                                                );
+                                            }
+                                        )} */}
+                                </select>
+
+                            </div>
+                            {/* <div className="form-group receiver">
+                                <label>ผู้รับแจ้ง</label>
+                                <select
+                                    name="receiver"
+                                    id="receiver"
+                                    className="form-control select2"
+                                    ref={register({ required: true })}
+                                    required
+                                >
+                                    <option>เลือกผู้รับแจ้ง</option>
                                     {feedData.data &&
                                         feedData.data.ucf_officer &&
                                         feedData.data.ucf_officer.map(
@@ -168,7 +208,7 @@ function SaveorderComponent(
                                 {errors.receiver && (
                                     <span>กรุณาเลือกผู้รับแจ้ง</span>
                                 )}
-                            </div>
+                            </div> */}
 
                             <div className="form-group">
                                 <label>วันที่รับแจ้ง</label>
@@ -256,7 +296,7 @@ function SaveorderComponent(
                                         })}
                                         // required
                                     >
-                                        <option></option>
+                                        {/* <option></option> */}
                                         {feedData.data &&
                                             feedData.data
                                                 .ucf_customer_contact &&
