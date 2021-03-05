@@ -34,24 +34,24 @@ const officerRoute = [
         layout: "",
         component: lazy(() => import("../pages/Lookscreen/Lookscreen")),
     },
-    {
-        path: "/officer/saveorder3",
-        exact: true,
-        layout: "officer",
-        component: lazy(() => import("../pages/Order/component/SaveorderComponent")),
-    },
-    {
-        path: "/officer/detail",
-        exact: true,
-        layout: "officer",
-        component: lazy(() => import("../pages/Order/component/Detail")),
-    },
-    {
-        path: "/officer/calenda",
-        exact: true,
-        layout: "officer",
-        component: lazy(() => import("../pages/Calenda/Calenda")),
-    },
+    // {
+    //     path: "/officer/saveorder3",
+    //     exact: true,
+    //     layout: "officer",
+    //     component: lazy(() => import("../pages/Order/component/SaveorderComponent")),
+    // },
+    // {
+    //     path: "/officer/detail",
+    //     exact: true,
+    //     layout: "officer",
+    //     component: lazy(() => import("../pages/Order/component/Detail")),
+    // },
+    // {
+    //     path: "/officer/calenda",
+    //     exact: true,
+    //     layout: "officer",
+    //     component: lazy(() => import("../pages/Calenda/Calenda")),
+    // },
 ];
 
 

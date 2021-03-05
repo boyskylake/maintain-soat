@@ -12,9 +12,9 @@ import Step from "@material-ui/core/Step";
 import { StepButton } from "@material-ui/core";
 
 //ประการศหน้ามาตาม Step
-import SaveorderComponent from "./component/SaveorderComponent";
-import Detail from "./component/Detail";
-import ConfirmOrder from "./component/ConfirmOrder";
+import Step1Component from "./component/Step1Component";
+import Step2Component from "./component/Step2Component";
+import Step3Component from "./component/Step3Component";
 
 function Saveorder() {
     const dispatch = useDispatch();
@@ -28,6 +28,7 @@ function Saveorder() {
     useScript(
         "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
     );
+    
     const { register, handleSubmit, watch, errors } = useForm();
 
     //steppppppppppp
@@ -148,8 +149,6 @@ function Saveorder() {
                         {steps.map((label, index) => {
                             const stepProps = {};
                             const buttonProps = {};
-                            {
-                            }
                             if (isStepSkipped(index)) {
                                 stepProps.completed = false;
                             }
@@ -199,9 +198,11 @@ function Saveorder() {
 }
 
 export default Saveorder;
+
 function getSteps() {
     return ["บันทึกออเดอร์", "สำหรับ Order สั่งซื้อ", "ตรวจสอบความถูกต้อง"];
 }
+
 function getStepContent(
     step,
     setCompleted,
@@ -220,7 +221,7 @@ function getStepContent(
     switch (step) {
         case 0:
             return (
-                <SaveorderComponent
+                <Step1Component
                     props={data}
                     setCompleted={setCompleted}
                     completed={completed}
@@ -231,7 +232,7 @@ function getStepContent(
             );
         case 1:
             return (
-                <Detail
+                <Step2Component
                     props={data}
                     setCompleted={setCompleted}
                     completed={completed}
@@ -240,15 +241,17 @@ function getStepContent(
                     step={step}
                 />
             );
-            case 2:
-            return <ConfirmOrder
-            props={data}
-            setCompleted={setCompleted}
-            completed={completed}
-            setActiveStep={setActiveStep}
-            activeStep={activeStep}
-            step={step}
-        />
+        case 2:
+            return (
+                <Step3Component
+                    props={data}
+                    setCompleted={setCompleted}
+                    completed={completed}
+                    setActiveStep={setActiveStep}
+                    activeStep={activeStep}
+                    step={step}
+                />
+            );
         case 3:
             return "Step 3: This is the bit I really care about!";
         default:

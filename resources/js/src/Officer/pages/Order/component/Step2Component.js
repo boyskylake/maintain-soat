@@ -7,7 +7,7 @@ import { feedDataAction } from "../../../redux/actions";
 
 import { useCookies } from "react-cookie";
 
-function Detail(
+function Step2Component(
     props,
     { setCompleted, completed, setActiveStep, activeStep, step }
 ) {
@@ -23,14 +23,9 @@ function Detail(
     const [coopid, setCoopid] = useState(null);
 
     const [CookiePageOne, setCookiePageOne] = useState();
-    // useScript("/officer/dist/js/pages/saveorder.js");
-    useScript("/officer/dist/js/pages/saveorder.js");
-    useScript("/officer/bower_components/ckeditor/ckeditor.js");
-    useScript(
-        "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-    );
 
     const { register, handleSubmit, watch, errors } = useForm();
+    
     const onSubmit = (data) => {
         console.log(data);
         console.log(coopid);
@@ -322,4 +317,4 @@ function Detail(
         </Fragment>
     );
 }
-export default Detail;
+export default Step2Component;

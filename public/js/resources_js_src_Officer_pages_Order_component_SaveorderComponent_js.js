@@ -52,7 +52,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function SaveorderComponent(props, _ref) {
+function Step1Component(props, _ref) {
   var _errors$informer;
 
   var setCompleted = _ref.setCompleted,
@@ -61,7 +61,7 @@ function SaveorderComponent(props, _ref) {
       activeStep = _ref.activeStep,
       step = _ref.step;
 
-  // function SaveorderComponent({ props }) {
+  // function Step1Component({ props }) {
   // console.log(props);
   var _useCookies = (0,react_cookie__WEBPACK_IMPORTED_MODULE_8__.default)(["pageone"]),
       _useCookies2 = _slicedToArray(_useCookies, 3),
@@ -661,7 +661,7 @@ function SaveorderComponent(props, _ref) {
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (SaveorderComponent);
+/* harmony default export */ __webpack_exports__["default"] = (Step1Component);
 
 var ErrorSpan = function ErrorSpan(_ref2) {
   var children = _ref2.children,

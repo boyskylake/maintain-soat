@@ -44,7 +44,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Detail(props, _ref) {
+function Step2Component(props, _ref) {
   var setCompleted = _ref.setCompleted,
       completed = _ref.completed,
       setActiveStep = _ref.setActiveStep,
@@ -357,7 +357,7 @@ function Detail(props, _ref) {
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Detail);
+/* harmony default export */ __webpack_exports__["default"] = (Step2Component);
 
 /***/ }),
 
