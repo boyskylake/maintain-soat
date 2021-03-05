@@ -6892,7 +6892,7 @@ function ConfirmOrder(props, _ref) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                     children: "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C\u0E2F"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("select", {
-                    disabled: true,
+                    // disabled={true}
                     name: "coopid",
                     id: "coopid",
                     className: "form-control select2",
@@ -6900,13 +6900,14 @@ function ConfirmOrder(props, _ref) {
                     }) // required
                     ,
                     children: feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
+                      console.log(val.coop_id, " ", cookies.pageone.coopid);
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("option", {
                         value: val.coop_id,
-                        selected: cookies.pageone.coopid == val.coop_id,
+                        selected: cookies.pageone.coopid == val.coop_id && "selected",
                         children: [val.coop_id, " ", val.coop_name]
                       }, i);
                     })
-                  })]
+                  }), console.log(feedData.data.ma_coop), ";"]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "col-md-6",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -6923,7 +6924,8 @@ function ConfirmOrder(props, _ref) {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {}), feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
                         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("option", {
                           value: val.contact_no,
-                          children: ["[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name]
+                          selected: cookies.pageone.informer == val.contact_no,
+                          children: [val.contact_no, " ", val.contact_name]
                         }, i);
                       })]
                     }), " ", ((_errors$informer = errors.informer) === null || _errors$informer === void 0 ? void 0 : _errors$informer.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ErrorSpan, {
@@ -7862,6 +7864,7 @@ function SaveorderComponent(props, _ref) {
                 children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
                 name: "receiver",
+                id: "receiver",
                 className: "form-control select2",
                 ref: register({
                   required: true
@@ -7870,11 +7873,9 @@ function SaveorderComponent(props, _ref) {
                 children: feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("option", {
                     value: val.officer_id,
-                    children: ["[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name]
+                    children: ["[".concat(val.officer_id, "]"), "\xA0\xA0", val.officer_name, "\xA0\xA0", val.officer_full_name]
                   }, i);
                 })
-              }), errors.receiver && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-                children: "\u0E01\u0E23\u0E38\u0E13\u0E32\u0E40\u0E25\u0E37\u0E2D\u0E01\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
               className: "form-group",
@@ -7955,19 +7956,19 @@ function SaveorderComponent(props, _ref) {
                 className: "form-group receiver",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
                   children: "\u0E1C\u0E39\u0E49\u0E41\u0E08\u0E49\u0E07"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("select", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("select", {
                   name: "informer",
                   id: "informer",
                   className: "form-control select2",
                   ref: register({//  required: true
                   }) // required
                   ,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {}), feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
+                  children: feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
                     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("option", {
                       value: val.contact_no,
                       children: ["[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name]
                     }, i);
-                  })]
+                  })
                 }), " ", ((_errors$informer = errors.informer) === null || _errors$informer === void 0 ? void 0 : _errors$informer.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(ErrorSpan, {
                   className: "",
                   children: ErrorsWord.informer.required
