@@ -26,55 +26,126 @@ function Home() {
     useEffect(() => {
         if (feedData && feedData.data) {
             $(function () {
+                let grahp1 = feedData.data.grahp1.map(function (val, i) {
+                    if (val.category_des == null) {
+                        return {
+                            label: "other",
+                            value: val.value,
+                        };
+                    } else {
+                        return {
+                            label: val.category_des,
+                            value: val.value,
+                        };
+                    }
+                });
 
-                var donut = new Morris.Donut({
-                    element: 'sales-chart',
+
+
+                let grapbew = [];
+                feedData.data.grahp3.map(function (val, i) {
+                    if (val.hardware == null) {
+                        grapbew.push(0);
+                    } else {
+                        grapbew.push(val.hardware);
+                    }
+
+                });
+
+                let grapbew2 = [];
+                feedData.data.grahp3.map(function (val, i) {
+                    if (val.hardware == null) {
+                        grapbew2.push(0);
+                    } else {
+                        grapbew2.push(val.software);
+                    }
+
+                });
+
+                let grapbew3 = [];
+                feedData.data.grahp3.map(function (val, i) {
+                    if (val.hardware != null) {
+                        grapbew3.push(val.years);
+                    } else {
+                        grapbew3.push(val.years);
+                    }
+
+                });
+
+
+
+                    console.log(grahp1)
+                new Morris.Donut({
+                    element: "sales-chart",
                     resize: true,
-                    colors: ["#f88f58", "#363636","#6bbbff"],
-                    data: [
+                    colors: ["#f10303", "#19caf3" , "#f88f58", "#f88f58"],
+                    data: grahp1,
+                    hideHover: "auto",
+                });
 
-                      {label: "Hardware", value: 5389},
-                      {label: "Software", value: 10853},
-                      {label: "อื่นๆ", value: 1853},
-
-                    ],
-                    hideHover: 'auto'
-                  });
-
-
-                var  bar = document.getElementById("bar-chart");
-                 bar = new Morris.Bar({
-                    element: 'bar-chart',
+                // var bar = document.getElementById("bar-chart");
+                new Morris.Bar({
+                    element: "bar-chart",
                     resize: true,
-                    data: [
-                      {y: '2017', a: 1000, b: 900, c: 50},
-                      {y: '2018', a: 750, b: 650, c:120},
-                      {y: '2019', a: 500, b: 400, c:300},
-                      {y: '2020', a: 750, b: 650, c:140},
+                    data: feedData.data.grahp2,
+                    barColors: [ "#f10303", "#19caf3", "#f88f58"],
+                    xkey: "years",
+                    ykeys: [ "hardware" , "software", "other"],
+                    labels: [ "Hardware", "Software", "อื่นๆ"],
+                    hideHover: "auto",
 
-                    ],
-                    barColors: ['#f88f58', '#363636',"#6bbbff"],
-                    xkey: 'y',
-                    ykeys: ['a', 'b','c'],
-                    labels: ['Hardware', 'Software','อื่นๆ'],
-                    hideHover: 'auto'
-                  });
+                });
+
+
+                var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+                    var areaChart = new Chart(areaChartCanvas)
+
+                    var areaChartData = {
+                    labels  : grapbew3,
+                    datasets: [
+                        {
+                        label               : 'Software',
+                        fillColor           : '#8d90fd',
+                        pointColor          : '#fcff46',
+                        pointStrokeColor    : '#c1c7d1',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data                : grapbew2
+                        },
+                        {
+                        label               : 'Hardware',
+                        fillColor           : '#ffb2b2',
+                        pointColor          : '#3effb8',
+                        pointStrokeColor    : 'rgba(60,141,188,1)',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data                : grapbew
+                        }
+                    ]
+                    }
+
+                    var areaChartOptions = {
+                    responsive              : true
+                    }
+
+                    areaChart.Line(areaChartData, areaChartOptions)
+
+
             });
         }
         return () => {};
     }, [feedData]);
 
-
     return (
         <div className="content-wrapper">
             {/* Content Header (Page header) */}
             <Helmet>
-                <script src="./bower_components/jquery/dist/jquery.min.js"></script>
                 <script src="./bower_components/raphael/raphael.min.js"></script>
                 <script src="./bower_components/morris.js/morris.min.js"></script>
-                <script src="./officer/dist/js/adminlte.min.js"></script>
-                <link rel="stylesheet" href="./bower_components/morris.js/morris.css"></link>
-
+                <link
+                    rel="stylesheet"
+                    href="./bower_components/morris.js/morris.css"
+                ></link>
             </Helmet>
             <section className="content-header">
                 <h1>
@@ -165,10 +236,14 @@ function Home() {
                     </div>
                 )}
 
+                <div className="row">
+
                 <div className="col-md-6">
                     <div className="box box-success">
                         <div className="box-header with-border">
-                            <h3 className="box-title"><strong>กราฟรายปี</strong></h3>
+                            <h3 className="box-title">
+                                <strong>กราฟย้อนหลังปัจจุบัน 7 ปี</strong>
+                            </h3>
 
                             <div className="box-tools pull-right">
                                 <button
@@ -184,18 +259,18 @@ function Home() {
                             <div
                                 className="chart"
                                 id="bar-chart"
-                                style={{ height: "300px" }}
+                                style={{ height: "250px" }}
                             ></div>
                         </div>
                     </div>
                 </div>
 
-
-
                 <div className="col-md-6">
-                <div className="box box-success">
+                    <div className="box box-success">
                         <div className="box-header with-border">
-                            <h3 className="box-title"><strong>กราฟสิ้นค้าทั้งหมด</strong></h3>
+                            <h3 className="box-title">
+                                <strong>กราฟสินค้าทั้งหมด</strong>
+                            </h3>
 
                             <div className="box-tools pull-right">
                                 <button
@@ -211,11 +286,47 @@ function Home() {
                             <div
                                 className="chart"
                                 id="sales-chart"
-                                style={{ height: "300px" }}
+                                style={{ height: "250px" }}
                             ></div>
                         </div>
                     </div>
                 </div>
+
+
+
+                <div className="col-md-12">
+                    <div className="box box-success">
+                        <div className="box-header with-border">
+                            <h3 className="box-title">
+                                <strong>กราฟเงินขาย</strong>
+                            </h3>
+
+                            <div className="box-tools pull-right">
+                                <button
+                                    type="button"
+                                    className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                >
+                                    <i className="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="box-body">
+                            <div className="chart">
+                                <canvas id="areaChart" style={{ height: "250px" }}></canvas>
+                            </div>
+                            </div>
+
+                    </div>
+                </div>
+
+
+
+
+                </div>
+
+
 
             </section>
         </div>

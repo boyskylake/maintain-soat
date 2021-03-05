@@ -42,14 +42,6 @@ class HomeController extends Controller
                 where
                     TO_CHAR(ma_h2.contract_date, 'YYYY') = TO_CHAR(ma_contract_head.contract_date, 'YYYY')
                     and ma_h2.group_type = '01'
-                ) as Software,
-                (select
-                    count(1)
-                from
-                    ma_contract_head ma_h2
-                where
-                    TO_CHAR(ma_h2.contract_date, 'YYYY') = TO_CHAR(ma_contract_head.contract_date, 'YYYY')
-                    and ma_h2.group_type = '02'
                 ) as Hardware,
                 (select
                     count(1)
@@ -57,7 +49,15 @@ class HomeController extends Controller
                     ma_contract_head ma_h2
                 where
                     TO_CHAR(ma_h2.contract_date, 'YYYY') = TO_CHAR(ma_contract_head.contract_date, 'YYYY')
-                    and (ma_h2.group_type = '05' or  ma_h2.group_type = ' ')
+                    and ma_h2.group_type = '02'
+                ) as Software,
+                (select
+                    count(1)
+                from
+                    ma_contract_head ma_h2
+                where
+                    TO_CHAR(ma_h2.contract_date, 'YYYY') = TO_CHAR(ma_contract_head.contract_date, 'YYYY')
+                    and (ma_h2.group_type = '05' or  ma_h2.group_type is null)
                 ) as other
             from
                 ma_contract_head
@@ -65,6 +65,35 @@ class HomeController extends Controller
                 TO_CHAR(CONTRACT_DATE, 'YYYY') >= ( to_char(CURRENT_DATE, 'YYYY') - 5 )
             GROUP BY TO_CHAR(CONTRACT_DATE, 'YYYY')
             ORDER by years desc");
+
+            $grahp3 =DB::connection('oracle')->select("select
+            TO_CHAR(CONTRACT_DATE, 'YYYY') as years,
+
+            (select
+                sum(CONTRACT_TOTAL_AMOUNT)
+            from
+                ma_contract_head ma_h2
+            where
+                TO_CHAR(ma_h2.contract_date, 'YYYY') = TO_CHAR(ma_contract_head.contract_date, 'YYYY')
+                and ma_h2.group_type = '01'
+            ) as Hardware,
+            (select
+                sum(CONTRACT_TOTAL_AMOUNT)
+            from
+                ma_contract_head ma_h2
+            where
+                TO_CHAR(ma_h2.contract_date, 'YYYY') = TO_CHAR(ma_contract_head.contract_date, 'YYYY')
+                and ma_h2.group_type = '02'
+            ) as Software
+        from
+            ma_contract_head
+        where
+            TO_CHAR(CONTRACT_DATE, 'YYYY') >= ( to_char(CURRENT_DATE, 'YYYY') - 21 )
+        GROUP BY TO_CHAR(CONTRACT_DATE, 'YYYY')
+        ORDER by years asc
+            ");
+
+
 
         // $ma_coop = DB::connection('oracle')->select("SELECT *FROM ma_coop");
 
@@ -74,6 +103,6 @@ class HomeController extends Controller
         // $EditOderPage = DB::select("", [1]);
 
 
-        return response()->json(compact('ma_coop', 'grahp1', 'grahp2'));
+        return response()->json(compact('ma_coop', 'grahp1', 'grahp2', 'grahp3'));
     }
 }

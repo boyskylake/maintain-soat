@@ -99,6 +99,30 @@ function Home() {
             };
           }
         });
+        var grapbew = [];
+        feedData.data.grahp3.map(function (val, i) {
+          if (val.hardware == null) {
+            grapbew.push(0);
+          } else {
+            grapbew.push(val.hardware);
+          }
+        });
+        var grapbew2 = [];
+        feedData.data.grahp3.map(function (val, i) {
+          if (val.hardware == null) {
+            grapbew2.push(0);
+          } else {
+            grapbew2.push(val.software);
+          }
+        });
+        var grapbew3 = [];
+        feedData.data.grahp3.map(function (val, i) {
+          if (val.hardware != null) {
+            grapbew3.push(val.years);
+          } else {
+            grapbew3.push(val.years);
+          }
+        });
         console.log(grahp1);
         new Morris.Donut({
           element: "sales-chart",
@@ -112,16 +136,16 @@ function Home() {
           element: "bar-chart",
           resize: true,
           data: feedData.data.grahp2,
-          barColors: ["#19caf3", "#f10303", "#f88f58"],
+          barColors: ["#f10303", "#19caf3", "#f88f58"],
           xkey: "years",
           ykeys: ["hardware", "software", "other"],
-          labels: ["Software", "Hardware", "อื่นๆ"],
+          labels: ["Hardware", "Software", "อื่นๆ"],
           hideHover: "auto"
         });
         var areaChartCanvas = $('#areaChart').get(0).getContext('2d');
         var areaChart = new Chart(areaChartCanvas);
         var areaChartData = {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: grapbew3,
           datasets: [{
             label: 'Software',
             fillColor: '#8d90fd',
@@ -129,7 +153,7 @@ function Home() {
             pointStrokeColor: '#c1c7d1',
             pointHighlightFill: '#fff',
             pointHighlightStroke: 'rgba(220,220,220,1)',
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: grapbew2
           }, {
             label: 'Hardware',
             fillColor: '#ffb2b2',
@@ -137,7 +161,7 @@ function Home() {
             pointStrokeColor: 'rgba(60,141,188,1)',
             pointHighlightFill: '#fff',
             pointHighlightStroke: 'rgba(60,141,188,1)',
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: grapbew
           }]
         };
         var areaChartOptions = {
