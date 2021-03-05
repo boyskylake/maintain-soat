@@ -627,87 +627,6 @@ var userConstants = {
 
 /***/ }),
 
-/***/ "./resources/js/src/Linebot/redux/reducers/index.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/src/Linebot/redux/reducers/index.js ***!
-  \**********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "linebotReducers": function() { return /* binding */ linebotReducers; }
-/* harmony export */ });
-/* harmony import */ var _user_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.reducer */ "./resources/js/src/Linebot/redux/reducers/user.reducer.js");
- // import { feedData } from "./feedData.reducer";
-
-var linebotReducers = {
-  userline: _user_reducer__WEBPACK_IMPORTED_MODULE_0__.userline
-};
-
-/***/ }),
-
-/***/ "./resources/js/src/Linebot/redux/reducers/user.reducer.js":
-/*!*****************************************************************!*\
-  !*** ./resources/js/src/Linebot/redux/reducers/user.reducer.js ***!
-  \*****************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userline": function() { return /* binding */ userline; }
-/* harmony export */ });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Linebot/redux/constants/index.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-var initialState = {
-  loggedIn: false,
-  access_token: "",
-  user: []
-};
-function userline() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_REQUEST:
-      return {
-        loggingIn: true,
-        access_token: ""
-      };
-
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_SUCCESS:
-      return {
-        loggingIn: false,
-        loggedIn: true,
-        access_token: action.token,
-        user: action.user
-      };
-
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGIN_FAILURE:
-      return {
-        loggingIn: false,
-        loggedIn: false,
-        access_token: action.token,
-        user: []
-      };
-
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.userConstants.LOGOUT:
-      return _objectSpread({}, state);
-
-    default:
-      return state;
-  }
-}
-
-/***/ }),
-
 /***/ "./resources/js/src/Linebot/redux/services/index.js":
 /*!**********************************************************!*\
   !*** ./resources/js/src/Linebot/redux/services/index.js ***!
@@ -2116,9 +2035,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FeedConstants": function() { return /* binding */ FeedConstants; }
 /* harmony export */ });
 var FeedConstants = {
-  FEED_REQUEST: 'FEED_LOGIN_REQUEST',
-  FEED_SUCCESS: 'FEED_LOGIN_SUCCESS',
-  FEED_FAILURE: 'FEED_LOGIN_FAILURE'
+  FEED_REQUEST: 'FEED_DATA_REQUEST',
+  FEED_SUCCESS: 'FEED_DATA_SUCCESS',
+  FEED_FAILURE: 'FEED_DATA_FAILURE'
 };
 
 /***/ }),
@@ -2163,37 +2082,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "userConstants": function() { return /* reexport safe */ _user_constants__WEBPACK_IMPORTED_MODULE_0__.userConstants; },
 /* harmony export */   "FeedConstants": function() { return /* reexport safe */ _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__.FeedConstants; },
-/* harmony export */   "authConstants": function() { return /* reexport safe */ _auth_constants__WEBPACK_IMPORTED_MODULE_2__.authConstants; },
-/* harmony export */   "SaveOrderConstants": function() { return /* reexport safe */ _saveOrder_constants__WEBPACK_IMPORTED_MODULE_3__.SaveOrderConstants; }
+/* harmony export */   "authConstants": function() { return /* reexport safe */ _auth_constants__WEBPACK_IMPORTED_MODULE_2__.authConstants; }
 /* harmony export */ });
 /* harmony import */ var _user_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.constants */ "./resources/js/src/Officer/redux/constants/user.constants.js");
 /* harmony import */ var _Feeddata_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Feeddata.constants */ "./resources/js/src/Officer/redux/constants/Feeddata.constants.js");
 /* harmony import */ var _auth_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth.constants */ "./resources/js/src/Officer/redux/constants/auth.constants.js");
-/* harmony import */ var _saveOrder_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./saveOrder.constants */ "./resources/js/src/Officer/redux/constants/saveOrder.constants.js");
 // export * from './Login'
 
 
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/constants/saveOrder.constants.js":
-/*!*************************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/constants/saveOrder.constants.js ***!
-  \*************************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SaveOrderConstants": function() { return /* binding */ SaveOrderConstants; }
-/* harmony export */ });
-var SaveOrderConstants = {
-  FEED_REQUEST: 'FEED_LOGIN_REQUEST',
-  FEED_SUCCESS: 'FEED_LOGIN_SUCCESS',
-  FEED_FAILURE: 'FEED_LOGIN_FAILURE'
-};
+ // export * from "./saveOrder.constants";
 
 /***/ }),
 
@@ -2365,70 +2262,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _authentication_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./authentication.reducer */ "./resources/js/src/Officer/redux/reducers/authentication.reducer.js");
 /* harmony import */ var _feedData_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedData.reducer */ "./resources/js/src/Officer/redux/reducers/feedData.reducer.js");
-/* harmony import */ var _saveOrder_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./saveOrder.reducer */ "./resources/js/src/Officer/redux/reducers/saveOrder.reducer.js");
 
-
+ // import { saveOrder } from "./saveOrder.reducer";
 
 var officerReducers = {
   authentication: _authentication_reducer__WEBPACK_IMPORTED_MODULE_0__.authentication,
-  feedData: _feedData_reducer__WEBPACK_IMPORTED_MODULE_1__.feedData,
-  saveOrder: _saveOrder_reducer__WEBPACK_IMPORTED_MODULE_2__.saveOrder
+  feedData: _feedData_reducer__WEBPACK_IMPORTED_MODULE_1__.feedData
 };
-
-/***/ }),
-
-/***/ "./resources/js/src/Officer/redux/reducers/saveOrder.reducer.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/src/Officer/redux/reducers/saveOrder.reducer.js ***!
-  \**********************************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "saveOrder": function() { return /* binding */ saveOrder; }
-/* harmony export */ });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/src/Officer/redux/constants/index.js");
-
-var initialState = {
-  fetching: false,
-  fetchSuccess: false,
-  fetchFailure: false,
-  data: []
-};
-function saveOrder() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  var type = action.type,
-      payload = action.payload;
-
-  switch (type) {
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_REQUEST:
-      return {
-        fetching: action.fetching,
-        fetchSuccess: false,
-        fetchFailure: false
-      };
-
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_SUCCESS:
-      return {
-        fetchSuccess: true,
-        fetching: false,
-        fetchFailure: false,
-        data: payload
-      };
-
-    case _constants__WEBPACK_IMPORTED_MODULE_0__.FeedConstants.FEED_FAILURE:
-      return {
-        fetching: false,
-        fetchSuccess: false,
-        fetchFailure: true
-      };
-
-    default:
-      return state;
-  }
-}
 
 /***/ }),
 
@@ -3412,9 +3252,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _Officer_redux_reducers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Officer/redux/reducers */ "./resources/js/src/Officer/redux/reducers/index.js");
-/* harmony import */ var _Linebot_redux_reducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Linebot/redux/reducers */ "./resources/js/src/Linebot/redux/reducers/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3422,9 +3261,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+ // import { linebotReducers } from "../Linebot/redux/reducers";
 
-
-/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)(_objectSpread(_objectSpread({}, _Officer_redux_reducers__WEBPACK_IMPORTED_MODULE_0__.officerReducers), _Linebot_redux_reducers__WEBPACK_IMPORTED_MODULE_1__.linebotReducers)));
+/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)(_objectSpread({}, _Officer_redux_reducers__WEBPACK_IMPORTED_MODULE_0__.officerReducers)));
 
 /***/ }),
 

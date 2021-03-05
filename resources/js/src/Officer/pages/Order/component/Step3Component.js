@@ -6,6 +6,7 @@ import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
 
 import { useCookies } from "react-cookie";
+import { trim } from "jquery";
 
 function Step3Component(
     props,
@@ -31,13 +32,13 @@ function Step3Component(
 
     // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
     const inform_type_only_c = ["07", "31", "03"];
+
     useEffect(() => {
-        // console.log(
-        //     cookies.pageone,
-        //     cookies.pageone &&
-        //         cookies.pageone.inform_type &&
-        //         inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
-        // );
+        // console.log(cookies.pageone);
+        // console.log(cookies.pageone.inform_type);
+        // console.log(cookies.pagetwo.pagetwo);
+
+        console.log(feedData.data && feedData.data);
 
         if (
             cookies.pageone &&
@@ -50,6 +51,7 @@ function Step3Component(
         } else {
             //ยังไม่มีอะไร
         }
+
         async function feedData() {
             await dispatch(
                 feedDataAction.feedDataGet("/api/v1/officer/orderPage")
@@ -65,6 +67,7 @@ function Step3Component(
         props.setCompleted(newCompleted);
         handleNext();
     };
+
     const handleNext = () => {
         const newActiveStep = props.activeStep + 1;
         // console.log(newActiveStep)
@@ -84,9 +87,18 @@ function Step3Component(
                     </h3>
                 </div>
             ) : (
-               <p>testse</p>
+                <Fragment>
+                    <p></p>
+                    {feedData.data &&
+                        feedData.data.ma_coop &&
+                        feedData.data.ma_coop.map((val, i) => {
+                            if (cookies.pageone.coopid == trim(val.coop_id)) {
+                                return <p>{val.coop_name}</p>;
+                            }
+                        })}
+                    testse
+                </Fragment>
             )}
-
         </Fragment>
     );
 }

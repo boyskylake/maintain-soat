@@ -8,6 +8,7 @@ import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
 import Services from "../../../redux/services/services";
 import { useCookies } from "react-cookie";
+import { trim } from "jquery";
 
 function Step1Component(
     props,
@@ -32,10 +33,10 @@ function Step1Component(
     const [coopid, setCoopid] = useState(null);
     // useScript("/officer/dist/js/pages/saveorder.js");
     useScript("/officer/dist/js/pages/saveorder.js");
-    useScript("/officer/bower_components/ckeditor/ckeditor.js");
-    useScript(
-        "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-    );
+    // useScript("/officer/bower_components/ckeditor/ckeditor.js");
+    // useScript(
+    //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
+    // );
 
     const { register, handleSubmit, watch, errors } = useForm();
 
@@ -71,13 +72,10 @@ function Step1Component(
 
     //data
     useEffect(() => {
-        async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-            );
+        if (watch('coopid') != null) {
+            document.getElementById("Detail").style.display = "block";
         }
-        feedData();
-    }, [dispatch]);
+    }, [watch]);
 
     $(function () {
         $(document.body).on("change", "#coopid", function () {
@@ -85,7 +83,7 @@ function Step1Component(
                 // console.log(coopid);
 
                 document.getElementById("Detail").style.display = "block";
-                $(".select2").select2();
+                // $(".select2").select2();
                 // CKEDITOR.replace("editor1");
                 //bootstrap WYSIHTML5 - text editor
                 // $(".textarea").wysihtml5();
@@ -111,7 +109,7 @@ function Step1Component(
     return (
         <div className="box-body">
             <div className="box-header">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} autoComplete="false">
                     <div className="row">
                         <div className="col-md-3">
                             <div className="form-group">
@@ -282,7 +280,17 @@ function Step1Component(
                                     {feedData.data &&
                                         feedData.data.ma_coop &&
                                         feedData.data.ma_coop.map((val, i) => (
-                                            <option key={i} value={val.coop_id}>
+                                            <option
+                                                key={i}
+                                                value={val.coop_id}
+                                                selected={
+                                                    cookies.pageone &&
+                                                    cookies.pageone.coopid ==
+                                                        trim(val.coop_id)
+                                                        ? true
+                                                        : false
+                                                }
+                                            >
                                                 {val.coop_id} {val.coop_name}
                                             </option>
                                         ))}
@@ -722,7 +730,7 @@ function Step1Component(
                                             }}
                                             onChange={(event, editor) => {
                                                 const data = editor.getData();
-                                                console.log("onChange.",{
+                                                console.log("onChange.", {
                                                     event,
                                                     editor,
                                                     data,

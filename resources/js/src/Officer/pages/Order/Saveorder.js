@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Inputmask from "inputmask";
+import { useCookies } from "react-cookie";
 
 import { useScript } from "../../../helpers";
 import { feedDataAction } from "../../redux/actions";
@@ -28,10 +29,10 @@ function Saveorder() {
     useScript(
         "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
     );
-    
+
     const { register, handleSubmit, watch, errors } = useForm();
 
-    //steppppppppppp
+    const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
 
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState(new Set());
@@ -88,31 +89,24 @@ function Saveorder() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    // useEffect(() => {
-    //     async function feedData() {
-    //         await dispatch(
-    //             feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-    //         );
-    //     }
-    //     feedData();
-    // }, [dispatch]);
-    ////////////////////////////////////////////////
     useEffect(() => {
         if (confirmSubmit) {
             console.log("Submit success");
         }
         return () => {};
     }, [confirmSubmit]);
+
     useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(
-        //         feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-        //     );
-        // }
-        // // Execute the created function directly
-        // feedData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        async function feedData() {
+            await dispatch(
+                feedDataAction.feedDataGet("/api/v1/officer/orderPage")
+            );
+
+            removeCookie("pageone");
+        }
+        feedData();
+    }, [dispatch, removeCookie]);
+
     // useEffect(() => {
     //     if (coopid != "") {
     //         alert(coopid);
