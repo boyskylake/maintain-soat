@@ -1517,13 +1517,14 @@ var officerRoute = [{
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Lookscreen_Lookscreen_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Lookscreen/Lookscreen */ "./resources/js/src/Officer/pages/Lookscreen/Lookscreen.js"));
   })
+}, {
+  path: "/officer/profile",
+  exact: true,
+  layout: "officer",
+  component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
+    return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Profile_Profile_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Profile/Profile */ "./resources/js/src/Officer/pages/Profile/Profile.js"));
+  })
 } // {
-//     path: "/officer/saveorder3",
-//     exact: true,
-//     layout: "officer",
-//     component: lazy(() => import("../pages/Order/component/test")),
-// },
-// {
 //     path: "/officer/detail",
 //     exact: true,
 //     layout: "officer",

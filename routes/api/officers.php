@@ -23,6 +23,6 @@ Route::group(['namespace' => 'Officer\Api'], function () {
 
         Route::post('pageone', 'OrderPageController@page_one');
         Route::post('Listorder', 'OrderListController@feedInform');
-
+        Route::get('Profile', 'Profile@Profile');
     });
 });
