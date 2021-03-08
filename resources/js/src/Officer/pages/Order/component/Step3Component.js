@@ -91,7 +91,12 @@ function Step3Component(
                     <div className="box-body">
                         <div className="box-header">
                             <div className="col-xs-12">
-                                <h2 className="page-header">
+                                {/* <div className="row"> */}
+                                <h2 className="page-header" style={{
+                                   borderBottom: "0px"
+                                }} >
+                                    {/* piclogo */}
+                                    <img className="pull-left" src="./dist/img/pdf.png" />
                                 {/* name coopid&&coopname */}
                                     {feedData.data &&
                                                 feedData.data.ma_coop &&
@@ -101,28 +106,26 @@ function Step3Component(
                                                             cookies.pageone.coopid == trim(val.coop_id)
                                                         ) {
                                                             return (
-                                                                <h4 className="pull-center" style={{
-                                                                    paddingLeft: "540px",
+                                                                <h4 className="pull-left" style={{
+                                                                    paddingLeft: "500px",paddingTop:"20px"
                                                                 }}>
                                                                 {val.coop_id} {val.coop_name}
                                                                 <br />
-                                                                <small className="pull-center" style={{
+                                                                <small className="pull-left" style={{
                                                                     paddingLeft: "65px",
-                                                                }}>เอกสารภายใน ห้ามนำออกนอกบริษัทโดยเด็ดขาด</small>
+                                                                }}>
+                                                                    เอกสารภายใน ห้ามนำออกนอกบริษัทโดยเด็ดขาด
+                                                                </small>
                                                                 </h4>
                                                             );
                                                         }
                                                     }
-                                                )}  
-                                    {/* piclogo */}
-                                    <img src="./dist/img/pdf.png" />
+                                                )}
                                     {/* get date */}
                                     <small className="pull-right">
                                         {/* Date: 2/10/2014 */}
                                         Date:{cookies.pageone.receive_date}
                                     </small>
-                                    
-                                    
                                 </h2>
                             </div>
                         </div>
