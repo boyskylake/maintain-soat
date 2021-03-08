@@ -40,7 +40,88 @@ function Home() {
                     }
                 });
 
+//-------------------------------กราฟย้อนหลังปัจจุบัน 7 ปี
+                let graponeH = [];
+                feedData.data.grahp2.map(function (val, i) {
+                    if (val.hardware == null) {
+                        graponeH.push(0);
+                    } else {
+                        graponeH.push(val.hardware);
+                    }
 
+                });
+                let graponeO = [];
+                feedData.data.grahp2.map(function (val, i) {
+                    if (val.other == null) {
+                        graponeO.push(0);
+                    } else {
+                        graponeO.push(val.other);
+                    }
+
+                });
+                let graponeS = [];
+                feedData.data.grahp2.map(function (val, i) {
+                    if (val.software == null) {
+                        graponeS.push(0);
+                    } else {
+                        graponeS.push(val.software);
+                    }
+
+                });
+                let graponeY = [];
+                feedData.data.grahp2.map(function (val, i) {
+                    if (val.hardware != null) {
+                        graponeY.push(val.years);
+                    } else {
+                        graponeY.push(val.years);
+                    }
+
+                });
+
+
+                var areaChartData1 = {
+                    labels  : graponeY,
+                    datasets: [
+
+                        {
+                        label               : 'Hardware',
+                        data                : graponeH
+                        },
+                        {
+                            label               : 'Software',
+                            data                : graponeS
+                            },
+                        {
+                            label               : 'อื่นๆ',
+                            data                : graponeO
+                            },
+                    ]
+                    }
+
+
+                    var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
+                    var barChart                         = new Chart(barChartCanvas)
+                    var barChartData                     = areaChartData1
+                    barChartData.datasets[0].fillColor   = '#f10303'
+                    barChartData.datasets[0].strokeColor = '#f10303'
+                    barChartData.datasets[0].pointColor  = '#f10303'
+                    barChartData.datasets[1].fillColor   = '#19caf3'
+                    barChartData.datasets[1].strokeColor = '#19caf3'
+                    barChartData.datasets[1].pointColor  = '#19caf3'
+                    barChartData.datasets[2].fillColor   = '#f88f58'
+                    barChartData.datasets[2].strokeColor = '#f88f58'
+                    barChartData.datasets[2].pointColor  = '#f88f58'
+                    var barChartOptions                  = {
+                    responsive              : true,
+
+                    }
+
+                    barChartOptions.datasetFill = false
+                    barChart.Bar(barChartData, barChartOptions)
+
+//-------------------------------กราฟย้อนหลังปัจจุบัน 7 ปี
+
+//-------------------------------กราฟเงินขาย
 
                 let grapbew = [];
                 feedData.data.grahp3.map(function (val, i) {
@@ -74,33 +155,7 @@ function Home() {
 
 
 
-                    console.log(grahp1)
-                new Morris.Donut({
-                    element: "sales-chart",
-                    resize: true,
-                    colors: ["#f10303", "#19caf3" , "#f88f58", "#f88f58"],
-                    data: grahp1,
-                    hideHover: "auto",
-                });
-
-                // var bar = document.getElementById("bar-chart");
-                new Morris.Bar({
-                    element: "bar-chart",
-                    resize: true,
-                    data: feedData.data.grahp2,
-                    barColors: [ "#f10303", "#19caf3", "#f88f58"],
-                    xkey: "years",
-                    ykeys: [ "hardware" , "software", "other"],
-                    labels: [ "Hardware", "Software", "อื่นๆ"],
-                    hideHover: "auto",
-
-                });
-
-
-                var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-                    var areaChart = new Chart(areaChartCanvas)
-
-                    var areaChartData = {
+                var areaChartData = {
                     labels  : grapbew3,
                     datasets: [
                         {
@@ -124,11 +179,53 @@ function Home() {
                     ]
                     }
 
+                    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+                    var areaChart = new Chart(areaChartCanvas)
+
                     var areaChartOptions = {
                     responsive              : true
                     }
 
                     areaChart.Line(areaChartData, areaChartOptions)
+
+                    
+//-------------------------------กราฟเงินขาย
+
+
+                    console.log(grahp1)
+                new Morris.Donut({
+                    element: "sales-chart",
+                    resize: true,
+                    colors: ["#f10303", "#19caf3" , "#f88f58", "#f88f58"],
+                    data: grahp1,
+                    hideHover: "auto",
+                });
+
+                // var bar = document.getElementById("bar-chart");
+                // new Morris.Bar({
+                //     element: "bar-chart",
+                //     resize: true,
+                //     data: feedData.data.grahp2,
+                //     barColors: [ "#f10303", "#19caf3", "#f88f58"],
+                //     xkey: "years",
+                //     ykeys: [ "hardware" , "software", "other"],
+                //     labels: [ "Hardware", "Software", "อื่นๆ"],
+                //     hideHover: "auto",
+
+                // });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             });
@@ -163,6 +260,9 @@ function Home() {
             </section>
             {/* Main content */}
             <section className="content">
+
+
+
                 {/* Info boxes */}
 
                 <div className="row">
@@ -230,15 +330,15 @@ function Home() {
                         })}
                 </div>
 
-                {feedData.fetching && (
-                    <div className="overlay">
-                        <i className="fa fa-refresh fa-spin" />
-                    </div>
-                )}
+
+                <div className="box box-default">
+
+
+
 
                 <div className="row">
 
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                     <div className="box box-success">
                         <div className="box-header with-border">
                             <h3 className="box-title">
@@ -263,7 +363,36 @@ function Home() {
                             ></div>
                         </div>
                     </div>
+                </div> */}
+
+
+                <div className="col-md-6">
+                    <div className="box box-success">
+                        <div className="box-header with-border">
+                            <h3 className="box-title">
+                                <strong>กราฟย้อนหลังปัจจุบัน 7 ปี</strong>
+                            </h3>
+
+                            <div className="box-tools pull-right">
+                                <button
+                                    type="button"
+                                    className="btn btn-box-tool"
+                                    data-widget="collapse"
+                                >
+                                    <i className="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="box-body">
+                            <div className="chart">
+                                <canvas id="barChart" style={{ height: "250px" }}></canvas>
+                            </div>
+                            </div>
+                    </div>
                 </div>
+
+
+
 
                 <div className="col-md-6">
                     <div className="box box-success">
@@ -294,6 +423,8 @@ function Home() {
 
 
 
+
+
                 <div className="col-md-12">
                     <div className="box box-success">
                         <div className="box-header with-border">
@@ -317,7 +448,7 @@ function Home() {
                                 <canvas id="areaChart" style={{ height: "250px" }}></canvas>
                             </div>
                             </div>
-             555555
+
                     </div>
                 </div>
 
@@ -327,6 +458,13 @@ function Home() {
                 </div>
 
 
+                                {feedData.fetching && (
+                        <div className="overlay">
+                            <i className="fa fa-refresh fa-spin" />
+                        </div>
+                    )}
+
+                </div>
 
             </section>
         </div>
