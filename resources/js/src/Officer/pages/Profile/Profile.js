@@ -16,12 +16,7 @@ function Profile() {
     useScript("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
     useScript("/officer/dist/js/pages/dashboard2.js");
 
-    useEffect(() => {
-        async function feedData() {
-            await dispatch(feedDataAction.feedDataGet("/api/v1/officer/Home"));
-        }
-        feedData();
-    }, [dispatch]);
+
 
     useEffect(() => {
         if (feedData && feedData.data) {
