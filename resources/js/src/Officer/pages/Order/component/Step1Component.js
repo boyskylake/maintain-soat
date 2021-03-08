@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
 import Services from "../../../redux/services/services";
 import { useCookies } from "react-cookie";
+import { trim } from "jquery";
 
-function SaveorderComponent(
+function Step1Component(
     props,
     { setCompleted, completed, setActiveStep, activeStep, step }
 ) {
-    // function SaveorderComponent({ props }) {
+    // function Step1Component({ props }) {
     // console.log(props);
 
-    const [cookies, setCookie,removeCookie] = useCookies(["pageone"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
 
     const services = new Services();
     const ErrorsWord = {
@@ -30,10 +33,10 @@ function SaveorderComponent(
     const [coopid, setCoopid] = useState(null);
     // useScript("/officer/dist/js/pages/saveorder.js");
     useScript("/officer/dist/js/pages/saveorder.js");
-    useScript("/officer/bower_components/ckeditor/ckeditor.js");
-    useScript(
-        "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-    );
+    // useScript("/officer/bower_components/ckeditor/ckeditor.js");
+    // useScript(
+    //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
+    // );
 
     const { register, handleSubmit, watch, errors } = useForm();
 
@@ -51,12 +54,11 @@ function SaveorderComponent(
         services.API("/api/v1/officer/pageone", requestOptions).then((res) => {
             if (res.rc_code === "1") {
                 //
-                removeCookie('pageone');
-                setCookie('pageone',JSON.stringify(res.data));
-                alert('Successs');
+                removeCookie("pageone");
+                setCookie("pageone", JSON.stringify(res.data));
+                alert("Successs");
                 // handle Next
                 handleComplete();
-
             } else {
                 alert("การเขื่อมต่อไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
             }
@@ -70,14 +72,10 @@ function SaveorderComponent(
 
     //data
     useEffect(() => {
-        async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-            );
+        if (watch('coopid') != null) {
+            document.getElementById("Detail").style.display = "block";
         }
-        feedData();
-    }, [dispatch]);
-
+    }, [watch]);
 
     $(function () {
         $(document.body).on("change", "#coopid", function () {
@@ -85,17 +83,16 @@ function SaveorderComponent(
                 // console.log(coopid);
 
                 document.getElementById("Detail").style.display = "block";
-                $(".select2").select2();
-                CKEDITOR.replace("editor1");
+                // $(".select2").select2();
+                // CKEDITOR.replace("editor1");
                 //bootstrap WYSIHTML5 - text editor
-                $(".textarea").wysihtml5();
+                // $(".textarea").wysihtml5();
                 document.getElementById("informer").disabled = false;
             }
 
             setCoopid(this.value);
         });
     });
-
 
     const handleComplete = () => {
         const newCompleted = new Set(props.completed);
@@ -112,7 +109,7 @@ function SaveorderComponent(
     return (
         <div className="box-body">
             <div className="box-header">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} autoComplete="false">
                     <div className="row">
                         <div className="col-md-3">
                             <div className="form-group">
@@ -147,13 +144,22 @@ function SaveorderComponent(
                                     // required
                                 >
                                     {/* <option></option> */}
-                                     {feedData.data &&
+                                    {feedData.data &&
                                         feedData.data.ucf_officer &&
-                                        feedData.data.ucf_officer.map((val, i) => (
-                                            <option key={i} value={val.officer_id}>
-                                               {`[${val.officer_id}]`}&nbsp;&nbsp;{val.officer_name}&nbsp;&nbsp;{val.officer_full_name}
-                                            </option>
-                                        ))}
+                                        feedData.data.ucf_officer.map(
+                                            (val, i) => (
+                                                <option
+                                                    key={i}
+                                                    value={val.officer_id}
+                                                >
+                                                    {`[${val.officer_id}]`}
+                                                    &nbsp;&nbsp;
+                                                    {val.officer_name}
+                                                    &nbsp;&nbsp;
+                                                    {val.officer_full_name}
+                                                </option>
+                                            )
+                                        )}
                                     {/* {feedData.data &&
                                         feedData.data.ucf_officer &&
                                         feedData.data.ucf_officer.map(
@@ -173,7 +179,6 @@ function SaveorderComponent(
                                             }
                                         )} */}
                                 </select>
-
                             </div>
                             {/* <div className="form-group receiver">
                                 <label>ผู้รับแจ้ง</label>
@@ -275,7 +280,17 @@ function SaveorderComponent(
                                     {feedData.data &&
                                         feedData.data.ma_coop &&
                                         feedData.data.ma_coop.map((val, i) => (
-                                            <option key={i} value={val.coop_id}>
+                                            <option
+                                                key={i}
+                                                value={val.coop_id}
+                                                selected={
+                                                    cookies.pageone &&
+                                                    cookies.pageone.coopid ==
+                                                        trim(val.coop_id)
+                                                        ? true
+                                                        : false
+                                                }
+                                            >
                                                 {val.coop_id} {val.coop_name}
                                             </option>
                                         ))}
@@ -371,7 +386,10 @@ function SaveorderComponent(
                             <div className="col-md-6">
                                 <div className="form-group blueselect">
                                     <label>ผู้แก้ไข</label>
-                                    <select className="form-control select2" name="editor_id">
+                                    <select
+                                        className="form-control select2"
+                                        name="editor_id"
+                                    >
                                         <option></option>
                                         {feedData.data &&
                                             feedData.data.ucf_officer &&
@@ -558,6 +576,7 @@ function SaveorderComponent(
                             </div>
                         </div>
                     </div>
+
                     <div
                         className="box box-danger"
                         id="Detail"
@@ -692,12 +711,37 @@ function SaveorderComponent(
                                                     <i className="fa fa-calendar" />
                                                     </div> */}
                                         {/* <textarea type="text" className="form-control"  /> */}
-                                        <textarea
+                                        {/* <textarea
                                             id="editor1"
                                             name="editor1"
                                             rows={10}
                                             cols={80}
                                             ref={register}
+                                        /> */}
+                                        <CKEditor
+                                            editor={ClassicEditor}
+                                            data="<p>Hello from CKEditor 5!</p>"
+                                            onReady={(editor) => {
+                                                // You can store the "editor" and use when it is needed.
+                                                console.log(
+                                                    "Editor is ready to use!",
+                                                    editor
+                                                );
+                                            }}
+                                            onChange={(event, editor) => {
+                                                const data = editor.getData();
+                                                console.log("onChange.", {
+                                                    event,
+                                                    editor,
+                                                    data,
+                                                });
+                                            }}
+                                            onBlur={(event, editor) => {
+                                                console.log("Blur.", editor);
+                                            }}
+                                            onFocus={(event, editor) => {
+                                                console.log("Focus.", editor);
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -720,7 +764,7 @@ function SaveorderComponent(
         </div>
     );
 }
-export default SaveorderComponent;
+export default Step1Component;
 
 const ErrorSpan = ({ children, className }) => {
     return (

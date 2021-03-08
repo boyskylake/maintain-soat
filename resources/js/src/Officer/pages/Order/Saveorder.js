@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import Inputmask from "inputmask";
+import { useCookies } from "react-cookie";
 
 import { useScript } from "../../../helpers";
 import { feedDataAction } from "../../redux/actions";
@@ -12,9 +13,9 @@ import Step from "@material-ui/core/Step";
 import { StepButton } from "@material-ui/core";
 
 //ประการศหน้ามาตาม Step
-import SaveorderComponent from "./component/SaveorderComponent";
-import Detail from "./component/Detail";
-import ConfirmOrder from "./component/ConfirmOrder";
+import Step1Component from "./component/Step1Component";
+import Step2Component from "./component/Step2Component";
+import Step3Component from "./component/Step3Component";
 
 function Saveorder() {
     const dispatch = useDispatch();
@@ -28,9 +29,10 @@ function Saveorder() {
     useScript(
         "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
     );
+
     const { register, handleSubmit, watch, errors } = useForm();
 
-    //steppppppppppp
+    const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
 
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState(new Set());
@@ -87,31 +89,24 @@ function Saveorder() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    // useEffect(() => {
-    //     async function feedData() {
-    //         await dispatch(
-    //             feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-    //         );
-    //     }
-    //     feedData();
-    // }, [dispatch]);
-    ////////////////////////////////////////////////
     useEffect(() => {
         if (confirmSubmit) {
             console.log("Submit success");
         }
         return () => {};
     }, [confirmSubmit]);
+
     useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(
-        //         feedDataAction.feedDataGet("/api/v1/officer/orderPage")
-        //     );
-        // }
-        // // Execute the created function directly
-        // feedData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        async function feedData() {
+            await dispatch(
+                feedDataAction.feedDataGet("/api/v1/officer/orderPage")
+            );
+
+            removeCookie("pageone");
+        }
+        feedData();
+    }, [dispatch, removeCookie]);
+
     // useEffect(() => {
     //     if (coopid != "") {
     //         alert(coopid);
@@ -148,8 +143,6 @@ function Saveorder() {
                         {steps.map((label, index) => {
                             const stepProps = {};
                             const buttonProps = {};
-                            {
-                            }
                             if (isStepSkipped(index)) {
                                 stepProps.completed = false;
                             }
@@ -199,9 +192,11 @@ function Saveorder() {
 }
 
 export default Saveorder;
+
 function getSteps() {
     return ["บันทึกออเดอร์", "สำหรับ Order สั่งซื้อ", "ตรวจสอบความถูกต้อง"];
 }
+
 function getStepContent(
     step,
     setCompleted,
@@ -220,7 +215,7 @@ function getStepContent(
     switch (step) {
         case 0:
             return (
-                <SaveorderComponent
+                <Step1Component
                     props={data}
                     setCompleted={setCompleted}
                     completed={completed}
@@ -231,7 +226,7 @@ function getStepContent(
             );
         case 1:
             return (
-                <Detail
+                <Step2Component
                     props={data}
                     setCompleted={setCompleted}
                     completed={completed}
@@ -240,15 +235,17 @@ function getStepContent(
                     step={step}
                 />
             );
-            case 2:
-            return <ConfirmOrder
-            props={data}
-            setCompleted={setCompleted}
-            completed={completed}
-            setActiveStep={setActiveStep}
-            activeStep={activeStep}
-            step={step}
-        />
+        case 2:
+            return (
+                <Step3Component
+                    props={data}
+                    setCompleted={setCompleted}
+                    completed={completed}
+                    setActiveStep={setActiveStep}
+                    activeStep={activeStep}
+                    step={step}
+                />
+            );
         case 3:
             return "Step 3: This is the bit I really care about!";
         default:

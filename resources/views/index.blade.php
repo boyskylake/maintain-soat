@@ -29,6 +29,10 @@
     <script src="{{ mix('/js/manifest.js') }}"></script>
     <script src="{{ mix('/js/vendor.js') }}"></script>
     <script src="{{ mix('/js/app.js') }}"></script>
+
+    <script src="/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker-thai.js"></script>
+    <script src="/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"></script>
 </body>
 
 </html>
