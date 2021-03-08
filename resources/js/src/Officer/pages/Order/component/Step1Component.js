@@ -72,16 +72,33 @@ function Step1Component(
 
     //data
     useEffect(() => {
-        if (watch('coopid') != null) {
+        // console.log(watch('coopid'))
+        // if (watch('coopid') != null) {
+        //     // console.log(document.getElementById("coopid").value)
+        //     // if (document.getElementById("coopid").value != null) {
+        //     //
+        //     document.getElementById("Detail").style.display = "block";
+        //     // document.getElementById("coopid").value = "block";
+        // }
+    }, [watch]);
+
+    useEffect(() => {
+        // console.log(coopid);
+        if(cookies.pageone && cookies.pageone.coopid !=null)
+        {
+            setCoopid(cookies.pageone && cookies.pageone.coopid)
             document.getElementById("Detail").style.display = "block";
         }
-    }, [watch]);
+        // if (coopid != null) {
+        //
+        // }
+        return () => {};
+    }, [coopid]);
 
     $(function () {
         $(document.body).on("change", "#coopid", function () {
             if (coopid == null) {
                 // console.log(coopid);
-
                 document.getElementById("Detail").style.display = "block";
                 // $(".select2").select2();
                 // CKEDITOR.replace("editor1");
@@ -143,7 +160,7 @@ function Step1Component(
                                     ref={register({ required: true })}
                                     // required
                                 >
-                                    {/* <option></option> */}
+                                    <option></option>
                                     {feedData.data &&
                                         feedData.data.ucf_officer &&
                                         feedData.data.ucf_officer.map(
@@ -160,60 +177,8 @@ function Step1Component(
                                                 </option>
                                             )
                                         )}
-                                    {/* {feedData.data &&
-                                        feedData.data.ucf_officer &&
-                                        feedData.data.ucf_officer.map(
-                                            (val, i) => {
-                                                return (
-                                                    <option
-                                                        key={i}
-                                                        // value={val.officer_id}
-                                                    >
-                                                        {`[${val.officer_id}]`}
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        {val.officer_name}
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {val.officer_full_name}
-                                                    </option>
-                                                );
-                                            }
-                                        )} */}
                                 </select>
                             </div>
-                            {/* <div className="form-group receiver">
-                                <label>ผู้รับแจ้ง</label>
-                                <select
-                                    name="receiver"
-                                    id="receiver"
-                                    className="form-control select2"
-                                    ref={register({ required: true })}
-                                    required
-                                >
-                                    <option>เลือกผู้รับแจ้ง</option>
-                                    {feedData.data &&
-                                        feedData.data.ucf_officer &&
-                                        feedData.data.ucf_officer.map(
-                                            (val, i) => {
-                                                return (
-                                                    <option
-                                                        key={i}
-                                                        value={val.officer_id}
-                                                    >
-                                                        {`[${val.officer_id}]`}
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        {val.officer_name}
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {val.officer_full_name}
-                                                    </option>
-                                                );
-                                            }
-                                        )}
-                                </select>
-
-                                {errors.receiver && (
-                                    <span>กรุณาเลือกผู้รับแจ้ง</span>
-                                )}
-                            </div> */}
 
                             <div className="form-group">
                                 <label>วันที่รับแจ้ง</label>
@@ -279,21 +244,37 @@ function Step1Component(
                                     <option></option>
                                     {feedData.data &&
                                         feedData.data.ma_coop &&
-                                        feedData.data.ma_coop.map((val, i) => (
-                                            <option
-                                                key={i}
-                                                value={val.coop_id}
-                                                selected={
-                                                    cookies.pageone &&
-                                                    cookies.pageone.coopid ==
-                                                        trim(val.coop_id)
-                                                        ? true
-                                                        : false
-                                                }
-                                            >
-                                                {val.coop_id} {val.coop_name}
-                                            </option>
-                                        ))}
+                                        feedData.data.ma_coop.map((val, i) => {
+                                            if (
+                                                cookies &&
+                                                cookies.pageone &&
+                                                cookies.pageone.coopid &&
+                                                cookies.pageone.coopid ==
+                                                    trim(val.coop_id)
+                                            ) {
+                                                // setCoopid(
+                                                //     cookies.pageone &&
+                                                //         cookies.pageone.coopid
+                                                // );
+                                            }
+                                            return (
+                                                <option
+                                                    key={i}
+                                                    value={val.coop_id}
+                                                    selected={
+                                                        cookies.pageone &&
+                                                        cookies.pageone
+                                                            .coopid ==
+                                                            trim(val.coop_id)
+                                                            ? true
+                                                            : false
+                                                    }
+                                                >
+                                                    {val.coop_id}{" "}
+                                                    {val.coop_name}
+                                                </option>
+                                            );
+                                        })}
                                 </select>{" "}
                                 {errors.coopid && (
                                     <span>กรุณาเลือกผู้รับแจ้ง</span>
@@ -311,7 +292,7 @@ function Step1Component(
                                         })}
                                         // required
                                     >
-                                        {/* <option></option> */}
+                                        <option></option>
                                         {feedData.data &&
                                             feedData.data
                                                 .ucf_customer_contact &&

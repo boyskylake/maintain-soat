@@ -6801,11 +6801,27 @@ function Step1Component(props, _ref) {
   }; //data
 
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (watch('coopid') != null) {
-      document.getElementById("Detail").style.display = "block";
-    }
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {// console.log(watch('coopid'))
+    // if (watch('coopid') != null) {
+    //     // console.log(document.getElementById("coopid").value)
+    //     // if (document.getElementById("coopid").value != null) {
+    //     //
+    //     document.getElementById("Detail").style.display = "block";
+    //     // document.getElementById("coopid").value = "block";
+    // }
   }, [watch]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // console.log(coopid);
+    if (cookies.pageone && cookies.pageone.coopid != null) {
+      setCoopid(cookies.pageone && cookies.pageone.coopid);
+      document.getElementById("Detail").style.display = "block";
+    } // if (coopid != null) {
+    //
+    // }
+
+
+    return function () {};
+  }, [coopid]);
   $(function () {
     $(document.body).on("change", "#coopid", function () {
       if (coopid == null) {
@@ -6874,7 +6890,7 @@ function Step1Component(props, _ref) {
               className: "form-group receiver",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("label", {
                 children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("select", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("select", {
                 name: "receiver",
                 id: "receiver",
                 className: "form-control select2",
@@ -6882,12 +6898,12 @@ function Step1Component(props, _ref) {
                   required: true
                 }) // required
                 ,
-                children: feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("option", {
                     value: val.officer_id,
                     children: ["[".concat(val.officer_id, "]"), "\xA0\xA0", val.officer_name, "\xA0\xA0", val.officer_full_name]
                   }, i);
-                })
+                })]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
               className: "form-group",
@@ -6954,6 +6970,12 @@ function Step1Component(props, _ref) {
                 }) // required
                 ,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {}), feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
+                  if (cookies && cookies.pageone && cookies.pageone.coopid && cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.coop_id)) {// setCoopid(
+                    //     cookies.pageone &&
+                    //         cookies.pageone.coopid
+                    // );
+                  }
+
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("option", {
                     value: val.coop_id,
                     selected: cookies.pageone && cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.coop_id) ? true : false,
@@ -6969,19 +6991,19 @@ function Step1Component(props, _ref) {
                 className: "form-group receiver",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("label", {
                   children: "\u0E1C\u0E39\u0E49\u0E41\u0E08\u0E49\u0E07"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("select", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("select", {
                   name: "informer",
                   id: "informer",
                   className: "form-control select2",
                   ref: register({//  required: true
                   }) // required
                   ,
-                  children: feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {}), feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
                     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("option", {
                       value: val.contact_no,
                       children: ["[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name]
                     }, i);
-                  })
+                  })]
                 }), " ", ((_errors$informer = errors.informer) === null || _errors$informer === void 0 ? void 0 : _errors$informer.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(ErrorSpan, {
                   className: "",
                   children: ErrorsWord.informer.required
@@ -7857,14 +7879,35 @@ function Step3Component(props, _ref) {
         className: "text-gray-800 text-base font-medium",
         children: [" ", "\u0E17\u0E48\u0E32\u0E19\u0E44\u0E14\u0E49\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19\u0E01\u0E32\u0E23\u0E02\u0E31\u0E49\u0E19\u0E15\u0E2D\u0E19\u0E19\u0E35\u0E49\u0E40\u0E2A\u0E23\u0E47\u0E08\u0E2A\u0E21\u0E1A\u0E23\u0E39\u0E13\u0E4C\u0E41\u0E25\u0E49\u0E27"]
       })]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {}), feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
-        if (cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.coop_id)) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-            children: val.coop_name
-          });
-        }
-      }), "testse"]
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "box-body",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "box-header",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "col-xs-12",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
+              className: "page-header",
+              children: feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
+                if (cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.coop_id)) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h4", {
+                    className: "pull-center",
+                    style: {
+                      paddingLeft: "540p"
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                      src: "./dist/img/pdf.png"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
+                      className: "pull-right",
+                      children: ["Date:", cookies.pageone.receive_date]
+                    }), val.coop_id, " ", val.coop_name, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E20\u0E32\u0E22\u0E43\u0E19 \u0E2B\u0E49\u0E32\u0E21\u0E19\u0E33\u0E2D\u0E2D\u0E01\u0E19\u0E2D\u0E01\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E14\u0E22\u0E40\u0E14\u0E47\u0E14\u0E02\u0E32\u0E14"]
+                  });
+                }
+              })
+            })
+          })
+        })
+      })
     })
   });
 }

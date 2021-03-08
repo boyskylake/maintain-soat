@@ -1521,7 +1521,7 @@ var officerRoute = [{
 //     path: "/officer/saveorder3",
 //     exact: true,
 //     layout: "officer",
-//     component: lazy(() => import("../pages/Order/component/SaveorderComponent")),
+//     component: lazy(() => import("../pages/Order/component/test")),
 // },
 // {
 //     path: "/officer/detail",
