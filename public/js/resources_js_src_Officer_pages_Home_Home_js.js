@@ -98,7 +98,72 @@ function Home() {
               value: val.value
             };
           }
+        }); //-------------------------------กราฟย้อนหลังปัจจุบัน 7 ปี
+
+        var graponeH = [];
+        feedData.data.grahp2.map(function (val, i) {
+          if (val.hardware == null) {
+            graponeH.push(0);
+          } else {
+            graponeH.push(val.hardware);
+          }
         });
+        var graponeO = [];
+        feedData.data.grahp2.map(function (val, i) {
+          if (val.other == null) {
+            graponeO.push(0);
+          } else {
+            graponeO.push(val.other);
+          }
+        });
+        var graponeS = [];
+        feedData.data.grahp2.map(function (val, i) {
+          if (val.software == null) {
+            graponeS.push(0);
+          } else {
+            graponeS.push(val.software);
+          }
+        });
+        var graponeY = [];
+        feedData.data.grahp2.map(function (val, i) {
+          if (val.hardware != null) {
+            graponeY.push(val.years);
+          } else {
+            graponeY.push(val.years);
+          }
+        });
+        var areaChartData1 = {
+          labels: graponeY,
+          datasets: [{
+            label: 'Hardware',
+            data: graponeH
+          }, {
+            label: 'Software',
+            data: graponeS
+          }, {
+            label: 'อื่นๆ',
+            data: graponeO
+          }]
+        };
+        var barChartCanvas = $('#barChart').get(0).getContext('2d');
+        var barChart = new Chart(barChartCanvas);
+        var barChartData = areaChartData1;
+        barChartData.datasets[0].fillColor = '#f10303';
+        barChartData.datasets[0].strokeColor = '#f10303';
+        barChartData.datasets[0].pointColor = '#f10303';
+        barChartData.datasets[1].fillColor = '#19caf3';
+        barChartData.datasets[1].strokeColor = '#19caf3';
+        barChartData.datasets[1].pointColor = '#19caf3';
+        barChartData.datasets[2].fillColor = '#f88f58';
+        barChartData.datasets[2].strokeColor = '#f88f58';
+        barChartData.datasets[2].pointColor = '#f88f58';
+        var barChartOptions = {
+          responsive: true
+        };
+        barChartOptions.datasetFill = false;
+        barChart.Bar(barChartData, barChartOptions); //-------------------------------กราฟย้อนหลังปัจจุบัน 7 ปี
+        //-------------------------------กราฟเงินขาย
+
         var grapbew = [];
         feedData.data.grahp3.map(function (val, i) {
           if (val.hardware == null) {
@@ -123,27 +188,6 @@ function Home() {
             grapbew3.push(val.years);
           }
         });
-        console.log(grahp1);
-        new Morris.Donut({
-          element: "sales-chart",
-          resize: true,
-          colors: ["#f10303", "#19caf3", "#f88f58", "#f88f58"],
-          data: grahp1,
-          hideHover: "auto"
-        }); // var bar = document.getElementById("bar-chart");
-
-        new Morris.Bar({
-          element: "bar-chart",
-          resize: true,
-          data: feedData.data.grahp2,
-          barColors: ["#f10303", "#19caf3", "#f88f58"],
-          xkey: "years",
-          ykeys: ["hardware", "software", "other"],
-          labels: ["Hardware", "Software", "อื่นๆ"],
-          hideHover: "auto"
-        });
-        var areaChartCanvas = $('#areaChart').get(0).getContext('2d');
-        var areaChart = new Chart(areaChartCanvas);
         var areaChartData = {
           labels: grapbew3,
           datasets: [{
@@ -164,10 +208,31 @@ function Home() {
             data: grapbew
           }]
         };
+        var areaChartCanvas = $('#areaChart').get(0).getContext('2d');
+        var areaChart = new Chart(areaChartCanvas);
         var areaChartOptions = {
           responsive: true
         };
-        areaChart.Line(areaChartData, areaChartOptions);
+        areaChart.Line(areaChartData, areaChartOptions); //-------------------------------กราฟเงินขาย
+
+        console.log(grahp1);
+        new Morris.Donut({
+          element: "sales-chart",
+          resize: true,
+          colors: ["#f10303", "#19caf3", "#f88f58", "#f88f58"],
+          data: grahp1,
+          hideHover: "auto"
+        }); // var bar = document.getElementById("bar-chart");
+        // new Morris.Bar({
+        //     element: "bar-chart",
+        //     resize: true,
+        //     data: feedData.data.grahp2,
+        //     barColors: [ "#f10303", "#19caf3", "#f88f58"],
+        //     xkey: "years",
+        //     ykeys: [ "hardware" , "software", "other"],
+        //     labels: [ "Hardware", "Software", "อื่นๆ"],
+        //     hideHover: "auto",
+        // });
       });
     }
 
@@ -261,113 +326,118 @@ function Home() {
             })]
           }, i);
         })
-      }), feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "overlay",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-          className: "fa fa-refresh fa-spin"
-        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        className: "row",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "col-md-6",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "box box-success",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "box-header with-border",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-                className: "box-title",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                  children: "\u0E01\u0E23\u0E32\u0E1F\u0E22\u0E49\u0E2D\u0E19\u0E2B\u0E25\u0E31\u0E07\u0E1B\u0E31\u0E08\u0E08\u0E38\u0E1A\u0E31\u0E19 7 \u0E1B\u0E35"
-                })
+        className: "box box-default",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "col-md-6",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "box box-success",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "box-header with-border",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+                  className: "box-title",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+                    children: "\u0E01\u0E23\u0E32\u0E1F\u0E22\u0E49\u0E2D\u0E19\u0E2B\u0E25\u0E31\u0E07\u0E1B\u0E31\u0E08\u0E08\u0E38\u0E1A\u0E31\u0E19 7 \u0E1B\u0E35"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "box-tools pull-right",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-box-tool",
+                    "data-widget": "collapse",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+                      className: "fa fa-minus"
+                    })
+                  })
+                })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "box-tools pull-right",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                  type: "button",
-                  className: "btn btn-box-tool",
-                  "data-widget": "collapse",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                    className: "fa fa-minus"
+                className: "box-body",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "chart",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("canvas", {
+                    id: "barChart",
+                    style: {
+                      height: "250px"
+                    }
                   })
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "box-body chart-responsive",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "chart",
-                id: "bar-chart",
-                style: {
-                  height: "250px"
-                }
-              })
-            })]
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "col-md-6",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "box box-success",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "box-header with-border",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-                className: "box-title",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                  children: "\u0E01\u0E23\u0E32\u0E1F\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "box-tools pull-right",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                  type: "button",
-                  className: "btn btn-box-tool",
-                  "data-widget": "collapse",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                    className: "fa fa-minus"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "col-md-6",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "box box-success",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "box-header with-border",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+                  className: "box-title",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+                    children: "\u0E01\u0E23\u0E32\u0E1F\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
                   })
-                })
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "box-body chart-responsive",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "chart",
-                id: "sales-chart",
-                style: {
-                  height: "250px"
-                }
-              })
-            })]
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "col-md-12",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "box box-success",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "box-header with-border",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-                className: "box-title",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
-                  children: "\u0E01\u0E23\u0E32\u0E1F\u0E40\u0E07\u0E34\u0E19\u0E02\u0E32\u0E22"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "box-tools pull-right",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                  type: "button",
-                  className: "btn btn-box-tool",
-                  "data-widget": "collapse",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                    className: "fa fa-minus"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "box-tools pull-right",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-box-tool",
+                    "data-widget": "collapse",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+                      className: "fa fa-minus"
+                    })
                   })
-                })
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "box-body",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "chart",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("canvas", {
-                  id: "areaChart",
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "box-body chart-responsive",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "chart",
+                  id: "sales-chart",
                   style: {
                     height: "250px"
                   }
                 })
-              })
-            }), "555555"]
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "col-md-12",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "box box-success",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "box-header with-border",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+                  className: "box-title",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+                    children: "\u0E01\u0E23\u0E32\u0E1F\u0E40\u0E07\u0E34\u0E19\u0E02\u0E32\u0E22"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "box-tools pull-right",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-box-tool",
+                    "data-widget": "collapse",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+                      className: "fa fa-minus"
+                    })
+                  })
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "box-body",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "chart",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("canvas", {
+                    id: "areaChart",
+                    style: {
+                      height: "250px"
+                    }
+                  })
+                })
+              })]
+            })
+          })]
+        }), feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "overlay",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+            className: "fa fa-refresh fa-spin"
           })
         })]
       })]
