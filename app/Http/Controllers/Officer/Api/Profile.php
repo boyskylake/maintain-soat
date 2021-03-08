@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class CalendaController extends Controller
+class Profile extends Controller
 {
-    public function editOrder()
+    public function Profile()
     {
         // $ma_coop = DB::connection('oracle')->select("select * from MA_COOP");
         // $ucf_officer = DB::connection('oracle')->select("select * from UCF_OFFICER");
@@ -23,6 +23,13 @@ class CalendaController extends Controller
 
 
         // return response()->json(compact('ma_coop', 'ucf_officer','ucf_inform_type','ucf_customer_contact','ucf_application'));
+
+
+        $Profile = DB::select("SELECT * FROM maintainsoat.officers");
+
+        return view(compact('Profile'));
+        // return response()->json(compatc('Profile'));
+
 
     }
 
