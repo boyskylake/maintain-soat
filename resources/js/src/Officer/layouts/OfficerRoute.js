@@ -34,12 +34,12 @@ const officerRoute = [
         layout: "",
         component: lazy(() => import("../pages/Lookscreen/Lookscreen")),
     },
-    // {
-    //     path: "/officer/saveorder3",
-    //     exact: true,
-    //     layout: "officer",
-    //     component: lazy(() => import("../pages/Order/component/test")),
-    // },
+    {
+        path: "/officer/Profile",
+        exact: true,
+        layout: "officer",
+        component: lazy(() => import("../pages/Profile/Profile")),
+    },
     // {
     //     path: "/officer/detail",
     //     exact: true,
