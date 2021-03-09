@@ -183,48 +183,61 @@ var Login = function Login() {
               onSubmit: function onSubmit(e) {
                 return handleSubmit(e);
               },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                className: "form-group has-feedback",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                  type: "Email",
-                  onChange: function onChange(event) {
-                    return setUser(event.target.value);
-                  },
-                  className: "form-control",
-                  placeholder: "Username",
-                  required: true,
-                  height: "30"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("svg", {
-                  width: "1.2em",
-                  height: "1.2em",
-                  viewBox: "0 0 16 16",
-                  className: "bi bi-person-fill",
-                  fill: "currentColor",
-                  xmlns: "http://www.w3.org/2000/svg"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                  className: "glyphicon glyphicon-lock form-control-feedback"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-                className: "form-group has-feedback",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
-                  type: "password",
-                  onChange: function onChange(event) {
-                    return setPass(event.target.value);
-                  },
-                  className: "form-control",
-                  placeholder: "Password",
-                  required: true
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-                  className: "glyphicon glyphicon-lock form-control-feedback"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "row",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "flex -mx-3",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                  className: "login-btn",
+                  className: "w-full px-3 mb-5",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                    className: "flex",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                      className: "w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+                        className: "mdi mdi-email-outline text-gray-400 text-lg"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                      type: "email",
+                      onChange: function onChange(event) {
+                        return setUser(event.target.value);
+                      },
+                      className: "w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                      placeholder: "Username",
+                      required: true,
+                      style: {
+                        fontSize: "20px"
+                      }
+                    })]
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "flex -mx-3",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "w-full px-3 mb-12",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                    className: "flex",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                      className: "w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+                        className: "mdi mdi-lock-outline text-gray-400 text-lg"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                      type: "password",
+                      onChange: function onChange(event) {
+                        return setPass(event.target.value);
+                      },
+                      className: "w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                      placeholder: "************",
+                      required: true
+                    })]
+                  })
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "flex -mx-3",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "w-full px-3 mb-5",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                    className: "btn btn-primary ",
+                    className: "block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold",
                     type: "submit",
-                    children: "Log in"
+                    children: "Login"
                   })
                 })
               })]

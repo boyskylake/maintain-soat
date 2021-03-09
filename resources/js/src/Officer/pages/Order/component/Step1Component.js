@@ -198,7 +198,9 @@ function Step1Component(
                                         className="form-control"
                                         data-provide="datepicker"
                                         data-date-language="th-th"
+                                        autoComplete="off"
                                         ref={register}
+
                                     />
                                 </div>
                             </div>
@@ -223,6 +225,7 @@ function Step1Component(
                                         className="form-control"
                                         data-inputmask="'alias': 'dd/mm/yyyy'"
                                         data-mask
+                                        autoComplete="off"
                                         ref={register}
                                     />
                                 </div>
@@ -325,6 +328,7 @@ function Step1Component(
                                         type="text"
                                         name="doc_make"
                                         className="form-control"
+                                        autoComplete="off"
                                         style={{
                                             border: "1.5px solid #3c8dbc",
                                             borderRadius: 2,
@@ -416,6 +420,7 @@ function Step1Component(
                                             className="form-control"
                                             data-inputmask="'alias': 'dd/mm/yyyy'"
                                             data-mask
+                                            autoComplete="off"
                                             ref={register}
                                         />
                                     </div>
@@ -440,6 +445,7 @@ function Step1Component(
                                             className="form-control"
                                             data-inputmask="'alias': 'dd/mm/yyyy'"
                                             data-mask
+                                            autoComplete="off"
                                             ref={register}
                                         />
                                     </div>
@@ -612,6 +618,7 @@ function Step1Component(
                                             type="text"
                                             name="status"
                                             className="form-control"
+                                            autoComplete="off"
                                             ref={register}
                                             style={{
                                                 border: "1.5px solid #3c8dbc",
@@ -677,6 +684,7 @@ function Step1Component(
                                                 data-inputmask="'alias': 'dd/mm/yyyy'"
                                                 data-mask
                                                 ref={register}
+                                                autoComplete="off"
                                             />
                                         </div>
                                     </div>
