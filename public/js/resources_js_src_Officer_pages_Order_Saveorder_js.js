@@ -6627,22 +6627,25 @@ function getStepContent(step, setCompleted, completed, setActiveStep, activeStep
 
   switch (step) {
     case 0:
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_component_Step1Component__WEBPACK_IMPORTED_MODULE_7__.default, {
-        props: data,
-        setCompleted: setCompleted,
-        completed: completed,
-        setActiveStep: setActiveStep,
-        activeStep: activeStep,
-        step: step
-      }) //     <Step3Component
-      //     props={data}
-      //     setCompleted={setCompleted}
-      //     completed={completed}
-      //     setActiveStep={setActiveStep}
-      //     activeStep={activeStep}
-      //     step={step}
-      // />
-      ;
+      return (
+        /*#__PURE__*/
+        // <Step1Component
+        //     props={data}
+        //     setCompleted={setCompleted}
+        //     completed={completed}
+        //     setActiveStep={setActiveStep}
+        //     activeStep={activeStep}
+        //     step={step}
+        // />
+        (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_component_Step3Component__WEBPACK_IMPORTED_MODULE_9__.default, {
+          props: data,
+          setCompleted: setCompleted,
+          completed: completed,
+          setActiveStep: setActiveStep,
+          activeStep: activeStep,
+          step: step
+        })
+      );
 
     case 1:
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_component_Step2Component__WEBPACK_IMPORTED_MODULE_8__.default, {
@@ -6934,6 +6937,7 @@ function Step1Component(props, _ref) {
                   className: "form-control",
                   "data-provide": "datepicker",
                   "data-date-language": "th-th",
+                  autoComplete: "off",
                   ref: register
                 })]
               })]
@@ -6960,6 +6964,7 @@ function Step1Component(props, _ref) {
                   className: "form-control",
                   "data-inputmask": "'alias': 'dd/mm/yyyy'",
                   "data-mask": true,
+                  autoComplete: "off",
                   ref: register
                 })]
               })]
@@ -7024,6 +7029,7 @@ function Step1Component(props, _ref) {
                   type: "text",
                   name: "doc_make",
                   className: "form-control",
+                  autoComplete: "off",
                   style: {
                     border: "1.5px solid #3c8dbc",
                     borderRadius: 2
@@ -7099,6 +7105,7 @@ function Step1Component(props, _ref) {
                     className: "form-control",
                     "data-inputmask": "'alias': 'dd/mm/yyyy'",
                     "data-mask": true,
+                    autoComplete: "off",
                     ref: register
                   })]
                 })]
@@ -7125,6 +7132,7 @@ function Step1Component(props, _ref) {
                     className: "form-control",
                     "data-inputmask": "'alias': 'dd/mm/yyyy'",
                     "data-mask": true,
+                    autoComplete: "off",
                     ref: register
                   })]
                 })]
@@ -7254,6 +7262,7 @@ function Step1Component(props, _ref) {
                     type: "text",
                     name: "status",
                     className: "form-control",
+                    autoComplete: "off",
                     ref: register,
                     style: {
                       border: "1.5px solid #3c8dbc",
@@ -7303,7 +7312,8 @@ function Step1Component(props, _ref) {
                       className: "form-control",
                       "data-inputmask": "'alias': 'dd/mm/yyyy'",
                       "data-mask": true,
-                      ref: register
+                      ref: register,
+                      autoComplete: "off"
                     })]
                   })]
                 })
@@ -7950,42 +7960,56 @@ function Step3Component(props, _ref) {
                   },
                   children: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E20\u0E32\u0E22\u0E43\u0E19\u0E2B\u0E49\u0E32\u0E21\u0E19\u0E33\u0E2D\u0E2D\u0E01\u0E19\u0E2D\u0E01\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E14\u0E22\u0E40\u0E14\u0E47\u0E14\u0E02\u0E32\u0E14"
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
                 className: "pull-right",
                 style: {
-                  paddingRight: "30px"
+                  paddingRight: "40px"
                 },
-                children: ["level", feedPostData && feedPostData.coop[0] && feedPostData.coop[0].dep_des]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-                className: "pull-right",
-                style: {
-                  paddingRight: "30px",
-                  borderBottom: "1px"
-                },
-                children: "Order No:"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {})]
+                children: feedPostData && feedPostData.coop[0] && feedPostData.coop[0].dep_des
+              })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-            className: "pull-right",
-            style: {
-              paddingRight: "120px",
-              borderBottom: "1px"
-            },
-            children: "Order date:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-            className: "pull-left",
-            style: {
-              paddingLeft: "30px",
-              borderBottom: "1px"
-            },
-            children: "Tel:"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-            className: "pull-left",
-            style: {
-              paddingLeft: "30px",
-              borderBottom: "1px"
-            },
-            children: "Remote Other:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+            className: "row invoice-info",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+              className: "col-sm-4 invoice-col",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("order1", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+                  style: {
+                    lineHeight: "1.8",
+                    paddingLeft: "30px"
+                  },
+                  children: ["Tel", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), "Remote Other", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), "Application :"]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("order4", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+                  style: {
+                    lineHeight: "1.8",
+                    paddingLeft: "30px"
+                  },
+                  children: ["Tel", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), "Remote Other", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), "Application :"]
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("order2", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+                className: "pull-right",
+                style: {
+                  lineHeight: "1.8",
+                  paddingRight: "230px",
+                  paddingTop: "11px"
+                },
+                children: ["Order:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), "Order date:"]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("order3", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+                className: "pull-right",
+                style: {
+                  lineHeight: "1.8",
+                  paddingRight: "230px",
+                  paddingTop: "11px"
+                },
+                children: ["Order:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), "Order date:"]
+              })
+            })]
           })]
         })
       })

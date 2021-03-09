@@ -148,7 +148,7 @@ function Step3Component(
                                         {feedPostData &&
                                             feedPostData.coop[0] &&
                                             feedPostData.coop[0].coop_name}
-                                            <br />
+                                        <br />
                                         <small
                                             className="pull-left"
                                             style={{
@@ -158,62 +158,88 @@ function Step3Component(
                                             เอกสารภายในห้ามนำออกนอกบริษัทโดยเด็ดขาด
                                         </small>
                                     </h3>
-                                    <h3 className="pull-right" style={{
-                                                paddingRight: "30px",
-                                            }}>
+                                    <h3
+                                        className="pull-right"
+                                        style={{
+                                            paddingRight: "40px",
+                                        }}
+                                    >
                                         {/* Date:{cookies.pageone.receive_date} */}
-                                        level
+                                        {/* level */}
                                         {feedPostData &&
                                             feedPostData.coop[0] &&
                                             feedPostData.coop[0].dep_des}
                                     </h3>
-                                    {/* order */}
-                                    <br />
-                                    <h3 className="pull-right" style={{
-                                                paddingRight: "30px",
-                                                borderBottom: "1px"
-                                            }}>
-                                        Order No:
-                                        {/* {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].dep_des} */}
-                                    </h3>
-
-                                    <br />
-                                   </h2>
-
+                                </h2>
                             </div>
+                            {/* แนวตั้ง */}
+                            <div className="row invoice-info">
+                                <div className="col-sm-4 invoice-col">
+                                    <br />
+                                    <order1>
+                                        <h3
+                                            style={{
+                                                lineHeight: "1.8",
+                                                paddingLeft: "30px",
+                                            }}
+                                        >
+                                            Tel
+                                            <br />
+                                            Remote Other
+                                            <br />
+                                            Application :
+                                        </h3>
+                                    </order1>
+                                    <br />
+                                    <order4>
+                                        <h3
+                                            style={{
+                                                lineHeight: "1.8",
+                                                paddingLeft: "30px",
+                                            }}
+                                        >
+                                            Tel
+                                            <br />
+                                            Remote Other
+                                            <br />
+                                            Application :
+                                        </h3>
+                                    </order4>
 
-                             {/* order date */}
-                             <h3 className="pull-right" style={{
-                                                paddingRight: "120px",
-                                                borderBottom: "1px"
-                                            }}>
+                                </div>
+                                <order2>
+                                    <h3
+                                        className="pull-right"
+                                        style={{
+                                            lineHeight: "1.8",
+                                            paddingRight: "230px",
+                                            paddingTop: "11px",
+                                        }}
+                                    >
+                                        Order:
+                                        <br />
                                         Order date:
-                                        {/* {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].dep_des} */}
                                     </h3>
-                            {/* tel */}
-                            <h3 className="pull-left" style={{
-                                                paddingLeft: "30px",
-                                                borderBottom: "1px"
-                                            }}>
-                                        Tel:
-                                        {/* {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].dep_des} */}
-                            </h3>
-                            <br />
-                            <h3 className="pull-left" style={{
-                                                paddingLeft: "30px",
-                                                borderBottom: "1px"
-                                            }}>
-                                        Remote Other:
-                                        {/* {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].dep_des} */}
-                            </h3>
+                                </order2>
+                                {/* <br /> */}
+                                 {/* ////// */}
+                                 <order3>
+                                    <h3
+                                        className="pull-right"
+                                        style={{
+                                            lineHeight: "1.8",
+                                            paddingRight: "230px",
+                                            paddingTop: "11px",
+                                        }}
+                                    >
+                                        Order:
+                                        <br />
+                                        Order date:
+                                    </h3>
+                                </order3>
+                            </div>
+                            {/* ------ */}
+
                         </div>
                     </div>
                 </Fragment>
