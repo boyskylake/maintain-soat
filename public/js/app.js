@@ -2290,7 +2290,7 @@ var service = new _services__WEBPACK_IMPORTED_MODULE_0__.default();
 
 function feedDataGet(url) {
   var requestOptions = {
-    method: "Get" //  body:   {}
+    method: 'Get' //  body:   {}
 
   };
   return service.API(url, requestOptions).then(function (res) {
@@ -2300,10 +2300,9 @@ function feedDataGet(url) {
 
 function feedDataPost(url) {
   var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  console.log(body);
   var requestOptions = {
-    method: "POST",
-    data: JSON.stringify(body)
+    method: "Post",
+    body: body
   };
   return service.API(url, requestOptions).then(function (res) {
     return res;

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SebastianBergmann\Environment\Console;
 
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,11 +26,14 @@ class Profile extends Controller
         // return response()->json(compact('ma_coop', 'ucf_officer','ucf_inform_type','ucf_customer_contact','ucf_application'));
 
 
-        $Profile = DB::select("SELECT * FROM maintainsoat.officers");
 
-        return view(compact('Profile'));
-        // return response()->json(compatc('Profile'));
+        $user = Auth::user();
 
+        $Profile = DB::table("officers")->where('id', '=', $user->id)->first();
+
+
+        return response()->json(['Profile'=>$Profile]);
+        // dd($menu);
 
     }
 

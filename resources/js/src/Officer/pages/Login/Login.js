@@ -161,7 +161,7 @@ const Login = () => {
                         <h4>กรุณาเข้าสู่ระบบเพื่อใช้งาน !</h4>
                         <div className="form-group">
                             <form onSubmit={(e) => handleSubmit(e)}>
-                                <div className="form-group has-feedback">
+                                {/* <div className="form-group has-feedback">
                                     <input
                                         type="Email"
                                         onChange={(event) =>
@@ -181,8 +181,29 @@ const Login = () => {
                                         xmlns="http://www.w3.org/2000/svg"
                                     ></svg>
                                     <span className="glyphicon glyphicon-lock form-control-feedback" />
+                                </div> */}
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-5">
+                                        {/* <label htmlFor className="text-xs font-semibold px-1"></label> */}
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
+                                            </div>
+                                            <input
+                                                type="email"
+                                                onChange={(event) =>
+                                                    setUser(event.target.value)
+                                                }
+                                                className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                                                placeholder="Username"
+                                                required
+                                                style={{ fontSize: "20px" }}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="form-group has-feedback">
+
+                                {/* <div className="form-group has-feedback">
                                     <input
                                         type="password"
                                         onChange={(event) =>
@@ -193,14 +214,46 @@ const Login = () => {
                                         required
                                     />
                                     <span className="glyphicon glyphicon-lock form-control-feedback" />
+                                </div> */}
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-12">
+                                        {/* <label
+                                            htmlFor
+                                            className="text-xs font-semibold px-1"
+                                        >
+                                            Password
+                                        </label> */}
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
+                                            </div>
+                                            <input
+                                                type="password"
+                                                onChange={(event) =>
+                                                    setPass(event.target.value)
+                                                }
+                                                className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                                                placeholder="************"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="row">
+
+                                {/* <div className="row">
                                     <div className="login-btn">
                                         <button
                                             className="btn btn-primary "
                                             type="submit"
                                         >
                                             Log in
+                                        </button>
+                                    </div>
+                                </div> */}
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-5">
+                                        <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold" type="submit">
+                                            Login
                                         </button>
                                     </div>
                                 </div>
