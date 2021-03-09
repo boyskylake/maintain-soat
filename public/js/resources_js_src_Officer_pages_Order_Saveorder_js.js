@@ -6634,7 +6634,15 @@ function getStepContent(step, setCompleted, completed, setActiveStep, activeStep
         setActiveStep: setActiveStep,
         activeStep: activeStep,
         step: step
-      });
+      }) //     <Step3Component
+      //     props={data}
+      //     setCompleted={setCompleted}
+      //     completed={completed}
+      //     setActiveStep={setActiveStep}
+      //     activeStep={activeStep}
+      //     step={step}
+      // />
+      ;
 
     case 1:
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_component_Step2Component__WEBPACK_IMPORTED_MODULE_8__.default, {
@@ -7415,9 +7423,9 @@ function Step2Component(props, _ref) {
       _useCookies2 = _slicedToArray(_useCookies, 3),
       cookies = _useCookies2[0],
       setCookie = _useCookies2[1],
-      removeCookie = _useCookies2[2];
+      removeCookie = _useCookies2[2]; // console.log(props);
 
-  console.log(props);
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var feedData = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.feedData;
@@ -7445,9 +7453,9 @@ function Step2Component(props, _ref) {
       watch = _useForm.watch,
       errors = _useForm.errors;
 
-  var onSubmit = function onSubmit(data) {
-    console.log(data);
-    console.log(coopid); // $('#myModal').modal('show')
+  var onSubmit = function onSubmit(data) {// console.log(data);
+    // console.log(coopid);
+    // $('#myModal').modal('show')
   }; // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
 
 
@@ -7460,10 +7468,12 @@ function Step2Component(props, _ref) {
     //         inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
     // );
     if (cookies.pageone && cookies.pageone.inform_type && inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0) {
+      // สั่งซื้อ
       setCookiePageOne(cookies.pageone);
       removeCookie("pageone");
       feedData();
     } else {
+      //
       if (cookies.pageone && cookies.pageone.coopid) {
         setCookie("pagetwo", JSON.stringify({
           status: "1"
@@ -7731,10 +7741,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../helpers */ "./resources/js/src/helpers/index.js");
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../redux/actions */ "./resources/js/src/Officer/redux/actions/index.js");
-/* harmony import */ var react_cookie__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-cookie */ "./node_modules/react-cookie/es6/useCookies.js");
+/* harmony import */ var react_cookie__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-cookie */ "./node_modules/react-cookie/es6/useCookies.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _redux_services_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../redux/services/services */ "./resources/js/src/Officer/redux/services/services.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7763,6 +7774,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Step3Component(props, _ref) {
   var setCompleted = _ref.setCompleted,
       completed = _ref.completed,
@@ -7770,13 +7782,13 @@ function Step3Component(props, _ref) {
       activeStep = _ref.activeStep,
       step = _ref.step;
 
-  var _useCookies = (0,react_cookie__WEBPACK_IMPORTED_MODULE_8__.default)(["pageone"]),
+  var _useCookies = (0,react_cookie__WEBPACK_IMPORTED_MODULE_9__.default)(["pageone"]),
       _useCookies2 = _slicedToArray(_useCookies, 3),
       cookies = _useCookies2[0],
       setCookie = _useCookies2[1],
-      removeCookie = _useCookies2[2];
+      removeCookie = _useCookies2[2]; // console.log(props);
 
-  console.log(props);
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var feedData = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.feedData;
@@ -7803,26 +7815,39 @@ function Step3Component(props, _ref) {
       CookiePageTwo = _useState8[0],
       setCookiePageTwo = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      feedPostData = _useState10[0],
+      setfeedPostData = _useState10[1];
+
+  var services = new _redux_services_services__WEBPACK_IMPORTED_MODULE_7__.default();
+
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_3__.useForm)(),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
       watch = _useForm.watch,
       errors = _useForm.errors;
 
-  var onSubmit = function onSubmit(data) {
-    console.log(data);
-    console.log(coopid); // $('#myModal').modal('show')
+  var onSubmit = function onSubmit(data) {// console.log(data);
+    // console.log(coopid);
+    // $('#myModal').modal('show')
   }; // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
 
 
-  var inform_type_only_c = ["07", "31", "03"];
+  var inform_type_only_c = ["07", "31", "03"]; // useEffect(() => {
+  //     if(feedPostData && feedPostData.coop[0])
+  //     {
+  //     }
+  //     return () => {
+  //     }
+  // }, [feedPostData])
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // console.log(cookies.pageone);
     // console.log(cookies.pageone.inform_type);
     // console.log(cookies.pagetwo.pagetwo);
-    console.log(feedData.data && feedData.data);
-
-    if (cookies.pageone && cookies.pageone.inform_type && cookies.pagetwo.pagetwo == "1") {
+    if (cookies.pageone && cookies.pageone.inform_type && cookies.pagetwo.status == "1") {
+      // console.log(cookies.pageone, cookies.pagetwo);
       setCookiePageOne(cookies.pageone);
       setCookiePageTwo(cookies.pagetwo);
       feedData();
@@ -7835,6 +7860,7 @@ function Step3Component(props, _ref) {
 
     function _feedData() {
       _feedData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var Mybody, requestOptions;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -7843,6 +7869,22 @@ function Step3Component(props, _ref) {
                 return dispatch(_redux_actions__WEBPACK_IMPORTED_MODULE_5__.feedDataAction.feedDataGet("/api/v1/officer/orderPage"));
 
               case 2:
+                Mybody = {
+                  coop_id: cookies.pageone && cookies.pageone.coopid
+                }; // console.log(JSON.stringify(Mybody))
+
+                requestOptions = {
+                  method: "POST",
+                  data: JSON.stringify(Mybody)
+                }; // console.log(requestOptions);
+
+                services.API("/api/v1/officer/coopinfo", requestOptions).then(function (res) {
+                  setfeedPostData(res);
+                }); // await dispatch(
+                //     feedDataAction.feedDataPost("/api/v1/officer/coopinfo",Mybody)
+                // );
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -7867,56 +7909,84 @@ function Step3Component(props, _ref) {
     props.setActiveStep(newActiveStep);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: props.completed.has(2) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+  console.log(feedPostData);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: props.completed.has(2) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
       className: "m-2 text-center py-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "py-2",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("i", {
           className: "far fa-check-circle fa-5x text-emerald-400"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h3", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
         className: "text-gray-800 text-base font-medium",
         children: [" ", "\u0E17\u0E48\u0E32\u0E19\u0E44\u0E14\u0E49\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19\u0E01\u0E32\u0E23\u0E02\u0E31\u0E49\u0E19\u0E15\u0E2D\u0E19\u0E19\u0E35\u0E49\u0E40\u0E2A\u0E23\u0E47\u0E08\u0E2A\u0E21\u0E1A\u0E23\u0E39\u0E13\u0E4C\u0E41\u0E25\u0E49\u0E27"]
       })]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "box-body",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
           className: "box-header",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
             className: "col-xs-12",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h2", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h2", {
               className: "page-header",
               style: {
                 borderBottom: "0px"
               },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
                 className: "pull-left",
                 src: "./dist/img/pdf.png"
-              }), feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
-                if (cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.coop_id)) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h4", {
-                    className: "pull-left",
-                    style: {
-                      paddingLeft: "500px",
-                      paddingTop: "20px"
-                    },
-                    children: [val.coop_id, " ", val.coop_name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
-                      className: "pull-left",
-                      style: {
-                        paddingLeft: "65px"
-                      },
-                      children: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E20\u0E32\u0E22\u0E43\u0E19 \u0E2B\u0E49\u0E32\u0E21\u0E19\u0E33\u0E2D\u0E2D\u0E01\u0E19\u0E2D\u0E01\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E14\u0E22\u0E40\u0E14\u0E47\u0E14\u0E02\u0E32\u0E14"
-                    })]
-                  });
-                }
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+                className: "pull-left",
+                style: {
+                  paddingLeft: "400px",
+                  paddingTop: "20px"
+                },
+                children: [feedPostData && feedPostData.coop[0] && feedPostData.coop[0].coop_id, "\xA0", feedPostData && feedPostData.coop[0] && feedPostData.coop[0].coop_name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("small", {
+                  className: "pull-left",
+                  style: {
+                    paddingLeft: "120px"
+                  },
+                  children: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E20\u0E32\u0E22\u0E43\u0E19\u0E2B\u0E49\u0E32\u0E21\u0E19\u0E33\u0E2D\u0E2D\u0E01\u0E19\u0E2D\u0E01\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E14\u0E22\u0E40\u0E14\u0E47\u0E14\u0E02\u0E32\u0E14"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
                 className: "pull-right",
-                children: ["Date:", cookies.pageone.receive_date]
-              })]
+                style: {
+                  paddingRight: "30px"
+                },
+                children: ["level", feedPostData && feedPostData.coop[0] && feedPostData.coop[0].dep_des]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
+                className: "pull-right",
+                style: {
+                  paddingRight: "30px",
+                  borderBottom: "1px"
+                },
+                children: "Order No:"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {})]
             })
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
+            className: "pull-right",
+            style: {
+              paddingRight: "120px",
+              borderBottom: "1px"
+            },
+            children: "Order date:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
+            className: "pull-left",
+            style: {
+              paddingLeft: "30px",
+              borderBottom: "1px"
+            },
+            children: "Tel:"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
+            className: "pull-left",
+            style: {
+              paddingLeft: "30px",
+              borderBottom: "1px"
+            },
+            children: "Remote Other:"
+          })]
         })
       })
     })

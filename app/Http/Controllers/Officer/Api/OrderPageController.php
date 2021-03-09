@@ -13,7 +13,12 @@ class OrderPageController extends Controller
 {
     public function editOrder()
     {
-        $ma_coop = DB::connection('oracle')->select("select * from MA_COOP");
+        // $ma_coop = DB::connection('oracle')->select("select * from MA_COOP");
+        $ma_coop = DB::connection('oracle')->select("select ma_coop.coop_id,ma_coop.bussiness_line,ma_coop.coop_name
+        ,ucf_department.dep_des
+        from MA_COOP
+        left join ucf_department on ma_coop.bussiness_line = ucf_department.dep_code");
+
         $ucf_officer = DB::connection('oracle')->select("select * from UCF_OFFICER");
         $ucf_inform_type = DB::connection('oracle')->select("select * from UCF_INFORM_TYPE");
         $ucf_customer_contact = DB::connection('oracle')->select("select * from UCF_CUSTOMER_CONTACT");
@@ -73,4 +78,29 @@ class OrderPageController extends Controller
 
         return response()->json(compact('request'));
     }
+    public function coopinformation(Request $request)
+    {
+        // $coop = DB::connection('oracle')->select("select ma_coop.coop_id,ma_coop.coop_name,ma_coop.bussiness_line
+        // ,ucf_department.dep_des
+        // from MA_COOP
+        // left join ucf_department on ma_coop.bussiness_line = ucf_department.dep_code
+        // where ma_coop.coop_id ='".$request->coop_id."'
+        // ;");
+
+        $coop_id = $request->coop_id;
+        $coop = DB::connection('oracle')->select("select ma_coop.coop_id,ma_coop.bussiness_line,ma_coop.coop_name
+        ,ucf_department.dep_des
+        from MA_COOP
+        left join ucf_department on ma_coop.bussiness_line = ucf_department.dep_code
+        where ma_coop.coop_id ='".$request->coop_id."'");
+
+
+        return response()->json(compact('coop','coop_id'));
+        // return response()->json([
+        //     'rc_code' => '1',
+        //     'message' => "หน้าแรกสำเร็จ",
+        //     'data'=>$coop
+        // ], 200);
+    }
+
 }

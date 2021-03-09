@@ -23,8 +23,8 @@ function feedDataPost(url,body ={}) {
         dispatch(fetching(true));
 
         feedDataService.feedDataPost(url,body).then(
-            (data) => dispatch(fetchSuccess(data)),
-            (err) => dispatch(fetchFailure())
+            data => dispatch(fetchSuccess(data)),
+            err => dispatch(fetchFailure(true))
         );
     };
 }
