@@ -35,7 +35,7 @@ function Profile() {
             <section className="content-header">
                 <h1>
                 Profile
-
+                    <small>Version 2.0</small>
                 </h1>
                 <ol className="breadcrumb">
                     <li>
@@ -91,7 +91,7 @@ function Profile() {
                                         </a>
                                     </li>
                                     <li className="list-group-item">
-                                        <b>Phone</b>{" "}
+                                        <b>position</b>{" "}
                                         <a className="pull-right">-</a>
                                     </li>
                                 </ul>
