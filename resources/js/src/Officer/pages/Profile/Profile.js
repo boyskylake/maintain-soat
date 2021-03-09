@@ -34,8 +34,8 @@ function Profile() {
         <div className="content-wrapper">
             <section className="content-header">
                 <h1>
-                    Dashboard
-                    <small>Version 2.0</small>
+                Profile
+
                 </h1>
                 <ol className="breadcrumb">
                     <li>
@@ -43,7 +43,7 @@ function Profile() {
                             <i className="fa fa-dashboard" /> Home
                         </a>
                     </li>
-                    <li className="active">Dashboard</li>
+                    <li className="active">Profile</li>
                 </ol>
             </section>
             {/* Main content */}
@@ -55,12 +55,13 @@ function Profile() {
                         <div className="box box-primary">
                             <div className="box-body box-profile">
 
-                            <img className="img-circle"
+                            <img className="rounded-full  mx-auto flex items-center justify-center ring-4 "
                                src={`/storage/${feedData.fetchSuccess &&
                                 feedData.data.Profile &&
                                 feedData.data.Profile.avatar}`}
                                 alt="User Image"
-                                style={{ width: "250px" }}/>
+                                style={{ width: "200px",height: "200px" }}
+                                />
 
                                 <h3 className="profile-username text-center">
                                     {feedData.fetchSuccess &&
@@ -91,7 +92,7 @@ function Profile() {
                                     </li>
                                     <li className="list-group-item">
                                         <b>Phone</b>{" "}
-                                        <a className="pull-right">0879785367</a>
+                                        <a className="pull-right">-</a>
                                     </li>
                                 </ul>
 
