@@ -223,6 +223,14 @@ function getStepContent(
                     activeStep={activeStep}
                     step={step}
                 />
+            //     <Step3Component
+            //     props={data}
+            //     setCompleted={setCompleted}
+            //     completed={completed}
+            //     setActiveStep={setActiveStep}
+            //     activeStep={activeStep}
+            //     step={step}
+            // />
             );
         case 1:
             return (
@@ -245,6 +253,7 @@ function getStepContent(
                     activeStep={activeStep}
                     step={step}
                 />
+
             );
         case 3:
             return "Step 3: This is the bit I really care about!";

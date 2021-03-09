@@ -7,13 +7,14 @@ import { feedDataAction } from "../../../redux/actions";
 
 import { useCookies } from "react-cookie";
 import { trim } from "jquery";
+import Services from "../../../redux/services/services";
 
 function Step3Component(
     props,
     { setCompleted, completed, setActiveStep, activeStep, step }
 ) {
     const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
-    console.log(props);
+    // console.log(props);
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const [confirmSubmit, setconfirmSubmit] = useState(false);
@@ -23,28 +24,40 @@ function Step3Component(
     const [CookiePageOne, setCookiePageOne] = useState();
     const [CookiePageTwo, setCookiePageTwo] = useState();
 
+    const [feedPostData, setfeedPostData] = useState();
+
+    const services = new Services();
+
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = (data) => {
-        console.log(data);
-        console.log(coopid);
+        // console.log(data);
+        // console.log(coopid);
         // $('#myModal').modal('show')
     };
 
     // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
     const inform_type_only_c = ["07", "31", "03"];
 
+    // useEffect(() => {
+    //     if(feedPostData && feedPostData.coop[0])
+    //     {
+
+    //     }
+    //     return () => {
+
+    //     }
+    // }, [feedPostData])
     useEffect(() => {
         // console.log(cookies.pageone);
         // console.log(cookies.pageone.inform_type);
         // console.log(cookies.pagetwo.pagetwo);
 
-        console.log(feedData.data && feedData.data);
-
         if (
             cookies.pageone &&
             cookies.pageone.inform_type &&
-            cookies.pagetwo.pagetwo == "1"
+            cookies.pagetwo.status == "1"
         ) {
+            // console.log(cookies.pageone, cookies.pagetwo);
             setCookiePageOne(cookies.pageone);
             setCookiePageTwo(cookies.pagetwo);
             feedData();
@@ -56,6 +69,22 @@ function Step3Component(
             await dispatch(
                 feedDataAction.feedDataGet("/api/v1/officer/orderPage")
             );
+            let Mybody = { coop_id: cookies.pageone && cookies.pageone.coopid };
+            // console.log(JSON.stringify(Mybody))
+
+            const requestOptions = {
+                method: "POST",
+                data: JSON.stringify(Mybody),
+            };
+            // console.log(requestOptions);
+            services
+                .API("/api/v1/officer/coopinfo", requestOptions)
+                .then((res) => {
+                    setfeedPostData(res);
+                });
+            // await dispatch(
+            //     feedDataAction.feedDataPost("/api/v1/officer/coopinfo",Mybody)
+            // );
         }
     }, [dispatch]);
 
@@ -73,6 +102,7 @@ function Step3Component(
         // console.log(newActiveStep)
         props.setActiveStep(newActiveStep);
     };
+    console.log(feedPostData);
 
     return (
         <Fragment>
@@ -92,42 +122,98 @@ function Step3Component(
                         <div className="box-header">
                             <div className="col-xs-12">
                                 {/* <div className="row"> */}
-                                <h2 className="page-header" style={{
-                                   borderBottom: "0px"
-                                }} >
+                                <h2
+                                    className="page-header"
+                                    style={{
+                                        borderBottom: "0px",
+                                    }}
+                                >
                                     {/* piclogo */}
-                                    <img className="pull-left" src="./dist/img/pdf.png" />
-                                {/* name coopid&&coopname */}
-                                    {feedData.data &&
-                                                feedData.data.ma_coop &&
-                                                feedData.data.ma_coop.map(
-                                                    (val, i) => {
-                                                        if (
-                                                            cookies.pageone.coopid == trim(val.coop_id)
-                                                        ) {
-                                                            return (
-                                                                <h4 className="pull-left" style={{
-                                                                    paddingLeft: "500px",paddingTop:"20px"
-                                                                }}>
-                                                                {val.coop_id} {val.coop_name}
-                                                                <br />
-                                                                <small className="pull-left" style={{
-                                                                    paddingLeft: "65px",
-                                                                }}>
-                                                                    เอกสารภายใน ห้ามนำออกนอกบริษัทโดยเด็ดขาด
-                                                                </small>
-                                                                </h4>
-                                                            );
-                                                        }
-                                                    }
-                                                )}
-                                    {/* get date */}
-                                    <small className="pull-right">
-                                        {/* Date: 2/10/2014 */}
-                                        Date:{cookies.pageone.receive_date}
-                                    </small>
-                                </h2>
+                                    <img
+                                        className="pull-left"
+                                        src="./dist/img/pdf.png"
+                                    />
+                                    {/* name coopid&&coopname */}
+                                    <h3
+                                        className="pull-left"
+                                        style={{
+                                            paddingLeft: "400px",
+                                            paddingTop: "20px",
+                                        }}
+                                    >
+                                        {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].coop_id}
+                                        &nbsp;
+                                        {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].coop_name}
+                                            <br />
+                                        <small
+                                            className="pull-left"
+                                            style={{
+                                                paddingLeft: "120px",
+                                            }}
+                                        >
+                                            เอกสารภายในห้ามนำออกนอกบริษัทโดยเด็ดขาด
+                                        </small>
+                                    </h3>
+                                    <h3 className="pull-right" style={{
+                                                paddingRight: "30px",
+                                            }}>
+                                        {/* Date:{cookies.pageone.receive_date} */}
+                                        level
+                                        {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].dep_des}
+                                    </h3>
+                                    {/* order */}
+                                    <br />
+                                    <h3 className="pull-right" style={{
+                                                paddingRight: "30px",
+                                                borderBottom: "1px"
+                                            }}>
+                                        Order No:
+                                        {/* {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].dep_des} */}
+                                    </h3>
+
+                                    <br />
+                                   </h2>
+
                             </div>
+
+                             {/* order date */}
+                             <h3 className="pull-right" style={{
+                                                paddingRight: "120px",
+                                                borderBottom: "1px"
+                                            }}>
+                                        Order date:
+                                        {/* {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].dep_des} */}
+                                    </h3>
+                            {/* tel */}
+                            <h3 className="pull-left" style={{
+                                                paddingLeft: "30px",
+                                                borderBottom: "1px"
+                                            }}>
+                                        Tel:
+                                        {/* {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].dep_des} */}
+                            </h3>
+                            <br />
+                            <h3 className="pull-left" style={{
+                                                paddingLeft: "30px",
+                                                borderBottom: "1px"
+                                            }}>
+                                        Remote Other:
+                                        {/* {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].dep_des} */}
+                            </h3>
                         </div>
                     </div>
                 </Fragment>

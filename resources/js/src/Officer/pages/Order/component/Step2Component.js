@@ -15,7 +15,7 @@ function Step2Component(
         "pageone",
         "pagetwo",
     ]);
-    console.log(props);
+    // console.log(props);
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const [confirmSubmit, setconfirmSubmit] = useState(false);
@@ -25,10 +25,10 @@ function Step2Component(
     const [CookiePageOne, setCookiePageOne] = useState();
 
     const { register, handleSubmit, watch, errors } = useForm();
-    
+
     const onSubmit = (data) => {
-        console.log(data);
-        console.log(coopid);
+        // console.log(data);
+        // console.log(coopid);
         // $('#myModal').modal('show')
     };
 
@@ -47,10 +47,12 @@ function Step2Component(
             cookies.pageone.inform_type &&
             inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
         ) {
+            // สั่งซื้อ
             setCookiePageOne(cookies.pageone);
             removeCookie("pageone");
             feedData();
         } else {
+            //
             if (cookies.pageone && cookies.pageone.coopid) {
                 setCookie("pagetwo", JSON.stringify({ status: "1" }));
                 handleComplete();
