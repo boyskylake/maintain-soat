@@ -481,8 +481,9 @@ const Header = () => {
                                     {FeedMenu && FeedMenu[1] && (
                                         <img
                                             src={`/storage/${FeedMenu[1].avatar}`}
-                                            className="img-circle"
+                                            className="rounded-full  mx-auto flex items-center justify-center "
                                             alt="User Image"
+                                            style={{ width: "100px",height: "100px" }}
                                         />
                                     )}
                                     {FeedMenu && FeedMenu[1] && (

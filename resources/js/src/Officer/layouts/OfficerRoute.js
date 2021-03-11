@@ -38,6 +38,7 @@ const officerRoute = [
         path: "/officer/Profile",
         exact: true,
         layout: "officer",
+        auth: true,
         component: lazy(() => import("../pages/Profile/Profile")),
     },
     // {

@@ -1345,8 +1345,12 @@ var Header = function Header() {
                 className: "user-header",
                 children: [FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
                   src: "/storage/".concat(FeedMenu[1].avatar),
-                  className: "img-circle",
-                  alt: "User Image"
+                  className: "rounded-full  mx-auto flex items-center justify-center ",
+                  alt: "User Image",
+                  style: {
+                    width: "100px",
+                    height: "100px"
+                  }
                 }), FeedMenu && FeedMenu[1] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
                   children: [FeedMenu[1].name, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
                     children: FeedMenu[1].email
@@ -1521,8 +1525,9 @@ var officerRoute = [{
   path: "/officer/Profile",
   exact: true,
   layout: "officer",
+  auth: true,
   component: /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () {
-    return __webpack_require__.e(/*! import() */ "resources_js_src_Officer_pages_Profile_Profile_js").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Profile/Profile */ "./resources/js/src/Officer/pages/Profile/Profile.js"));
+    return Promise.all(/*! import() */[__webpack_require__.e("/js/vendor"), __webpack_require__.e("resources_js_src_Officer_pages_Profile_Profile_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ../pages/Profile/Profile */ "./resources/js/src/Officer/pages/Profile/Profile.js"));
   })
 } // {
 //     path: "/officer/detail",

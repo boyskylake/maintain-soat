@@ -30,11 +30,47 @@ class Profile extends Controller
         $user = Auth::user();
 
         $Profile = DB::table("officers")->where('id', '=', $user->id)->first();
+        // dd($Profile);
+        $Position = DB::select("SELECT
+        *
+        FROM officers
+        left join roles_officer on roles_officer.id = officers.role_id
+        where officers.id =  $user->id");
+        // dd($Position);
 
 
-        return response()->json(['Profile'=>$Profile]);
+
+
+
+        return response()->json(['Profile' => $Profile, 'Position' => $Position]);
         // dd($menu);
 
     }
 
+    public function Editprofile(Request $request)
+    {
+
+        $user = Auth::user();
+
+        if ($user) {
+        //     $Editname = DB::select("UPDATE officers
+        // SET name = $request->inputName ,email = $request->inputEmail
+        // where id = $user->id ");
+
+        $Editname = DB::table('officers')->where('id',$user->id)
+        ->update(['name'=>$request->inputName,'email'=>$request->inputEmail]);
+
+            if ($Editname) {
+
+                return response()->json(['rc_code' => '1','message'=>'เปลี่ยนแปลงข้อมูลเสร็จแล้วนะ ']);
+            }
+            else
+            {
+                return response()->json(['rc_code' => '0','message'=>'อัพเดทไม่สำเสร็จ!!!! ']);
+
+            }
+        }
+
+                return response()->json(['rc_code' => '-1','message'=>'ค้นหาชื่อผู้ใช้ไม่พบ!!!! ']);
+    }
 }
