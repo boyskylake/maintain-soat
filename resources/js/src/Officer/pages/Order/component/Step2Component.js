@@ -31,7 +31,7 @@ function Step2Component(
         // console.log(coopid);
         // $('#myModal').modal('show')
     };
-
+    // useScript("/officer/dist/js/pages/saveorder.js");
     // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
     const inform_type_only_c = ["07", "31", "03"];
     useEffect(() => {
@@ -253,12 +253,13 @@ function Step2Component(
                                 </div>
 
                                 <div className="col-md-4">
-                                    <div className="form-group greenselect">
+                                    <div className="form-group appno">
                                         <label>ระบบงาน Service</label>
                                         <select
                                             className="form-control select2"
                                             ref={register}
-                                            name="app no"
+                                            name="appno"
+                                            id="appno"
                                         >
                                             <option></option>
                                             {feedData.data &&
@@ -268,9 +269,7 @@ function Step2Component(
                                                         return (
                                                             <option
                                                                 key={i}
-                                                                value={
-                                                                    val.app_no
-                                                                }
+                                                                value={val.app_no}
                                                             >
                                                                 {`[${val.app_no}]`}
                                                                 &nbsp;&nbsp;&nbsp;

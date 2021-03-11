@@ -6754,7 +6754,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Step1Component(props, _ref) {
-  var _errors$informer;
+  var _errors$receiver, _errors$coopid, _errors$informer;
 
   var setCompleted = _ref.setCompleted,
       completed = _ref.completed,
@@ -6773,6 +6773,14 @@ function Step1Component(props, _ref) {
   var services = new _redux_services_services__WEBPACK_IMPORTED_MODULE_7__.default();
   var ErrorsWord = {
     informer: {
+      required: "กรุณาเลือกผู้แจ้ง",
+      maxLength: ""
+    },
+    coopid: {
+      required: "กรุณาเลือกสหกรณ์",
+      maxLength: ""
+    },
+    receiver: {
       required: "กรุณาเลือกผู้รับแจ้ง",
       maxLength: ""
     }
@@ -6889,6 +6897,7 @@ function Step1Component(props, _ref) {
     props.setActiveStep(newActiveStep);
   };
 
+  console.log(cookies.pageone && cookies.pageone.receive_date);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
     className: "box-body",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
@@ -6937,11 +6946,21 @@ function Step1Component(props, _ref) {
                 }) // required
                 ,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+                  if (cookies && cookies.pageone && cookies.pageone.receiver && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.officer_id)) {// setCoopid(
+                    //     cookies.pageone &&
+                    //         cookies.pageone.coopid
+                    // );
+                  }
+
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("option", {
                     value: val.officer_id,
+                    selected: cookies.pageone && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.officer_id) ? true : false,
                     children: ["[".concat(val.officer_id, "]"), "\xA0\xA0", val.officer_name, "\xA0\xA0", val.officer_full_name]
                   }, i);
                 })]
+              }), ((_errors$receiver = errors.receiver) === null || _errors$receiver === void 0 ? void 0 : _errors$receiver.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                className: "",
+                children: ErrorsWord.receiver.required
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
               className: "form-group",
@@ -6962,10 +6981,11 @@ function Step1Component(props, _ref) {
                   type: "text",
                   name: "receive_date",
                   className: "form-control",
-                  "data-provide": "datepicker",
-                  "data-date-language": "th-th",
                   autoComplete: "off",
-                  ref: register
+                  "data-mask": "99/99/9999",
+                  "data-inputmask": "'mask': '99/99/9999'",
+                  ref: register,
+                  value: cookies.pageone && cookies.pageone.receive_date
                 })]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
@@ -6989,10 +7009,11 @@ function Step1Component(props, _ref) {
                   type: "text",
                   name: "appointment_date",
                   className: "form-control",
-                  "data-inputmask": "'alias': 'dd/mm/yyyy'",
-                  "data-mask": "date",
-                  autoComplete: "off",
-                  ref: register
+                  "data-mask": "99/99/9999",
+                  "data-inputmask": "'mask': '99/99/9999'",
+                  ref: register,
+                  value: cookies.pageone && cookies.pageone.start_date_tdata,
+                  autoComplete: "off"
                 })]
               })]
             })]
@@ -7006,7 +7027,8 @@ function Step1Component(props, _ref) {
                 name: "coopid",
                 id: "coopid",
                 className: "form-control select2",
-                ref: register({//  required: true
+                ref: register({
+                  required: true
                 }) // required
                 ,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {}), feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
@@ -7022,8 +7044,9 @@ function Step1Component(props, _ref) {
                     children: [val.coop_id, " ", val.coop_name]
                   }, i);
                 })]
-              }), " ", errors.coopid && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-                children: "\u0E01\u0E23\u0E38\u0E13\u0E32\u0E40\u0E25\u0E37\u0E2D\u0E01\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
+              }), ((_errors$coopid = errors.coopid) === null || _errors$coopid === void 0 ? void 0 : _errors$coopid.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                className: "",
+                children: ErrorsWord.coopid.required
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
               className: "col-md-6",
@@ -7035,19 +7058,22 @@ function Step1Component(props, _ref) {
                   name: "informer",
                   id: "informer",
                   className: "form-control select2",
-                  ref: register({//  required: true
+                  ref: register({
+                    required: true
                   }) // required
                   ,
                   children: feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
                     if (watch("coopid") == val.id_pay_to) {
+                      cookies && cookies.pageone && cookies.pageone.informer && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.contact_no);
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("option", {
                         value: val.contact_no,
+                        selected: cookies.pageone && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.contact_no) ? true : false,
                         children: ["[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name]
                       }, i);
                     } else {//
                     }
                   })
-                }), " ", ((_errors$informer = errors.informer) === null || _errors$informer === void 0 ? void 0 : _errors$informer.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                }), ((_errors$informer = errors.informer) === null || _errors$informer === void 0 ? void 0 : _errors$informer.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
                   className: "",
                   children: ErrorsWord.informer.required
                 })]
@@ -7138,10 +7164,11 @@ function Step1Component(props, _ref) {
                     type: "text",
                     name: "start_date_tdata",
                     className: "form-control",
-                    "data-inputmask": "'alias': 'dd/mm/yyyy'",
-                    "data-mask": "date",
-                    autoComplete: "off",
-                    ref: register
+                    "data-mask": "99/99/9999",
+                    "data-inputmask": "'mask': '99/99/9999'",
+                    ref: register,
+                    value: cookies.pageone && cookies.pageone.start_date_tdata,
+                    autoComplete: "off"
                   })]
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
@@ -7165,10 +7192,11 @@ function Step1Component(props, _ref) {
                     type: "text",
                     name: "finished_date_tdate",
                     className: "form-control",
-                    "data-inputmask": "'alias': 'dd/mm/yyyy'",
-                    "data-mask": "date",
-                    autoComplete: "off",
-                    ref: register
+                    "data-mask": "99/99/9999",
+                    "data-inputmask": "'mask': '99/99/9999'",
+                    ref: register,
+                    value: cookies.pageone && cookies.pageone.start_date_tdata,
+                    autoComplete: "off"
                   })]
                 })]
               })]
@@ -7280,8 +7308,12 @@ function Step1Component(props, _ref) {
                     name: "app_no",
                     ref: register,
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {}), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
+                      if (cookies && cookies.pageone && cookies.pageone.app_no && cookies.pageone.app_no == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.app_no)) {//
+                      }
+
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("option", {
                         value: val.app_no,
+                        selected: cookies.pageone && cookies.pageone.app_no == (0,jquery__WEBPACK_IMPORTED_MODULE_8__.trim)(val.app_no) ? true : false,
                         children: ["[".concat(val.app_no, "]"), "\xA0\xA0\xA0", val.application, "\xA0\xA0\xA0", "[".concat(val.version, "]")]
                       }, i);
                     })]
@@ -7408,7 +7440,7 @@ var ErrorSpan = function ErrorSpan(_ref2) {
   var children = _ref2.children,
       className = _ref2.className;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("span", {
-    className: "text-danger ".concat(className && className, " "),
+    className: "text-red-500 text-xl ".concat(className && className, " "),
     children: [" ", children && children]
   });
 };
@@ -7503,7 +7535,8 @@ function Step2Component(props, _ref) {
   var onSubmit = function onSubmit(data) {// console.log(data);
     // console.log(coopid);
     // $('#myModal').modal('show')
-  }; // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
+  }; // useScript("/officer/dist/js/pages/saveorder.js");
+  // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
 
 
   var inform_type_only_c = ["07", "31", "03"];
@@ -7723,13 +7756,14 @@ function Step2Component(props, _ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "col-md-4",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "form-group greenselect",
+              className: "form-group appno",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                 children: "\u0E23\u0E30\u0E1A\u0E1A\u0E07\u0E32\u0E19 Service"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
                 className: "form-control select2",
                 ref: register,
-                name: "app no",
+                name: "appno",
+                id: "appno",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {}), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("option", {
                     value: val.app_no,
@@ -7989,7 +8023,7 @@ function Step3Component(props, _ref) {
                 className: "table-fixed w-full",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("thead", {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {})]
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {})]
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
@@ -8009,7 +8043,7 @@ function Step3Component(props, _ref) {
                         children: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E20\u0E32\u0E22\u0E43\u0E19 \u0E2B\u0E49\u0E32\u0E21\u0E19\u0E33\u0E2D\u0E2D\u0E01\u0E19\u0E19\u0E2D\u0E01\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E14\u0E22\u0E40\u0E14\u0E47\u0E14\u0E02\u0E32\u0E14"
                       })]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
-                      colSpan: "2",
+                      colSpan: "3",
                       className: "text-right",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
                         children: feedPostData && feedPostData.coop[0] && feedPostData.coop[0].dep_des
@@ -8022,7 +8056,7 @@ function Step3Component(props, _ref) {
                       colSpan: "2",
                       className: "text-right",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Order NO :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
@@ -8035,17 +8069,17 @@ function Step3Component(props, _ref) {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "2",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Tel"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
                       colSpan: "6",
-                      children: [" ", "\xA0  ", feedPostData && feedPostData.coop[0] && feedPostData.coop[0].tel]
+                      children: [" ", "\xA0", " ", feedPostData && feedPostData.coop[0] && feedPostData.coop[0].tel]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "2",
                       className: "text-right",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Order Date :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
@@ -8058,35 +8092,50 @@ function Step3Component(props, _ref) {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "2",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Remote Other"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
-                      colSpan: "5",
-                      children: "xxxxxxxxxxxxxxxxxxxxxxxxxx"
+                      colSpan: "6",
+                      className: "text-xl",
+                      children: feedPostData && feedPostData.coop && feedPostData.coop[0] && feedPostData.coop[0].remote_remark.length >= 52 ? (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(feedPostData.coop[0].remote_remark.substr(0, 52)) : feedPostData && feedPostData.coop[0] && feedPostData.coop[0] && feedPostData.coop[0].remote_remark
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
-                      colSpan: "3",
+                      colSpan: "2",
                       className: "text-right",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Customer Name :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
-                      colSpan: "2",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h5", {
-                        children: ["\xA0", feedPostData && feedPostData.coop[0] && feedPostData.coop[0].contract_name]
+                      colSpan: "3",
+                      children: feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
+                        // console.log(cookies.pageone.informer == trim(val.contact_no))
+                        if (cookies && cookies.pageone && cookies.pageone.informer && cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.id_pay_to) && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.contact_no)) {
+                          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h5", {
+                            className: "text-xl",
+                            children: ["\xA0", val.contract_name]
+                          }, i);
+                        }
                       })
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "2",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Application :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "5",
-                      children: "N/A"
+                      children: feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
+                        // console.log( cookies.pageone.receiver,trim(val.officer_id))
+                        if (cookies && cookies.pageone && cookies.pageone.app_no && cookies.pageone.app_no == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.app_no)) {
+                          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h5", {
+                            className: "text-xl",
+                            children: val.application
+                          }, i);
+                        }
+                      })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "6"
                     })]
@@ -8097,21 +8146,21 @@ function Step3Component(props, _ref) {
                       colSpan: "3",
                       className: "text-right",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: " text-2xl font-bold",
+                        className: " text-xl font-bold",
                         children: "Start Date :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "2",
                       className: "text-left",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h5", {
-                        children: "\xA0xx-xx-xx"
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h5", {
+                        children: ["\xA0", cookies.pageone && cookies.pageone.start_date_tdata]
                       })
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "3",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Appointment Date :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
@@ -8122,7 +8171,7 @@ function Step3Component(props, _ref) {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "1",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Estime"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
@@ -8134,13 +8183,13 @@ function Step3Component(props, _ref) {
                       colSpan: "3",
                       className: "text-right",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold",
+                        className: "text-xl font-bold",
                         children: "Finished Date :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "2",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h5", {
-                        children: "\xA0xx-xx-xx"
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h5", {
+                        children: ["\xA0", cookies.pageone && cookies.pageone.finished_date_tdate]
                       })
                     })]
                   })]
@@ -8237,7 +8286,7 @@ function Step3Component(props, _ref) {
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                               colSpan: "10",
-                              className: "text-2xl text-center",
+                              className: "text-xl text-center",
                               style: {
                                 borderBottom: "1px solid grey"
                               },
@@ -8245,7 +8294,7 @@ function Step3Component(props, _ref) {
                                 // console.log( cookies.pageone.receiver,trim(val.officer_id))
                                 if (cookies && cookies.pageone && cookies.pageone.receiver && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.officer_id)) {
                                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h5", {
-                                    className: "text-2xl",
+                                    className: "text-xl",
                                     children: val.officer_full_name
                                   }, i);
                                 }
@@ -8274,7 +8323,7 @@ function Step3Component(props, _ref) {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "3",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold text-right",
+                        className: "text-xl font-bold text-right",
                         children: "Editor :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
@@ -8318,19 +8367,10 @@ function Step3Component(props, _ref) {
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                               colSpan: "10",
-                              className: "text-2xl text-center",
+                              className: "text-xl text-center",
                               style: {
                                 borderBottom: "1px solid grey"
-                              },
-                              children: feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
-                                // console.log( cookies.pageone.receiver,trim(val.officer_id))
-                                if (cookies && cookies.pageone && cookies.pageone.receiver && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_6__.trim)(val.officer_id)) {
-                                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h5", {
-                                    className: "text-2xl",
-                                    children: val.officer_full_name
-                                  }, i);
-                                }
-                              })
+                              }
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                               colSpan: "1",
                               className: "text-3xl text-right font-bold",
@@ -8355,7 +8395,7 @@ function Step3Component(props, _ref) {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "3",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h4", {
-                        className: "text-2xl font-bold text-right",
+                        className: "text-xl font-bold text-right",
                         children: "Manager :"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
@@ -8394,7 +8434,7 @@ function Step3Component(props, _ref) {
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                               colSpan: "10",
-                              className: "text-2xl text-center",
+                              className: "text-xl text-center",
                               style: {
                                 borderBottom: "1px solid grey"
                               },
@@ -8419,9 +8459,9 @@ function Step3Component(props, _ref) {
                 className: "w-full relative top-96 inset-x-0 mt-30",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
                   className: "field rounded",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
                     className: "leg text-3xl",
-                    children: " CRM : Remark "
+                    children: [" ", "CRM : Remark", " "]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("table", {
                     className: "w-full",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("thead", {
@@ -8430,9 +8470,9 @@ function Step3Component(props, _ref) {
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
                           colSpan: "2",
-                          children: "\u0E2A\u0E34\u0E17\u0E18\u0E34 : "
+                          children: ["\u0E2A\u0E34\u0E17\u0E18\u0E34 :", " "]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                           colSpan: "2",
                           children: "\xA0xxxxxx \u0E41\u0E15\u0E49\u0E21"
@@ -8444,9 +8484,9 @@ function Step3Component(props, _ref) {
                           children: "\xA0xx \u0E41\u0E15\u0E49\u0E21"
                         })]
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
                           colSpan: "2",
-                          children: "3\u0E2B\u0E31\u0E01 : "
+                          children: ["3\u0E2B\u0E31\u0E01 :", " "]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                           colSpan: "2",
                           children: "\xA0xxxxxx \u0E41\u0E15\u0E49\u0E21"
@@ -8471,7 +8511,7 @@ function Step3Component(props, _ref) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                       colSpan: "12",
-                      className: "text-2xl",
+                      className: "text-xl",
                       children: "SO-AT SOLUTION COMPANY LIMITED"
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tr", {
