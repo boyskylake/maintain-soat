@@ -24,9 +24,17 @@ function Step1Component(
     const services = new Services();
     const ErrorsWord = {
         informer: {
-            required: "กรุณาเลือกผู้รับแจ้ง",
+            required: "กรุณาเลือกผู้แจ้ง",
             maxLength: "",
         },
+        coopid: {
+            required: "กรุณาเลือกสหกรณ์",
+            maxLength: "",
+        },
+        receiver: {
+            required: "กรุณาเลือกผู้รับแจ้ง",
+            maxLength: "",
+        }
     };
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
@@ -132,7 +140,7 @@ useEffect(() => {
         // console.log(newActiveStep)
         props.setActiveStep(newActiveStep);
     };
-
+    console.log(cookies.pageone&&cookies.pageone.receive_date);
     return (
         <div className="box-body">
             <div className="box-header">
@@ -166,28 +174,53 @@ useEffect(() => {
                                 <select
                                     name="receiver"
                                     id="receiver"
-                                    className="form-control select2"
+                                    className={"form-control select2"}
                                     ref={register({ required: true })}
                                     // required
                                 >
                                     <option></option>
                                     {feedData.data &&
                                         feedData.data.ucf_officer &&
-                                        feedData.data.ucf_officer.map(
-                                            (val, i) => (
+                                        feedData.data.ucf_officer.map((val, i) => {
+                                            if (
+                                                cookies &&
+                                                cookies.pageone &&
+                                                cookies.pageone.receiver &&
+                                                cookies.pageone.receiver ==
+                                                    trim(val.officer_id)
+                                            ) {
+                                                // setCoopid(
+                                                //     cookies.pageone &&
+                                                //         cookies.pageone.coopid
+                                                // );
+                                            }
+                                            return (
                                                 <option
                                                     key={i}
                                                     value={val.officer_id}
+                                                    selected={
+                                                        cookies.pageone &&
+                                                        cookies.pageone
+                                                            .receiver ==
+                                                            trim(val.officer_id)
+                                                            ? true
+                                                            : false
+                                                    }
                                                 >
-                                                    {`[${val.officer_id}]`}
+                                                   {`[${val.officer_id}]`}
                                                     &nbsp;&nbsp;
                                                     {val.officer_name}
                                                     &nbsp;&nbsp;
                                                     {val.officer_full_name}
                                                 </option>
-                                            )
-                                        )}
+                                            );
+                                        })}
                                 </select>
+                                {errors.receiver?.type === "required" && (
+                                        <ErrorSpan className="">
+                                            {ErrorsWord.receiver.required}
+                                        </ErrorSpan>
+                                    )}
                             </div>
 
                             <div className="form-group">
@@ -202,16 +235,18 @@ useEffect(() => {
                                     <div className="input-group-addon">
                                         <i className="fa fa-calendar" />
                                     </div>
+                                    
                                     <input
                                         type="text"
                                         name="receive_date"
                                         className="form-control"
-                                        data-provide="datepicker"
-                                        data-date-language="th-th"
                                         autoComplete="off"
+                                        data-mask="99/99/9999"
+                                        data-inputmask="'mask': '99/99/9999'"
                                         ref={register}
-
+                                        value={cookies.pageone&&cookies.pageone.receive_date}
                                     />
+                                    
                                 </div>
                             </div>
 
@@ -233,10 +268,12 @@ useEffect(() => {
                                         type="text"
                                         name="appointment_date"
                                         className="form-control"
-                                        data-inputmask="'alias': 'dd/mm/yyyy'"
-                                        data-mask="date"
-                                        autoComplete="off"
+                                        data-mask="99/99/9999"
+                                        data-inputmask="'mask': '99/99/9999'"
                                         ref={register}
+                                        value={cookies.pageone&&cookies.pageone.start_date_tdata}
+                                        autoComplete="off"
+                                       
                                     />
                                 </div>
                             </div>
@@ -250,7 +287,7 @@ useEffect(() => {
                                     id="coopid"
                                     className="form-control select2"
                                     ref={register({
-                                        //  required: true
+                                         required: true
                                     })}
                                     // required
                                 >
@@ -288,10 +325,13 @@ useEffect(() => {
                                                 </option>
                                             );
                                         })}
-                                </select>{" "}
-                                {errors.coopid && (
-                                    <span>กรุณาเลือกผู้รับแจ้ง</span>
-                                )}
+                                </select>
+                                {/* {" "} */}
+                                {errors.coopid?.type === "required" && (
+                                        <ErrorSpan className="">
+                                            {ErrorsWord.coopid.required}
+                                        </ErrorSpan>
+                                    )}
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group receiver">
@@ -301,7 +341,7 @@ useEffect(() => {
                                         id="informer"
                                         className="form-control select2"
                                         ref={register({
-                                            //  required: true
+                                             required: true
                                         })}
                                         // required
                                     >
@@ -312,11 +352,20 @@ useEffect(() => {
                                             feedData.data.ucf_customer_contact.map(
                                                 (val, i) => {
                                                  if (watch("coopid") == val.id_pay_to) {
+                                                    cookies &&
+                                                    cookies.pageone &&
+                                                    cookies.pageone.informer &&
+                                                    cookies.pageone.informer ==
+                                                    trim(val.contact_no)
                                                     return (
                                                         <option
                                                             key={i}
-                                                            value={
-                                                                val.contact_no
+                                                            value={val.contact_no}
+                                                            selected={
+                                                                cookies.pageone &&
+                                                                cookies.pageone.informer == trim(val.contact_no)
+                                                                    ? true
+                                                                    : false
                                                             }
                                                         >
                                                             {`[${val.contact_no}]`}
@@ -328,9 +377,11 @@ useEffect(() => {
                                                         //
                                                     }
                                                 })}
-                                    </select>{" "}
+                                    </select>
+                                    {/* {" "} */}
                                     {errors.informer?.type === "required" && (
                                         <ErrorSpan className="">
+                                            {/* {console.log('ddddd')} */}
                                             {ErrorsWord.informer.required}
                                         </ErrorSpan>
                                     )}
@@ -373,7 +424,7 @@ useEffect(() => {
                                             // id="Time-mask"
                                             // data-inputmask="'alias': 'HH:mm -  HH:mm'"
                                               data-mask="99:99 - 99:99"
-                                        data-inputmask="'mask': '99:99 - 99:99'"
+                                              data-inputmask="'mask': '99:99 - 99:99'"
                                             // data-mask
                                             autoComplete="off"
                                             ref={register({
@@ -436,10 +487,11 @@ useEffect(() => {
                                             type="text"
                                             name="start_date_tdata"
                                             className="form-control"
-                                            data-inputmask="'alias': 'dd/mm/yyyy'"
-                                            data-mask="date"
-                                            autoComplete="off"
+                                            data-mask="99/99/9999"
+                                            data-inputmask="'mask': '99/99/9999'"
                                             ref={register}
+                                            value={cookies.pageone&&cookies.pageone.start_date_tdata}
+                                            autoComplete="off"
                                         />
                                     </div>
                                 </div>
@@ -461,10 +513,11 @@ useEffect(() => {
                                             type="text"
                                             name="finished_date_tdate"
                                             className="form-control"
-                                            data-inputmask="'alias': 'dd/mm/yyyy'"
-                                            data-mask="date"
-                                            autoComplete="off"
+                                            data-mask="99/99/9999"
+                                            data-inputmask="'mask': '99/99/9999'"
                                             ref={register}
+                                            value={cookies.pageone&&cookies.pageone.start_date_tdata}
+                                            autoComplete="off"
                                         />
                                     </div>
                                 </div>
@@ -603,32 +656,45 @@ useEffect(() => {
                                             name="app_no"
                                             ref={register}
                                         >
-                                            <option></option>
-                                            {feedData.data &&
-                                                feedData.data.ucf_application &&
-                                                feedData.data.ucf_application.map(
-                                                    (val, i) => {
-                                                        return (
-                                                            <option
-                                                                key={i}
-                                                                value={
-                                                                    val.app_no
-                                                                }
-                                                            >
-                                                                {`[${val.app_no}]`}
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                {
-                                                                    val.application
-                                                                }
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                {`[${val.version}]`}
-                                                            </option>
-                                                        );
+                                    <option></option>
+                                    {feedData.data &&
+                                        feedData.data.ucf_application &&
+                                        feedData.data.ucf_application.map((val, i) => {
+                                            if (
+                                                cookies &&
+                                                cookies.pageone &&
+                                                cookies.pageone.app_no &&
+                                                cookies.pageone.app_no ==
+                                                    trim(val.app_no)
+                                            ) {
+                                               //
+                                            }
+                                            return (
+                                                <option
+                                                    key={i}
+                                                    value={val.app_no}
+                                                    selected={
+                                                        cookies.pageone &&
+                                                        cookies.pageone
+                                                            .app_no ==
+                                                            trim(val.app_no)
+                                                            ? true
+                                                            : false
                                                     }
-                                                )}
+                                                >
+                                                    {`[${val.app_no}]`}
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    {val.application}
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    {`[${val.version}]`}
+                                                </option>
+                                                   );
+                                                }
+                                            )}
                                         </select>
                                     </div>
                                 </div>
+
                                 <div className="col-md-3">
                                     <div className="form-group">
                                         <label>สภานะ</label>
@@ -777,7 +843,7 @@ export default Step1Component;
 
 const ErrorSpan = ({ children, className }) => {
     return (
-        <span className={`text-danger ${className && className} `}>
+        <span className={`text-red-500 text-xl ${className && className} `}>
             {" "}
             {children && children}
         </span>

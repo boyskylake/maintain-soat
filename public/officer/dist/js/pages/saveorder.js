@@ -76,7 +76,6 @@ $(function () {
             $('#daterange-btn span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'))
         }
     )
-
     //Date picker
     $('#datepicker').datepicker({
         format: 'MM/DD/YYYY',
@@ -86,6 +85,8 @@ $(function () {
         // timePicker: tr,
         autoclose: true,
     })
+    // console.log('datepicker active')
+
 
     $('.datetime').datetimepicker({
 	    format: 'HH:mm:ss',
@@ -113,5 +114,6 @@ $(function () {
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
 
+    
    
 })

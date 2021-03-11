@@ -89,7 +89,7 @@ class OrderPageController extends Controller
 
         $coop_id = $request->coop_id;
         $coop = DB::connection('oracle')->select("select ma_coop.coop_id,ma_coop.bussiness_line,ma_coop.coop_name
-        ,ucf_department.dep_des,ma_coop.tel,ucf_customer_contact.contract_name 
+        ,ucf_department.dep_des,ma_coop.tel,ucf_customer_contact.contact_no,ucf_customer_contact.contract_name,ma_coop.remote_remark 
         from MA_COOP
         left join ucf_department on ma_coop.bussiness_line = ucf_department.dep_code
         left join ucf_customer_contact on ma_coop.coop_id = ucf_customer_contact.id_pay_to
