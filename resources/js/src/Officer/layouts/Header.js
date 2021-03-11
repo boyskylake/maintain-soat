@@ -519,8 +519,9 @@ const Header = () => {
                                 <li className="user-footer">
                                     <div className="pull-left">
                                         <a
-                                            href="#"
+                                            href="/officer/Profile"
                                             className="btn btn-default btn-info"
+
                                         >
                                             Profile
                                         </a>

@@ -170,7 +170,7 @@ function Profile() {
                   width: "150px",
                   height: "150px"
                 }
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
                 className: "profile-username text-center",
                 children: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.name
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
@@ -213,7 +213,7 @@ function Profile() {
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-          className: "col-md-7",
+          className: "col-md-9",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
             className: "nav-tabs-custom",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
@@ -231,7 +231,7 @@ function Profile() {
                   className: "col-sm-2 control-label",
                   children: "Name:"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "col-sm-5",
+                  className: "col-sm-10",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
                     ref: register({}),
                     type: "name",
@@ -249,7 +249,7 @@ function Profile() {
                   className: "col-sm-2 control-label",
                   children: "E-mail:"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "col-sm-5",
+                  className: "col-sm-10",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
                     ref: register({}),
                     type: "email",
@@ -258,6 +258,24 @@ function Profile() {
                     name: "inputEmail",
                     placeholder: "E-mail",
                     Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.email
+                  })
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                className: "form-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                  htmlFor: "inputEmail",
+                  className: "col-sm-2 control-label",
+                  children: "Password:"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                  className: "col-sm-10",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                    ref: register({}),
+                    type: "name",
+                    className: "form-control",
+                    id: "inputPassword",
+                    name: "inputPassword",
+                    placeholder: "Password",
+                    Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.password
                   })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {

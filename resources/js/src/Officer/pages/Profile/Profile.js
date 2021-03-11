@@ -103,7 +103,7 @@ function Profile() {
                                     alt="User Image"
                                     style={{ width: "150px", height: "150px" }}
                                 />
-
+                                <br></br>
                                 <h3 className="profile-username text-center">
                                     {feedData.fetchSuccess &&
                                         feedData.data.Profile &&
@@ -153,7 +153,7 @@ function Profile() {
                         </div>
                     </div>
 
-                    <div className="col-md-7">
+                    <div className="col-md-9">
                         <div className="nav-tabs-custom">
                             <div className="pl-10 pt-5">
                                 <h3>Edit Profile</h3>
@@ -170,7 +170,7 @@ function Profile() {
                                     >
                                         Name:
                                     </label>
-                                    <div className="col-sm-5">
+                                    <div className="col-sm-10">
                                         <input
                                             ref={register({})}
                                             type="name"
@@ -193,7 +193,7 @@ function Profile() {
                                     >
                                         E-mail:
                                     </label>
-                                    <div className="col-sm-5">
+                                    <div className="col-sm-10">
                                         <input
                                             ref={register({})}
                                             type="email"
@@ -205,6 +205,30 @@ function Profile() {
                                                 feedData.fetchSuccess &&
                                                 feedData.data.Profile &&
                                                 feedData.data.Profile.email
+                                            }
+                                        ></input>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="inputEmail"
+                                        className="col-sm-2 control-label"
+                                    >
+                                        Password:
+                                    </label>
+                                    <div className="col-sm-10">
+                                        <input
+                                            ref={register({})}
+                                            type="name"
+                                            className="form-control"
+                                            id="inputPassword"
+                                            name="inputPassword"
+                                            placeholder="Password"
+                                            Value={
+                                                feedData.fetchSuccess &&
+                                                feedData.data.Profile &&
+                                                feedData.data.Profile.password
                                             }
                                         ></input>
                                     </div>

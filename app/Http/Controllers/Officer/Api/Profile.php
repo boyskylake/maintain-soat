@@ -58,7 +58,7 @@ class Profile extends Controller
         // where id = $user->id ");
 
         $Editname = DB::table('officers')->where('id',$user->id)
-        ->update(['name'=>$request->inputName,'email'=>$request->inputEmail]);
+        ->update(['name'=>$request->inputName,'email'=>$request->inputEmail,'password'=>$request->inputPassword]);
 
             if ($Editname) {
 

@@ -1385,7 +1385,7 @@ var Header = function Header() {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                   className: "pull-left",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-                    href: "#",
+                    href: "/officer/Profile",
                     className: "btn btn-default btn-info",
                     children: "Profile"
                   })
