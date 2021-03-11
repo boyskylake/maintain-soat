@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\Environment\Console;
 
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -58,7 +59,7 @@ class Profile extends Controller
         // where id = $user->id ");
 
         $Editname = DB::table('officers')->where('id',$user->id)
-        ->update(['name'=>$request->inputName,'email'=>$request->inputEmail,'password'=>$request->inputPassword]);
+        ->update(['name'=>$request->inputName,'email'=>$request->inputEmail]);
 
             if ($Editname) {
 
@@ -73,4 +74,43 @@ class Profile extends Controller
 
                 return response()->json(['rc_code' => '-1','message'=>'ค้นหาชื่อผู้ใช้ไม่พบ!!!! ']);
     }
+
+
+
+
+    public function Editpassword(Request $request)
+    {
+
+        $user = Auth::user();
+
+        if ($user) {
+            $Getuser = DB::table('officers')->where('id',$user->id)->first();
+
+            $oldpassword = $Getuser->password;
+
+
+
+        $plain  = $request->OldPassword;
+        if(Hash::check($plain, $oldpassword)){
+
+            $Editpassword = DB::table('officers')->where('id',$user->id)
+        ->update(['password'=>Hash::make($request->NewPassword)]);
+
+            if ($Editpassword) {
+
+                return response()->json(['rc_code' => '1','message'=>'เปลี่ยนแปลงรหัสผ่านเสร็จแล้วนะ ']);
+            }
+            else
+            {
+                return response()->json(['rc_code' => '0','message'=>'อัพเดทไม่สำเสร็จ!!!! ']);
+
+            }
+        }
+
+        }
+                return response()->json(['rc_code' => '-1','message'=>'รหัสผ่านเดิมไม่ถูกต้อง!!!! ']);
+    }
+
+
+
 }

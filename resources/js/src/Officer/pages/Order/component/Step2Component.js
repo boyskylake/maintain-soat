@@ -144,6 +144,7 @@ function Step2Component(
                                                         </div>
                                                         <input
                                                             type="text"
+                                                            name="purchase_date_tdate"
                                                             className="form-control"
                                                             data-inputmask="'alias': 'dd/mm/yyyy'"
                                                             data-mask
@@ -160,6 +161,7 @@ function Step2Component(
                                                     <input
                                                         type="text"
                                                         className="form-control"
+                                                        name="contract_le"
                                                         ref={register}
                                                         style={{
                                                             border:
@@ -176,6 +178,7 @@ function Step2Component(
                                                     <input
                                                         type="checkbox"
                                                         className="flat-red"
+                                                        name="contract_no"
                                                         ref={register}
                                                         style={{
                                                             border:
@@ -193,6 +196,7 @@ function Step2Component(
                                                     <input
                                                         type="text"
                                                         className="form-control"
+                                                        name="order_value_amount"
                                                         ref={register}
                                                         style={{
                                                             border:
@@ -216,6 +220,7 @@ function Step2Component(
                                             className="form-control select2"
                                             id="ownerjobselect"
                                             ref={register}
+                                            name="programmer_date_tdata"
                                         >
                                             <option></option>
                                             {feedData.data &&
@@ -253,6 +258,7 @@ function Step2Component(
                                         <select
                                             className="form-control select2"
                                             ref={register}
+                                            name="app no"
                                         >
                                             <option></option>
                                             {feedData.data &&
@@ -287,6 +293,7 @@ function Step2Component(
                                             readOnly={true}
                                             type="text"
                                             className="form-control"
+                                            name="f_get_app_group_manage"
                                             ref={register}
                                             style={{
                                                 border: "1.5px solid #0000008c",

@@ -9,10 +9,12 @@ $(function () {
     //Datemask2 mm/dd/yyyy
     // $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     //Money Euro
+
     Inputmask({
         alias: "datetime",
         inputFormat: "dd/mm/yyyy"
-    }).mask("[data-mask]");
+    }).mask("[data-mask='date']");
+
     // Inputmask({ alias: "ip" , inputFormat: "ip" }).mask("[data-ip]");
     // $('[data-mask]').inputmask()
 
@@ -37,12 +39,25 @@ $(function () {
         }
     });
     //Date range picker with time picker
+    // $('#reservationtime').daterangepicker({
+    //     timePicker: true,
+    //     timePickerIncrement: 30,
+    //     locale: {
+    //         format: 'hh:mm A'
+    //     }
+    // })
+     //Timepicker
     $('#reservationtime').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        locale: {
-            format: 'MM/DD/YYYY hh:mm A'
-        }
+         timePicker : true,
+            singleDatePicker:false,
+            timePicker24Hour : true,
+            timePickerIncrement : 1,
+            timePickerSeconds : true,
+            locale : {
+                format : 'HH:mm:ss'
+            }
+        }).on('show.daterangepicker', function(ev, picker) {
+            picker.container.find(".calendar-table").hide();
     })
     //Date range as a button
     $('#daterange-btn').daterangepicker({
@@ -64,13 +79,18 @@ $(function () {
 
     //Date picker
     $('#datepicker').datepicker({
-        format: 'dd/mm/yyyy',
+        format: 'MM/DD/YYYY',
         language: 'th', //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
         thaiyear: true,
         todayBtn: true,
-        // autoclose: true,
+        // timePicker: tr,
+        autoclose: true,
     })
-    
+
+    $('.datetime').datetimepicker({
+	    format: 'HH:mm:ss',
+    });
+
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -93,8 +113,5 @@ $(function () {
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
 
-    //Timepicker
-    $('.timepicker').timepicker({
-        showInputs: false
-    })
+   
 })

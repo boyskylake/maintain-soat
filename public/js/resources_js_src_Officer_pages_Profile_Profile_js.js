@@ -52,6 +52,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Profile() {
+  var _errors$inputName, _errors$inputEmail, _errors$OldPassword, _errors$NewPassword, _errors$Confirm;
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
   var feedData = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.feedData;
@@ -61,15 +63,43 @@ function Profile() {
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
       watch = _useForm.watch,
-      errors = _useForm.errors; // const [inputs, setInputs] = useState(["ma_coop"]);
+      errors = _useForm.errors;
 
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      coopid = _useState2[0],
-      setCoopid = _useState2[1]; // const [FeedMenu, setFeedMenu] = useState();
-  // <!-- jvectormap  -->
+      passwordeye = _useState2[0],
+      setpasswordeye = _useState2[1]; // const [inputs, setInputs] = useState(["ma_coop"]);
 
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      coopid = _useState4[0],
+      setCoopid = _useState4[1]; // const [FeedMenu, setFeedMenu] = useState();
+
+
+  var ErrorsWord = {
+    Confirm: {
+      required: "กรุณากรอกรหัสผ่าน",
+      maxLength: ""
+    },
+    NewPassword: {
+      required: "กรุณากรอกรหัสผ่าน",
+      maxLength: "",
+      PasswordNotMatch: "กรุณากรอกรหัสผ่านให้ตรงกัน"
+    },
+    OldPassword: {
+      required: "กรุณากรอกรหัสผ่าน",
+      maxLength: ""
+    },
+    inputEmail: {
+      required: "กรุณากรอกอีเมล์",
+      maxLength: ""
+    },
+    inputName: {
+      required: "กรุณากรอกชื่อ",
+      maxLength: ""
+    }
+  }; // <!-- jvectormap  -->
 
   (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
   (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
@@ -108,35 +138,48 @@ function Profile() {
       data: JSON.stringify(data)
     };
     services.API("/api/v1/officer/Editprofile", requestOptions).then(function (res) {
-      // console.log(res, res && res.rc_code, res && res.message);
       if (res && res.rc_code == "1") {
-        console.log('success'); // NotificationManager.success(
-        //     res && res.message,
-        //     "สำเร็จ",
-        //     5000
-        // );
-
+        console.log("success1");
         toastr__WEBPACK_IMPORTED_MODULE_9___default().success(res && res.message, "Success", 5000); // alert(res && res.message)
       } else {
-        console.log('failse'); // NotificationManager.error(
-        //     res && res.message,
-        //     "Error",
-        //     5000
-        // );
-
+        console.log("failse1");
         toastr__WEBPACK_IMPORTED_MODULE_9___default().error(res && res.message, "Error", 5000); // alert(res && res.message)
       }
     });
   };
 
-  console.log(feedData.fetchSuccess && feedData.data && feedData.data.Profile);
+  var OnSubmitEditPassword = function OnSubmitEditPassword(data) {
+    if (data.NewPassword == data.Confirm) {
+      var requestOptions = {
+        method: "POST",
+        data: JSON.stringify(data)
+      }; // console.log(data.NewPassword == data.Confirm);
+
+      services.API("/api/v1/officer/Editpassword", requestOptions).then(function (res) {
+        if (res && res.rc_code == "1") {
+          console.log("success2");
+          toastr__WEBPACK_IMPORTED_MODULE_9___default().success(res && res.message, "Success", 5000); // alert(res && res.message)
+        } else {
+          console.log("failse2");
+          toastr__WEBPACK_IMPORTED_MODULE_9___default().error(res && res.message, "Error", 5000); // alert(res && res.message)
+        }
+      });
+    } else {
+      console.log("failse2");
+      toastr__WEBPACK_IMPORTED_MODULE_9___default().error("คอนเฟิร์มรหัสผ่านไม่ถูกต้อง", "Error", 5000);
+    }
+  }; // console.log(
+  //     feedData.fetchSuccess && feedData.data && feedData.data.Profile
+  // );
+
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
     className: "content-wrapper",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("section", {
       className: "content-header",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("h1", {
         children: ["Profile", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("small", {
-          children: "Version 2.0"
+          children: "Version 17.58.98"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("ol", {
         className: "breadcrumb",
@@ -162,20 +205,25 @@ function Profile() {
             className: "box box-primary",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
               className: "box-body box-profile",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("img", {
-                className: "rounded-full  mx-auto flex items-center justify-center ring-4 ",
-                src: "/storage/".concat(feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.avatar),
-                alt: "User Image",
-                style: {
-                  width: "150px",
-                  height: "150px"
-                }
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                className: "relative h-60",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("img", {
+                  className: "absolute h-full w-full object-cover",
+                  src: "https://images.unsplash.com/photo-1448932133140-b4045783ed9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                className: "relative shadow mx-auto h-64 w-64 -my-36 border-white rounded-full overflow-hidden border-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("img", {
+                  className: "object-cover w-full h-full",
+                  src: "/storage/".concat(feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.avatar),
+                  alt: "User Image"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
                 className: "profile-username text-center",
                 children: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.name
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
                 className: "text-muted text-center",
-                children: feedData.fetchSuccess && feedData.data.Position[0] && feedData.data.Position[0].name
+                children: feedData.fetchSuccess && feedData.data.Position && feedData.data.Position[0] && feedData.data.Position[0].name
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("ul", {
                 className: "list-group list-group-unbordered",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("li", {
@@ -184,7 +232,7 @@ function Profile() {
                     children: "Name"
                   }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
                     className: "pull-right",
-                    children: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.name
+                    children: feedData.fetchSuccess && feedData.data.Position && feedData.data.Profile && feedData.data.Profile.name
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("li", {
                   className: "list-group-item",
@@ -192,7 +240,7 @@ function Profile() {
                     children: "E-mail"
                   }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
                     className: "pull-right",
-                    children: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.email
+                    children: feedData.fetchSuccess && feedData.data.Position && feedData.data.Profile && feedData.data.Profile.email
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("li", {
                   className: "list-group-item",
@@ -200,7 +248,7 @@ function Profile() {
                     children: "position"
                   }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
                     className: "pull-right",
-                    children: feedData.fetchSuccess && feedData.data.Position[0] && feedData.data.Position[0].name
+                    children: feedData.fetchSuccess && feedData.data.Position && feedData.data.Position[0] && feedData.data.Position[0].name
                   })]
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
@@ -216,78 +264,232 @@ function Profile() {
           className: "col-md-9",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
             className: "nav-tabs-custom",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-              className: "pl-10 pt-5",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
-                children: "Edit Profile"
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
-              className: "form-horizontal p-10",
-              onSubmit: handleSubmit(OnSubmitEditProfile),
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
-                  htmlFor: "inputName",
-                  className: "col-sm-2 control-label",
-                  children: "Name:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "col-sm-10",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
-                    ref: register({}),
-                    type: "name",
-                    className: "form-control",
-                    id: "inputName",
-                    name: "inputName",
-                    placeholder: "Name",
-                    Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.name
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
-                  htmlFor: "inputEmail",
-                  className: "col-sm-2 control-label",
-                  children: "E-mail:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "col-sm-10",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
-                    ref: register({}),
-                    type: "email",
-                    className: "form-control",
-                    id: "inputEmail",
-                    name: "inputEmail",
-                    placeholder: "E-mail",
-                    Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.email
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
-                  htmlFor: "inputEmail",
-                  className: "col-sm-2 control-label",
-                  children: "Password:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "col-sm-10",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
-                    ref: register({}),
-                    type: "name",
-                    className: "form-control",
-                    id: "inputPassword",
-                    name: "inputPassword",
-                    placeholder: "Password",
-                    Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.password
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                className: "form-group",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "col-sm-offset-2 col-sm-10",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
-                    type: "submit",
-                    className: "btn btn-danger",
-                    children: "Submit"
-                  })
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("ul", {
+              className: "nav nav-tabs",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("li", {
+                className: "active",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
+                  href: "#EditProfile",
+                  "data-toggle": "tab",
+                  children: "Edit Profile"
                 })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
+                  href: "#EditPassword",
+                  "data-toggle": "tab",
+                  children: "Edit Password"
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+              className: "tab-content",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                className: "active tab-pane",
+                id: "EditProfile",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                  className: "pl-10 pt-5",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
+                    children: "Edit Profile"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
+                  className: "form-horizontal p-10",
+                  onSubmit: handleSubmit(OnSubmitEditProfile),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "form-group",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                      htmlFor: "inputName",
+                      className: "col-sm-2 control-label",
+                      children: "Name:"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                      className: "col-sm-10",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                        ref: register({
+                          required: true
+                        }),
+                        type: "name",
+                        className: "form-control",
+                        id: "inputName",
+                        name: "inputName",
+                        placeholder: "Name",
+                        autoComplete: "off",
+                        Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.name
+                      }), ((_errors$inputName = errors.inputName) === null || _errors$inputName === void 0 ? void 0 : _errors$inputName.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                        className: "",
+                        children: ErrorsWord.inputName.required
+                      })]
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "form-group",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                      htmlFor: "inputEmail",
+                      className: "col-sm-2 control-label",
+                      children: "E-mail:"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                      className: "col-sm-10",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                        ref: register({
+                          required: true
+                        }),
+                        type: "email",
+                        className: "form-control",
+                        id: "inputEmail",
+                        name: "inputEmail",
+                        placeholder: "E-mail",
+                        autoComplete: "off",
+                        Value: feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.email
+                      }), ((_errors$inputEmail = errors.inputEmail) === null || _errors$inputEmail === void 0 ? void 0 : _errors$inputEmail.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                        className: "",
+                        children: ErrorsWord.inputEmail.required
+                      })]
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                    className: "form-group",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                      className: "col-sm-offset-2 col-sm-10",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+                        type: "submit",
+                        className: "btn btn-danger",
+                        children: "Submit"
+                      })
+                    })
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                className: "tab-pane",
+                id: "EditPassword",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                  className: "pl-10 pt-5",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
+                    children: "Edit Password"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
+                  className: "form-horizontal p-10",
+                  onSubmit: handleSubmit(OnSubmitEditPassword),
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "form-group",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                      htmlFor: "OldPassword",
+                      className: "col-sm-2 control-label",
+                      children: "Old Password:"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                      className: "col-sm-9",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                        className: "mt-1 relative rounded-md shadow-sm",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                          className: "absolute inset-y-0 right-0 pr-3 flex items-center",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                            onClick: function onClick() {
+                              setpasswordeye(function (state) {
+                                return !state;
+                              });
+                            },
+                            className: "h-5 w-5 text-gray-400",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                              className: "fas fa-".concat(passwordeye ? "eye-slash" : "eye")
+                            })
+                          })
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                          ref: register({
+                            required: true
+                          }),
+                          type: passwordeye ? "text" : "password",
+                          className: "form-control",
+                          id: "OldPassword",
+                          name: "OldPassword",
+                          autoComplete: "off",
+                          placeholder: "Old Password" // Value={
+                          //     feedData.fetchSuccess &&
+                          //     feedData.data.Profile &&
+                          //     feedData.data.Profile.name
+                          // }
+
+                        })]
+                      }), ((_errors$OldPassword = errors.OldPassword) === null || _errors$OldPassword === void 0 ? void 0 : _errors$OldPassword.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                        className: "",
+                        children: ErrorsWord.OldPassword.required
+                      })]
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "form-group",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                      htmlFor: "NewPassword",
+                      className: "col-sm-2 control-label",
+                      children: "New Password:"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                      className: "col-sm-9",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                        autoComplete: "off",
+                        ref: register({
+                          required: true
+                        }),
+                        type: passwordeye ? "text" : "password",
+                        className: "form-control",
+                        id: "NewPassword",
+                        name: "NewPassword",
+                        placeholder: "New Password" // Value={
+                        //     feedData.fetchSuccess &&
+                        //     feedData.data.Profile &&
+                        //     feedData.data.Profile.email
+                        // }
+
+                      }), ((_errors$NewPassword = errors.NewPassword) === null || _errors$NewPassword === void 0 ? void 0 : _errors$NewPassword.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                        className: "",
+                        children: ErrorsWord.NewPassword.required
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                      onClick: function onClick() {
+                        setpasswordeye(function (state) {
+                          return !state;
+                        });
+                      },
+                      className: "text-gray-700  btn-show-pass z-10 h-full leading-snug font-normal text-center absolute bg-transparent rounded text-base items-center justify-center w-10 right-0 lg:right-40 xl:right-48 pr-3 py-3"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "form-group",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                      htmlFor: "Confirm",
+                      className: "col-sm-2 control-label",
+                      children: "New Password (Confirm):"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                      className: "col-sm-9",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                        autoComplete: "off",
+                        ref: register({
+                          required: true
+                        }),
+                        type: passwordeye ? "text" : "password",
+                        className: "form-control",
+                        id: "Confirm",
+                        name: "Confirm",
+                        placeholder: "New Password (Confirm)" // Value={
+                        //     feedData.fetchSuccess &&
+                        //     feedData.data.Profile &&
+                        //     feedData.data.Profile.email
+                        // }
+
+                      }), ((_errors$Confirm = errors.Confirm) === null || _errors$Confirm === void 0 ? void 0 : _errors$Confirm.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ErrorSpan, {
+                        className: "",
+                        children: ErrorsWord.Confirm.required
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                      onClick: function onClick() {
+                        setpasswordeye(function (state) {
+                          return !state;
+                        });
+                      },
+                      className: "text-gray-700  btn-show-pass z-10 h-full leading-snug font-normal text-center absolute bg-transparent rounded text-base items-center justify-center w-10 right-0 lg:right-40 xl:right-48 pr-3 py-3"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                    className: "form-group",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                      className: "col-sm-offset-2 col-sm-10",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+                        type: "submit",
+                        className: "btn btn-danger",
+                        children: "Submit"
+                      })
+                    })
+                  })]
+                })]
               })]
             })]
           })
@@ -298,6 +500,15 @@ function Profile() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Profile);
+
+var ErrorSpan = function ErrorSpan(_ref) {
+  var children = _ref.children,
+      className = _ref.className;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("span", {
+    className: "text-danger ".concat(className && className, " "),
+    children: [" ", children && children]
+  });
+};
 
 /***/ })
 

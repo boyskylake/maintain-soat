@@ -14,7 +14,7 @@
     {{-- <!-- Styles --> --}}
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
-    {{-- <!-- Bootstrap 3.3.7 --> --}}
+    <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('officer/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     {{-- <!-- Font Awesome --> --}}
     <link rel="stylesheet" href="{{ asset('officer/bower_components/font-awesome/css/font-awesome.min.css') }}">

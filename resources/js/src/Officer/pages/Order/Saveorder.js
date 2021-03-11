@@ -16,6 +16,7 @@ import { StepButton } from "@material-ui/core";
 import Step1Component from "./component/Step1Component";
 import Step2Component from "./component/Step2Component";
 import Step3Component from "./component/Step3Component";
+import Lodingicon from "../../components/utils/Lodingicon";
 
 function Saveorder() {
     const dispatch = useDispatch();
@@ -180,9 +181,7 @@ function Saveorder() {
                         </div>
                     )}
                     {feedData.fetching && (
-                        <div className="overlay">
-                            <i className="fa fa-refresh fa-spin" />
-                        </div>
+                        <Lodingicon/>
                     )}
                 </div>
             </section>
@@ -215,22 +214,22 @@ function getStepContent(
     switch (step) {
         case 0:
             return (
-                // <Step1Component
-                //     props={data}
-                //     setCompleted={setCompleted}
-                //     completed={completed}
-                //     setActiveStep={setActiveStep}
-                //     activeStep={activeStep}
-                //     step={step}
-                // />
-                <Step3Component
-                props={data}
-                setCompleted={setCompleted}
-                completed={completed}
-                setActiveStep={setActiveStep}
-                activeStep={activeStep}
-                step={step}
-            />
+                <Step1Component
+                    props={data}
+                    setCompleted={setCompleted}
+                    completed={completed}
+                    setActiveStep={setActiveStep}
+                    activeStep={activeStep}
+                    step={step}
+                />
+            //     <Step3Component
+            //     props={data}
+            //     setCompleted={setCompleted}
+            //     completed={completed}
+            //     setActiveStep={setActiveStep}
+            //     activeStep={activeStep}
+            //     step={step}
+            // />
             );
         case 1:
             return (

@@ -939,9 +939,6 @@ var Header = function Header() {
         href: "/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
         rel: "stylesheet",
-        href: "/officer/bower_components/font-awesome/css/font-awesome.min.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
-        rel: "stylesheet",
         href: "/officer/bower_components/Ionicons/css/ionicons.min.css"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
         rel: "stylesheet",
@@ -953,6 +950,9 @@ var Header = function Header() {
         href: "/officer/bower_components/bootstrap-datepicker/css/datepicker.css",
         rel: "stylesheet",
         media: "screen"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
+        rel: "stylesheet",
+        href: "/officer/dist/fontawesome/css/all.min.css"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
         rel: "stylesheet",
         href: "/officer/plugins/iCheck/all.css"

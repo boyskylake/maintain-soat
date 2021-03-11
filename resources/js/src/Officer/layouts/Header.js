@@ -64,10 +64,10 @@ const Header = () => {
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
                 />
-                <link
+                {/* <link
                     rel="stylesheet"
                     href="/officer/bower_components/font-awesome/css/font-awesome.min.css"
-                />
+                /> */}
                 <link
                     rel="stylesheet"
                     href="/officer/bower_components/Ionicons/css/ionicons.min.css"
@@ -85,6 +85,10 @@ const Header = () => {
                     rel="stylesheet"
                     media="screen"
                 ></link>
+                <link
+                    rel="stylesheet"
+                    href="/officer/dist/fontawesome/css/all.min.css"
+                />
                 {/* <link
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"

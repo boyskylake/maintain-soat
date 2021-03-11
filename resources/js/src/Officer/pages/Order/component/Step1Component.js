@@ -10,6 +10,8 @@ import Services from "../../../redux/services/services";
 import { useCookies } from "react-cookie";
 import { trim } from "jquery";
 
+import Inputmask from "inputmask";
+
 function Step1Component(
     props,
     { setCompleted, completed, setActiveStep, activeStep, step }
@@ -20,6 +22,7 @@ function Step1Component(
     const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
 
     const services = new Services();
+
     const ErrorsWord = {
         informer: {
             required: "กรุณาเลือกผู้รับแจ้ง",
@@ -70,6 +73,13 @@ function Step1Component(
         // $('#myModal').modal('show')
     };
 
+
+useEffect(() => {
+    Inputmask().mask(document.querySelectorAll("input"));
+    return () => {
+
+    }
+}, [])
     //data
     useEffect(() => {
         // console.log(watch('coopid'))
@@ -80,6 +90,7 @@ function Step1Component(
         //     document.getElementById("Detail").style.display = "block";
         //     // document.getElementById("coopid").value = "block";
         // }
+
     }, [watch]);
 
     useEffect(() => {
@@ -224,7 +235,7 @@ function Step1Component(
                                         name="appointment_date"
                                         className="form-control"
                                         data-inputmask="'alias': 'dd/mm/yyyy'"
-                                        data-mask
+                                        data-mask="date"
                                         autoComplete="off"
                                         ref={register}
                                     />
@@ -295,12 +306,13 @@ function Step1Component(
                                         })}
                                         // required
                                     >
-                                        <option></option>
+                                        {/* <option></option> */}
                                         {feedData.data &&
                                             feedData.data
                                                 .ucf_customer_contact &&
                                             feedData.data.ucf_customer_contact.map(
                                                 (val, i) => {
+                                                 if (watch("coopid") == val.id_pay_to) {
                                                     return (
                                                         <option
                                                             key={i}
@@ -313,8 +325,10 @@ function Step1Component(
                                                             {val.contract_name}
                                                         </option>
                                                     );
-                                                }
-                                            )}
+                                                    } else {
+                                                        //
+                                                    }
+                                                })}
                                     </select>{" "}
                                     {errors.informer?.type === "required" && (
                                         <ErrorSpan className="">
@@ -326,7 +340,7 @@ function Step1Component(
                                     <label>เอกสารอ้างอิง</label>
                                     <input
                                         type="text"
-                                        name="doc_make"
+                                        name="ref_doc_no"
                                         className="form-control"
                                         autoComplete="off"
                                         style={{
@@ -355,9 +369,14 @@ function Step1Component(
                                         </div>
                                         <input
                                             type="text"
-                                            name="dateRevice"
+                                            name="appointns"
                                             className="form-control pull-right"
-                                            id="reservation"
+                                            // id="Time-mask"
+                                            // data-inputmask="'alias': 'HH:mm -  HH:mm'"
+                                              data-mask="99:99 - 99:99"
+                                        data-inputmask="'mask': '99:99 - 99:99'"
+                                            // data-mask
+                                            autoComplete="off"
                                             ref={register({
                                                 // required: true,
                                             })}
@@ -419,7 +438,7 @@ function Step1Component(
                                             name="start_date_tdata"
                                             className="form-control"
                                             data-inputmask="'alias': 'dd/mm/yyyy'"
-                                            data-mask
+                                            data-mask="date"
                                             autoComplete="off"
                                             ref={register}
                                         />
@@ -444,7 +463,7 @@ function Step1Component(
                                             name="finished_date_tdate"
                                             className="form-control"
                                             data-inputmask="'alias': 'dd/mm/yyyy'"
-                                            data-mask
+                                            data-mask="date"
                                             autoComplete="off"
                                             ref={register}
                                         />
@@ -737,8 +756,10 @@ function Step1Component(
                             </div>
                             <input
                                 type="submit"
-                                className="btn btn-block btn-primary btn-lg"
-                                style={{ width: "150px", marginLeft: "1400px" }}
+                                value="ดำเนินการต่อ"
+                                // className="btn btn-block btn-primary btn-lg"
+                                className="p-2 flex m-auto justify-center text-gray-800 rounded-lg w-32 bg-blue-400 shadow-sm text-base lg:text-5xl"
+                                style={{width: "200px",marginLeft: "1380px" }}
                             />
                         </div>
                     </div>

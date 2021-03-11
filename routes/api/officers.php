@@ -27,5 +27,7 @@ Route::group(['namespace' => 'Officer\Api'], function () {
         Route::get('Profile', 'Profile@Profile');
 
         Route::post('Editprofile', 'Profile@Editprofile');
+
+        Route::post('Editpassword', 'Profile@Editpassword');
     });
 });
