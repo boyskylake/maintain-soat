@@ -118,128 +118,577 @@ function Step3Component(
                 </div>
             ) : (
                 <Fragment>
-                    <div className="box-body">
-                        <div className="box-header">
-                            <div className="col-xs-12">
-                                {/* <div className="row"> */}
-                                <h2
-                                    className="page-header"
-                                    style={{
-                                        borderBottom: "0px",
-                                    }}
-                                >
-                                    {/* piclogo */}
-                                    <img
+                    {/* {feedPostData &&
+                                            feedPostData.coop[0] &&
+                                            feedPostData.coop[0].dep_des} */}
+                    {/* <img
                                         className="pull-left"
                                         src="./dist/img/pdf.png"
-                                    />
-                                    {/* name coopid&&coopname */}
-                                    <h3
-                                        className="pull-left"
-                                        style={{
-                                            paddingLeft: "400px",
-                                            paddingTop: "20px",
-                                        }}
-                                    >
-                                        {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].coop_id}
-                                        &nbsp;
-                                        {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].coop_name}
-                                        <br />
-                                        <small
-                                            className="pull-left"
-                                            style={{
-                                                paddingLeft: "120px",
-                                            }}
-                                        >
-                                            เอกสารภายในห้ามนำออกนอกบริษัทโดยเด็ดขาด
-                                        </small>
-                                    </h3>
-                                    <h3
-                                        className="pull-right"
-                                        style={{
-                                            paddingRight: "40px",
-                                        }}
-                                    >
-                                        {/* Date:{cookies.pageone.receive_date} */}
-                                        {/* level */}
-                                        {feedPostData &&
-                                            feedPostData.coop[0] &&
-                                            feedPostData.coop[0].dep_des}
-                                    </h3>
-                                </h2>
-                            </div>
-                            {/* แนวตั้ง */}
-                            <div className="row invoice-info">
-                                <div className="col-sm-4 invoice-col">
+                                    /> */}
+                    <div className="box-body">
+                        <div className="box-header">
+                            <div className="book">
+                                <div className="page">
+                                    <table className="table-fixed w-full">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colSpan="2">
+                                                    <img
+                                                        className="pull-left"
+                                                        src="./dist/img/pdf.png"
+                                                    />
+                                                </td>
+                                                <td
+                                                    colSpan="8"
+                                                    className="text-center"
+                                                >
+                                                    <h3 className="text-3xl font-semibold">
+                                                        {feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .coop_id}
+                                                        &nbsp;
+                                                        {feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .coop_name}
+                                                    </h3>
+                                                    {/* <br /> */}
+                                                    <h5>
+                                                        เอกสารภายใน
+                                                        ห้ามนำออกนนอกบริษัทโดยเด็ดขาด
+                                                    </h5>
+                                                </td>
+                                                <td colSpan="2" className="text-right">
+                                                    {/* Vipxxxx */}
+                                                    <h3>
+                                                        {feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .dep_des}
+                                                    </h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="8"></td>
+                                                <td
+                                                    colSpan="2"
+                                                    className="text-right"
+                                                >
+                                                    <h4 className="text-2xl font-bold">
+                                                        Order NO :
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="2">
+                                                    <h5>&nbsp;xx-xx-xx-xxxx</h5>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="2">
+                                                    <h4 className="text-2xl font-bold">
+                                                        Tel
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="6">
+                                                    {" "}
+                                                    &nbsp;  {feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .tel}
+                                                </td>
+                                                <td
+                                                    colSpan="2"
+                                                    className="text-right"
+                                                >
+                                                    <h4 className="text-2xl font-bold">
+                                                        Order Date :
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="2">
+                                                    <h5>
+                                                        &nbsp;{cookies.pageone &&
+                                                    cookies.pageone.receive_date}
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="2">
+                                                    <h4 className="text-2xl font-bold">
+                                                        Remote Other
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="5">
+                                                    xxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                </td>
+                                                <td
+                                                    colSpan="3"
+                                                    className="text-right"
+                                                >
+                                                    <h4 className="text-2xl font-bold">
+                                                        Customer Name :
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="2">
+                                                    <h5>
+                                                        &nbsp;{feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .contract_name}
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="2">
+                                                    <h4 className="text-2xl font-bold">
+                                                        Application :
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="5">N/A</td>
+                                                <td colSpan="6"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="7"></td>
+                                                <td
+                                                    colSpan="3"
+                                                    className="text-right"
+                                                >
+                                                    <h4 className=" text-2xl font-bold">
+                                                        Start Date :
+                                                    </h4>
+                                                </td>
+                                                <td
+                                                    colSpan="2"
+                                                    className="text-left"
+                                                >
+                                                    <h5>&nbsp;xx-xx-xx</h5>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="3">
+                                                    <h4 className="text-2xl font-bold">
+                                                        Appointment Date :
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="2">
+                                                    <h5>xx-xx-xx</h5>
+                                                </td>
+                                                <td colSpan="1">
+                                                    <h4 className="text-2xl font-bold">
+                                                        Estime
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="1">
+                                                    <h5>xxxxxx</h5>
+                                                </td>
+                                                <td
+                                                    colSpan="3"
+                                                    className="text-right"
+                                                >
+                                                    <h4 className="text-2xl font-bold">
+                                                        Finished Date :
+                                                    </h4>
+                                                </td>
+                                                <td colSpan="2">
+                                                    <h5>&nbsp;xx-xx-xx</h5>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table className="table-fixed w-full">
+                                        <thead>
+                                            <tr className="border-2">
+                                                <th
+                                                    colSpan="1"
+                                                    className="text-center"
+                                                >
+                                                    No
+                                                </th>
+                                                <th
+                                                    colSpan="2"
+                                                    className="text-center "
+                                                >
+                                                    Application
+                                                </th>
+                                                <th
+                                                    colSpan="4"
+                                                    className="text-center "
+                                                >
+                                                    Description
+                                                </th>
+                                                <th
+                                                    colSpan="2"
+                                                    className="text-center "
+                                                >
+                                                    Time
+                                                </th>
+                                                <th
+                                                    colSpan="3"
+                                                    className="text-center "
+                                                >
+                                                    Problem
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td className="text-center">
+                                                    1
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table className="table-fixed w-full relative top-96 inset-x-0 mt-30">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {/* <td colSpan="2" className="border-2">2</td> */}
+                                                <td colSpan="5"></td>
+                                                {/* <td colSpan="3"></td> */}
+                                                <td colSpan="3">
+                                                    <h4 className="text-2xl font-bold text-right">
+                                                        Receiver :
+                                                    </h4>
+                                                </td>
+                                                <td
+                                                    colSpan="4"
+                                                    style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}
+                                                >
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="2" className="border-2">&nbsp;</td>
+                                                <td colSpan="3" className="border-2">&nbsp;</td>
+                                                <td colSpan="3" className="border-0">&nbsp;</td>
+                                                <td colSpan="4">
+                                                    <table className="w-full h-10">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr className="h-10">
+                                                              <td colSpan="1" className="text-3xl font-bold"  style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}> <h5>(</h5></td> 
+                                                                <td colSpan="10" className="text-2xl text-center" style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}> 
+                                                                {feedData.data &&
+                                                                feedData.data.ucf_officer &&
+                                                                feedData.data.ucf_officer.map((val, i) => {
+                                                                // console.log( cookies.pageone.receiver,trim(val.officer_id))
+                                                                    if (
+                                                                        cookies &&
+                                                                        cookies.pageone &&
+                                                                        cookies.pageone.receiver &&
+                                                                        cookies.pageone.receiver ==
+                                                                            trim(val.officer_id)
+                                                                    ) {
+                                                                        return (
+                                                                        <h5
+                                                                            key={i} className="text-2xl">
+                                                                            {val.officer_full_name}
+                                                                        </h5>
+                                                                        );
+                                                                    }
+                                                                })}               
+                                                                 </td>  
+                                                              <td colSpan="1" className="text-3xl text-right font-bold" style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}><h5>)</h5></td> 
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    colSpan="2"
+                                                    className="border-2"
+                                                ></td>
+                                                <td
+                                                    colSpan="3"
+                                                    className="border-2"
+                                                ></td>
+                                                <td colSpan="3">
+                                                    <h4 className="text-2xl font-bold text-right">
+                                                        Editor :
+                                                    </h4>
+                                                </td>
+                                                <td
+                                                    colSpan="4"
+                                                    style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}
+                                                ></td>
+                                            </tr>
+                                            <tr>
+                                            <td colSpan="2" className="border-2">&nbsp;</td>
+                                                <td colSpan="3" className="border-2">&nbsp;</td>
+                                                <td colSpan="3" className="border-0">&nbsp;</td>
+                                                <td colSpan="4">
+                                                    <table className="w-full h-10">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr className="h-10">
+                                                              <td colSpan="1" className="text-3xl font-bold" style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}> <h5>(</h5></td> 
+                                                                <td colSpan="10" className="text-2xl text-center" style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}> 
+                                                                {feedData.data &&
+                                                                feedData.data.ucf_officer &&
+                                                                feedData.data.ucf_officer.map((val, i) => {
+                                                                // console.log( cookies.pageone.receiver,trim(val.officer_id))
+                                                                    if (
+                                                                        cookies &&
+                                                                        cookies.pageone &&
+                                                                        cookies.pageone.receiver &&
+                                                                        cookies.pageone.receiver ==
+                                                                            trim(val.officer_id)
+                                                                    ) {
+                                                                        return (
+                                                                        <h5
+                                                                            key={i} className="text-2xl">
+                                                                            {val.officer_full_name}
+                                                                        </h5>
+                                                                        );
+                                                                    }
+                                                                })}               
+                                                                 </td>  
+                                                              <td colSpan="1" className="text-3xl text-right font-bold" style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}><h5>)</h5></td> 
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                          
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    colSpan="2"
+                                                    className="border-2"
+                                                ></td>
+                                                <td
+                                                    colSpan="3"
+                                                    className="border-2"
+                                                ></td>
+                                                <td colSpan="3">
+                                                    <h4 className="text-2xl font-bold text-right">
+                                                        Manager :
+                                                    </h4>
+                                                </td>
+                                                <td
+                                                    colSpan="4"
+                                                    style={{
+                                                        borderBottom:
+                                                            "1px solid grey",
+                                                    }}
+                                                ></td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td colSpan="2" className="border-2">&nbsp;</td>
+                                                <td colSpan="3" className="border-2">&nbsp;</td> */}
+                                                <td colSpan="5">&nbsp;</td>
+                                                <td colSpan="3" className="border-0">&nbsp;</td>
+                                                <td colSpan="4">
+                                                    <table className="w-full h-10">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr className="h-10">
+                                                              <td colSpan="1" className="text-3xl font-bold"style={{
+                                                               borderBottom:"1px solid grey",}}> <h5>(</h5></td> 
+                                                                <td colSpan="10" className="text-2xl text-center" style={{
+                                                                borderBottom:"1px solid grey",}}> </td>  
+                                                              <td colSpan="1" className="text-3xl text-right font-bold" style={{
+                                                              borderBottom:"1px solid grey",}}><h5>)</h5></td> 
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <br />
-                                    <order1>
-                                        <h3
-                                            style={{
-                                                lineHeight: "1.8",
-                                                paddingLeft: "30px",
-                                            }}
-                                        >
-                                            Tel
-                                            <br />
-                                            Remote Other
-                                            <br />
-                                            Application :
-                                        </h3>
-                                    </order1>
-                                    <br />
-                                    <order4>
-                                        <h3
-                                            style={{
-                                                lineHeight: "1.8",
-                                                paddingLeft: "30px",
-                                            }}
-                                        >
-                                            Tel
-                                            <br />
-                                            Remote Other
-                                            <br />
-                                            Application :
-                                        </h3>
-                                    </order4>
+                                    <div className="w-full relative top-96 inset-x-0 mt-30">
+                                        <div className="field rounded">
+                                            <div className="leg text-3xl"> CRM : Remark </div>
+                                    <table className="w-full">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {/* <td colSpan="2" className="border-2">2</td> */}
+                                                <td colSpan="2">สิทธิ : </td>
+                                                {/* <td colSpan="3"></td> */}
+                                                <td colSpan="2">
+                                                    &nbsp;xxxxxx แต้ม
+                                                </td>
+                                                <td colSpan="2">
+                                                        หัก งานด่วน*2 :
+                                                </td>
+                                                <td colSpan="2">
+                                                    &nbsp;xx แต้ม
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td colSpan="2" className="border-2">2</td> */}
+                                                <td colSpan="2">3หัก : </td>
+                                                {/* <td colSpan=""></td> */}
+                                                <td colSpan="2">
+                                                    &nbsp;xxxxxx แต้ม
+                                                </td>
+                                                <td colSpan="2">
+                                                        เหลือ :
+                                                </td>
+                                                <td colSpan="2">
+                                                    &nbsp;xx แต้ม
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                        </div>
+                                    </div>
+                                    <table className="table-fixed w-full relative top-96 inset-x-0 mt-30">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colSpan="12" className="text-2xl">SO-AT SOLUTION COMPANY LIMITED</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="12" className="text-xl">165/57 Ramindra Road , Monument Sub-District , Bangkhen District , Bangkok 10220</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="4" className="text-xl">:: Customercare::Tel./Fax. 0-2059-0511</td>
+                                                <td colSpan="4" className="text-xl text-left">www.soatsolution.com</td>
+                                                <td colSpan="4" className="text-xl">Contact us: ssc_soat@soatsolution.com</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="12" className="text-xl"><hr/></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
 
                                 </div>
-                                <order2>
-                                    <h3
-                                        className="pull-right"
-                                        style={{
-                                            lineHeight: "1.8",
-                                            paddingRight: "230px",
-                                            paddingTop: "11px",
-                                        }}
-                                    >
-                                        Order:
-                                        <br />
-                                        Order date:
-                                    </h3>
-                                </order2>
-                                {/* <br /> */}
-                                 {/* ////// */}
-                                 <order3>
-                                    <h3
-                                        className="pull-right"
-                                        style={{
-                                            lineHeight: "1.8",
-                                            paddingRight: "230px",
-                                            paddingTop: "11px",
-                                        }}
-                                    >
-                                        Order:
-                                        <br />
-                                        Order date:
-                                    </h3>
-                                </order3>
                             </div>
-                            {/* ------ */}
-
                         </div>
                     </div>
                 </Fragment>

@@ -19,6 +19,7 @@
         ]) !!};
     </script>
 
+    {{-- <link href="/officer/dist/fontawesome/css/fontawesome.min.css" rel="stylesheet"> --}}
 </head>
 
 <body>
@@ -33,6 +34,7 @@
     <script src="/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker-thai.js"></script>
     <script src="/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"></script>
+
 </body>
 
 </html>
