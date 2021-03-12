@@ -13,14 +13,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/deploy', function () {
-    Artisan::call('optimize');
-});
 
-Route::get('/', function () {
-    // return view('welcome');
-    return redirect('/officer/login');
-});
+// Route::get('/deploy', function () {
+//     Artisan::call('cache:clear');
+//     Artisan::call('config:cache');
+// });
+//refresh auto
+
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return redirect('/officer/login');
+// });
 
 // Route::get('/test', function () {
 //     return view('test');
@@ -28,7 +31,7 @@ Route::get('/', function () {
 
 // Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // Using For Reactjs Only middleware('auth:web')->
 //  Route::get( '/officer/{any}', function () {
@@ -37,7 +40,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::view('/officer/{path?}', 'officer.home')->where('path', '.*');
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+
 Route::get('/{any}', function () {
     return view('index');
     // return view('officer.home');
 })->where('any', '.*');
+
+

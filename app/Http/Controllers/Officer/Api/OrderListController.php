@@ -11,55 +11,159 @@ use Illuminate\Support\Facades\DB;
 
 class OrderListController extends Controller
 {
-    public function feedInform()
+    public function feedInform(Request $request)
     {
-        // $ma_coop = DB::connection('oracle')->select("select * from MA_COOP");
-        // $ucf_officer = DB::connection('oracle')->select("select * from UCF_OFFICER");
-        // $ucf_inform_type = DB::connection('oracle')->select("select * from UCF_INFORM_TYPE");
-        // $ucf_customer_contact = DB::connection('oracle')->select("select * from UCF_CUSTOMER_CONTACT");
-        // $ucf_application = DB::connection('oracle')->select("select * from UCF_APPLICATION");
+        $sh = "";
 
-        $infrom = DB::connection('oracle')->select("SELECT
-                inform_head.inform_no,
-                inform_head.coop_id,
-                inform_head.informer,
-                inform_head.receiver,
-                inform_head.receive_date,
-                inform_head.ref_doc_no,
-                '        '  AS receive_date_tdate,
-                ma_coop.coop_name,
-                inform_head.sum_order_rate,
-                inform_head.count_order_rate,
-                inform_head.finished_status,
-                inform_head.editor_id,
-                inform_head.finished_date,
-                '        '  AS finished_date_tdate,
-                method_status,
-                inform_head.inform_type,
-                coop_shortname,
-                onsite_date,
-                '        '  AS onsite_date_tdate,
-                remark_cancel,
-                express_status,
-                ucf_inform_type.group_type,
-                inform_head.appointment_date,
-                '        '  AS appointment_date_tdate,
-                entry_date
+
+        // $infrom = DB::connection('oracle')->select();
+
+        $num = DB::connection('oracle')->select("SELECT
+            count(1) as num
             FROM
-                inform_head,
-                ma_coop,
-                ucf_inform_type
-            WHERE
-                    inform_head.coop_id = ma_coop.coop_id
-                -- AND ( inform_head.receive_date BETWEEN :adtm_start AND :adtm_stop )
-                    AND ucf_inform_type.inform_type = inform_head.inform_type
-                    -- and inform_no = '6312020040'
-                    and EXTRACT(year FROM receive_date) = 2021
-            ORDER BY
-                inform_head.receive_date DESC");
+            inform_head");
 
-       // $EditOderPage = DB::select("", [1]);
-        return response()->json(compact('infrom'));
+        $columns = array(
+            0 => 'c.inform_no',
+            1 => 'c.RECEIVER',
+        );
+
+        $totalData = $num[0]->num;
+
+        // dd($num[0]->num);
+
+        $totalFiltered = $totalData;
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        $sql = "SELECT
+        inform_head.inform_no,
+        inform_head.coop_id,
+        inform_head.informer,
+        inform_head.receiver,
+        inform_head.receive_date,
+        inform_head.ref_doc_no,
+        '        '  AS receive_date_tdate,
+        ma_coop.coop_name,
+        inform_head.sum_order_rate,
+        inform_head.count_order_rate,
+        inform_head.finished_status,
+        inform_head.editor_id,
+        inform_head.finished_date,
+        '        '  AS finished_date_tdate,
+        method_status,
+        inform_head.inform_type,
+        coop_shortname,
+        onsite_date,
+        '        '  AS onsite_date_tdate,
+        remark_cancel,
+        express_status,
+        ucf_inform_type.group_type,
+        inform_head.appointment_date,
+        '        '  AS appointment_date_tdate,
+        entry_date,
+        ucf_officer.officer_name as namereceiver,
+                ucf_officer.officer_id as id,
+                ucf_status.status_des as name_status,
+                case when ucf_status.status = 4 then
+                -- '<span style=\"color:#00a65a;\">'||ucf_status.status_des||'</span>'
+                '<span  style=\"font-size: 14px;background-color:#19a63d; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 2 then
+                '<span  style=\"font-size: 14px;background-color:#fa9a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 5 then
+                '<span  style=\"font-size: 14px;background-color:#fa2a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 0 then
+                '<span  style=\"font-size: 14px;background-color:#fc660f; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 3 then
+                '<span  style=\"font-size: 14px;background-color:#193ae0; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 1 then
+                '<span  style=\"font-size: 14px;background-color:#e8cd1a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 6 then
+                '<span  style=\"font-size: 14px;background-color:#4798fc; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 7 then
+                '<span  style=\"font-size: 14px;background-color:#fa3741; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                when ucf_status.status = 8 then
+                '<span  style=\"font-size: 14px;background-color:#fa5137; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+
+
+                else
+                ucf_status.status_des
+                end as name_status_des
+    FROM
+            (
+            SELECT
+                ROW_NUMBER()
+                OVER(
+                    ORDER BY $order $dir
+                ) rn,
+                c.*
+            FROM
+                inform_head c";
+            // $sh
+
+
+            $sql2 = ")inform_head,
+        ma_coop,ucf_officer,
+        ucf_inform_type,ucf_status
+    WHERE
+            inform_head.coop_id = ma_coop.coop_id
+        -- AND ( inform_head.receive_date BETWEEN :adtm_start AND :adtm_stop )
+            AND ucf_inform_type.inform_type = inform_head.inform_type
+            AND ucf_officer.officer_id = inform_head.receiver
+            AND ucf_status.status = inform_head.finished_status
+            -- and inform_no = '6312020040'
+    ";
+
+        if ($limit === "-1") {
+            if (empty($request->input('search.value'))) {
+                $posts = DB::connection('oracle')->select($sql);
+            } else {
+                $search = $request->input('search.value');
+
+                $sh = " where c.inform_no LIKE '%$search%'";
+
+                $posts = DB::connection('oracle')->select($sql . " where inform_head.inform_no LIKE '%$search%'");
+
+                $num = DB::connection('oracle')->select("SELECT
+                    count(1) as num
+                    FROM
+                    inform_head
+                    where inform_head.inform_no LIKE '%$search%'");
+
+                $totalFiltered = $num[0]->num;
+            }
+        } else {
+            if (empty($request->input('search.value'))) {
+                $posts = DB::connection('oracle')->select($sql.$sql2 . " and (rn > $start and rn <= " . ($limit + $start) . ")");
+            } else {
+                $search = $request->input('search.value');
+
+                $sh .= " where c.inform_no LIKE '%$search%'";
+
+                $posts = DB::connection('oracle')->select($sql.$sh.$sql2 . " and inform_head.inform_no LIKE '%$search%' and (rn > $start and rn <= " . ($limit + $start) . ")");
+
+                // dd($sql . " and inform_head.inform_no LIKE '%$search%' and (rn > $start and rn <= " . ($limit + $start) . ")");
+
+                $num = DB::connection('oracle')->select("SELECT
+                count(1) as num
+                FROM
+                inform_head
+                where inform_head.inform_no LIKE '%$search%'");
+
+                $totalFiltered = $num[0]->num;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $posts
+        );
+
+        return response()->json($json_data);
+        // return response()->json(compact($json_data));
     }
 }
-

@@ -1,0 +1,5 @@
+export const SaveOrderConstants = {
+    FEED_REQUEST: 'FEED_ORDER_REQUEST',
+    FEED_SUCCESS: 'FEED_ORDER_SUCCESS',
+    FEED_FAILURE: 'FEED_ORDER_FAILURE',
+};

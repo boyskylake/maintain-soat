@@ -30,15 +30,15 @@ const Footer = () => {
     );
 
     // <!-- bootstrap datepicker -->
-    useScript(
-        "/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"
-    );
-    useScript(
-        "/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker-thai.js"
-    );
-    useScript(
-        "/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"
-    );
+    // useScript(
+    //     "/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"
+    // );
+    // useScript(
+    //     "/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker-thai.js"
+    // );
+    // useScript(
+    //     "/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"
+    // );
     // useScript(
     //     "/officer/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
     // );

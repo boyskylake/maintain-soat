@@ -15,9 +15,20 @@ Route::group(['namespace' => 'Officer\Api'], function () {
     // Route::group(['middleware' => 'auth:api'], function () {
     //     Route::get('user', 'Auth\AuthController@user');
 
-    //     Route::get('Home', 'HomeController@allMacoop');
-    //     Route::get('orderPage', 'OrderPageController@editOrder');
-    //     Route::get('Listorder', 'OrderListController@feedInform');
+        Route::get('menu', 'MenuController@menu');
+
+
+        Route::get('Home', 'HomeController@allMacoop');
+        Route::get('orderPage', 'OrderPageController@editOrder');
+
+        Route::post('pageone', 'OrderPageController@page_one');
+        Route::post('coopinfo', 'OrderPageController@coopinformation');
+        Route::post('Listorder', 'OrderListController@feedInform');
+        Route::get('Profile', 'Profile@Profile');
+
+        Route::post('Editprofile', 'Profile@Editprofile');
+
+        Route::post('Editpassword', 'Profile@Editpassword');
 
     // });
 });

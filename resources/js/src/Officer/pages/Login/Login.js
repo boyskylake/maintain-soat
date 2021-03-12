@@ -7,8 +7,8 @@ import toastr from "toastr";
 import { useBodyClass, useScript } from "../../../helpers";
 // import { login } from '../actions';
 
-import { userActions } from "../../redux/actions";
 
+import { userActions } from "../../redux/actions";
 const Login = () => {
     const [user, setUser] = useState();
     const [pass, setPass] = useState();
@@ -68,6 +68,7 @@ const Login = () => {
                     rel="stylesheet"
                     href="/officer/bower_components/font-awesome/css/font-awesome.min.css"
                 />
+                {/* <link rel="stylesheet" href="{{ asset('officer/dist/fontawesome/css/all.min.css)}}"/> */}
                 <link
                     rel="stylesheet"
                     href="/officer/bower_components/Ionicons/css/ionicons.min.css"
@@ -114,15 +115,15 @@ const Login = () => {
                 `}</style>
             </Helmet>
 
-            <div className="container">
+            <div className="container shadow-2xl rounded-full py-3 px-6">
                 <div className="header-area">
                     <div className="navbar-area">
                         <nav className="site-navbar">
-                            <a href="#home" className="site-logo">
+                            <a href="#home" className="site-logo" style={{paddingLeft:"130px"}}>
                                 บริษัทโซแอ็ท โซลูชั่น จำกัด
                             </a>
                             {/* แถบด้านบน */}
-                            <ul>
+                            <ul style={{paddingRight:"130px"}}>
                                 <li>
                                     <a href="https://www.soatsolution.com/home">
                                         Home
@@ -153,54 +154,68 @@ const Login = () => {
                     <div className="col-lg-6 col-md-6">
                         {/* รอภาพจากป๊อป */}
                         <img
-                            className="pic-login-2"
-                            src="https://sv1.picz.in.th/images/2021/02/18/obsLEe.png"
+                            className="pic-login-2 rounded-full py-3 px-6"
+                            src="./dist/img/bglogin.png"
                         />
                     </div>
                     <div className="col-lg-5 col-md-6 col-sm-12 col-12 login-form">
                         <h4>กรุณาเข้าสู่ระบบเพื่อใช้งาน !</h4>
                         <div className="form-group">
                             <form onSubmit={(e) => handleSubmit(e)}>
-                                <div className="form-group has-feedback">
-                                    <input
-                                        type="Email"
-                                        onChange={(event) =>
-                                            setUser(event.target.value)
-                                        }
-                                        className="form-control"
-                                        placeholder="Username"
-                                        required
-                                        height="30"
-                                    />
-                                    <svg
-                                        width="1.2em"
-                                        height="1.2em"
-                                        viewBox="0 0 16 16"
-                                        className="bi bi-person-fill"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    ></svg>
-                                    <span className="glyphicon glyphicon-lock form-control-feedback" />
+
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-5">
+                                        {/* <label htmlFor className="text-xs font-semibold px-1"></label> */}
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                {/* <i className="fa fa-user text-gray-400 text-lg"></i> */}
+                                                {/* <i className="far fa-user"></i> */}
+                                                <i className="fa fa-user"></i>
+                                            </div>
+                                            <input
+                                                type="email"
+                                                onChange={(event) =>
+                                                    setUser(event.target.value)
+                                                }
+                                                // className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                                                className="w-full rounded border-2 border-custom-200  bg-white p-3 focus:bg-white focus:shadow-lg focus:border-custom-400 max-w-xl "
+                                                placeholder="Username"
+                                                required
+                                                style={{ fontSize: "15px" }}
+                                            >
+
+                                            </input>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="form-group has-feedback">
-                                    <input
-                                        type="password"
-                                        onChange={(event) =>
-                                            setPass(event.target.value)
-                                        }
-                                        className="form-control"
-                                        placeholder="Password"
-                                        required
-                                    />
-                                    <span className="glyphicon glyphicon-lock form-control-feedback" />
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-12">
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center text-3xl">
+                                                {/* <i className="mdi mdi-lock-outline text-gray-400 text-lg" /> */}
+                                                <i className="fa fa-lock"></i>
+                                            </div>
+                                            <input
+                                                type="password"
+                                                onChange={(event) =>
+                                                    setPass(event.target.value)
+                                                }
+                                                className="w-full rounded border-2 border-custom-200  bg-white p-3 focus:bg-white focus:shadow-lg focus:border-custom-400 max-w-xl text-3xl"
+                                                placeholder="************"
+                                                required
+                                                style={{ fontSize: "15px"}}
+                                            >
+
+                                            </input>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="row">
-                                    <div className="login-btn">
-                                        <button
-                                            className="btn btn-primary "
-                                            type="submit"
-                                        >
-                                            Log in
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 mb-5">
+                                        <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-gray-50 rounded-lg px-3 py-3 font-semibold text-3xl" type="submit">
+                                        {/* text-gray-50 text-sm lg:text-lg md:text-base font-bold p-2 rounded-lg shadow  bg-custom-600 hover:bg-custom-400 hover:shadow-md hover:text-black w-5/6 hover:no-underline  */}
+                                            Login
                                         </button>
                                     </div>
                                 </div>

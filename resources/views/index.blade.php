@@ -12,6 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+
+    <script>
+    window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+
+    {{-- <link href="/officer/dist/fontawesome/css/fontawesome.min.css" rel="stylesheet"> --}}
 </head>
 
 <body>
@@ -22,6 +30,11 @@
     <script src="{{ mix('/js/manifest.js') }}"></script>
     <script src="{{ mix('/js/vendor.js') }}"></script>
     <script src="{{ mix('/js/app.js') }}"></script>
+
+    <script src="/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/officer/bower_components/bootstrap-datepicker/js/bootstrap-datepicker-thai.js"></script>
+    <script src="/officer/bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js"></script>
+
 </body>
 
 </html>

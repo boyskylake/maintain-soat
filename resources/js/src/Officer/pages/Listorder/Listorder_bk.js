@@ -16,22 +16,31 @@ function Listorder() {
     //     // console.log(data);
     //     // console.log(coopid);
     // };
+    let user = JSON.parse(localStorage.getItem("user"));
+
 
     useEffect(() => {
-        async function feedData() {
-            await dispatch(
-                feedDataAction.feedDataGet("/api/v1/officer/Listorder")
-            );
-        }
-        // $("#example2").DataTable({
+        // async function feedData() {
+        //     await dispatch(
+        //         feedDataAction.feedDataGet("/api/v1/officer/Listorder")
+        //     );
+        // }
 
-        // });
-        $(document).ready(function() {
-            $('#example2').DataTable();
-        } );
+            $('#example2').DataTable({
+                    serverSide: true,
+                    "ajax": {
+                        "url": "/api/v1/officer/Listorder",
+                        "type": "GET",
+                        headers: {
+                            'Authorization': "Bearer " +  user.access_token
+                        },
+                }
+            });
 
-        feedData();
-    }, [dispatch]);
+        // feedData();
+    }, [user]);
+
+
 
 
     return (
@@ -79,6 +88,15 @@ function Listorder() {
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                    <tr>
+
+                                                            <td>X</td>
+                                                            <td>X</td>
+                                                            <td>X</td>
+                                                            <td>X</td>
+                                                             <td>X</td>
+                                                        </tr>
                                         {feedData.data &&
                                             feedData.data.infrom &&
                                             feedData.data.infrom.map(

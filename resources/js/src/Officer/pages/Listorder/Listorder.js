@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { feedDataAction } from "../../redux/actions";
 
 import "datatables.net-dt/css/jquery.dataTables.css";
+import { Button } from "bootstrap";
+
+import Lodingicon from "../../components/utils/Lodingicon";
+
 $.DataTable = require("datatables.net");
 
 function Listorder() {
@@ -18,7 +22,6 @@ function Listorder() {
     // };
     let user = JSON.parse(localStorage.getItem("user"));
 
-
     useEffect(() => {
         // async function feedData() {
         //     await dispatch(
@@ -26,30 +29,66 @@ function Listorder() {
         //     );
         // }
 
-            $('#example2').DataTable({
-                    serverSide: true,
-                    "ajax": {
-                        "url": "/api/v1/officer/Listorder",
-                        "type": "GET",
-                        headers: {
-                            'Authorization': "Bearer " +  user.access_token
-                        },
-                }
-            });
+        $("#example2").DataTable({
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"],
+            ],
+            order: [[0, "desc"]],
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: {
+                url: "/api/v1/officer/Listorder",
+                type: "POST",
+                headers: {
+                    Authorization: "Bearer " + user.access_token,
+                },
+            },
+            columns: [
+                { data: "inform_no" },
+                // { data: "coop_id" },
+                {
+                    data: "coop_shortname",
+                    orderable: false,
+                },
+                {
+                    data: "receive_date",
+                    orderable: false,
+                },
+                {
+                    data: "namereceiver",
+                    orderable: false,
+                },
+                // {
+                //     data: "express_status",
+                //     orderable: false,
+                // },
+                {
+                    data: "name_status_des",
+                    orderable: false,
+                },
+                {
+                    data: null,
+                    // className: "center",
+                    defaultContent:
+                        '<div style="padding-right: 30px;"><a href=" " title="ลบ" class="btn btn-sm btn-danger pull-right delete style="margin-right: 5px; "><i class="fa fa-trash-o"></i><span class="hidden-xs hidden-sm"> ลบ</span></a>' +
+                        '<a href=" " title="แก้ไข" class="btn btn-sm btn-warning pull-right edit" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> <span class="hidden-xs hidden-sm">แก้ไข</span></a></div>' +
+                        '<a href=" " title="View" class="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">View</span></a>',
+                },
+            ],
+        });
 
         // feedData();
     }, [user]);
-
-
-
 
     return (
         <div className="content-wrapper">
             {/* Content Header (Page header) */}
             <section className="content-header">
                 <h1>
-                    Data Tables
-                    <small>advanced tables</small>
+                    ดู order ทั้งหมด
+                    {/* <small>advanced tables</small> */}
                 </h1>
                 <ol className="breadcrumb">
                     <li>
@@ -69,55 +108,89 @@ function Listorder() {
                     <div className="col-xs-12">
                         <div className="box">
                             <div className="box-header">
-                                <h3 className="box-title">Hover Data Table</h3>
+                                <h3 className="box-title">
+                                    รายการ Order ทั้งหมด
+                                </h3>
                             </div>
+                            {/* <br />
+                            <div className="col-md-3">
+                                <select
+                                    name="filter_year"
+                                    id="filter_year"
+                                    className="form-control"
+                                    required
+                                >
+                                    <option>เลือกปี</option>
+                                </select>
+                            </div>
+                            <br />
+                            <br />
+                            <br /> */}
                             {/* /.box-header */}
                             <div className="box-body">
                                 {/* <table ref={main} /> */}
                                 <table
                                     id="example2"
                                     className="table table-bordered table-hover"
+                                    style={{
+                                        textAlign: "center",
+                                    }}
                                 >
                                     <thead>
                                         <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                เลขที่
+                                            </th>
+                                            {/* <th>เลขสหกรณ์</th> */}
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                สหกรณ์
+                                            </th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                วันที่รับแจ้ง
+                                            </th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                ผู้รับแจ้ง
+                                            </th>
+                                            {/* <th>ประเภทงาน</th> */}
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                สถานะงาน
+                                            </th>
+                                            <th
+                                                style={{
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {feedData.data &&
-                                            feedData.data.infrom &&
-                                            feedData.data.infrom.map(
-                                                (val, i) => {
-                                                    return (
-                                                        <tr key={i}>
-                                                            <td>{val.inform_no}</td>
-                                                            <td>{val.coop_shortname}
-                                                            </td>
-                                                            <td>{val.receive_data}</td>
-                                                            <td>{val.editor_id}</td>
-                                                            <td>X</td>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                    </tbody>
                                 </table>
-
                             </div>
-                            {feedData.fetching && (
-                        <div className="overlay">
-                            <i className="fa fa-refresh fa-spin" />
-                        </div>
-                    )}
+                            {feedData.fetching && <Lodingicon />}
                             {/* /.box-body */}
                         </div>
                     </div>
                     {/* /.col */}
-
                 </div>
                 {/* /.row */}
             </section>

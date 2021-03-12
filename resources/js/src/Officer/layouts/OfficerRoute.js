@@ -34,6 +34,27 @@ const officerRoute = [
         layout: "",
         component: lazy(() => import("../pages/Lookscreen/Lookscreen")),
     },
+    {
+        path: "/officer/Profile",
+        exact: true,
+        layout: "officer",
+        auth: true,
+        component: lazy(() => import("../pages/Profile/Profile")),
+    },
+    // {
+    //     path: "/officer/detail",
+    //     exact: true,
+    //     layout: "officer",
+    //     component: lazy(() => import("../pages/Order/component/Detail")),
+    // },
+    // {
+    //     path: "/officer/calenda",
+    //     exact: true,
+    //     layout: "officer",
+    //     component: lazy(() => import("../pages/Calenda/Calenda")),
+    // },
 ];
+
+
 
 export default officerRoute;

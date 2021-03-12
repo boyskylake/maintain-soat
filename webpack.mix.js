@@ -10,8 +10,10 @@ const mix = require("laravel-mix");
  | file for the application as well as bundling up all the JS files.
  |
  */
+ const tailwindcss = require('tailwindcss');
 const RemovePlugin = require("remove-files-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
+const autoprefixer = require('autoprefixer');
+// const ESLintPlugin = require("eslint-webpack-plugin");
 // const TargetsPlugin = require("targets-webpack-plugin");
 
 const removePlugin = new RemovePlugin({
@@ -52,7 +54,8 @@ const removePlugin = new RemovePlugin({
 mix.webpackConfig({
     plugins: [
         removePlugin,
-        new ESLintPlugin(),
+        autoprefixer,
+        // new ESLintPlugin(),
         // new TargetsPlugin({
         //     browsers: ["last 2 versions", "chrome >= 41", "IE 11", "IE 7"]
         // })
@@ -83,6 +86,10 @@ mix.js("resources/js/app.js", "public/js")
         "redux-thunk",
     ])
     .sass("resources/sass/app.scss", "public/css")
+    .options({
+        processCssUrls: false,
+        postCss: [ tailwindcss('./tailwind.config.js')],
+      })
     .sourceMaps(false, "source-map");
 
 mix.disableNotifications();
@@ -92,5 +99,5 @@ if (mix.inProduction()) {
 }
 
 if (!mix.inProduction()) {
-    mix.browserSync("http://maintain.com");
+    mix.browserSync("http://maintain.test");
 }

@@ -1,9 +1,13 @@
-import React from "react";
+// import React from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useBodyClass } from "../../helpers";
 import { userActions } from "../redux/actions";
 
+// import { useScript } from "../../helpers";
+// import { feedDataAction } from "../redux/actions";
+import Services from "../redux/services/services";
 
 const Header = () => {
     // const login = useSelector(state => state.login);
@@ -12,6 +16,22 @@ const Header = () => {
     useBodyClass("skin-yellow");
     useBodyClass("sidebar-mini");
 
+    const feedData = useSelector((state) => state.feedData);
+    const service = new Services();
+    // const [inputs, setInputs] = useState(["ma_coop"]);
+    const [coopid, setCoopid] = useState(null);
+    const [FeedMenu, setFeedMenu] = useState();
+    useEffect(() => {
+        async function feedData() {
+            // await dispatch(feedDataAction.feedDataGet("/api/v1/officer/menu"));
+            service
+                .API("/api/v1/officer/menu", { method: "Get" })
+                .then((res) => {
+                    setFeedMenu(res);
+                });
+        }
+        feedData();
+    }, [dispatch]);
     return (
         <header className="main-header">
             <Helmet>
@@ -44,10 +64,10 @@ const Header = () => {
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
                 />
-                <link
+                {/* <link
                     rel="stylesheet"
                     href="/officer/bower_components/font-awesome/css/font-awesome.min.css"
-                />
+                /> */}
                 <link
                     rel="stylesheet"
                     href="/officer/bower_components/Ionicons/css/ionicons.min.css"
@@ -65,6 +85,10 @@ const Header = () => {
                     rel="stylesheet"
                     media="screen"
                 ></link>
+                <link
+                    rel="stylesheet"
+                    href="/officer/dist/fontawesome/css/all.min.css"
+                />
                 {/* <link
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
@@ -103,7 +127,7 @@ const Header = () => {
                 <span className="logo-lg">
                     {/* <b>โซแอ็ทโซลูชั่น</b> จำกัด */}
                     <img
-                        src="dist/img/logo.png"
+                        src="./dist/img/logo.png"
                         className="logo-lg"
                         alt="Logo soat"
                     />
@@ -118,6 +142,7 @@ const Header = () => {
                     data-toggle="push-menu"
                     role="button"
                 >
+                    <i className="fas fa-bars"></i>
                     <span className="sr-only">Toggle navigation</span>
                 </a>
                 {/* Navbar Right Menu */}
@@ -130,7 +155,7 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <i className="fa fa-envelope-o" />
+                                <i className="fas fa-envelope"></i>
                                 <span className="label label-success">4</span>
                             </a>
                             <ul className="dropdown-menu">
@@ -139,27 +164,8 @@ const Header = () => {
                                     {/* inner menu: contains the actual data */}
                                     <ul className="menu">
                                         <li>
-                                            {/* start message */}
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img
-                                                        src="dist/img/user2-160x160.jpg"
-                                                        className="img-circle"
-                                                        alt="User Image"
-                                                    />
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small>
-                                                        <i className="fa fa-clock-o" />{" "}
-                                                        5 mins
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    Why not buy a new awesome
-                                                    theme?
-                                                </p>
-                                            </a>
+                                            start message
+                                            <a href="#"></a>
                                         </li>
                                         {/* end message */}
                                         <li>
@@ -264,7 +270,7 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <i className="fa fa-bell-o" />
+                                <i className="fas fa-bell"></i>
                                 <span className="label label-warning">10</span>
                             </a>
                             <ul className="dropdown-menu">
@@ -320,7 +326,7 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <i className="fa fa-flag-o" />
+                                <i className="fas fa-flag"></i>
                                 <span className="label label-danger">9</span>
                             </a>
                             <ul className="dropdown-menu">
@@ -446,27 +452,58 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <img
+                                {/* <img
                                     src="dist/img/user2-160x160.jpg"
                                     className="user-image"
                                     alt="User Image"
-                                />
-                                <span className="hidden-xs">
+                                /> */}
+                                {FeedMenu && FeedMenu[1] && (
+                                    <div className="pull-left image">
+                                        <img
+                                            src={`/storage/${FeedMenu[1].avatar}`}
+                                            className="user-image"
+                                            alt="User Image"
+                                        />
+                                    </div>
+                                )}
+                                {FeedMenu && FeedMenu[1] && (
+                                    <span className="hidden-xs">
+                                        {FeedMenu[1].name}
+                                    </span>
+                                )}
+                                {/* <span className="hidden-xs">
                                     Alexander Pierce
-                                </span>
+                                </span> */}
                             </a>
                             <ul className="dropdown-menu">
                                 {/* User image */}
                                 <li className="user-header">
-                                    <img
+                                    {/* <img
                                         src="dist/img/user2-160x160.jpg"
                                         className="img-circle"
                                         alt="User Image"
-                                    />
-                                    <p>
+                                    /> */}
+                                    {FeedMenu && FeedMenu[1] && (
+                                        <img
+                                            src={`/storage/${FeedMenu[1].avatar}`}
+                                            className="rounded-full  mx-auto flex items-center justify-center "
+                                            alt="User Image"
+                                            style={{ width: "100px",height: "100px" }}
+                                        />
+                                    )}
+                                    {FeedMenu && FeedMenu[1] && (
+                                        <p>
+                                            {FeedMenu[1].name}
+
+                                            <small>
+                                                {FeedMenu[1].email}
+                                            </small>
+                                        </p>
+                                    )}
+                                    {/* <p>
                                         Alexander Pierce - Web Developer
                                         <small>Member since Nov. 2012</small>
-                                    </p>
+                                    </p> */}
                                 </li>
                                 {/* Menu Body */}
                                 <li className="user-body">
@@ -487,8 +524,9 @@ const Header = () => {
                                 <li className="user-footer">
                                     <div className="pull-left">
                                         <a
-                                            href="#"
+                                            href="/officer/Profile"
                                             className="btn btn-default btn-info"
+
                                         >
                                             Profile
                                         </a>

@@ -35,7 +35,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (!Auth::guard()->attempt($this->credentials($request)))
+        if (!Auth::guard('officers')->attempt($this->credentials($request)))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
