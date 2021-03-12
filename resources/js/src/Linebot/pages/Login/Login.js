@@ -42,7 +42,7 @@ const Login = () => {
     };
 
     return (
-        <div className="wrapper bg-yellow-600">
+        <div className="wrapper bg-green-600">
             <Helmet>
                 <meta
                     name="description"
