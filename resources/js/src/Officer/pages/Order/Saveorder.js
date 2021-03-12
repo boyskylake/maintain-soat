@@ -125,7 +125,7 @@ function Saveorder() {
                 // console.log(coopid);
                 document.getElementById("Detail").style.display = "block";
                 $(".select2").select2();
-                CKEDITOR.replace("editor1");
+                // CKEDITOR.replace("editor1");
                 //bootstrap WYSIHTML5 - text editor
                 $(".textarea").wysihtml5();
                 document.getElementById("informer").disabled = false;
@@ -180,9 +180,9 @@ function Saveorder() {
                             )}
                         </div>
                     )}
-                    {feedData.fetching && (
+                    {/* {feedData.fetching && (
                         <Lodingicon/>
-                    )}
+                    )} */}
                 </div>
             </section>
             {/* /.content */}
@@ -252,7 +252,6 @@ function getStepContent(
                     activeStep={activeStep}
                     step={step}
                 />
-
             );
         case 3:
             return "Step 3: This is the bit I really care about!";

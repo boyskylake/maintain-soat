@@ -127,7 +127,7 @@ const Header = () => {
                 <span className="logo-lg">
                     {/* <b>โซแอ็ทโซลูชั่น</b> จำกัด */}
                     <img
-                        src="dist/img/logo.png"
+                        src="./dist/img/logo.png"
                         className="logo-lg"
                         alt="Logo soat"
                     />
@@ -142,6 +142,7 @@ const Header = () => {
                     data-toggle="push-menu"
                     role="button"
                 >
+                    <i className="fas fa-bars"></i>
                     <span className="sr-only">Toggle navigation</span>
                 </a>
                 {/* Navbar Right Menu */}
@@ -154,7 +155,7 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <i className="fa fa-envelope-o" />
+                                <i className="fas fa-envelope"></i>
                                 <span className="label label-success">4</span>
                             </a>
                             <ul className="dropdown-menu">
@@ -269,7 +270,7 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <i className="fa fa-bell-o" />
+                                <i className="fas fa-bell"></i>
                                 <span className="label label-warning">10</span>
                             </a>
                             <ul className="dropdown-menu">
@@ -325,7 +326,7 @@ const Header = () => {
                                 className="dropdown-toggle"
                                 data-toggle="dropdown"
                             >
-                                <i className="fa fa-flag-o" />
+                                <i className="fas fa-flag"></i>
                                 <span className="label label-danger">9</span>
                             </a>
                             <ul className="dropdown-menu">
