@@ -236,7 +236,7 @@ useEffect(() => {
                                     <div className="input-group-addon">
                                         <i className="fa fa-calendar" />
                                     </div>
-
+                                    
                                     <input
                                         type="text"
                                         name="receive_date"
@@ -247,7 +247,7 @@ useEffect(() => {
                                         ref={register}
                                         value={cookies.pageone&&cookies.pageone.receive_date}
                                     />
-
+                                    
                                 </div>
                             </div>
 
@@ -274,7 +274,7 @@ useEffect(() => {
                                         ref={register}
                                         value={cookies.pageone&&cookies.pageone.start_date_tdata}
                                         autoComplete="off"
-
+                                       
                                     />
                                 </div>
                             </div>

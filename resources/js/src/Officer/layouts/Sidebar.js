@@ -90,7 +90,7 @@ const Sidebar = () => {
                         <span className="hidden-xs">{FeedMenu[1].name}</span>
                     </div>
                 )}
-                <ul className="sidebar-menu" data-widget="tree">
+                <ul className="sidebar-menu " data-widget="tree">
                     {/* <li className="header">เมนูหลัก</li>
                     <ListItemLink
                         to="/officer/home"
@@ -107,6 +107,7 @@ const Sidebar = () => {
                         icon="fa fa-file-text"
                         name="Order ทั้งหมด"
                     /> */}
+                    {/* &nbsp; */}
                     {FeedMenu &&
                         FeedMenu[0] &&
                         FeedMenu[0].map((val, i) => {

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useScript } from "../../../helpers";
 import { feedDataAction } from "../../redux/actions";
 
+import Lodingicon from "../../components/utils/Lodingicon";
 function Home() {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
@@ -188,7 +189,7 @@ function Home() {
 
                     areaChart.Line(areaChartData, areaChartOptions)
 
-                    
+
 //-------------------------------กราฟเงินขาย
 
 
@@ -454,16 +455,10 @@ function Home() {
 
 
 
-
                 </div>
-
-
-                                {feedData.fetching && (
-                        <div className="overlay">
-                            <i className="fa fa-refresh fa-spin" />
-                        </div>
+                {feedData.fetching && (
+                        <Lodingicon/>
                     )}
-
                 </div>
 
             </section>

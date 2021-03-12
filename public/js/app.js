@@ -989,22 +989,24 @@ var Header = function Header() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
         className: "logo-lg",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-          src: "dist/img/logo.png",
+          src: "./dist/img/logo.png",
           className: "logo-lg",
           alt: "Logo soat"
         })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("nav", {
       className: "navbar navbar-static-top",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("a", {
         href: "#",
         className: "sidebar-toggle",
         "data-toggle": "push-menu",
         role: "button",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+          className: "fas fa-bars"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
           className: "sr-only",
           children: "Toggle navigation"
-        })
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "navbar-custom-menu",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("ul", {
@@ -1016,7 +1018,7 @@ var Header = function Header() {
               className: "dropdown-toggle",
               "data-toggle": "dropdown",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                className: "fa fa-envelope-o"
+                className: "fas fa-envelope"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "label label-success",
                 children: "4"
@@ -1130,7 +1132,7 @@ var Header = function Header() {
               className: "dropdown-toggle",
               "data-toggle": "dropdown",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                className: "fa fa-bell-o"
+                className: "fas fa-bell"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "label label-warning",
                 children: "10"
@@ -1195,7 +1197,7 @@ var Header = function Header() {
               className: "dropdown-toggle",
               "data-toggle": "dropdown",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                className: "fa fa-flag-o"
+                className: "fas fa-flag"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "label label-danger",
                 children: "9"
@@ -1707,7 +1709,7 @@ var Sidebar = function Sidebar() {
           children: FeedMenu[1].name
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ul", {
-        className: "sidebar-menu",
+        className: "sidebar-menu ",
         "data-widget": "tree",
         children: FeedMenu && FeedMenu[0] && FeedMenu[0].map(function (val, i) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {

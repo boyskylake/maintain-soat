@@ -6,6 +6,9 @@ import { feedDataAction } from "../../redux/actions";
 
 import "datatables.net-dt/css/jquery.dataTables.css";
 import { Button } from "bootstrap";
+
+import Lodingicon from "../../components/utils/Lodingicon";
+
 $.DataTable = require("datatables.net");
 
 function Listorder() {
@@ -183,11 +186,7 @@ function Listorder() {
                                     </thead>
                                 </table>
                             </div>
-                            {feedData.fetching && (
-                                <div className="overlay">
-                                    <i className="fa fa-refresh fa-spin" />
-                                </div>
-                            )}
+                            {feedData.fetching && <Lodingicon />}
                             {/* /.box-body */}
                         </div>
                     </div>

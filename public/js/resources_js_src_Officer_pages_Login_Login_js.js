@@ -130,7 +130,7 @@ var Login = function Login() {
         children: "\n                    html, body {\n                        height: unset;\n                    }\n                    .form-control {\n                        display: block;\n                        width: 100%;\n                        height: 45px;\n                        padding: 6px 12px;\n                        font-size: 14px;\n                        line-height: 1.42857143;\n                        color: #555;\n                        background-color: #fff;\n                        background-image: none;\n                        border: 1px solid #ccc;\n                        border-radius: 4px;\n                        -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);\n                        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);\n                        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n                        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n                        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n                        transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n                    }\n                "
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      className: "container",
+      className: "container shadow-2xl rounded-full py-3 px-6",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "header-area",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
@@ -140,8 +140,14 @@ var Login = function Login() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
               href: "#home",
               className: "site-logo",
+              style: {
+                paddingLeft: "130px"
+              },
               children: "\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17 \u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19 \u0E08\u0E33\u0E01\u0E31\u0E14"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("ul", {
+              style: {
+                paddingRight: "130px"
+              },
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
                   href: "https://www.soatsolution.com/home",
@@ -170,8 +176,8 @@ var Login = function Login() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "col-lg-6 col-md-6",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-            className: "pic-login-2",
-            src: "https://sv1.picz.in.th/images/2021/02/18/obsLEe.png"
+            className: "pic-login-2 rounded-full py-3 px-6",
+            src: "./dist/img/bglogin.png"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "col-lg-5 col-md-6 col-sm-12 col-12 login-form",
@@ -192,18 +198,19 @@ var Login = function Login() {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                       className: "w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                        className: "mdi mdi-email-outline text-gray-400 text-lg"
+                        className: "fa fa-user"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                       type: "email",
                       onChange: function onChange(event) {
                         return setUser(event.target.value);
-                      },
-                      className: "w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                      } // className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      ,
+                      className: "w-full rounded border-2 border-custom-200  bg-white p-3 focus:bg-white focus:shadow-lg focus:border-custom-400 max-w-xl ",
                       placeholder: "Username",
                       required: true,
                       style: {
-                        fontSize: "20px"
+                        fontSize: "15px"
                       }
                     })]
                   })
@@ -215,18 +222,21 @@ var Login = function Login() {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                     className: "flex",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                      className: "w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center",
+                      className: "w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center text-3xl",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                        className: "mdi mdi-lock-outline text-gray-400 text-lg"
+                        className: "fa fa-lock"
                       })
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                       type: "password",
                       onChange: function onChange(event) {
                         return setPass(event.target.value);
                       },
-                      className: "w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                      className: "w-full rounded border-2 border-custom-200  bg-white p-3 focus:bg-white focus:shadow-lg focus:border-custom-400 max-w-xl text-3xl",
                       placeholder: "************",
-                      required: true
+                      required: true,
+                      style: {
+                        fontSize: "15px"
+                      }
                     })]
                   })
                 })
@@ -235,7 +245,7 @@ var Login = function Login() {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                   className: "w-full px-3 mb-5",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                    className: "block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold",
+                    className: "block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-gray-50 rounded-lg px-3 py-3 font-semibold text-3xl",
                     type: "submit",
                     children: "Login"
                   })

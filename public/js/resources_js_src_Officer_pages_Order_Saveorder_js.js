@@ -6343,13 +6343,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var Lodingicon = function Lodingicon() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "overlay",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-      className: "fa fa-circle-notch fa-spin"
+  return (
+    /*#__PURE__*/
+    //     <div className="overlay">
+    //     <i className="fa fa-refresh fa-spin" />
+    //     <i className="fa fa-spinner-third"></i>
+    //     <i className="fa fa-spinner"></i>
+    //     <i className="fa fa-circle-notch fa-spin"></i>
+    //     <i className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"></i>
+    // </div>
+    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "text-center py-2 animate-pulse p-1 flex m-auto justify-center overlay pt-10",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "shadow-sm rounded-3xl p-1 w-3/6 bg-white",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+          className: "animate-bounce fas fa-download fa-8x text-gray-300"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+          className: "text-base md:text-xl lg:text-3xl mt-1 text-gray-300",
+          children: "\u0E01\u0E33\u0E25\u0E31\u0E07\u0E42\u0E2B\u0E25\u0E14\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25.."
+        })]
+      })
     })
-  });
+  );
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Lodingicon);
@@ -6580,8 +6597,8 @@ function Saveorder() {
       if (coopid == null) {
         // console.log(coopid);
         document.getElementById("Detail").style.display = "block";
-        $(".select2").select2();
-        CKEDITOR.replace("editor1"); //bootstrap WYSIHTML5 - text editor
+        $(".select2").select2(); // CKEDITOR.replace("editor1");
+        //bootstrap WYSIHTML5 - text editor
 
         $(".textarea").wysihtml5();
         document.getElementById("informer").disabled = false;
@@ -6627,7 +6644,7 @@ function Saveorder() {
           children: " \u0E17\u0E48\u0E32\u0E19\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E04\u0E23\u0E1A\u0E17\u0E38\u0E01\u0E2A\u0E48\u0E27\u0E19\u0E41\u0E25\u0E49\u0E27"
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           children: getStepContent(activeStep, setCompleted, completed, setActiveStep, activeStep)
-        }), feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_utils_Lodingicon__WEBPACK_IMPORTED_MODULE_10__.default, {})]
+        })]
       })
     })
   });

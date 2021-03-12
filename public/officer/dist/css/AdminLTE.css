@@ -259,10 +259,10 @@ a:focus {
     padding: 15px 15px;
     /* font-family: "Kanit", sans-serif; */
     /* font-family: "Font Awesome\ 5 Pro"; */
-    font-family: "fontAwesome";
+    font-family: "font-A";
 }
 .main-header .sidebar-toggle:before {
-    content: "\f0c9";
+    /* content: "\f0c9" */
     /* font-weight: 900; cjr */
 }
 .main-header .sidebar-toggle:hover {
@@ -276,7 +276,7 @@ a:focus {
     font-family: "Kanit", sans-serif;
 }
 .main-header .sidebar-toggle.fa5:before {
-    content: "\f0c9";
+    /* content: "\f0c9"; */
     font-weight: 900;
 }
 .main-header .sidebar-toggle .icon-bar {
@@ -5854,7 +5854,8 @@ hr {
     }
 }
 body {
-    background-image: url(https://sv1.picz.in.th/images/2021/02/18/obC6gR.png);
+    background-image:url("../img/BL.png");
+    /* background-color:; */
     background-size: cover;
     background-repeat: no-repeat;
     font-family: "Kanit", sans-serif;
@@ -5945,7 +5946,7 @@ a.site-logo {
     height: 50vh;
 }
 .login-form {
-    padding-top:90px;
+    padding-top:28px;
     margin: auto;
 }
 .login-form h4 {
@@ -5959,7 +5960,7 @@ a.site-logo {
 }
 .login-form input[type="text"],
 input[type="password"] {
-    height: 45px;
+    font-size: 15px;
 }
 .login-form input:focus {
     box-shadow: none !important;
