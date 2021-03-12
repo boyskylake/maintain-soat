@@ -92,6 +92,7 @@ const Login = () => {
             </Helmet>
             <div className="login-box login-page">
                 <div className="login-logo">
+                    <img src=" "/>
                     <a href="../../index2.html">
                         <b>Soat</b>Officer
                     </a>
