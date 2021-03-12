@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import liff from "@line/liff";
+// import liff from "@line/liff";
 
 import { useBodyClass, useScript } from "../../../helpers";
 
