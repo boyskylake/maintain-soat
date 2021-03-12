@@ -94,7 +94,7 @@ function Profile() {
                         <div className="box box-primary">
                             <div className="box-body box-profile">
                             <div className="relative h-60">
-                                <img class="absolute h-full w-full object-cover" src="https://images.unsplash.com/photo-1448932133140-b4045783ed9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"/>
+                                <img className="absolute h-full w-full object-cover" src="https://images.unsplash.com/photo-1448932133140-b4045783ed9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"/>
                             </div>
 
                             <div className="relative shadow mx-auto h-64 w-64 -my-36 border-white rounded-full overflow-hidden border-4">
