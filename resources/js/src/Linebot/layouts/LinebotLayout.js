@@ -25,17 +25,17 @@ function LinebotLayout({ children }) {
                     path: routes[i].path,
                 });
 
-                if (path != null) {
+                if (path != null){
                     setPath(routes[i]);
                     break; // stop the loop
                 }
             }
         }
-        if (path && path.authliff && !isAuth) {
-            dispatch(userActions.getAuthUser()).catch(() => {
-                history.push("/linebot/verify?path=" + path.path);
-            });
-        }
+        // if (path && path.authliff &etAuthUser()).catch(() => {
+        //         his& !isAuth) {
+        //     dispatch(userActions.gtory.push("/linebot/verify?path=" + path.path);
+        //     });
+        // }
     }, [dispatch, isAuth, pathname, path, history]);
 
     return isAuth ? (

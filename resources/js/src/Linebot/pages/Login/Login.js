@@ -26,13 +26,14 @@ const Login = () => {
     useEffect(() => {
         let path = new URLSearchParams(search);
 
-        if (!localStorage.getItem("linetoken")) {
-            history.push("/linebot/verify?path=" + path.get("path"));
-        }
+        // if (!localStorage.getItem("linetoken")) {
+        //     history.push("/linebot/verify?path=" + path.get("path"));
+        // }
 
         if (userAuth.loggedIn) {
             history.push(path.get("path"));
         }
+
     }, [userAuth, history, search]);
 
     let handleSubmit = (e) => {

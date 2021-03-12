@@ -32,7 +32,11 @@ class OrderController extends Controller
 
     public function getOrder(Request $request){
         // ดึงข้อมูล user จาก Request
-        $user = User::where('userId', $request->userId)->first();
+        $userId="U57725365d2726b327d758bc4f2d22857";
+
+        $user = User::where('userId', $userId)->first();
+        // dd($user);
+        // $user = User::where('userId', $request->userId)->first();
         // ดึง order ทั้งหมดมา นับจำนวนข้อมูล
         $num = DB::select("SELECT
             count(1) as num
