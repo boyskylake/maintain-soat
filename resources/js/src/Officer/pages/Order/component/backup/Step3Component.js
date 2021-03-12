@@ -126,8 +126,8 @@ function Step3Component(
                     </h3>
                 </div>
             ) : (
-                // <Fragment>
-                // {props.completed.has(1) ? (
+                <Fragment>
+                {props.completed.has(1) ? (
                     <div className="box-body">
                         <div className="box-header">
                             <div className="book">

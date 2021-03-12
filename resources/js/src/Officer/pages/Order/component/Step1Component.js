@@ -1,10 +1,8 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-
 
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
@@ -143,24 +141,8 @@ useEffect(() => {
         // console.log(newActiveStep)
         props.setActiveStep(newActiveStep);
     };
-    // console.log(cookies.pageone&&cookies.pageone.receive_date);
+    console.log(cookies.pageone&&cookies.pageone.receive_date);
     return (
-        <div>
-            {props.completed.has(0) ? (
-            <Fragment>
-                <div className="m-2 text-center py-2">
-                    <div className="py-2">
-                        <i className="far fa-check-circle fa-5x text-emerald-400"></i>
-                    </div>
-                    <h3 className="text-gray-800 text-base font-medium">
-                        {" "}
-                        ท่านได้ดำเนินการขั้นตอนนี้เสร็จสมบรูณ์แล้ว
-                    </h3>
-                </div>
-            </Fragment>
-        ) : (
-        <Fragment>
-        {/* {props.completed.has(0) ? ( */}
         <div className="box-body">
             <div className="box-header">
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="false">
@@ -847,17 +829,17 @@ useEffect(() => {
                             />
                         </div>
                     </div>
-
                 </form>
             </div>
-
-            </div>
-        </Fragment>
-        )}
-       </div>
+            {/* <button class="btn btn-block btn-primary btn-lg" onClick={handleComplete}>
+                ดำเนินการต่อ
+            </button> */}
+            {/* <button onClick={handleComplete} >
+                ดำเนินการต่อ
+            </button> */}
+        </div>
     );
 }
-
 export default Step1Component;
 
 const ErrorSpan = ({ children, className }) => {

@@ -335,7 +335,7 @@ function Step3Component(
                                                               feedData.data.ucf_application.map(
                                                             ( val, i) => {
                                                                                 // console.log( cookies.pageone.receiver,trim(val.officer_id))
-                                                               if (cookies &&cookies.pageone 
+                                                               if (cookies &&cookies.pageone
                                                                 &&cookies.pageone.app_no &&
                                                                 cookies.pageone.app_no ==trim(val.app_no)) {
                                                                  return (
@@ -343,7 +343,7 @@ function Step3Component(
                                                                          className="text-xl">
                                                                           {val.application }
                                                                         </h5>
-                                                                         
+
                                                                          );
                                                                          }
                                                                       }
