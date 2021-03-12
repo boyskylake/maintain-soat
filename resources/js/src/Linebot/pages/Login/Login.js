@@ -13,7 +13,7 @@ const Login = () => {
     const [pass, setPass] = useState();
 
     const userAuth = useSelector((state) => state.userline);
- 
+
     const { search } = useLocation();
     let history = useHistory();
     const dispatch = useDispatch();
@@ -98,7 +98,7 @@ const Login = () => {
                     </a>
                 </div>
                 {/* /.login-logo */}
-                <div className="login-box-body">
+                <div className="login-box-body shadow-2xl">
                     <p className="login-box-msg">
                         Sign in to start your session{" "}
                     </p>
