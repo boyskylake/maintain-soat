@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useForm } from "react-hook-form";
-
+import { useScript } from "../../../helpers";
 import { feedDataAction } from "../../redux/actions";
+import { useForm } from "react-hook-form";
 
 import "datatables.net-dt/css/jquery.dataTables.css";
 import { Button } from "bootstrap";
@@ -21,6 +22,12 @@ function Listorder() {
     //     // console.log(coopid);
     // };
     let user = JSON.parse(localStorage.getItem("user"));
+
+
+        // <!-- jvectormap  -->
+            useScript("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
+            useScript("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
+            useScript("/officer/dist/js/pages/dashboard2.js");
 
     useEffect(() => {
         // async function feedData() {
@@ -74,7 +81,7 @@ function Listorder() {
                     defaultContent:
                         '<div style="padding-right: 30px;"><a href=" " title="ลบ" class="btn btn-sm btn-danger pull-right delete style="margin-right: 5px; "><i class="fa fa-trash-o"></i><span class="hidden-xs hidden-sm"> ลบ</span></a>' +
                         '<a href=" " title="แก้ไข" class="btn btn-sm btn-warning pull-right edit" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> <span class="hidden-xs hidden-sm">แก้ไข</span></a></div>' +
-                        '<a href=" " title="View" class="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">View</span></a>',
+                        '<a href=" " title="View"  class="btn btn-sm btn-primary  pull-right view" data-toggle="modal" data-target="#myModal style="margin-right: 5px;"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">View</span></a>',
                 },
             ],
         });
@@ -111,6 +118,36 @@ function Listorder() {
                                 <h3 className="box-title">
                                     รายการ Order ทั้งหมด
                                 </h3>
+
+
+
+            <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+<div id="myModal" className="modal fade" role="dialog" >
+<div className="modal-dialog" style={{width:"1000px"}}>
+<div className="modal-content">
+<div className="modal-header bg-purple-500">
+<button type="button" className="close" data-dismiss="modal">&times;</button>
+<h2 className="modal-title text-white"><strong>order id: </strong></h2>
+</div>
+<div className="modal-body font-mono  text-purple-600 text-left" >
+<p ><strong>order id:</strong></p>
+<p ><strong>วันที่รับ :</strong> </p>
+<p ><strong>วันที่นัด :</strong> </p>
+<p ><strong>ชื่อสหกรณ์ :</strong> </p>
+<p ><strong>รายละเอียด:</strong> </p>
+<p ><strong>สถานะ :</strong> </p>
+
+</div>
+<div className="modal-footer bg-purple-300">
+<button type="button" className="btn btn-danger" data-dismiss="modal"><strong>Close</strong></button>
+</div>
+</div>
+
+</div>
+</div>
+
+
                             </div>
                             {/* <br />
                             <div className="col-md-3">
@@ -186,6 +223,11 @@ function Listorder() {
                                     </thead>
                                 </table>
                             </div>
+
+
+
+
+
                             {feedData.fetching && <Lodingicon />}
                             {/* /.box-body */}
                         </div>
