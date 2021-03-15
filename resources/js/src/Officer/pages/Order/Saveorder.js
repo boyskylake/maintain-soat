@@ -26,10 +26,10 @@ function Saveorder() {
     const [coopid, setCoopid] = useState(null);
 
     useScript("/officer/dist/js/pages/saveorder.js");
-    useScript("/officer/bower_components/ckeditor/ckeditor.js");
-    useScript(
-        "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-    );
+    // useScript("/officer/bower_components/ckeditor/ckeditor.js");
+    // useScript(
+    //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
+    // );
 
     const { register, handleSubmit, watch, errors } = useForm();
 

@@ -59,6 +59,7 @@
     <script src="{{ mix('/js/manifest.js') }}"></script>
     <script src="{{ mix('/js/vendor.js') }}"></script>
     <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ mix('') }}"></script>
     {{-- <!-- jQuery 3 --> --}}
     <script src="{{ asset('officer/bower_components/jquery/dist/jquery.min.js') }}"></script>
     {{-- <!-- Bootstrap 3.3.7 --> --}}
@@ -109,6 +110,7 @@
     </script>
     {{-- <!-- bootstrap time picker --> --}}
     <script src="{{ asset('officer/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('officer/dist/dropzone-5.7.0/dist/dropzone.js') }}"></script>
 
     {{-- <script src="{{ asset('js/saveorder.js') }}"></script> --}}
     {{-- <script src="{{ asset('officer/dist/js/pages/dashboard2.js') }}"></script> --}}

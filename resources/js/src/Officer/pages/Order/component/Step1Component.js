@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
+// import 'react-dropzone-uploader/dist/styles.css'
+import 'react-dropzone-uploader/dist/styles.css';
+import Dropzone from "react-dropzone-uploader";
+
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
 import Services from "../../../redux/services/services";
@@ -19,6 +23,7 @@ function Step1Component(
     // function Step1Component({ props }) {
     // console.log(props);
 
+    /////dropdown
     const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
 
     const services = new Services();
@@ -81,6 +86,18 @@ function Step1Component(
         // $('#myModal').modal('show')
     };
 
+    const getUploadParams = () => {
+        return { url: 'https://httpbin.org/post' }
+      }
+
+      const handleChangeStatus = ({ meta }, status) => {
+        console.log(status, meta)
+      }
+
+      const handleSubmit1 = (files, allFiles) => {
+        console.log(files.map(f => f.meta))
+        allFiles.forEach(f => f.remove())
+      }
 
 useEffect(() => {
     Inputmask().mask(document.querySelectorAll("input"));
@@ -830,6 +847,12 @@ useEffect(() => {
                         </div>
                     </div>
                 </form>
+                <Dropzone
+                    getUploadParams={getUploadParams}
+                    onChangeStatus={handleChangeStatus}
+                    onSubmit={handleSubmit1}
+                    styles={{dropzone: { minHeight: 200, maxHeight: 250 } }}
+                />
             </div>
             {/* <button class="btn btn-block btn-primary btn-lg" onClick={handleComplete}>
                 ดำเนินการต่อ

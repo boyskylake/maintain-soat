@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Services from "../../redux/services/services";
 import { NotificationManager } from "react-notifications";
 import toastr from "toastr";
+import EditProfile from "./EditProfile";
 
 function Profile() {
     const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function Profile() {
     const services = new Services();
 
     const OnSubmitEditProfile = (data) => {
+        console.log(data);
         const requestOptions = {
             method: "POST",
             data: JSON.stringify(data),
@@ -69,6 +71,7 @@ function Profile() {
         services
             .API("/api/v1/officer/Editprofile", requestOptions)
             .then((res) => {
+                console.log(res, res && res.rc_code, res && res.message);
                 if (res && res.rc_code == "1") {
                     console.log("success1");
                     toastr.success(res && res.message, "Success", 5000);
@@ -87,7 +90,7 @@ function Profile() {
                 method: "POST",
                 data: JSON.stringify(data),
             };
-            // console.log(data.NewPassword == data.Confirm);
+            console.log(data.NewPassword == data.Confirm);
 
             services
                 .API("/api/v1/officer/Editpassword", requestOptions)
@@ -195,7 +198,8 @@ function Profile() {
                                     <li className="list-group-item">
                                         <b>position</b>{" "}
                                         <a className="pull-right">
-                                            {feedData.fetchSuccess &&feedData.data.Position&&
+                                            {feedData.fetchSuccess &&
+                                                feedData.data.Position &&
                                                 feedData.data.Position[0] &&
                                                 feedData.data.Position[0].name}
                                         </a>
@@ -211,6 +215,37 @@ function Profile() {
                             </div>
                         </div>
                     </div>
+
+
+
+<button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<div id="myModal" className="modal fade" role="dialog" >
+  <div className="modal-dialog" >
+    <div className="modal-content">
+      <div className="modal-header bg-purple-500">
+        <button type="button" className="close" data-dismiss="modal">&times;</button>
+        <h2 className="modal-title text-white"><strong>order id:??? </strong></h2>
+      </div>
+      <div className="modal-body font-mono  text-purple-600 text-left">
+        <p ><strong>Order No :</strong> ????????????????????????????????????</p>
+        <p ><strong>วันที่รับ :</strong> ????????????????????????????????????</p>
+        <p ><strong>วันที่นัด :</strong> ????????????????????????????????????</p>
+        <p ><strong>ชื่อสหกรณ์ :</strong> ????????????????????????????????????</p>
+        <p ><strong>รายละเอียด:</strong> ????????????????????????????????????</p>
+        <p ><strong>สถานะ :</strong> ????????????????????????????????????</p>
+
+      </div>
+      <div className="modal-footer bg-purple-300">
+        <button type="button" className="btn btn-danger" data-dismiss="modal"><strong>Close</strong></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 
                     <div className="col-md-9">
                         <div className="nav-tabs-custom">
@@ -232,101 +267,7 @@ function Profile() {
                                     className="active tab-pane"
                                     id="EditProfile"
                                 >
-                                    <div className="pl-10 pt-5">
-                                        <h3>Edit Profile</h3>
-                                    </div>
-
-                                    <form
-                                        className="form-horizontal p-10"
-                                        onSubmit={handleSubmit(
-                                            OnSubmitEditProfile
-                                        )}
-                                    >
-                                        <div className="form-group">
-                                            <label
-                                                htmlFor="inputName"
-                                                className="col-sm-2 control-label"
-                                            >
-                                                Name:
-                                            </label>
-                                            <div className="col-sm-10">
-                                                <input
-                                                    ref={register({
-                                                        required: true,
-                                                    })}
-                                                    type="name"
-                                                    className="form-control"
-                                                    id="inputName"
-                                                    name="inputName"
-                                                    placeholder="Name"
-                                                    autoComplete="off"
-                                                    Value={
-                                                        feedData.fetchSuccess &&
-                                                        feedData.data.Profile &&
-                                                        feedData.data.Profile
-                                                            .name
-                                                    }
-                                                ></input>
-                                                {errors.inputName?.type ===
-                                                    "required" && (
-                                                    <ErrorSpan className="">
-                                                        {
-                                                            ErrorsWord.inputName
-                                                                .required
-                                                        }
-                                                    </ErrorSpan>
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label
-                                                htmlFor="inputEmail"
-                                                className="col-sm-2 control-label"
-                                            >
-                                                E-mail:
-                                            </label>
-                                            <div className="col-sm-10">
-                                                <input
-                                                    ref={register({
-                                                        required: true,
-                                                    })}
-                                                    type="email"
-                                                    className="form-control"
-                                                    id="inputEmail"
-                                                    name="inputEmail"
-                                                    placeholder="E-mail"
-                                                    autoComplete="off"
-                                                    Value={
-                                                        feedData.fetchSuccess &&
-                                                        feedData.data.Profile &&
-                                                        feedData.data.Profile
-                                                            .email
-                                                    }
-                                                ></input>
-                                                {errors.inputEmail?.type ===
-                                                    "required" && (
-                                                    <ErrorSpan className="">
-                                                        {
-                                                            ErrorsWord
-                                                                .inputEmail
-                                                                .required
-                                                        }
-                                                    </ErrorSpan>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <div className="form-group">
-                                            <div className="col-sm-offset-2 col-sm-10">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-danger"
-                                                >
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <EditProfile />
                                 </div>
 
                                 <div className="tab-pane" id="EditPassword">
@@ -384,11 +325,6 @@ function Profile() {
                                                         name="OldPassword"
                                                         autoComplete="off"
                                                         placeholder="Old Password"
-                                                        // Value={
-                                                        //     feedData.fetchSuccess &&
-                                                        //     feedData.data.Profile &&
-                                                        //     feedData.data.Profile.name
-                                                        // }
                                                     ></input>
                                                 </div>
                                                 {errors.OldPassword?.type ===
@@ -411,26 +347,43 @@ function Profile() {
                                                 New Password:
                                             </label>
                                             <div className="col-sm-9">
-                                                <input
-                                                    autoComplete="off"
-                                                    ref={register({
-                                                        required: true,
-                                                    })}
-                                                    type={
-                                                        passwordeye
-                                                            ? "text"
-                                                            : "password"
-                                                    }
-                                                    className="form-control"
-                                                    id="NewPassword"
-                                                    name="NewPassword"
-                                                    placeholder="New Password"
-                                                    // Value={
-                                                    //     feedData.fetchSuccess &&
-                                                    //     feedData.data.Profile &&
-                                                    //     feedData.data.Profile.email
-                                                    // }
-                                                ></input>
+                                                <div className="mt-1 relative rounded-md shadow-sm">
+                                                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                                        <span
+                                                            onClick={() => {
+                                                                setpasswordeye(
+                                                                    (state) => {
+                                                                        return !state;
+                                                                    }
+                                                                );
+                                                            }}
+                                                            className="h-5 w-5 text-gray-400"
+                                                        >
+                                                            <i
+                                                                className={`fas fa-${
+                                                                    passwordeye
+                                                                        ? "eye-slash"
+                                                                        : "eye"
+                                                                }`}
+                                                            />
+                                                        </span>
+                                                    </div>
+                                                    <input
+                                                        autoComplete="off"
+                                                        ref={register({
+                                                            required: true,
+                                                        })}
+                                                        type={
+                                                            passwordeye
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        className="form-control"
+                                                        id="NewPassword"
+                                                        name="NewPassword"
+                                                        placeholder="New Password"
+                                                    ></input>
+                                                </div>
                                                 {errors.NewPassword?.type ===
                                                     "required" && (
                                                     <ErrorSpan className="">
@@ -442,23 +395,6 @@ function Profile() {
                                                     </ErrorSpan>
                                                 )}
                                             </div>
-                                            <span
-                                                onClick={() => {
-                                                    setpasswordeye((state) => {
-                                                        return !state;
-                                                    });
-                                                }}
-                                                className="text-gray-700  btn-show-pass z-10 h-full leading-snug font-normal
-                                text-center absolute bg-transparent rounded text-base items-center justify-center w-10 right-0 lg:right-40 xl:right-48 pr-3 py-3"
-                                            >
-                                                {/* <i
-                                                    className={`fas fa-${
-                                                        passwordeye
-                                                            ? "eye-slash"
-                                                            : "eye"
-                                                    }`}
-                                                /> */}
-                                            </span>
                                         </div>
 
                                         <div className="form-group">
@@ -469,26 +405,43 @@ function Profile() {
                                                 New Password (Confirm):
                                             </label>
                                             <div className="col-sm-9">
-                                                <input
-                                                    autoComplete="off"
-                                                    ref={register({
-                                                        required: true,
-                                                    })}
-                                                    type={
-                                                        passwordeye
-                                                            ? "text"
-                                                            : "password"
-                                                    }
-                                                    className="form-control"
-                                                    id="Confirm"
-                                                    name="Confirm"
-                                                    placeholder="New Password (Confirm)"
-                                                    // Value={
-                                                    //     feedData.fetchSuccess &&
-                                                    //     feedData.data.Profile &&
-                                                    //     feedData.data.Profile.email
-                                                    // }
-                                                ></input>
+                                                <div className="mt-1 relative rounded-md shadow-sm">
+                                                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                                        <span
+                                                            onClick={() => {
+                                                                setpasswordeye(
+                                                                    (state) => {
+                                                                        return !state;
+                                                                    }
+                                                                );
+                                                            }}
+                                                            className="h-5 w-5 text-gray-400"
+                                                        >
+                                                            <i
+                                                                className={`fas fa-${
+                                                                    passwordeye
+                                                                        ? "eye-slash"
+                                                                        : "eye"
+                                                                }`}
+                                                            />
+                                                        </span>
+                                                    </div>
+                                                    <input
+                                                        autoComplete="off"
+                                                        ref={register({
+                                                            required: true,
+                                                        })}
+                                                        type={
+                                                            passwordeye
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        className="form-control"
+                                                        id="Confirm"
+                                                        name="Confirm"
+                                                        placeholder="New Password (Confirm)"
+                                                    ></input>
+                                                </div>
                                                 {errors.Confirm?.type ===
                                                     "required" && (
                                                     <ErrorSpan className="">
@@ -499,23 +452,6 @@ function Profile() {
                                                     </ErrorSpan>
                                                 )}
                                             </div>
-                                            <span
-                                                onClick={() => {
-                                                    setpasswordeye((state) => {
-                                                        return !state;
-                                                    });
-                                                }}
-                                                className="text-gray-700  btn-show-pass z-10 h-full leading-snug font-normal
-                                text-center absolute bg-transparent rounded text-base items-center justify-center w-10 right-0 lg:right-40 xl:right-48 pr-3 py-3"
-                                            >
-                                                {/* <i
-                                                    className={`fas fa-${
-                                                        passwordeye
-                                                            ? "eye-slash"
-                                                            : "eye"
-                                                    }`}
-                                                /> */}
-                                            </span>
                                         </div>
 
                                         <div className="form-group">
