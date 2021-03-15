@@ -18,8 +18,13 @@
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 
-@import "tailwindcss/base";
+// @import "tailwindcss/base";
 
-@import "tailwindcss/components";
+// @import "tailwindcss/components";
 
-@import "tailwindcss/utilities";
+// @import "tailwindcss/utilities";
+
+
+@import "officer/officer.scss";
+// @import 'officer/side-nav';
+// @import "officer/tailwind";

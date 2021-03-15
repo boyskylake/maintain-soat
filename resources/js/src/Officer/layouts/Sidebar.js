@@ -7,10 +7,13 @@ import { useScript } from "../../helpers";
 import { feedDataAction } from "../redux/actions";
 import Services from "../redux/services/services";
 
+
 const Sidebar = () => {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const service = new Services();
+
+    // useScript("/officer/dist/js/pages/Officerayoutscrip.js");
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
     const [FeedMenu, setFeedMenu] = useState();
@@ -29,101 +32,38 @@ const Sidebar = () => {
     }, [dispatch]);
     // console.log("feedData", feedData);
     return (
-        <aside className="main-sidebar">
-            {/* sidebar: style can be found in sidebar.less */}
-            <section className="sidebar">
-                {/* Sidebar user panel */}
-                <div className="user-panel">
-                    {FeedMenu && FeedMenu[1] && (
-                        <div>
-                            <div className="pull-left image">
-                                <img
-                                    src={`/storage/${FeedMenu[1].avatar}`}
-                                    className="img-circle"
-                                    alt="User Image"
-                                />
-                            </div>
-                            <div className="pull-center info">
-                                <center>
-                                   <h4>{FeedMenu[1].name}</h4>
-                                </center>
-                                {/*< <p>Alexander Pierce</p> */}
-                                <a href="#">
-                                &nbsp; <i className="fa fa-circle text-success" />{" "}
-                                     Online
-                                </a>
-                            </div>
-                        </div>
-                    )}
-                    {/* <div className="pull-left info">
-                        <p>Alexander Pierce</p>
-                        <a href="#">
-                            <i className="fa fa-circle text-success" /> Online
-                        </a>
-                    </div> */}
-                </div>
-                {/* search form */}
-                <form action="#" method="get" className="sidebar-form">
-                    <div className="input-group">
-                        <input
-                            type="text"
-                            name="q"
-                            className="form-control"
-                            placeholder="Search..."
-                        />
-                        <span className="input-group-btn">
-                            <button
-                                type="submit"
-                                name="search"
-                                id="search-btn"
-                                className="btn btn-flat"
+        <nav className="side-nav">
+            <a href="" className="intro-x flex items-center pl-5 pt-4">
+                <span className="hidden xl:block text-white text-lg ml-3 font-medium">
+                    Soat
+                </span>
+            </a>
+            <div className="side-nav__devider my-6"></div>
+            <ul>
+                {FeedMenu &&
+                    FeedMenu[0] &&
+                    FeedMenu[0].map((val, i) => {
+                        return (
+                            <li
+                                key={i}
+                                to={val.url}
+                                icon={val.icon_class}
+                                name={val.title}
                             >
-                                <i className="fa fa-search" />
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                {/* /.search form */}
-                {/* sidebar menu: : style can be found in sidebar.less */}
-                {FeedMenu && FeedMenu[2] && (
-                    <div>
-                        <span className="hidden-xs">{FeedMenu[1].name}</span>
-                    </div>
-                )}
-                <ul className="sidebar-menu " data-widget="tree">
-                    {/* <li className="header">เมนูหลัก</li>
-                    <ListItemLink
-                        to="/officer/home"
-                        icon="fa fa-circle-o"
-                        name="หน้าแรก"
-                    />
-                    <ListItemLink
-                        to="/officer/saveorder"
-                        icon="fa fa-files-o"
-                        name="บันทึกแจ้ง Order แก้ไขงาน"
-                    />
-                    <ListItemLink
-                        to="/officer/listorder"
-                        icon="fa fa-file-text"
-                        name="Order ทั้งหมด"
-                    /> */}
-                    {/* &nbsp; */}
-                    {FeedMenu &&
-                        FeedMenu[0] &&
-                        FeedMenu[0].map((val, i) => {
-                            return (
-                                <ListItemLink
-                                    key={i}
-                                    to={val.url}
-                                    icon={val.icon_class}
-                                    name={val.title}
-                                />
-                            );
-                        })}
-                </ul>
-            </section>
-            {/* /.sidebar */}
-        </aside>
+                                {/* side-menu side-menu--active */}
+                                    <a href={val.url} className={`side-menu`}>
+                                    <div className="side-menu__icon">
+                                        <i className={val.icon_class}></i>
+                                    </div>
+                                    <div className="side-menu__title">
+                                        {val.title}
+                                    </div>
+                                </a>
+                            </li>
+                        );
+                    })}
+            </ul>
+        </nav>
     );
 };
 
@@ -147,4 +87,3 @@ function ListItemLink({ to, icon, name, ...rest }) {
 }
 
 export default Sidebar;
-

@@ -5,6 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useBodyClass } from "../../helpers";
 import { userActions } from "../redux/actions";
 
+
+
+import { useScript } from "../../helpers";
+
+// import 'font-awesome/css/fontawesome.min.css';
+
 // import { useScript } from "../../helpers";
 // import { feedDataAction } from "../redux/actions";
 import Services from "../redux/services/services";
@@ -12,9 +18,13 @@ import Services from "../redux/services/services";
 const Header = () => {
     // const login = useSelector(state => state.login);
     const dispatch = useDispatch();
-    useBodyClass("hold-transition");
-    useBodyClass("skin-yellow");
-    useBodyClass("sidebar-mini");
+
+    // useBodyClass("hold-transition");
+    // useBodyClass("skin-yellow");
+    // useBodyClass("sidebar-mini");
+
+    useScript("/officer/dist/js/pages/Officerlayoutscript.js");
+
 
     const feedData = useSelector((state) => state.feedData);
     const service = new Services();
@@ -33,528 +43,217 @@ const Header = () => {
         feedData();
     }, [dispatch]);
     return (
-        <header className="main-header">
+        // <div>
+
+        <div className="top-bar">
             <Helmet>
-                <meta
-                    name="description"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <meta property="og:locale" content="th_TH" />
-                <meta property="og:type" content="website" />
-                <meta
-                    property="og:title"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <meta
-                    property="og:description"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <meta property="og:url" content={window.location.href} />
-                <link rel="canonical" href={window.location.href} />
-                <meta
-                    property="og:site_name"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <link
-                    rel="stylesheet"
-                    type="text/css"
-                    href="/info/scripts/fullcalendar/fullcalendar.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
-                />
-                {/* <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/font-awesome/css/font-awesome.min.css"
-                /> */}
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/Ionicons/css/ionicons.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/jvectormap/jquery-jvectormap.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/bootstrap-daterangepicker/daterangepicker.css"
-                />
-                <link
-                    href="/officer/bower_components/bootstrap-datepicker/css/datepicker.css"
-                    rel="stylesheet"
-                    media="screen"
-                ></link>
                 <link
                     rel="stylesheet"
                     href="/officer/dist/fontawesome/css/all.min.css"
                 />
-                {/* <link
+                 {/* <link
                     rel="stylesheet"
-                    href="/officer/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+                    href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
                 /> */}
-                <link rel="stylesheet" href="/officer/plugins/iCheck/all.css" />
                 <link
                     rel="stylesheet"
-                    href="/officer/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/plugins/timepicker/bootstrap-timepicker.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/select2/dist/css/select2.min.css"
-                />
-                <link rel="stylesheet" href="/officer/dist/css/AdminLTE.css" />
-                <link
-                    rel="stylesheet"
-                    href="/officer/dist/css/skins/_all-skins.min.css"
-                />
-                <link rel="stylesheet" href="/officer/dist/css/style.css" />
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
+                    href="/officer/bower_components/jvectormap/jquery-jvectormap.css"
                 />
             </Helmet>
-            {/* Logo */}
-            <a href="index2.html" className="logo">
-                {/* mini logo for sidebar mini 50x50 pixels */}
-                <span className="logo-mini">
-                    <b>A</b>LT
-                </span>
-                {/* logo for regular state and mobile devices */}
-                <span className="logo-lg">
-                    {/* <b>โซแอ็ทโซลูชั่น</b> จำกัด */}
-                    <img
-                        src="./dist/img/logo.png"
-                        className="logo-lg"
-                        alt="Logo soat"
-                    />
-                </span>
-            </a>
-            {/* Header Navbar: style can be found in header.less */}
-            <nav className="navbar navbar-static-top">
-                {/* Sidebar toggle button*/}
-                <a
-                    href="#"
-                    className="sidebar-toggle"
-                    data-toggle="push-menu"
-                    role="button"
-                >
-                    <i className="fas fa-bars"></i>
-                    <span className="sr-only">Toggle navigation</span>
+            {/* <!-- BEGIN: Breadcrumb --> */}
+            <div className="-intro-x breadcrumb mr-auto hidden sm:flex">
+                <a href="" className="">
+                    Application
                 </a>
-                {/* Navbar Right Menu */}
-                <div className="navbar-custom-menu">
-                    <ul className="nav navbar-nav">
-                        {/* Messages: style can be found in dropdown.less*/}
-                        <li className="dropdown messages-menu">
-                            <a
-                                href="#"
-                                className="dropdown-toggle"
-                                data-toggle="dropdown"
-                            >
-                                <i className="fas fa-envelope"></i>
-                                <span className="label label-success">4</span>
+                <i
+                    data-feather="chevron-right"
+                    className="breadcrumb__icon"
+                ></i>
+                <a href="" className="breadcrumb--active">
+                    Dashboard
+                </a>
+            </div>
+            {/* <!-- END: Breadcrumb -->
+        <!-- BEGIN: Search --> */}
+            <div className="intro-x relative mr-3 sm:mr-6">
+                <div className="search hidden sm:block">
+                    <input
+                        type="text"
+                        className="search__input input placeholder-theme-13"
+                        placeholder="Search..."
+                    />
+                    <i className="search__icon fas fa-search"></i>
+                </div>
+                <a className="notification sm:hidden" href="">
+                    <i data-feather="search" className="notification__icon"></i>
+                </a>
+                <div className="search-result">
+                    <div className="search-result__content">
+                        <div className="search-result__content__title">
+                            Pages
+                        </div>
+                        <div className="mb-5">
+                            <a href="" className="flex items-center">
+                                <div className="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full">
+                                    <i
+                                        className="w-4 h-4"
+                                        data-feather="inbox"
+                                    ></i>
+                                </div>
+                                <div className="ml-3">Mail Settings</div>
                             </a>
-                            <ul className="dropdown-menu">
-                                <li className="header">You have 4 messages</li>
-                                <li>
-                                    {/* inner menu: contains the actual data */}
-                                    <ul className="menu">
-                                        <li>
-                                            start message
-                                            <a href="#"></a>
-                                        </li>
-                                        {/* end message */}
-                                        <li>
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img
-                                                        src="dist/img/user3-128x128.jpg"
-                                                        className="img-circle"
-                                                        alt="User Image"
-                                                    />
-                                                </div>
-                                                <h4>
-                                                    AdminLTE Design Team
-                                                    <small>
-                                                        <i className="fa fa-clock-o" />{" "}
-                                                        2 hours
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    Why not buy a new awesome
-                                                    theme?
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img
-                                                        src="dist/img/user4-128x128.jpg"
-                                                        className="img-circle"
-                                                        alt="User Image"
-                                                    />
-                                                </div>
-                                                <h4>
-                                                    Developers
-                                                    <small>
-                                                        <i className="fa fa-clock-o" />{" "}
-                                                        Today
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    Why not buy a new awesome
-                                                    theme?
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img
-                                                        src="dist/img/user3-128x128.jpg"
-                                                        className="img-circle"
-                                                        alt="User Image"
-                                                    />
-                                                </div>
-                                                <h4>
-                                                    Sales Department
-                                                    <small>
-                                                        <i className="fa fa-clock-o" />{" "}
-                                                        Yesterday
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    Why not buy a new awesome
-                                                    theme?
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img
-                                                        src="dist/img/user4-128x128.jpg"
-                                                        className="img-circle"
-                                                        alt="User Image"
-                                                    />
-                                                </div>
-                                                <h4>
-                                                    Reviewers
-                                                    <small>
-                                                        <i className="fa fa-clock-o" />{" "}
-                                                        2 days
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    Why not buy a new awesome
-                                                    theme?
-                                                </p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="footer">
-                                    <a href="#">See All Messages</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {/* Notifications: style can be found in dropdown.less */}
-                        <li className="dropdown notifications-menu">
-                            <a
-                                href="#"
-                                className="dropdown-toggle"
-                                data-toggle="dropdown"
-                            >
-                                <i className="fas fa-bell"></i>
-                                <span className="label label-warning">10</span>
+                            <a href="" className="flex items-center mt-2">
+                                <div className="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full">
+                                    <i
+                                        className="w-4 h-4"
+                                        data-feather="users"
+                                    ></i>
+                                </div>
+                                <div className="ml-3">Users & Permissions</div>
                             </a>
-                            <ul className="dropdown-menu">
-                                <li className="header">
-                                    You have 10 notifications
-                                </li>
-                                <li>
-                                    {/* inner menu: contains the actual data */}
-                                    <ul className="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-users text-aqua" />{" "}
-                                                5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-warning text-yellow" />{" "}
-                                                Very long description here that
-                                                may not fit into the page and
-                                                may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-users text-red" />{" "}
-                                                5 new members joined
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-shopping-cart text-green" />{" "}
-                                                25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-user text-red" />{" "}
-                                                You changed your username
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="footer">
-                                    <a href="#">View all</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {/* Tasks: style can be found in dropdown.less */}
-                        <li className="dropdown tasks-menu">
-                            <a
-                                href="#"
-                                className="dropdown-toggle"
-                                data-toggle="dropdown"
-                            >
-                                <i className="fas fa-flag"></i>
-                                <span className="label label-danger">9</span>
+                            <a href="" className="flex items-center mt-2">
+                                <div className="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full">
+                                    <i
+                                        className="w-4 h-4"
+                                        data-feather="credit-card"
+                                    ></i>
+                                </div>
+                                <div className="ml-3">Transactions Report</div>
                             </a>
-                            <ul className="dropdown-menu">
-                                <li className="header">You have 9 tasks</li>
-                                <li>
-                                    {/* inner menu: contains the actual data */}
-                                    <ul className="menu">
-                                        <li>
-                                            {/* Task item */}
-                                            <a href="#">
-                                                <h3>
-                                                    Design some buttons
-                                                    <small className="pull-right">
-                                                        20%
-                                                    </small>
-                                                </h3>
-                                                <div className="progress xs">
-                                                    <div
-                                                        className="progress-bar progress-bar-aqua"
-                                                        style={{ width: "20%" }}
-                                                        role="progressbar"
-                                                        aria-valuenow={20}
-                                                        aria-valuemin={0}
-                                                        aria-valuemax={100}
-                                                    >
-                                                        <span className="sr-only">
-                                                            20% Complete
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        {/* end task item */}
-                                        <li>
-                                            {/* Task item */}
-                                            <a href="#">
-                                                <h3>
-                                                    Create a nice theme
-                                                    <small className="pull-right">
-                                                        40%
-                                                    </small>
-                                                </h3>
-                                                <div className="progress xs">
-                                                    <div
-                                                        className="progress-bar progress-bar-green"
-                                                        style={{ width: "40%" }}
-                                                        role="progressbar"
-                                                        aria-valuenow={20}
-                                                        aria-valuemin={0}
-                                                        aria-valuemax={100}
-                                                    >
-                                                        <span className="sr-only">
-                                                            40% Complete
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        {/* end task item */}
-                                        <li>
-                                            {/* Task item */}
-                                            <a href="#">
-                                                <h3>
-                                                    Some task I need to do
-                                                    <small className="pull-right">
-                                                        60%
-                                                    </small>
-                                                </h3>
-                                                <div className="progress xs">
-                                                    <div
-                                                        className="progress-bar progress-bar-red"
-                                                        style={{ width: "60%" }}
-                                                        role="progressbar"
-                                                        aria-valuenow={20}
-                                                        aria-valuemin={0}
-                                                        aria-valuemax={100}
-                                                    >
-                                                        <span className="sr-only">
-                                                            60% Complete
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        {/* end task item */}
-                                        <li>
-                                            {/* Task item */}
-                                            <a href="#">
-                                                <h3>
-                                                    Make beautiful transitions
-                                                    <small className="pull-right">
-                                                        80%
-                                                    </small>
-                                                </h3>
-                                                <div className="progress xs">
-                                                    <div
-                                                        className="progress-bar progress-bar-yellow"
-                                                        style={{ width: "80%" }}
-                                                        role="progressbar"
-                                                        aria-valuenow={20}
-                                                        aria-valuemin={0}
-                                                        aria-valuemax={100}
-                                                    >
-                                                        <span className="sr-only">
-                                                            80% Complete
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        {/* end task item */}
-                                    </ul>
-                                </li>
-                                <li className="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {/* User Account: style can be found in dropdown.less */}
-                        <li className="dropdown user user-menu">
-                            <a
-                                href="#"
-                                className="dropdown-toggle"
-                                data-toggle="dropdown"
-                            >
-                                {/* <img
-                                    src="dist/img/user2-160x160.jpg"
-                                    className="user-image"
-                                    alt="User Image"
-                                /> */}
-                                {FeedMenu && FeedMenu[1] && (
+                        </div>
+                        <div className="search-result__content__title">
+                            Users
+                        </div>
+                        <div className="mb-5">
+                            <a href="" className="flex items-center mt-2">
+                                <div className="w-8 h-8 image-fit">
+                                    {/* <img alt="Midone Laravel Admin Dashboard Starter Kit" className="rounded-full" src="{{ asset('dist/images/' . $faker['photos'][0]) }}"> */}
+                                </div>
+                                <div className="ml-3">nutty</div>
+                                <div className="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                    nut@nut.com
+                                </div>
+                            </a>
+                        </div>
+                        <div className="search-result__content__title">
+                            Products
+                        </div>
+
+                        <a href="" className="flex items-center mt-2">
+                            <div className="w-8 h-8 image-fit">
+                                {/* <img alt="Midone Laravel Admin Dashboard Starter Kit" className="rounded-full" src="{{ asset('dist/images/' . $faker['images'][0]) }}"> */}
+                            </div>
+                            <div className="ml-3">maintain</div>
+                            <div className="ml-auto w-48 truncate text-gray-600 text-xs text-right">
+                                Order{" "}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {/* !-- END: Search -->
+        <!-- BEGIN: Notifications --> */}
+            <div className="intro-x dropdown relative mr-auto sm:mr-6">
+                <div href="#"className="dropdown-toggle notification notification--bullet cursor-pointer"  data-toggle="dropdown">
+                    {/* <i data-feather="bell" className="notification__icon"></i> */}
+                    {/* <i className="feather-bell"></i> */}
+                    <i className="notification__icon fas fa-bell"></i>
+                </div>
+                <div className="notification-content dropdown-box mt-8 absolute top-0 left-0 sm:left-auto sm:right-0 z-20 -ml-10 sm:ml-0">
+                    <div className="notification-content__box dropdown-box__content box">
+                        <div className="notification-content__title">
+                            Notifications
+                        </div>
+
+                        <div className="cursor-pointer relative flex items-center {{ $key ? 'mt-5' : '' }}">
+                            <div className="w-12 h-12 flex-none image-fit mr-1">
+                                {/* <img alt="Midone Laravel Admin Dashboard Starter Kit" className="rounded-full" src="{{ asset('dist/images/' . $faker['photos'][0]) }}"> */}
+                                <div className="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
+                            </div>
+                            <div className="ml-2 overflow-hidden">
+                                <div className="flex items-center">
+                                    <a
+                                        href="javascript:;"
+                                        className="font-medium truncate mr-5"
+                                    >
+                                        nut
+                                    </a>
+                                    <div className="text-xs text-gray-500 ml-auto whitespace-no-wrap">
+                                        2021
+                                    </div>
+                                </div>
+                                <div className="w-full truncate text-gray-600">
+                                    สู้ๆนะจ้ะ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* // <!-- END: Notifications -->
+    // <!-- BEGIN: Account Menu --> */}
+            <div className="intro-x dropdown w-8 h-8 relative">
+                <div  href="#" className="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in"  data-toggle="dropdown">
+                    {/* <img alt="Midone Laravel Admin Dashboard Starter Kit" src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}"/> */}
+                    {FeedMenu && FeedMenu[1] && (
                                     <div className="pull-left image">
                                         <img
                                             src={`/storage/${FeedMenu[1].avatar}`}
-                                            className="user-image"
+                                            // className="user-image"
                                             alt="User Image"
                                         />
                                     </div>
-                                )}
+                    )}
+                </div>
+                <div className="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">
+                    <div className="dropdown-box__content box bg-theme-38 text-white">
+                        <div className="p-4 border-b border-theme-40">
+                            <div className="font-medium">
                                 {FeedMenu && FeedMenu[1] && (
                                     <span className="hidden-xs">
                                         {FeedMenu[1].name}
                                     </span>
                                 )}
-                                {/* <span className="hidden-xs">
-                                    Alexander Pierce
-                                </span> */}
+                            </div>
+                            <div className="text-xs text-theme-41">
+                                {FeedMenu && FeedMenu[1] && (
+                                    <span className="hidden-xs">
+                                        {FeedMenu[1].role_id}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                        <div className="p-2">
+                            <a href=""className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md">
+                                <i className=" fas fa-user w-4 h-4 mr-2"></i>
+                                Profile
                             </a>
-                            <ul className="dropdown-menu">
-                                {/* User image */}
-                                <li className="user-header">
-                                    {/* <img
-                                        src="dist/img/user2-160x160.jpg"
-                                        className="img-circle"
-                                        alt="User Image"
-                                    /> */}
-                                    {FeedMenu && FeedMenu[1] && (
-                                        <img
-                                            src={`/storage/${FeedMenu[1].avatar}`}
-                                            className="rounded-full  mx-auto flex items-center justify-center "
-                                            alt="User Image"
-                                            style={{ width: "100px",height: "100px" }}
-                                        />
-                                    )}
-                                    {FeedMenu && FeedMenu[1] && (
-                                        <p>
-                                            {FeedMenu[1].name}
-
-                                            <small>
-                                                {FeedMenu[1].email}
-                                            </small>
-                                        </p>
-                                    )}
-                                    {/* <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p> */}
-                                </li>
-                                {/* Menu Body */}
-                                <li className="user-body">
-                                    <div className="row">
-                                        <div className="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div className="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div className="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    {/* /.row */}
-                                </li>
-                                {/* Menu Footer*/}
-                                <li className="user-footer">
-                                    <div className="pull-left">
-                                        <a
-                                            href="/officer/Profile"
-                                            className="btn btn-default btn-info"
-
-                                        >
-                                            Profile
-                                        </a>
-                                    </div>
-                                    <div className="pull-right">
-                                        <a
-                                            href="#"
-                                            onClick={() =>
-                                                dispatch(userActions.logout())
-                                            }
-                                            className="btn btn-default btn-danger"
-                                        >
-                                            Sign out
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        {/* Control Sidebar Toggle Button */}
-                        <li>
-                            <a href="#" data-toggle="control-sidebar">
-                                <i className="fa fa-gears" />
+                            <a href=""className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md">
+                                <i className="fas fa-edit w-4 h-4 mr-2"></i>
+                                Add Account
                             </a>
-                        </li>
-                    </ul>
+                            <a href=""className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md">
+                                <i className="fas fa-lock w-4 h-4 mr-2"></i>
+                                Reset Password
+                            </a>
+                            <a href="" className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md">
+                                <i className="w-4 h-4 mr-2 fas fa-question-circle"></i>
+                                Help
+                            </a>
+                        </div>
+                        <div className="p-2 border-t border-theme-40">
+                            <a href="" className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                            >
+                                <i className="w-4 h-4 mr-2 fas fa-toggle-off"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </nav>
-        </header>
+            </div>
+            {/* // <!-- END: Account Menu --> */}
+        </div>
+        // </div>
     );
 };
 

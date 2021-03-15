@@ -12,16 +12,19 @@ function OfficerLayout({ children }) {
     const feedData = useSelector((state) => state.feedData);
 
     return (
-        <div className="wrapper">
-            <Header />
+        <div className="flex officer-content px-8 py-3">
+            {/* <Header /> */}
             <Sidebar />
-            {children}
-            {feedData.fetching && (
-                <div className="overlay">
-                    <i className="fa fa-refresh fa-spin" />
-                </div>
-            )}
-            <Footer />
+            <div className="content">
+                <Header />
+                {children}
+                {feedData.fetching && (
+                    <div className="overlay">
+                        <i className="fa fa-refresh fa-spin" />
+                    </div>
+                )}
+            </div>
+            {/* <Footer /> */}
         </div>
     );
 }
