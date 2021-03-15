@@ -29,5 +29,6 @@ Route::group(['namespace' => 'Officer\Api'], function () {
         Route::post('Editprofile', 'Profile@Editprofile');
 
         Route::post('Editpassword', 'Profile@Editpassword');
+
     });
 });

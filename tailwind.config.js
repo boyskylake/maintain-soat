@@ -54,7 +54,8 @@ module.exports = {
         amber: colors.amber,
         lime: colors.lime,
         black: colors.black,
-        white: colors.white
+        white: colors.white,
+        purple: colors.purple,
         // custom: colors.lightBlue
     },
   },
