@@ -88,9 +88,10 @@ $(function () {
     // console.log('datepicker active')
 
 
-    $('.datetime').datetimepicker({
-	    format: 'HH:mm:ss',
-    });
+    // $('.date').datetimepicker({
+	//     format: 'MM/DD/YYYY',
+    //     allowMultidate: true,
+    // });
 
 
     //iCheck for checkbox and radio inputs
@@ -114,6 +115,10 @@ $(function () {
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
 
-    
-   
+     //Timepicker
+     $('.timepicker').timepicker({
+        showInputs: false
+    })
+
+
 })
