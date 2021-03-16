@@ -10,9 +10,9 @@ const mix = require("laravel-mix");
  | file for the application as well as bundling up all the JS files.
  |
  */
- const tailwindcss = require('tailwindcss');
+const tailwindcss = require("tailwindcss");
 const RemovePlugin = require("remove-files-webpack-plugin");
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require("autoprefixer");
 // const ESLintPlugin = require("eslint-webpack-plugin");
 // const TargetsPlugin = require("targets-webpack-plugin");
 
@@ -88,8 +88,11 @@ mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/app.scss", "public/css")
     .options({
         processCssUrls: false,
-        postCss: [ tailwindcss('./tailwind.config.js')],
-      })
+        postCss: [tailwindcss("./tailwind.config.js")],
+    })
+    .autoload({
+        jquery: ["$", "window.jQuery", "jQuery"],
+    })
     .sourceMaps(false, "source-map");
 
 mix.disableNotifications();

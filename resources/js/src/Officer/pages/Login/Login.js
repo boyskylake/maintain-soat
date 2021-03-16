@@ -7,7 +7,6 @@ import toastr from "toastr";
 import { useBodyClass, useScript } from "../../../helpers";
 // import { login } from '../actions';
 
-
 import { userActions } from "../../redux/actions";
 const Login = () => {
     const [user, setUser] = useState();
@@ -38,193 +37,113 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <Helmet>
-                <meta
-                    name="description"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <meta property="og:locale" content="th_TH" />
-                <meta property="og:type" content="website" />
-                <meta
-                    property="og:title"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <meta
-                    property="og:descrpition"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <meta property="og:url" content={window.location.href} />
-                <link rel="canonical" href={window.location.href} />
-                <meta
-                    property="og:site_name"
-                    content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
-                />
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/font-awesome/css/font-awesome.min.css"
-                />
-                {/* <link rel="stylesheet" href="{{ asset('officer/dist/fontawesome/css/all.min.css)}}"/> */}
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/Ionicons/css/ionicons.min.css"
-                />
-
-                <link rel="stylesheet" href="/officer/plugins/iCheck/all.css" />
-
-                <link rel="stylesheet" href="/officer/dist/css/AdminLTE.css" />
-                <link
-                    rel="stylesheet"
-                    href="/officer/dist/css/skins/_all-skins.min.css"
-                />
-                <link rel="stylesheet" href="/officer/dist/css/style.css" />
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
-                />
-
-                <style type="text/css">{`
-                    html, body {
-                        height: unset;
-                    }
-                    .form-control {
-                        display: block;
-                        width: 100%;
-                        height: 45px;
-                        padding: 6px 12px;
-                        font-size: 14px;
-                        line-height: 1.42857143;
-                        color: #555;
-                        background-color: #fff;
-                        background-image: none;
-                        border: 1px solid #ccc;
-                        border-radius: 4px;
-                        -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-                        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-                        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-                        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-                        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-                        transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-                    }
-                `}</style>
-            </Helmet>
-
-            <div className="container shadow-2xl rounded-full py-3 px-6">
-                <div className="header-area">
-                    <div className="navbar-area">
-                        <nav className="site-navbar">
-                            <a href="#home" className="site-logo" style={{paddingLeft:"130px"}}>
-                                บริษัทโซแอ็ท โซลูชั่น จำกัด
-                            </a>
-                            {/* แถบด้านบน */}
-                            <ul style={{paddingRight:"130px"}}>
-                                <li>
-                                    <a href="https://www.soatsolution.com/home">
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.soatsolution.com/home#sec-1">
-                                        About us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.soatsolution.com/home#sec-7">
-                                        Services
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <button className="nav-toggler">
-                                <span></span>
-                            </button>
-                        </nav>
+        <div className="body">
+            <div className="login">
+        {/* <div className="content"> */}
+            <div className="container sm:px-10">
+                <div className="block xl:grid grid-cols-2 gap-4">
+                    {/* BEGIN: Login Info */}
+                    <div className="hidden xl:flex flex-col min-h-screen">
+                        <a href className="-intro-x flex items-center pt-5">
+                            <img
+                                alt="Midone Laravel Admin Dashboard Starter Kit"
+                                className="w-6"
+                                src="/officer/dist/img/logo.png"
+                            />
+                            <span className="text-white text-lg ml-3">
+                                Mid<span className="font-medium">one</span>
+                            </span>
+                        </a>
+                        <div className="my-auto">
+                            <img
+                                alt="Midone Laravel Admin Dashboard Starter Kit"
+                                className="-intro-x w-1/2 -mt-16"
+                                src="/officer/dist/img/logo.png"
+                            />
+                            <div className="-intro-x text-white font-medium text-4xl leading-tight mt-10">
+                                A few more clicks to <br /> sign in to your
+                                account.
+                            </div>
+                            <div className="-intro-x mt-5 text-lg text-white">
+                                Manage all your e-commerce accounts in one place
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div
-                    id="login-box-body"
-                    className="row col-lg-12 col-md-12 col-sm-12 col-12"
-                >
-                    <div className="col-lg-6 col-md-6">
-                        {/* รอภาพจากป๊อป */}
-                        <img
-                            className="pic-login-2 rounded-full py-3 px-6"
-                            src="./dist/img/bglogin.png"
-                        />
-                    </div>
-                    <div className="col-lg-5 col-md-6 col-sm-12 col-12 login-form">
-                        <h4>กรุณาเข้าสู่ระบบเพื่อใช้งาน !</h4>
-                        <div className="form-group">
+                    {/* END: Login Info */}
+                    {/* BEGIN: Login Form */}
+                    <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
+                        <div className="my-auto mx-auto xl:ml-20 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+                            <h2 className="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
+                                Sign In
+                            </h2>
+                            <div className="intro-x mt-2 text-gray-500 xl:hidden text-center">
+                                A few more clicks to sign in to your account.
+                                Manage all your e-commerce accounts in one place
+                            </div>
                             <form onSubmit={(e) => handleSubmit(e)}>
-
-                                <div className="flex -mx-3">
-                                    <div className="w-full px-3 mb-5">
-                                        {/* <label htmlFor className="text-xs font-semibold px-1"></label> */}
-                                        <div className="flex">
-                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                {/* <i className="fa fa-user text-gray-400 text-lg"></i> */}
-                                                {/* <i className="far fa-user"></i> */}
-                                                <i className="fa fa-user"></i>
-                                            </div>
-                                            <input
-                                                type="email"
+                            <div className="intro-x mt-8">
+                                <input
+                                    // type="text"
+                                    className="intro-x login__input input input--lg border border-gray-300 block"
+                                    placeholder="Email"
+                                    type="email"
                                                 onChange={(event) =>
                                                     setUser(event.target.value)
                                                 }
-                                                // className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                                                className="w-full rounded border-2 border-custom-200  bg-white p-3 focus:bg-white focus:shadow-lg focus:border-custom-400 max-w-xl "
-                                                placeholder="Username"
-                                                required
-                                                style={{ fontSize: "15px" }}
-                                            >
-
-                                            </input>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex -mx-3">
-                                    <div className="w-full px-3 mb-12">
-                                        <div className="flex">
-                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center text-3xl">
-                                                {/* <i className="mdi mdi-lock-outline text-gray-400 text-lg" /> */}
-                                                <i className="fa fa-lock"></i>
-                                            </div>
-                                            <input
-                                                type="password"
+                                />
+                                <input
+                                    // type="password"
+                                    className="intro-x login__input input input--lg border border-gray-300 block mt-4"
+                                    placeholder="Password"
+                                    type="password"
                                                 onChange={(event) =>
                                                     setPass(event.target.value)
                                                 }
-                                                className="w-full rounded border-2 border-custom-200  bg-white p-3 focus:bg-white focus:shadow-lg focus:border-custom-400 max-w-xl text-3xl"
-                                                placeholder="************"
-                                                required
-                                                style={{ fontSize: "15px"}}
-                                            >
-
-                                            </input>
-                                        </div>
-                                    </div>
+                                />
+                            </div>
+                            <div className="intro-x flex text-gray-700 text-xs sm:text-sm mt-4">
+                                <div className="flex items-center mr-auto">
+                                    <input
+                                        type="checkbox"
+                                        className="input border mr-2"
+                                        id="remember-me"
+                                    />
+                                    <label
+                                        className="cursor-pointer select-none"
+                                        htmlFor="remember-me"
+                                    >
+                                        Remember me
+                                    </label>
                                 </div>
-                                <div className="flex -mx-3">
-                                    <div className="w-full px-3 mb-5">
-                                        <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-gray-50 rounded-lg px-3 py-3 font-semibold text-3xl" type="submit">
-                                        {/* text-gray-50 text-sm lg:text-lg md:text-base font-bold p-2 rounded-lg shadow  bg-custom-600 hover:bg-custom-400 hover:shadow-md hover:text-black w-5/6 hover:no-underline  */}
-                                            Login
-                                        </button>
-                                    </div>
-                                </div>
+                                <a href>Forgot Password?</a>
+                            </div>
+                            <div className="intro-x mt-5 xl:mt-8 text-center xl:text-left">
+                                <button className="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3">
+                                    Login
+                                </button>
+                                <button className="button button--lg w-full xl:w-32 text-gray-700 border border-gray-300 mt-3 xl:mt-0">
+                                    Sign up
+                                </button>
+                            </div>
                             </form>
+                            <div className="intro-x mt-10 xl:mt-24 text-gray-700 text-center xl:text-left">
+                                By signin up, you agree to our <br />{" "}
+                                <a className="text-theme-1" href>
+                                    Terms and Conditions
+                                </a>{" "}
+                                &amp;{" "}
+                                <a className="text-theme-1" href>
+                                    Privacy Policy
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    {/* END: Login Form */}
                 </div>
             </div>
-        </div>
+            </div>
+            </div>
+        // </div>
     );
 };
 

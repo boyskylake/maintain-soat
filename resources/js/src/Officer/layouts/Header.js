@@ -26,8 +26,6 @@ const Header = () => {
     useScript("/officer/dist/js/pages/Officerlayoutscript.js");
     // useScript("/officer/dist/js/pages/Effect/side-menu.js");
 
-
-
     const feedData = useSelector((state) => state.feedData);
     const service = new Services();
     // const [inputs, setInputs] = useState(["ma_coop"]);
@@ -48,20 +46,6 @@ const Header = () => {
         // <div>
 
         <div className="top-bar">
-            <Helmet>
-                <link
-                    rel="stylesheet"
-                    href="/officer/dist/fontawesome/css/all.min.css"
-                />
-                 {/* <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
-                /> */}
-                <link
-                    rel="stylesheet"
-                    href="/officer/bower_components/jvectormap/jquery-jvectormap.css"
-                />
-            </Helmet>
             {/* <!-- BEGIN: Breadcrumb --> */}
             <div className="-intro-x breadcrumb mr-auto hidden sm:flex">
                 <a href="" className="">
@@ -244,7 +228,9 @@ const Header = () => {
                             </a>
                         </div>
                         <div className="p-2 border-t border-theme-40">
-                            <a href="" className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
+                            <a href="#"
+                                onClick={() =>dispatch(userActions.logout())} 
+                                className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
                             >
                                 <i className="w-4 h-4 mr-2 fas fa-toggle-off"></i>
                                 Logout

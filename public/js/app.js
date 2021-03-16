@@ -140,6 +140,7 @@ __webpack_require__(/*! ./src/index */ "./resources/js/src/index.js");
   \***********************************/
 /***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
+/* provided dependency */ var __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -149,7 +150,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js").default;
-  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+  window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
   window.moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); // require("bootstrap");
 } catch (e) {}
 /**
@@ -912,15 +913,7 @@ var Header = function Header() {
     // <div>
     (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "top-bar",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_helmet__WEBPACK_IMPORTED_MODULE_2__.Helmet, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
-          rel: "stylesheet",
-          href: "/officer/dist/fontawesome/css/all.min.css"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("link", {
-          rel: "stylesheet",
-          href: "/officer/bower_components/jvectormap/jquery-jvectormap.css"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "-intro-x breadcrumb mr-auto hidden sm:flex",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
           href: "",
@@ -1146,7 +1139,10 @@ var Header = function Header() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
               className: "p-2 border-t border-theme-40",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("a", {
-                href: "",
+                href: "#",
+                onClick: function onClick() {
+                  return dispatch(_redux_actions__WEBPACK_IMPORTED_MODULE_5__.userActions.logout());
+                },
                 className: "flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
                   className: "w-4 h-4 mr-2 fas fa-toggle-off"
@@ -1414,24 +1410,30 @@ var Sidebar = function Sidebar() {
       className: "side-nav__devider my-6"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ul", {
       children: FeedMenu && FeedMenu[0] && FeedMenu[0].map(function (val, i) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-          to: val.url,
-          icon: val.icon_class,
-          name: val.title,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("a", {
-            href: val.url,
-            className: "side-menu",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "side-menu__icon",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                className: val.icon_class
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: "side-menu__title",
-              children: val.title
-            })]
-          })
-        }, i);
+        return (
+          /*#__PURE__*/
+          // <li
+          //     key={i}
+          //     to={val.url}
+          //     icon={val.icon_class}
+          //     name={val.title}
+          // >
+          //     {/* side-menu side-menu--active */}
+          //         <a href={val.url} className={`side-menu side-menu--active`}>
+          //         <div className="side-menu__icon">
+          //             <i className={val.icon_class}></i>
+          //         </div>
+          //         <div className="side-menu__title">
+          //             {val.title}
+          //         </div>
+          //     </a>
+          // </li>
+          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ListItemLink, {
+            to: val.url,
+            icon: val.icon_class,
+            name: val.title
+          }, i)
+        );
       })
     })]
   });
@@ -1451,13 +1453,23 @@ function ListItemLink(_ref) {
       var match = _ref2.match;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
         className: match ? "active" : "",
+        to: to,
+        icon: icon,
+        name: name,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, _objectSpread(_objectSpread({
+          className: match ? "side-menu side-menu--active" : "side-menu",
           to: to
         }, rest), {}, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-            className: icon
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-            children: name
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "side-menu__icon",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+              className: icon
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "side-menu__title",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+              children: name
+            })
           })]
         }))
       });
@@ -2308,6 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
 var number_format = function number_format(val) {

@@ -61,6 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_utils_Lodingicon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/utils/Lodingicon */ "./resources/js/src/Officer/components/utils/Lodingicon.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
  // import { useForm } from "react-hook-form";
 

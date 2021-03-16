@@ -1,5 +1,4 @@
-import select2 from 'select2'
-
+// import select2 from 'select2'
 (function($) {
     "use strict";
 

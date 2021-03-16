@@ -4,9 +4,7 @@ import { useForm } from "react-hook-form";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-// import 'react-dropzone-uploader/dist/styles.css'
-import "react-dropzone-uploader/dist/styles.css";
-import Dropzone from "react-dropzone-uploader";
+import select2 from "select2";
 
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
@@ -47,13 +45,8 @@ function Step1Component(
     const [confirmSubmit, setconfirmSubmit] = useState(false);
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
-    // useScript("/officer/dist/js/pages/saveorder.js");
+
     useScript("/officer/dist/js/pages/saveorder.js");
-    useScript("/officer/dist/js/pages/Officerlayoutscript.js");
-    // useScript("/officer/bower_components/ckeditor/ckeditor.js");
-    // useScript(
-    //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-    // );
 
     const { register, handleSubmit, watch, errors } = useForm();
 
@@ -133,7 +126,7 @@ function Step1Component(
             if (coopid == null) {
                 // console.log(coopid);
                 document.getElementById("Detail").style.display = "block";
-                // $(".select2").select2();
+                $(".select2").select2();
                 // CKEDITOR.replace("editor1");
                 //bootstrap WYSIHTML5 - text editor
                 // $(".textarea").wysihtml5();
@@ -175,9 +168,55 @@ function Step1Component(
                 </div>
 
                 <div className="intro-y col-span-12 sm:col-span-6">
-                   
+                    <div className="mb-2 text-left">สหกรณ์ฯ</div>
+                    <select data-hide-search="true" className="select2 w-full">
+                        <option></option>
+                        {feedData.data &&
+                            feedData.data.ma_coop &&
+                            feedData.data.ma_coop.map((val, i) => {
+                                if (
+                                    cookies &&
+                                    cookies.pageone &&
+                                    cookies.pageone.coopid &&
+                                    cookies.pageone.coopid == trim(val.coop_id)
+                                ) {
+                                    // setCoopid(
+                                    //     cookies.pageone &&
+                                    //         cookies.pageone.coopid
+                                    // );
+                                }
+                                return (
+                                    <option
+                                        key={i}
+                                        value={val.coop_id}
+                                        selected={
+                                            cookies.pageone &&
+                                            cookies.pageone.coopid ==
+                                                trim(val.coop_id)
+                                                ? true
+                                                : false
+                                        }
+                                    >
+                                        {val.coop_id} {val.coop_name}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                    {/* {" "} */}
+                    {errors.coopid?.type === "required" && (
+                        <ErrorSpan className="">
+                            {ErrorsWord.coopid.required}
+                        </ErrorSpan>
+                    )}
                 </div>
-
+                <div className="intro-y col-span-12 sm:col-span-6">
+                    <div className="mb-2">Subject</div>
+                    <input
+                        type="text"
+                        className="input w-full border flex-1"
+                        placeholder="Important Meeting"
+                    />
+                </div>
                 <div className="intro-y col-span-12 sm:col-span-6">
                     <div className="mb-2">Has the Words</div>
                     <input

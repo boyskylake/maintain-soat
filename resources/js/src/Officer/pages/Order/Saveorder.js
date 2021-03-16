@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import Inputmask from "inputmask";
 import { useCookies } from "react-cookie";
 
 import { useScript } from "../../../helpers";
@@ -105,7 +104,7 @@ function Saveorder() {
         $(document.body).on("change", "#coopid", function () {
             if (coopid == null) {
                 document.getElementById("Detail").style.display = "block";
-                // $(".select2").select2();
+                $(".select2").select2();
                 $(".textarea").wysihtml5();
                 document.getElementById("informer").disabled = false;
             }

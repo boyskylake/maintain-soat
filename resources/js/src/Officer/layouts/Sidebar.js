@@ -45,22 +45,28 @@ const Sidebar = () => {
                     FeedMenu[0] &&
                     FeedMenu[0].map((val, i) => {
                         return (
-                            <li
-                                key={i}
-                                to={val.url}
-                                icon={val.icon_class}
-                                name={val.title}
-                            >
-                                {/* side-menu side-menu--active */}
-                                    <a href={val.url} className={`side-menu`}>
-                                    <div className="side-menu__icon">
-                                        <i className={val.icon_class}></i>
-                                    </div>
-                                    <div className="side-menu__title">
-                                        {val.title}
-                                    </div>
-                                </a>
-                            </li>
+                            // <li
+                            //     key={i}
+                            //     to={val.url}
+                            //     icon={val.icon_class}
+                            //     name={val.title}
+                            // >
+                            //     {/* side-menu side-menu--active */}
+                            //         <a href={val.url} className={`side-menu side-menu--active`}>
+                            //         <div className="side-menu__icon">
+                            //             <i className={val.icon_class}></i>
+                            //         </div>
+                            //         <div className="side-menu__title">
+                            //             {val.title}
+                            //         </div>
+                            //     </a>
+                            // </li>
+                            <ListItemLink
+                                    key={i}
+                                    to={val.url}
+                                    icon={val.icon_class}
+                                    name={val.title}
+                            />
                         );
                     })}
             </ul>
@@ -75,10 +81,14 @@ function ListItemLink({ to, icon, name, ...rest }) {
             path={to}
             // eslint-disable-next-line react/no-children-prop
             children={({ match }) => (
-                <li className={match ? "active" : ""}>
-                    <Link to={to} {...rest}>
-                        <i className={icon} />
-                        <span>{name}</span>
+                <li className={match ? "active" : ""} to={to} icon={icon} name={name}>
+                    <Link className={match ? "side-menu side-menu--active" : "side-menu"} to={to} {...rest} >
+                        <div className="side-menu__icon">
+                          <i className={icon} />  
+                        </div>
+                        <div className="side-menu__title">
+                             <span>{name}</span>
+                        </div>
                     </Link>
                     {/* <Link to={to} {...rest} /> */}
                 </li>
