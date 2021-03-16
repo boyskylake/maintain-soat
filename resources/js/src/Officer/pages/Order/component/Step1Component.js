@@ -5,6 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import select2 from "select2";
+import dropzone from "dropzone";
 
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
@@ -151,7 +152,7 @@ function Step1Component(
     // console.log(cookies.pageone && cookies.pageone.receive_date);
     return (
         <div className="mt-10 pt-10 border-t border-gray-200">
-            <div className="font-medium text-left">แก้ไข/บันทึก</div>
+            {/* <div className="font-medium text-left">แก้ไข/บันทึก</div> */}
             <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
                 {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
                 {/* เลขที่รายการ */}
@@ -483,6 +484,44 @@ function Step1Component(
                             })}
                     </select>
                 </div>
+                {/* dropzone */}
+                <div className="intro-y col-span-12 sm:col-span-12">
+                    <div className="grid grid-cols-12 gap-6 mt-5">
+                    <div className="intro-y col-span-12 lg:col-span-12">
+                            <div className="intro-y box mt-5">
+                                {/* <div className="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
+                                <h2 className="font-medium text-base mr-auto">
+                                    Multiple File Upload
+                                </h2>
+                                <div className="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
+                                    <div className="mr-3">Show code</div>
+                                    <input data-target="#multiple-file-upload" className="show-code input input--switch border" type="checkbox" />
+                                </div>
+                                </div> */}
+                                <div className="p-5" id="multiple-file-upload">
+                                <div className="preview">
+                                    <form action="/file-upload" className="dropzone border-gray-200 border-dashed">
+                                    <div className="fallback">
+                                        <input name="file" type="file" multiple />
+                                    </div>
+                                    <div className="dz-message" data-dz-message>
+                                        <div className="text-lg font-medium">Drop files here or click to upload.</div>
+                                        <div className="text-gray-600"> This is just a demo dropzone. Selected files are <span className="font-medium">not</span> actually uploaded. </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                <div className="source-code hidden">
+                                    <button data-target="#copy-multiple-file-upload" className="copy-code button button--sm border flex items-center text-gray-700"> <i data-feather="file" className="w-4 h-4 mr-2" /> Copy code </button>
+                                    <div className="overflow-y-auto h-64 mt-3">
+                                    <pre className="source-preview" id="copy-multiple-file-upload"> <code className="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagform action="/file-upload" class="dropzone border-gray-200 border-dashed"HTMLCloseTag HTMLOpenTagdiv class="fallback"HTMLCloseTag HTMLOpenTaginput name="file" type="file" multiple/HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class="dz-message" data-dz-messageHTMLCloseTag HTMLOpenTagdiv class="text-lg font-medium"HTMLCloseTagDrop files here or click to upload.HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class="text-gray-600"HTMLCloseTag This is just a demo dropzone. Selected files are HTMLOpenTagspan class="font-medium"HTMLCloseTagnotHTMLOpenTag/spanHTMLCloseTag actually uploaded. HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/formHTMLCloseTag </code> </pre>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
 
                 <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                     <button

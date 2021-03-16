@@ -194,14 +194,14 @@ function getStepContent(
     switch (step) {
         case 0:
             return (
-                // <Step1Component
-                //     props={data}
-                //     setCompleted={setCompleted}
-                //     completed={completed}
-                //     setActiveStep={setActiveStep}
-                //     activeStep={activeStep}
-                //     step={step}
-                // />
+                <Step1Component
+                    props={data}
+                    setCompleted={setCompleted}
+                    completed={completed}
+                    setActiveStep={setActiveStep}
+                    activeStep={activeStep}
+                    step={step}
+                />
                 //     <Step3Component
                 //     props={data}
                 //     setCompleted={setCompleted}
@@ -211,14 +211,14 @@ function getStepContent(
                 //     step={step}
                 // />
 
-                    <Step2Component
-                    props={data}
-                    setCompleted={setCompleted}
-                    completed={completed}
-                    setActiveStep={setActiveStep}
-                    activeStep={activeStep}
-                    step={step}
-                />
+                //     <Step2Component
+                //     props={data}
+                //     setCompleted={setCompleted}
+                //     completed={completed}
+                //     setActiveStep={setActiveStep}
+                //     activeStep={activeStep}
+                //     step={step}
+                // />
             );
         case 1:
             return (

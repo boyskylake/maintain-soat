@@ -27,6 +27,7 @@
         "clsx": "^1.1.1",
         "datatables.net": "^1.10.24",
         "datatables.net-dt": "^1.10.24",
+        "dropzone": "^5.8.1",
         "font-awesome": "^4.7.0",
         "history": "^5.0.0",
         "inputmask": "^5.0.5",

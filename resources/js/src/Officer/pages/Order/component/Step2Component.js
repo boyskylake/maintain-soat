@@ -95,97 +95,135 @@ function Step2Component(
     };
 
     return (
-        <div className="mt-10 pt-10 border-t border-gray-200">
-            {/* <div className="font-medium text-left">สำหรับ Order สั่งซื้อ</div> */}
-            <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
-                {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
-                {/* วันที่สั่งซื้อ */}
-                <div className="intro-y col-span-12 sm:col-span-2">
-                    <div className="mb-2 text-left">วันที่สั่งซื้อ</div>
-                    <input
-                        type="text"
-                        name="purchase_date_tdate"
-                        autoComplete="off"
-                        data-mask="99/99/9999"
-                        data-inputmask="'mask': '99/99/9999'"
-                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
-                        ref={register}
-                        value={
-                            cookies.pagetwo &&
-                            cookies.pagetwo.purchase_date_tdate
-                        }
-                    />
+        <Fragment>
+            {props.completed.has(1) ? (
+                <div className="m-2 text-center py-2">
+                    <div className="py-2">
+                        <i className="far fa-check-circle fa-5x text-emerald-400"></i>
+                    </div>
+                    <h3 className="text-gray-800 text-base font-medium">
+                        {" "}
+                        ท่านได้ดำเนินการขั้นตอนนี้เสร็จสมบรูณ์แล้ว
+                    </h3>
                 </div>
-                {/* จำนวนวันตามสัญญา */}
-                <div className="intro-y col-span-12 sm:col-span-2">
-                    <div className="mb-2 text-left">จำนวนวันตามสัญญา</div>
-                    <input
-                        type="text"
-                        name="contract_le"
-                        autoComplete="off"
-                        data-mask="999 วัน"
-                        data-inputmask="'mask': '999 วัน'"
-                        className="text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
-                        ref={register}
-                        value={
-                            cookies.pagetwo &&
-                            cookies.pagetwo.purchase_date_tdate
-                        }
-                    />
-                    {/* {errors.dateRevice && (
+            ) : (
+                <Fragment>
+                    {props.completed.has(0) ? (
+                        <div className="mt-10 pt-10 border-t border-gray-200">
+                            {/* <div className="font-medium text-left">สำหรับ Order สั่งซื้อ</div> */}
+                            <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
+                                {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
+                                {/* วันที่สั่งซื้อ */}
+                                <div className="intro-y col-span-12 sm:col-span-2">
+                                    <div className="mb-2 text-left">
+                                        วันที่สั่งซื้อ
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="purchase_date_tdate"
+                                        autoComplete="off"
+                                        data-mask="99/99/9999"
+                                        data-inputmask="'mask': '99/99/9999'"
+                                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.purchase_date_tdate
+                                        }
+                                    />
+                                </div>
+                                {/* จำนวนวันตามสัญญา */}
+                                <div className="intro-y col-span-12 sm:col-span-2">
+                                    <div className="mb-2 text-left">
+                                        จำนวนวันตามสัญญา
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="contract_le"
+                                        autoComplete="off"
+                                        data-mask="999 วัน"
+                                        data-inputmask="'mask': '999 วัน'"
+                                        className="text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.purchase_date_tdate
+                                        }
+                                    />
+                                    {/* {errors.dateRevice && (
                                     <span>This field is required</span>
                                 )} */}
-                </div>
-                {/* มีสัญญาจ้าง */}
-                {/* &nbsp;&nbsp; */}
-                <div className="intro-y col-span-12 sm:col-span-4">
-                    <div className="mb-2 text-left">มีสัญญาจ้าง</div>
-                            <input
-                                type="text"
-                                name="contract_no"
-                                autoComplete="off"
-                                // data-mask="999 วัน"
-                                // data-inputmask="'mask': '999 วัน'"
-                                className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
-                                ref={register}
-                                value={
-                                    cookies.pagetwo &&
-                                    cookies.pagetwo.contract_no
-                                }
-                            />
-                        </div>
-                {/* มูลค่างาน */}
-                {/* &nbsp;&nbsp; */}
-                <div className="intro-y col-span-12 sm:col-span-4">
-                    <div className="mb-2 text-left">มูลค่างาน</div>
-                            <input
-                                type="text"
-                                name="order_value_amount"
-                                autoComplete="off"
-                                // data-mask="999 วัน"
-                                // data-inputmask="'mask': '999 วัน'"
-                                className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
-                                ref={register}
-                                value={
-                                    cookies.pagetwo &&
-                                    cookies.pagetwo.order_value_amount
-                                }
-                            />
-                        </div>
-                <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                    <button
-                        type="submit"
-                        className="button w-36 justify-center block bg-theme-1 text-white ml-2"
-                    >
-                        ดำเนินการต่อ
-                    </button>
-                    {/* <button className="button w-24 justify-center block bg-theme-1 text-white ml-2">
+                                </div>
+                                {/* มีสัญญาจ้าง */}
+                                {/* &nbsp;&nbsp; */}
+                                <div className="intro-y col-span-12 sm:col-span-4">
+                                    <div className="mb-2 text-left">
+                                        มีสัญญาจ้าง
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="contract_no"
+                                        autoComplete="off"
+                                        // data-mask="999 วัน"
+                                        // data-inputmask="'mask': '999 วัน'"
+                                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.contract_no
+                                        }
+                                    />
+                                </div>
+                                {/* มูลค่างาน */}
+                                {/* &nbsp;&nbsp; */}
+                                <div className="intro-y col-span-12 sm:col-span-4">
+                                    <div className="mb-2 text-left">
+                                        มูลค่างาน
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="order_value_amount"
+                                        autoComplete="off"
+                                        // data-mask="999 วัน"
+                                        // data-inputmask="'mask': '999 วัน'"
+                                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.order_value_amount
+                                        }
+                                    />
+                                </div>
+                                <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                                    <button
+                                        type="submit"
+                                        className="button w-36 justify-center block bg-theme-1 text-white ml-2"
+                                    >
+                                        ดำเนินการต่อ
+                                    </button>
+                                    {/* <button className="button w-24 justify-center block bg-theme-1 text-white ml-2">
                     Next
                 </button> */}
-                </div>
-                {/* </form> */}
-            </div>
-        </div>
+                                </div>
+                                {/* </form> */}
+                            </div>
+                        </div>
+                    ) : (
+                        <Fragment>
+                            <div className="m-2 text-center py-2">
+                                <div className="py-2">
+                                    <i className="far fa-times-circle fa-5x text-red-400"></i>
+                                </div>
+                                <h3 className="text-gray-800 text-base font-medium">
+                                    {" "}
+                                    กรุณาดำเนินการขั้นตอนก่อนหน้าตามลำดับ
+                                </h3>
+                            </div>
+                        </Fragment>
+                    )}
+                </Fragment>
+            )}
+        </Fragment>
     );
 }
 export default Step2Component;
