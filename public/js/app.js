@@ -227,11 +227,11 @@ var Footer = function Footer() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers */ "./resources/js/src/helpers/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers */ "./resources/js/src/helpers/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -242,81 +242,87 @@ __webpack_require__.r(__webpack_exports__);
 var Header = function Header() {
   // const login = useSelector(state => state.login);
   // const dispatch = useDispatch();
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useBodyClass)("hold-transition");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useBodyClass)("skin-yellow");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useBodyClass)("layout-top-nav");
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_helmet__WEBPACK_IMPORTED_MODULE_2__.Helmet, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useBodyClass)("hold-transition");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useBodyClass)("skin-yellow");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useBodyClass)("layout-top-nav");
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_helmet__WEBPACK_IMPORTED_MODULE_1__.Helmet, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       name: "description",
       content: "\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17 \u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19 \u0E08\u0E33\u0E01\u0E31\u0E14"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       property: "og:locale",
       content: "th_TH"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       property: "og:type",
       content: "website"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       property: "og:title",
       content: "\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17 \u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19 \u0E08\u0E33\u0E01\u0E31\u0E14"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       property: "og:description",
       content: "\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17 \u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19 \u0E08\u0E33\u0E01\u0E31\u0E14"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       property: "og:url",
       content: window.location.href
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "canonical",
       href: window.location.href
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meta", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("meta", {
       property: "og:site_name",
       content: "\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17 \u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19 \u0E08\u0E33\u0E01\u0E31\u0E14"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       type: "text/css",
       href: "/info/scripts/fullcalendar/fullcalendar.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/font-awesome/css/font-awesome.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/Ionicons/css/ionicons.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/jvectormap/jquery-jvectormap.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/bootstrap-daterangepicker/daterangepicker.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       href: "/officer/bower_components/bootstrap-datepicker/css/datepicker.css",
       rel: "stylesheet",
       media: "screen"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/plugins/iCheck/all.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/plugins/timepicker/bootstrap-timepicker.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/bower_components/select2/dist/css/select2.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/dist/css/AdminLTE.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/dist/css/skins/_all-skins.min.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "/officer/dist/css/style.css"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("link", {
+      href: "https://fonts.googleapis.com/css2?family=Acme&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+      rel: "stylesheet"
     })]
   });
 };
@@ -404,7 +410,7 @@ function LinebotLayout(_ref) {
 
   }, [dispatch, isAuth, pathname, path, history]);
   return isAuth ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-    className: "wrapper",
+    className: "wrapper line-layout",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_3__.default, {}), children, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Footer__WEBPACK_IMPORTED_MODULE_4__.default, {})]
   }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "overlay",

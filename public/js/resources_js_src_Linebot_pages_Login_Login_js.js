@@ -56,11 +56,11 @@ var Login = function Login() {
       search = _useLocation.search;
 
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useBodyClass)("hold-transition");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useBodyClass)("skin-yellow");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useBodyClass)("sidebar-mini");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useScript)("/officer/bower_components/bootstrap/dist/js/bootstrap.min.js");
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)(); // useBodyClass("hold-transition");
+  // useBodyClass("skin-yellow");
+  // useBodyClass("sidebar-mini");
+  // useScript("/officer/bower_components/bootstrap/dist/js/bootstrap.min.js");
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var path = new URLSearchParams(search); // if (!localStorage.getItem("linetoken")) {
     //     history.push("/linebot/verify?path=" + path.get("path"));
@@ -77,7 +77,6 @@ var Login = function Login() {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    className: "wrapper bg-green-600",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_helmet__WEBPACK_IMPORTED_MODULE_1__.Helmet, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("meta", {
         name: "description",
@@ -105,95 +104,63 @@ var Login = function Login() {
         content: "\u0E1A\u0E23\u0E34\u0E29\u0E31\u0E17\u0E42\u0E0B\u0E41\u0E2D\u0E47\u0E17 \u0E42\u0E0B\u0E25\u0E39\u0E0A\u0E31\u0E48\u0E19 \u0E08\u0E33\u0E01\u0E31\u0E14"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
         rel: "stylesheet",
-        href: "/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
-        rel: "stylesheet",
-        href: "/officer/bower_components/font-awesome/css/font-awesome.min.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
-        rel: "stylesheet",
-        href: "/officer/bower_components/Ionicons/css/ionicons.min.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
-        rel: "stylesheet",
-        href: "/officer/plugins/iCheck/all.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
-        rel: "stylesheet",
-        href: "/officer/dist/css/AdminLTE.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
-        rel: "stylesheet",
-        href: "/officer/dist/css/skins/_all-skins.min.css"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
-        rel: "stylesheet",
         href: "/officer/dist/css/style.css"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("link", {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      className: "login-box login-page",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "login-logo",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-          src: " "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
-          href: "../../index2.html",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
-            children: "Soat"
-          }), "Officer"]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "login-box-body shadow-2xl",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-          className: "login-box-msg",
-          children: ["Sign in to start your session", " "]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
-          onSubmit: function onSubmit(e) {
-            return handleSubmit(e);
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-            id: "userId",
-            hidden: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-            id: "token",
-            hidden: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "form-group has-feedback",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-              type: "text",
-              onChange: function onChange(event) {
-                return setUser(event.target.value);
-              },
-              className: "form-control",
-              placeholder: "Username",
-              required: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: "glyphicon glyphicon-envelope form-control-feedback"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "form-group has-feedback",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-              type: "password",
-              onChange: function onChange(event) {
-                return setPass(event.target.value);
-              },
-              className: "form-control",
-              placeholder: "Password",
-              required: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: "glyphicon glyphicon-lock form-control-feedback"
-            })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "min-w-screen min-h-screen bg-white flex items-center justify-center line-login",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "bg-gray-500 flex overflow-hidden relative",
+        style: {
+          width: 539,
+          height: 819
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "h-full w-full px-10 pt-6 pb-20 overflow-y-auto",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            type: "button",
+            className: "flex text-white mx-8",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+              className: "w-56 h-45 mx-12 mt-40",
+              src: "/officer/dist/img/Linelogo.png"
+            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "col-xs-4",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-                type: "submit",
-                className: "btn btn-primary btn-block btn-flat",
-                children: "Sign In"
-              })
+            className: "max-w-md mt-4 mx-auto",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+              action: true,
+              className: true,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "mb-4 mt-4 px-8 py-1 ",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                  placeholder: "Username",
+                  id: "username",
+                  type: "text",
+                  name: "username",
+                  className: "placeholder-gray-700 w-72 border-gray-400 py-2 px-2 rounded"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "flex flex-col mb- text-center px-8 py-3 mb-2",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                  placeholder: "Password",
+                  id: "password",
+                  type: "password",
+                  name: "password",
+                  className: "placeholder-gray-700 w-72 border border-gray-400 py-2 px-2 rounded"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                className: "bg-red-500 px-8 py-3  text-white mx-24 rounded-lg ",
+                children: "Login"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "flex flex-col text-center"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "absolute left-1/2 transform -translate-x-1/2 bottom-0"
+              })]
             })
           })]
-        })]
-      })]
+        })
+      })
     })]
   });
 };

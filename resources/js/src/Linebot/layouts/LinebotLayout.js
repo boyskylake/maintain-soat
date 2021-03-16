@@ -39,7 +39,7 @@ function LinebotLayout({ children }) {
     }, [dispatch, isAuth, pathname, path, history]);
 
     return isAuth ? (
-        <div className="wrapper">
+        <div className="wrapper line-layout">
             <Header />
             {children}
             {/* {feedData.fetching && (

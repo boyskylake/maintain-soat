@@ -18,10 +18,10 @@ const Login = () => {
     let history = useHistory();
     const dispatch = useDispatch();
 
-    useBodyClass("hold-transition");
-    useBodyClass("skin-yellow");
-    useBodyClass("sidebar-mini");
-    useScript("/officer/bower_components/bootstrap/dist/js/bootstrap.min.js");
+    // useBodyClass("hold-transition");
+    // useBodyClass("skin-yellow");
+    // useBodyClass("sidebar-mini");
+    // useScript("/officer/bower_components/bootstrap/dist/js/bootstrap.min.js");
 
     useEffect(() => {
         let path = new URLSearchParams(search);
@@ -33,7 +33,6 @@ const Login = () => {
         if (userAuth.loggedIn) {
             history.push(path.get("path"));
         }
-
     }, [userAuth, history, search]);
 
     let handleSubmit = (e) => {
@@ -43,7 +42,7 @@ const Login = () => {
     };
 
     return (
-        <div className="wrapper bg-green-600">
+        <div>
             <Helmet>
                 <meta
                     name="description"
@@ -65,7 +64,7 @@ const Login = () => {
                     property="og:site_name"
                     content="บริษัทโซแอ็ท โซลูชั่น จำกัด"
                 />
-                <link
+                {/* <link
                     rel="stylesheet"
                     href="/officer/bower_components/bootstrap/dist/css/bootstrap.min.css"
                 />
@@ -84,66 +83,57 @@ const Login = () => {
                 <link
                     rel="stylesheet"
                     href="/officer/dist/css/skins/_all-skins.min.css"
-                />
+                /> */}
                 <link rel="stylesheet" href="/officer/dist/css/style.css" />
                 <link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
                 />
             </Helmet>
-            <div className="login-box login-page">
-                <div className="login-logo">
-                    <img src=" "/>
-                    <a href="../../index2.html">
-                        <b>Soat</b>Officer
-                    </a>
-                </div>
-                {/* /.login-logo */}
-                <div className="login-box-body shadow-2xl">
-                    <p className="login-box-msg">
-                        Sign in to start your session{" "}
-                    </p>
-                    <form onSubmit={(e) => handleSubmit(e)}>
-                        {/* <img id="pictureUrl" /> */}
-                        <input id="userId" hidden />
-                        <input id="token" hidden />
-                        <div className="form-group has-feedback">
-                            <input
-                                type="text"
-                                onChange={(event) =>
-                                    setUser(event.target.value)
-                                }
-                                className="form-control"
-                                placeholder="Username"
-                                required
+            <div className="min-w-screen min-h-screen bg-white flex items-center justify-center line-login">
+                <div
+                    className="bg-gray-500 flex overflow-hidden relative"
+                    style={{ width: 539, height: 819 }}
+                >
+                    <div className="h-full w-full px-10 pt-6 pb-20 overflow-y-auto">
+                        <button type="button" className="flex text-white mx-8">
+                            <img
+                                className="w-56 h-45 mx-12 mt-40"
+                                src="/officer/dist/img/Linelogo.png"
                             />
-                            <span className="glyphicon glyphicon-envelope form-control-feedback" />
-                        </div>
-                        <div className="form-group has-feedback">
-                            <input
-                                type="password"
-                                onChange={(event) =>
-                                    setPass(event.target.value)
-                                }
-                                className="form-control"
-                                placeholder="Password"
-                                required
-                            />
-                            <span className="glyphicon glyphicon-lock form-control-feedback" />
-                        </div>
-                        <div className="row">
-                            {/* /.col */}
-                            <div className="col-xs-4">
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary btn-block btn-flat"
-                                >
-                                    Sign In
+                            {/* <span className="font-bold">BMT</span> */}
+                            {/* <span>Connect</span> */}
+                        </button>
+                        <div className="max-w-md mt-4 mx-auto">
+                            <form action className>
+                                {/* <h1 className="font-medium mb-6 text-white text-3xl">Hi there</h1> */}
+                                <div className="mb-4 mt-4 px-8 py-1 ">
+                                    <input
+                                        placeholder="Username"
+                                        id="username"
+                                        type="text"
+                                        name="username"
+                                        className="placeholder-gray-700 w-72 border-gray-400 py-2 px-2 rounded"
+                                    />
+                                </div>
+                                <div className="flex flex-col mb- text-center px-8 py-3 mb-2">
+                                    <input
+                                        placeholder="Password"
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        className="placeholder-gray-700 w-72 border border-gray-400 py-2 px-2 rounded"
+                                    />
+                                </div>
+                                <button className="bg-red-500 px-8 py-3  text-white mx-24 rounded-lg ">
+                                    Login
                                 </button>
-                            </div>
-                            {/* /.col */}
+                                <div className="flex flex-col text-center"></div>
+                                <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0">
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

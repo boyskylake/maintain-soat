@@ -5854,7 +5854,7 @@ hr {
     }
 }
 body {
-    background-image:url("../img/BL.png");
+    /* background-image:url("../img/BL.png"); */
     /* background-color:; */
     background-size: cover;
     background-repeat: no-repeat;
