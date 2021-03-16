@@ -217,21 +217,18 @@ function Profile() {
                     </div>
 
 
-<button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-{/* <a href=" " title="View" className="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i className="fa fa-search"></i> <span className="hidden-xs hidden-sm">View</span></a> */}
-<a href=" " title="View" data-toggle="modal" data-target="#myModal" className="btn btn-sm btn-primary"><span className="hidden-xs hidden-sm">View555</span></a>
 
-
+{/* <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <div id="myModal" className="modal fade" role="dialog" >
-  <div className="modal-dialog" style={{width:"1000px"}}>
+  <div className="modal-dialog" style={{width:"1000px"}} >
     <div className="modal-content">
       <div className="modal-header bg-purple-500">
         <button type="button" className="close" data-dismiss="modal">&times;</button>
         <h2 className="modal-title text-white"><strong>order id: </strong></h2>
       </div>
-      <div className="modal-body font-mono  text-purple-600 text-left" >
-        <p ><strong>order id:</strong></p>
+      <div className="modal-body font-mono  text-purple-600 text-left">
+        <p ><strong>Order No :</strong> </p>
         <p ><strong>วันที่รับ :</strong> </p>
         <p ><strong>วันที่นัด :</strong> </p>
         <p ><strong>ชื่อสหกรณ์ :</strong> </p>
@@ -245,7 +242,7 @@ function Profile() {
     </div>
 
   </div>
-</div>
+</div> */}
 
 
 
