@@ -229,7 +229,7 @@ const Header = () => {
                         </div>
                         <div className="p-2 border-t border-theme-40">
                             <a href="#"
-                                onClick={() =>dispatch(userActions.logout())} 
+                                onClick={() =>dispatch(userActions.logout())}
                                 className="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md"
                             >
                                 <i className="w-4 h-4 mr-2 fas fa-toggle-off"></i>

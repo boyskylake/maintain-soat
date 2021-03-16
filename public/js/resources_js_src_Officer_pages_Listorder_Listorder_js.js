@@ -86,9 +86,9 @@ function Listorder() {
   // };
 
   var user = JSON.parse(localStorage.getItem("user")); // <!-- jvectormap  -->
+  // useScript("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
+  // useScript("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
 
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.useScript)("/officer/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js");
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.useScript)("/officer/plugins/jvectormap/jquery-jvectormap-world-mill-en.js");
   (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.useScript)("/officer/dist/js/pages/dashboard2.js");
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // async function feedData() {

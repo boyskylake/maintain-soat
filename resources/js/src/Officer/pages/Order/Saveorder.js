@@ -191,7 +191,6 @@ function getStepContent(
         setActiveStep: setActiveStep,
         activeStep: activeStep,
     };
-    // console.log(step, setCompleted, completed, setActiveStep, activeStep);
     switch (step) {
         case 0:
             return (

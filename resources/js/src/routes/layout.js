@@ -10,7 +10,7 @@ import { userActions } from "./../Officer/redux/actions";
 // import components
 import routes from "../routes/routes";
 import OfficerLayout from "../Officer/layouts/OfficerLayout";
-import LinebotLayout from "../Linebot/layouts/LinebotLayout";
+// import LinebotLayout from "../Linebot/layouts/LinebotLayout";
 
 const Layout = ({ children, ...props }) => {
     const dispatch = useDispatch();
@@ -45,8 +45,8 @@ const Layout = ({ children, ...props }) => {
     switch (layout) {
         case "officer":
             return <OfficerLayout {...props}>{children}</OfficerLayout>;
-        case "linebot":
-            return <LinebotLayout {...props}>{children}</LinebotLayout>;
+        // case "linebot":
+        //     return <LinebotLayout {...props}>{children}</LinebotLayout>;
         default:
             return <Fragment>{children}</Fragment>;
     }

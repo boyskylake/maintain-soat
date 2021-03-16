@@ -6659,7 +6659,7 @@ function getStepContent(step, setCompleted, completed, setActiveStep, activeStep
     completed: completed,
     setActiveStep: setActiveStep,
     activeStep: activeStep
-  }; // console.log(step, setCompleted, completed, setActiveStep, activeStep);
+  };
 
   switch (step) {
     case 0:
@@ -6933,17 +6933,17 @@ function Step1Component(props, _ref) {
 
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-    className: "px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200",
+    className: "mt-10 pt-10 border-t border-gray-200",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
       className: "grid grid-cols-12 gap-4 row-gap-5 mt-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 sm:col-span-2",
+        className: "intro-y col-span-12 sm:col-span-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           className: "mb-2 text-left",
           children: "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
           type: "text",
-          className: "input w-full border-2 flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300",
+          className: "input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300",
           placeholder: "60xxxxxx",
           disabled: true,
           name: "inform_no",
@@ -6951,7 +6951,7 @@ function Step1Component(props, _ref) {
           ref: register
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 sm:col-span-6",
+        className: "intro-y col-span-12 sm:col-span-8",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           className: "mb-2 text-left",
           children: "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C\u0E2F"
@@ -6976,61 +6976,209 @@ function Step1Component(props, _ref) {
           children: ErrorsWord.coopid.required
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 sm:col-span-6",
+        className: "intro-y col-span-12 sm:col-span-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-          className: "mb-2",
-          children: "Subject"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
-          type: "text",
-          className: "input w-full border flex-1",
-          placeholder: "Important Meeting"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 sm:col-span-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-          className: "mb-2",
-          children: "Has the Words"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
-          type: "text",
-          className: "input w-full border flex-1",
-          placeholder: "Job, Work, Documentation"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 sm:col-span-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-          className: "mb-2",
-          children: "Doesn't Have"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
-          type: "text",
-          className: "input w-full border flex-1",
-          placeholder: "Job, Work, Documentation"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 sm:col-span-6",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-          className: "mb-2",
-          children: "Size"
+          className: "mb-2 text-left",
+          children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
-          className: "input w-full border flex-1",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
-            children: "10"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
-            children: "25"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
-            children: "35"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
-            children: "50"
+          "data-hide-search": "true",
+          className: "select2 w-full",
+          name: "receiver",
+          id: "receiver",
+          ref: register({
+            required: true
+          }),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+            if (cookies && cookies.pageone && cookies.pageone.receiver && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_9__.trim)(val.officer_id)) {// setCoopid(
+              //     cookies.pageone &&
+              //         cookies.pageone.coopid
+              // );
+            }
+
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("option", {
+              value: val.officer_id,
+              selected: cookies.pageone && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_9__.trim)(val.officer_id) ? true : false,
+              children: ["[".concat(val.officer_id, "]"), "\xA0\xA0", val.officer_name, "\xA0\xA0", val.officer_full_name]
+            }, i);
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
-          className: "button w-24 justify-center block bg-gray-200 text-gray-600",
-          children: "Previous"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
-          className: "button w-24 justify-center block bg-theme-1 text-white ml-2",
-          children: "Next"
+        className: "intro-y col-span-12 sm:col-span-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E1C\u0E39\u0E49\u0E41\u0E08\u0E49\u0E07"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("select", {
+          "data-hide-search": "true",
+          className: "select2 w-full",
+          name: "informer",
+          id: "informer",
+          ref: register({
+            required: true
+          }),
+          children: feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
+            if (watch("coopid") == val.id_pay_to) {
+              cookies && cookies.pageone && cookies.pageone.informer && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_9__.trim)(val.contact_no);
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("option", {
+                value: val.contact_no,
+                selected: cookies.pageone && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_9__.trim)(val.contact_no) ? true : false,
+                children: ["[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name]
+              }, i);
+            } else {//
+            }
+          })
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E1C\u0E39\u0E49\u0E41\u0E01\u0E49\u0E44\u0E02"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
+          "data-hide-search": "true",
+          className: "select2 w-full",
+          name: "editor_id",
+          id: "editor_id",
+          ref: register({
+            required: true
+          }),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("option", {
+              value: val.officer_id,
+              children: ["[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name]
+            }, i);
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+          type: "text",
+          name: "receive_date",
+          autoComplete: "off",
+          "data-mask": "99/99/9999",
+          "data-inputmask": "'mask': '99/99/9999'",
+          className: "input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300",
+          ref: register,
+          value: cookies.pageone && cookies.pageone.receive_date
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E40\u0E27\u0E25\u0E32\u0E19\u0E31\u0E14\u0E2B\u0E21\u0E32\u0E22"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+          type: "text",
+          name: "appointns",
+          autoComplete: "off",
+          "data-mask": "99:99 \u0E16\u0E36\u0E07 99:99",
+          "data-inputmask": "'mask': '99:99 \u0E16\u0E36\u0E07 99:99'",
+          className: "text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300",
+          ref: register,
+          value: cookies.pageone && cookies.pageone.receive_date
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E41\u0E25\u0E49\u0E27\u0E40\u0E2A\u0E23\u0E47\u0E08"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+          type: "text",
+          name: "finished_date_tdate",
+          autoComplete: "off",
+          "data-mask": "99/99/9999",
+          "data-inputmask": "'mask': '99/99/9999'",
+          className: "text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300",
+          ref: register,
+          value: cookies.pageone && cookies.pageone.start_date_tdata
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E27\u0E34\u0E18\u0E35\u0E01\u0E32\u0E23\u0E41\u0E01\u0E49\u0E44\u0E02"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "flex flex-col sm:flex-row mt-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "form-check mr-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                // id="radio-switch-4"
+                className: "form-check-input",
+                type: "radio",
+                name: "r3",
+                ref: register
+              }), "\xA0\xA0\xA0\xA0 \u0E44\u0E21\u0E48\u0E23\u0E30\u0E1A\u0E38\xA0\xA0\xA0\xA0"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                // id="radio-switch-4"
+                className: "form-check-input",
+                type: "radio",
+                name: "r3",
+                ref: register
+              }), "\xA0\xA0\xA0\xA0 Telephone\xA0\xA0\xA0\xA0"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                // id="radio-switch-4"
+                className: "form-check-input",
+                type: "radio",
+                name: "r3",
+                ref: register
+              }), "\xA0\xA0\xA0\xA0 Modem\xA0\xA0\xA0\xA0"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                // id="radio-switch-4"
+                className: "form-check-input",
+                type: "radio",
+                name: "r3",
+                ref: register
+              }), "\xA0\xA0\xA0\xA0 Onsite\xA0\xA0\xA0\xA0"]
+            })]
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17\u0E07\u0E32\u0E19"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
+          "data-hide-search": "true",
+          className: "select2 w-full",
+          name: "inform_type",
+          id: "inform_type",
+          ref: register,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {}), feedData.data && feedData.data.ucf_inform_type && feedData.data.ucf_inform_type.map(function (val, i) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("option", {
+              value: val.inform_type,
+              children: ["[".concat(val.inform_type, "]"), "\xA0\xA0\xA0", val.type_desc]
+            }, i);
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "SA"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
+          "data-hide-search": "true",
+          className: "select2 w-full",
+          name: "sa_id",
+          id: "sa_id",
+          ref: register,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("option", {
+              value: val.officer_id,
+              children: ["[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name]
+            }, i);
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+        className: "intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
+          type: "submit",
+          className: "button w-36 justify-center block bg-theme-1 text-white ml-2",
+          children: "\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19\u0E01\u0E32\u0E23\u0E15\u0E48\u0E2D"
+        })
       })]
     })
   });

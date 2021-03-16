@@ -12,6 +12,8 @@ function OfficerLayout({ children }) {
     const feedData = useSelector((state) => state.feedData);
 
     return (
+        <Fragment>
+            {/* <MenuMobile /> */}
         <div className="flex officer-content px-8 py-3">
             {/* <Header /> */}
             <Sidebar />
@@ -26,6 +28,7 @@ function OfficerLayout({ children }) {
             </div>
             {/* <Footer /> */}
         </div>
+        </Fragment>
     );
 }
 

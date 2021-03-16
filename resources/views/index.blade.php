@@ -20,13 +20,13 @@
     </script>
 
     {{-- <!-- jQuery 3 --> --}}
-    <script src="{{ asset('officer/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('officer/bower_components/jquery/dist/jquery.min.js') }}"></script> --}}
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
      {{-- <!-- jvectormap --> --}}
-     <link rel="stylesheet" href="{{ asset('officer/bower_components/jvectormap/jquery-jvectormap.css') }}">
+     {{-- <link rel="stylesheet" href="{{ asset('officer/bower_components/jvectormap/jquery-jvectormap.css') }}"> --}}
 
     {{-- <link href="/officer/dist/fontawesome/css/fontawesome.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('officer/dist/fontawesome/css/all.min.css')}}">
@@ -43,7 +43,7 @@
 
     {{-- <!-- jQuery 3 --> --}}
     {{-- <script src="{{ asset('officer/bower_components/jquery/dist/jquery.min.js') }}"></script> --}}
-    
+
 
 </body>
 
