@@ -151,7 +151,7 @@ function Step1Component(
     // console.log(cookies.pageone && cookies.pageone.receive_date);
     return (
         <div className="mt-10 pt-10 border-t border-gray-200">
-            {/* <div className="font-medium text-left">แก้ไข/บันทึก</div> */}
+            <div className="font-medium text-left">แก้ไข/บันทึก</div>
             <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
                 {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
                 {/* เลขที่รายการ */}

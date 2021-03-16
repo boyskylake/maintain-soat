@@ -7,9 +7,6 @@ import { feedDataAction } from "../../../redux/actions";
 
 import { useCookies } from "react-cookie";
 
-import { trim } from "jquery";
-import Services from "../../../redux/services/services";
-
 function Step2Component(
     props,
     { setCompleted, completed, setActiveStep, activeStep, step }
@@ -18,9 +15,11 @@ function Step2Component(
         "pageone",
         "pagetwo",
     ]);
+    // console.log(props);
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const [confirmSubmit, setconfirmSubmit] = useState(false);
+    // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
 
     const [CookiePageOne, setCookiePageOne] = useState();
@@ -75,7 +74,7 @@ function Step2Component(
 
                 document.getElementById("Detail").style.display = "block";
                 $(".select2").select2();
-                // CKEDITOR.replace("editor1");
+                CKEDITOR.replace("editor1");
                 //bootstrap WYSIHTML5 - text editor
                 $(".textarea").wysihtml5();
                 document.getElementById("informer").disabled = false;
