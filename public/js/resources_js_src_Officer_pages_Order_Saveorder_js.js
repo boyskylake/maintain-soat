@@ -6451,18 +6451,14 @@ function Saveorder() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       confirmSubmit = _useState2[0],
-      setconfirmSubmit = _useState2[1]; // const [inputs, setInputs] = useState(["ma_coop"]);
-
+      setconfirmSubmit = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       coopid = _useState4[0],
       setCoopid = _useState4[1];
 
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_5__.useScript)("/officer/dist/js/pages/saveorder.js"); // useScript("/officer/bower_components/ckeditor/ckeditor.js");
-  // useScript(
-  //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-  // );
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_5__.useScript)("/officer/dist/js/pages/saveorder.js");
 
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_3__.useForm)(),
       register = _useForm.register,
@@ -6535,9 +6531,7 @@ function Saveorder() {
   };
 
   var handleNext = function handleNext() {
-    var newActiveStep = isLastStep() && !allStepsCompleted() ? // It's the last step, but not all steps have been completed
-    // find the first step that has been completed
-    steps.findIndex(function (step, i) {
+    var newActiveStep = isLastStep() && !allStepsCompleted() ? steps.findIndex(function (step, i) {
       return !completed.has(i);
     }) : activeStep + 1;
     setActiveStep(newActiveStep);
@@ -6584,22 +6578,11 @@ function Saveorder() {
     }
 
     feedData();
-  }, [dispatch, removeCookie]); // useEffect(() => {
-  //     if (coopid != "") {
-  //         alert(coopid);
-  //     }
-  // }, [coopid])
-  // $(document).ready(function(){
-  //     document.getElementById("Detail").style.display = "none";
-  // });
-
+  }, [dispatch, removeCookie]);
   $(function () {
     $(document.body).on("change", "#coopid", function () {
       if (coopid == null) {
-        // console.log(coopid);
-        document.getElementById("Detail").style.display = "block";
-        $(".select2").select2(); // CKEDITOR.replace("editor1");
-        //bootstrap WYSIHTML5 - text editor
+        document.getElementById("Detail").style.display = "block"; // $(".select2").select2();
 
         $(".textarea").wysihtml5();
         document.getElementById("informer").disabled = false;
@@ -6608,46 +6591,60 @@ function Saveorder() {
       setCoopid(this.value);
     });
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-    className: "content-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("section", {
-      className: "content",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-        className: "box box-default",
-        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core_Stepper__WEBPACK_IMPORTED_MODULE_13__.default, {
-          alternativeLabel: true,
-          nonLinear: true,
-          activeStep: activeStep,
-          children: steps.map(function (label, index) {
-            var stepProps = {};
-            var buttonProps = {};
-
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
-
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core_Step__WEBPACK_IMPORTED_MODULE_14__.default, _objectSpread(_objectSpread({}, stepProps), {}, {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_15__.default, _objectSpread(_objectSpread({
-                onClick: handleStep(index),
-                completed: isStepComplete(index)
-              }, buttonProps), {}, {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h1", {
-                  className: "text-sm lg:text-lg text-gray-700 font-medium hover:font-bold",
-                  style: {
-                    fontFamily: "FontDefault"
-                  },
-                  children: label
-                })
-              }))
-            }), label);
-          })
-        }), activeStep === steps.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-          children: " \u0E17\u0E48\u0E32\u0E19\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E04\u0E23\u0E1A\u0E17\u0E38\u0E01\u0E2A\u0E48\u0E27\u0E19\u0E41\u0E25\u0E49\u0E27"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-          children: getStepContent(activeStep, setCompleted, completed, setActiveStep, activeStep)
-        })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+      className: "flex items-center mt-8",
+      style: {
+        fontFamily: 'Kanit'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h2", {
+        className: "intro-y text-lg font-medium mr-auto",
+        children: "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E41\u0E01\u0E49\u0E44\u0E02 order"
       })
-    })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+      className: "intro-y box py-10 sm:py-20 mt-5",
+      style: {
+        fontFamily: 'Kanit'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("section", {
+        className: "wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          className: "intro-x lg:text-center flex items-center lg:block flex-1 z-10",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core_Stepper__WEBPACK_IMPORTED_MODULE_13__.default, {
+            alternativeLabel: true,
+            nonLinear: true,
+            activeStep: activeStep,
+            children: steps.map(function (label, index) {
+              var stepProps = {};
+              var buttonProps = {};
+
+              if (isStepSkipped(index)) {
+                stepProps.completed = false;
+              }
+
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core_Step__WEBPACK_IMPORTED_MODULE_14__.default, _objectSpread(_objectSpread({}, stepProps), {}, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_15__.default, _objectSpread(_objectSpread({
+                  onClick: handleStep(index),
+                  completed: isStepComplete(index)
+                }, buttonProps), {}, {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h1", {
+                    className: "text-sm lg:text-lg text-gray-700 font-medium hover:font-bold",
+                    style: {
+                      fontFamily: "FontDefault"
+                    },
+                    children: label
+                  })
+                }))
+              }), label);
+            })
+          }), activeStep === steps.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+            children: " \u0E17\u0E48\u0E32\u0E19\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E04\u0E23\u0E1A\u0E17\u0E38\u0E01\u0E2A\u0E48\u0E27\u0E19\u0E41\u0E25\u0E49\u0E27"
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+            children: getStepContent(activeStep, setCompleted, completed, setActiveStep, activeStep)
+          })]
+        })
+      })
+    })]
   });
 }
 
@@ -6778,8 +6775,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Step1Component(props, _ref) {
-  var _errors$receiver, _errors$coopid, _errors$informer;
-
   var setCompleted = _ref.setCompleted,
       completed = _ref.completed,
       setActiveStep = _ref.setActiveStep,
@@ -6827,7 +6822,8 @@ function Step1Component(props, _ref) {
       setCoopid = _useState4[1]; // useScript("/officer/dist/js/pages/saveorder.js");
 
 
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_7__.useScript)("/officer/dist/js/pages/saveorder.js"); // useScript("/officer/bower_components/ckeditor/ckeditor.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_7__.useScript)("/officer/dist/js/pages/saveorder.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_7__.useScript)("/officer/dist/js/pages/Officerlayoutscript.js"); // useScript("/officer/bower_components/ckeditor/ckeditor.js");
   // useScript(
   //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
   // );
@@ -6869,7 +6865,7 @@ function Step1Component(props, _ref) {
 
   var getUploadParams = function getUploadParams() {
     return {
-      url: 'https://httpbin.org/post'
+      url: "https://httpbin.org/post"
     };
   };
 
@@ -6940,550 +6936,75 @@ function Step1Component(props, _ref) {
     var newActiveStep = props.activeStep + 1; // console.log(newActiveStep)
 
     props.setActiveStep(newActiveStep);
-  };
+  }; // console.log(cookies.pageone && cookies.pageone.receive_date);
 
-  console.log(cookies.pageone && cookies.pageone.receive_date);
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-    className: "box-body",
+    className: "px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-      className: "box-header",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("form", {
-        onSubmit: handleSubmit(onSubmit),
-        autoComplete: "false",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-          className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-            className: "col-md-3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "input-group",
-                style: {
-                  border: "1.5px solid #3c8dbc",
-                  borderRadius: 5
-                },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                  className: "input-group-addon",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                    className: "fa fa-reorder"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  readOnly: true,
-                  type: "text",
-                  name: "inform_no",
-                  className: "form-control",
-                  value: "",
-                  ref: register
-                })]
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group receiver",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                name: "receiver",
-                id: "receiver",
-                className: "form-control select2",
-                ref: register({
-                  required: true
-                }) // required
-                ,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
-                  if (cookies && cookies.pageone && cookies.pageone.receiver && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.officer_id)) {// setCoopid(
-                    //     cookies.pageone &&
-                    //         cookies.pageone.coopid
-                    // );
-                  }
-
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                    value: val.officer_id,
-                    selected: cookies.pageone && cookies.pageone.receiver == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.officer_id) ? true : false,
-                    children: ["[".concat(val.officer_id, "]"), "\xA0\xA0", val.officer_name, "\xA0\xA0", val.officer_full_name]
-                  }, i);
-                })]
-              }), ((_errors$receiver = errors.receiver) === null || _errors$receiver === void 0 ? void 0 : _errors$receiver.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(ErrorSpan, {
-                className: "",
-                children: ErrorsWord.receiver.required
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "input-group",
-                style: {
-                  border: "1.5px solid #3c8dbc",
-                  borderRadius: 2
-                },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                  className: "input-group-addon",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                    className: "fa fa-calendar"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "text",
-                  name: "receive_date",
-                  className: "form-control",
-                  autoComplete: "off",
-                  "data-mask": "99/99/9999",
-                  "data-inputmask": "'mask': '99/99/9999'",
-                  ref: register,
-                  value: cookies.pageone && cookies.pageone.receive_date
-                })]
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("b", {
-                  children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E19\u0E31\u0E14\u0E2B\u0E21\u0E32\u0E22"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "input-group",
-                style: {
-                  border: "1.5px solid blue",
-                  borderRadius: 2
-                },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                  className: "input-group-addon",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                    className: "fa fa-calendar"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "text",
-                  name: "appointment_date",
-                  className: "form-control",
-                  "data-mask": "99/99/9999",
-                  "data-inputmask": "'mask': '99/99/9999'",
-                  ref: register,
-                  value: cookies.pageone && cookies.pageone.start_date_tdata,
-                  autoComplete: "off"
-                })]
-              })]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-            className: "col-md-9",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group coopid",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C\u0E2F"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                name: "coopid",
-                id: "coopid",
-                className: "form-control select2",
-                ref: register({
-                  required: true
-                }) // required
-                ,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ma_coop && feedData.data.ma_coop.map(function (val, i) {
-                  if (cookies && cookies.pageone && cookies.pageone.coopid && cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.coop_id)) {// setCoopid(
-                    //     cookies.pageone &&
-                    //         cookies.pageone.coopid
-                    // );
-                  }
-
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                    value: val.coop_id,
-                    selected: cookies.pageone && cookies.pageone.coopid == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.coop_id) ? true : false,
-                    children: [val.coop_id, " ", val.coop_name]
-                  }, i);
-                })]
-              }), ((_errors$coopid = errors.coopid) === null || _errors$coopid === void 0 ? void 0 : _errors$coopid.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(ErrorSpan, {
-                className: "",
-                children: ErrorsWord.coopid.required
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "col-md-6",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "form-group receiver",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                  children: "\u0E1C\u0E39\u0E49\u0E41\u0E08\u0E49\u0E07"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("select", {
-                  name: "informer",
-                  id: "informer",
-                  className: "form-control select2",
-                  ref: register({
-                    required: true
-                  }) // required
-                  ,
-                  children: feedData.data && feedData.data.ucf_customer_contact && feedData.data.ucf_customer_contact.map(function (val, i) {
-                    if (watch("coopid") == val.id_pay_to) {
-                      cookies && cookies.pageone && cookies.pageone.informer && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.contact_no);
-                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                        value: val.contact_no,
-                        selected: cookies.pageone && cookies.pageone.informer == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.contact_no) ? true : false,
-                        children: ["[".concat(val.contact_no, "]"), "\xA0\xA0\xA0", val.contract_name]
-                      }, i);
-                    } else {//
-                    }
-                  })
-                }), ((_errors$informer = errors.informer) === null || _errors$informer === void 0 ? void 0 : _errors$informer.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(ErrorSpan, {
-                  className: "",
-                  children: ErrorsWord.informer.required
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                  children: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E2D\u0E49\u0E32\u0E07\u0E2D\u0E34\u0E07"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "text",
-                  name: "ref_doc_no",
-                  className: "form-control",
-                  autoComplete: "off",
-                  style: {
-                    border: "1.5px solid #3c8dbc",
-                    borderRadius: 2
-                  },
-                  ref: register({// required: true,
-                  })
-                }), errors.doc_make && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
-                  children: "This field is required"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                  children: "\u0E40\u0E27\u0E25\u0E32\u0E19\u0E31\u0E14\u0E2B\u0E21\u0E32\u0E22"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "input-group",
-                  style: {
-                    border: "1.5px solid blue",
-                    borderRadius: 2
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                    className: "input-group-addon",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                      className: "fa fa-calendar"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                    type: "text",
-                    name: "appointns",
-                    className: "form-control pull-right" // id="Time-mask"
-                    // data-inputmask="'alias': 'HH:mm -  HH:mm'"
-                    ,
-                    "data-mask": "99:99 - 99:99",
-                    "data-inputmask": "'mask': '99:99 - 99:99'" // data-mask
-                    ,
-                    autoComplete: "off",
-                    ref: register({// required: true,
-                    })
-                  }), errors.dateRevice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
-                    children: "This field is required"
-                  })]
-                })]
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "col-md-6",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "form-group blueselect",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                  children: "\u0E1C\u0E39\u0E49\u0E41\u0E01\u0E49\u0E44\u0E02"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                  className: "form-control select2",
-                  name: "editor_id",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                      value: val.officer_id,
-                      children: ["[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name]
-                    }, i);
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("b", {
-                    children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E40\u0E23\u0E34\u0E48\u0E21"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "input-group",
-                  style: {
-                    border: "1.5px solid blue",
-                    borderRadius: 2
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                    className: "input-group-addon",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                      className: "fa fa-calendar"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                    type: "text",
-                    name: "start_date_tdata",
-                    className: "form-control",
-                    "data-mask": "99/99/9999",
-                    "data-inputmask": "'mask': '99/99/9999'",
-                    ref: register,
-                    value: cookies.pageone && cookies.pageone.start_date_tdata,
-                    autoComplete: "off"
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                className: "form-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("b", {
-                    children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E41\u0E25\u0E49\u0E27\u0E40\u0E2A\u0E23\u0E47\u0E08"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "input-group",
-                  style: {
-                    border: "1.5px solid blue",
-                    borderRadius: 2
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                    className: "input-group-addon",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                      className: "fa fa-calendar"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                    type: "text",
-                    name: "finished_date_tdate",
-                    className: "form-control",
-                    "data-mask": "99/99/9999",
-                    "data-inputmask": "'mask': '99/99/9999'",
-                    ref: register,
-                    value: cookies.pageone && cookies.pageone.start_date_tdata,
-                    autoComplete: "off"
-                  })]
-                })]
-              })]
-            })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-          className: "row",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-            className: "col-md-9",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "\u0E27\u0E34\u0E18\u0E35\u0E01\u0E32\u0E23\u0E41\u0E01\u0E49\u0E44\u0E02"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("label", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "radio",
-                  name: "r3",
-                  className: "flat-red",
-                  ref: register
-                }), "\xA0\xA0\xA0\xA0 \u0E44\u0E21\u0E48\u0E23\u0E30\u0E1A\u0E38\xA0\xA0\xA0\xA0"]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("label", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "radio",
-                  name: "r3",
-                  className: "flat-red",
-                  ref: register
-                }), "\xA0\xA0\xA0\xA0 Telephone\xA0\xA0\xA0\xA0"]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("label", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "radio",
-                  name: "r3",
-                  className: "flat-red",
-                  ref: register
-                }), "\xA0\xA0\xA0\xA0 Modem\xA0\xA0\xA0\xA0"]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("label", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                  type: "radio",
-                  name: "r3",
-                  className: "flat-red",
-                  ref: register
-                }), "\xA0\xA0\xA0\xA0 Onsite\xA0\xA0\xA0\xA0"]
-              })]
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-          className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-            className: "col-md-3",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group blueselect",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17\u0E07\u0E32\u0E19"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                name: "inform_type",
-                className: "form-control select2",
-                ref: register,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ucf_inform_type && feedData.data.ucf_inform_type.map(function (val, i) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                    value: val.inform_type,
-                    children: ["[".concat(val.inform_type, "]"), "\xA0\xA0\xA0", val.type_desc]
-                  }, i);
-                })]
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-            className: "col-md-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "form-group orangeselect",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                children: "SA"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                className: "form-control select2",
-                ref: register,
-                name: "sa_id",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ucf_officer && feedData.data.ucf_officer.map(function (val, i) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                    value: val.officer_id,
-                    children: ["[".concat(val.officer_id, "]"), "\xA0\xA0\xA0", val.officer_name, "\xA0\xA0\xA0\xA0\xA0", val.officer_full_name]
-                  }, i);
-                })]
-              })]
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-          className: "box box-danger",
-          id: "Detail",
-          style: {
-            border: "2px solid #dd4b39",
-            display: "none"
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-            className: "box-header",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("h3", {
-              className: "box-title",
-              children: "\u0E23\u0E32\u0E22\u0E25\u0E30\u0E40\u0E2D\u0E35\u0E22\u0E14"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-            className: "box-body",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-              className: "row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                className: "col-md-3",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "form-group prinkselect",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                    children: "\u0E42\u0E1B\u0E23\u0E41\u0E01\u0E23\u0E21"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                    className: "form-control select2",
-                    name: "app_no",
-                    ref: register,
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
-                      if (cookies && cookies.pageone && cookies.pageone.app_no && cookies.pageone.app_no == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.app_no)) {//
-                      }
-
-                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                        value: val.app_no,
-                        selected: cookies.pageone && cookies.pageone.app_no == (0,jquery__WEBPACK_IMPORTED_MODULE_10__.trim)(val.app_no) ? true : false,
-                        children: ["[".concat(val.app_no, "]"), "\xA0\xA0\xA0", val.application, "\xA0\xA0\xA0", "[".concat(val.version, "]")]
-                      }, i);
-                    })]
-                  })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                className: "col-md-3",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                    children: "\u0E2A\u0E20\u0E32\u0E19\u0E30"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                    type: "text",
-                    name: "status",
-                    className: "form-control",
-                    autoComplete: "off",
-                    ref: register,
-                    style: {
-                      border: "1.5px solid #3c8dbc",
-                      borderRadius: 2
-                    }
-                  })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                className: "col-md-3",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "form-group prinkselect",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                    children: "\u0E23\u0E2B\u0E31\u0E2A\u0E1B\u0E31\u0E0D\u0E2B\u0E32"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
-                    className: "form-control select2",
-                    name: "problem_no",
-                    ref: register,
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {}), feedData.data && feedData.data.ucf_application && feedData.data.ucf_application.map(function (val, i) {
-                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("option", {
-                        value: val.app_no,
-                        children: ["[".concat(val.app_no, "]"), "\xA0\xA0\xA0", val.application, "\xA0\xA0\xA0", "[".concat(val.version, "]")]
-                      }, i);
-                    })]
-                  })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                className: "col-md-3",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                    children: "\u0E40\u0E27\u0E25\u0E32(\u0E19\u0E32\u0E17\u0E35)"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                    className: "input-group",
-                    namme: "estimeta_tir",
-                    style: {
-                      border: "1.5px solid #3c8dbc",
-                      borderRadius: 2
-                    },
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                      className: "input-group-addon",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("i", {
-                        className: "fa fa-calendar"
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-                      type: "text",
-                      name: "estimate_tir",
-                      className: "form-control",
-                      "data-inputmask": "'alias': 'dd/mm/yyyy'",
-                      "data-mask": true,
-                      ref: register,
-                      autoComplete: "off"
-                    })]
-                  })]
-                })
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-              className: "row",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-                className: "col-md-12",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
-                    children: "\u0E23\u0E32\u0E22\u0E25\u0E30\u0E40\u0E2D\u0E35\u0E22\u0E14 :"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_ckeditor_ckeditor5_react__WEBPACK_IMPORTED_MODULE_3__.CKEditor, {
-                    editor: (_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4___default()),
-                    data: "<p>Hello from CKEditor 5!</p>",
-                    onReady: function onReady(editor) {
-                      // You can store the "editor" and use when it is needed.
-                      console.log("Editor is ready to use!", editor);
-                    },
-                    onChange: function onChange(event, editor) {
-                      var data = editor.getData();
-                      console.log("onChange.", {
-                        event: event,
-                        editor: editor,
-                        data: data
-                      });
-                    },
-                    onBlur: function onBlur(event, editor) {
-                      console.log("Blur.", editor);
-                    },
-                    onFocus: function onFocus(event, editor) {
-                      console.log("Focus.", editor);
-                    }
-                  })]
-                })
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
-              type: "submit",
-              value: "\u0E14\u0E33\u0E40\u0E19\u0E34\u0E19\u0E01\u0E32\u0E23\u0E15\u0E48\u0E2D" // className="btn btn-block btn-primary btn-lg"
-              ,
-              className: "p-2 flex m-auto justify-center text-gray-800 rounded-lg w-32 bg-blue-400 shadow-sm text-base lg:text-5xl",
-              style: {
-                width: "200px",
-                marginLeft: "1380px"
-              }
-            })]
+      className: "grid grid-cols-12 gap-4 row-gap-5 mt-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          className: "mb-2 text-left",
+          children: "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
+          type: "text",
+          className: "input w-full border-2 flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300",
+          placeholder: "60xxxxxx",
+          disabled: true,
+          name: "inform_no",
+          value: "",
+          ref: register
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        className: "intro-y col-span-12 sm:col-span-6"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          className: "mb-2",
+          children: "Has the Words"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
+          type: "text",
+          className: "input w-full border flex-1",
+          placeholder: "Job, Work, Documentation"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          className: "mb-2",
+          children: "Doesn't Have"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("input", {
+          type: "text",
+          className: "input w-full border flex-1",
+          placeholder: "Job, Work, Documentation"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+        className: "intro-y col-span-12 sm:col-span-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          className: "mb-2",
+          children: "Size"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("select", {
+          className: "input w-full border flex-1",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {
+            children: "10"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {
+            children: "25"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {
+            children: "35"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("option", {
+            children: "50"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)((react_dropzone_uploader__WEBPACK_IMPORTED_MODULE_6___default()), {
-        getUploadParams: getUploadParams,
-        onChangeStatus: handleChangeStatus,
-        onSubmit: handleSubmit1,
-        styles: {
-          dropzone: {
-            minHeight: 200,
-            maxHeight: 250
-          }
-        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+        className: "intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+          className: "button w-24 justify-center block bg-gray-200 text-gray-600",
+          children: "Previous"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+          className: "button w-24 justify-center block bg-theme-1 text-white ml-2",
+          children: "Next"
+        })]
       })]
     })
   });

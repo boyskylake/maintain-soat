@@ -860,7 +860,8 @@ var Header = function Header() {
   // useBodyClass("skin-yellow");
   // useBodyClass("sidebar-mini");
 
-  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/dist/js/pages/Officerlayoutscript.js");
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_4__.useScript)("/officer/dist/js/pages/Officerlayoutscript.js"); // useScript("/officer/dist/js/pages/Effect/side-menu.js");
+
   var feedData = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.feedData;
   });
@@ -935,6 +936,9 @@ var Header = function Header() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "intro-x relative mr-3 sm:mr-6",
+        style: {
+          fontFamily: 'Kanit'
+        },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "search hidden sm:block",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
@@ -1350,7 +1354,8 @@ var Sidebar = function Sidebar() {
     return state.feedData;
   });
   var service = new _redux_services_services__WEBPACK_IMPORTED_MODULE_5__.default(); // useScript("/officer/dist/js/pages/Officerayoutscrip.js");
-  // const [inputs, setInputs] = useState(["ma_coop"]);
+
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.useScript)("/officer/dist/js/pages/Effect/tab.js"); // const [inputs, setInputs] = useState(["ma_coop"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1395,6 +1400,9 @@ var Sidebar = function Sidebar() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("nav", {
     className: "side-nav",
+    style: {
+      fontFamily: 'Kanit'
+    },
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
       href: "",
       className: "intro-x flex items-center pl-5 pt-4",

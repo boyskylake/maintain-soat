@@ -14,6 +14,7 @@ const Sidebar = () => {
     const service = new Services();
 
     // useScript("/officer/dist/js/pages/Officerayoutscrip.js");
+    useScript("/officer/dist/js/pages/Effect/tab.js");
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
     const [FeedMenu, setFeedMenu] = useState();
@@ -32,7 +33,7 @@ const Sidebar = () => {
     }, [dispatch]);
     // console.log("feedData", feedData);
     return (
-        <nav className="side-nav">
+        <nav className="side-nav" style={{fontFamily:'Kanit'}}>
             <a href="" className="intro-x flex items-center pl-5 pt-4">
                 <span className="hidden xl:block text-white text-lg ml-3 font-medium">
                     Soat

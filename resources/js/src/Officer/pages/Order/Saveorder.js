@@ -22,14 +22,9 @@ function Saveorder() {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const [confirmSubmit, setconfirmSubmit] = useState(false);
-    // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
 
     useScript("/officer/dist/js/pages/saveorder.js");
-    // useScript("/officer/bower_components/ckeditor/ckeditor.js");
-    // useScript(
-    //     "/officer/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-    // );
 
     const { register, handleSubmit, watch, errors } = useForm();
 
@@ -78,9 +73,7 @@ function Saveorder() {
     const handleNext = () => {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
-                ? // It's the last step, but not all steps have been completed
-                  // find the first step that has been completed
-                  steps.findIndex((step, i) => !completed.has(i))
+                ? steps.findIndex((step, i) => !completed.has(i))
                 : activeStep + 1;
 
         setActiveStep(newActiveStep);
@@ -108,25 +101,11 @@ function Saveorder() {
         feedData();
     }, [dispatch, removeCookie]);
 
-    // useEffect(() => {
-    //     if (coopid != "") {
-    //         alert(coopid);
-    //     }
-
-    // }, [coopid])
-
-    // $(document).ready(function(){
-    //     document.getElementById("Detail").style.display = "none";
-    // });
-
     $(function () {
         $(document.body).on("change", "#coopid", function () {
             if (coopid == null) {
-                // console.log(coopid);
                 document.getElementById("Detail").style.display = "block";
-                $(".select2").select2();
-                // CKEDITOR.replace("editor1");
-                //bootstrap WYSIHTML5 - text editor
+                // $(".select2").select2();
                 $(".textarea").wysihtml5();
                 document.getElementById("informer").disabled = false;
             }
@@ -136,10 +115,16 @@ function Saveorder() {
     });
 
     return (
-        <div className="content-wrapper">
-            <section className="content">
-                <div className="box box-default">
-                    {" "}
+        <div>
+            <div className="flex items-center mt-8"style={{fontFamily:'Kanit'}}>
+                <h2 className="intro-y text-lg font-medium mr-auto">
+                    บันทึกแก้ไข order
+                </h2>
+            </div>
+            {/* BEGIN: Wizard Layout */}
+            <div className="intro-y box py-10 sm:py-20 mt-5"style={{fontFamily:'Kanit'}}>
+                <section className="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
+                    <div className="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
                     <Stepper alternativeLabel nonLinear activeStep={activeStep}>
                         {steps.map((label, index) => {
                             const stepProps = {};
@@ -180,12 +165,9 @@ function Saveorder() {
                             )}
                         </div>
                     )}
-                    {/* {feedData.fetching && (
-                        <Lodingicon/>
-                    )} */}
-                </div>
-            </section>
-            {/* /.content */}
+                    </div>
+                </section>
+            </div>
         </div>
     );
 }
@@ -222,14 +204,14 @@ function getStepContent(
                     activeStep={activeStep}
                     step={step}
                 />
-            //     <Step3Component
-            //     props={data}
-            //     setCompleted={setCompleted}
-            //     completed={completed}
-            //     setActiveStep={setActiveStep}
-            //     activeStep={activeStep}
-            //     step={step}
-            // />
+                //     <Step3Component
+                //     props={data}
+                //     setCompleted={setCompleted}
+                //     completed={completed}
+                //     setActiveStep={setActiveStep}
+                //     activeStep={activeStep}
+                //     step={step}
+                // />
             );
         case 1:
             return (

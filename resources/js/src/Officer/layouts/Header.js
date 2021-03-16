@@ -24,6 +24,8 @@ const Header = () => {
     // useBodyClass("sidebar-mini");
 
     useScript("/officer/dist/js/pages/Officerlayoutscript.js");
+    // useScript("/officer/dist/js/pages/Effect/side-menu.js");
+
 
 
     const feedData = useSelector((state) => state.feedData);
@@ -75,7 +77,7 @@ const Header = () => {
             </div>
             {/* <!-- END: Breadcrumb -->
         <!-- BEGIN: Search --> */}
-            <div className="intro-x relative mr-3 sm:mr-6">
+            <div className="intro-x relative mr-3 sm:mr-6" style={{fontFamily:'Kanit'}}>
                 <div className="search hidden sm:block">
                     <input
                         type="text"
