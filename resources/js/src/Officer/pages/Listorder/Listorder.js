@@ -83,60 +83,9 @@ function Listorder() {
     return (
         <Fragment>
         <div className="content-wrapper">
-            {/* Content Header (Page header) */}
-            {/* Main content */}
-            <section className="content">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div className="box">
-                            <div className="box-header">
-                                <h3 className="box-title">
-                                    รายการ Order ทั้งหมด
-                                </h3>
-
-
-                            </div>
-                            {/* <br />
-                            <div className="col-md-3">
-                                <select
-                                    name="filter_year"
-                                    id="filter_year"
-                                    className="form-control"
-                                    required
-                                >
-                                    <i
-                                        data-feather="printer"
-                                        className="w-4 h-4 mr-2"
-                                    />{" "}
-                                    Print
-                                </a>
-                                <a
-                                    href
-                                    className="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md"
-                                >
-                                    <i
-                                        data-feather="file-text"
-                                        className="w-4 h-4 mr-2"
-                                    />{" "}
-                                    Export to Excel
-                                </a>
-                                <a
-                                    href
-                                    className="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md"
-                                >
-                                    <i
-                                        data-feather="file-text"
-                                        className="w-4 h-4 mr-2"
-                                    />{" "}
-                                    Export to PDF
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 {/* BEGIN: Data List */}
                 <div className="intro-y datatable-wrapper col-span-12 overflow-auto lg:overflow-visible">
-                    <table className="table table-report datatable -mt-2" id="example2">
+                    <table className="table table-report datatable -mt-2 text-center" id="example2" style={{ fontFamily: "Kanit" }}>
                         <thead>
                             <tr>
                                 <th className="whitespace-no-wrap">เลขที่</th>

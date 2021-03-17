@@ -120,7 +120,7 @@ function Profile() {
                 <h2 className=" mr-auto text-gray-600 hover:text-yellow-500 font-black text-3xl">Profile Layout</h2>
             </div>
 
-            <div className="intro-y box px-8 pt-5 mt-5">
+            <div className="intro-y box px-8 pt-5 mt-5" style={{ fontFamily: "Kanit" }}>
                 <div className="flex flex-col lg:flex-row border-b border-gray-200 pb-5 -mx-5">
                     <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
                         <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative transition duration-500 transform hover:-translate-y-1 hover:scale-110">

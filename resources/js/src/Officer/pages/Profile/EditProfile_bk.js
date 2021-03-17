@@ -96,7 +96,8 @@ function EditProfile() {
 
                                     <form
                                         id="pom"
-                                        className="form-horizontal p-10"
+                                        className="form-horizontal p-10 "
+                                        style={{ fontFamily: "Kanit" }}
                                         onSubmit={handleSubmit(
                                             OnSubmitEditProfile
                                         )}
