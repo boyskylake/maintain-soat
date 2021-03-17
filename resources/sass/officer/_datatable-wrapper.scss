@@ -37,9 +37,9 @@
         @media (max-width: $sm) {
             @apply -ml-3;
         }
-        thead tr th {
-            @apply border-t-2 py-4;
-        }
+        // thead tr th {
+        //     @apply border-t-2 py-4;
+        // }
         tbody tr {
             @apply bg-gray-200;
             &:nth-child(even) {

@@ -3,13 +3,14 @@
         border-spacing: 0 10px;
         @apply border-separate;
         td {
-            @apply bg-white;
+            @apply bg-white transition-all duration-500 transform hover:-translate-y-1 hover:scale-110;
             box-shadow: 20px 3px 20px #0000000b;
+
             &:first-child {
-                @apply rounded-l-md;
+                @apply rounded-l-md ;
             }
             &:last-child {
-                @apply rounded-r-md;
+                @apply rounded-r-md ;
             }
             &.table-report__action {
                 @apply py-0 relative;

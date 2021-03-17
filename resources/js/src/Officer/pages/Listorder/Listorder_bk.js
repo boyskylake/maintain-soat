@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // import "datatables.net-dt/css/jquery.dataTables.css";
@@ -7,8 +7,9 @@ import Lodingicon from "../../components/utils/Lodingicon";
 
 // $.DataTable = require("datatables.net");
 
-import dt from 'datatables.net'
-import dtResponsive from 'datatables.net-responsive-dt'
+import dt from "datatables.net";
+import dtResponsive from "datatables.net-responsive-dt";
+import { useState } from "react";
 
 function Listorder() {
     // const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function Listorder() {
                 [10, 25, 50, 100, "All"],
             ],
             order: [[0, "desc"]],
+            // pagingType: "simple",
             processing: true,
             serverSide: true,
             responsive: true,
@@ -66,112 +68,47 @@ function Listorder() {
                     data: null,
                     // className: "center",
                     defaultContent:
-                        '<div style="padding-right: 30px;"><a href=" " title="ลบ" class="btn btn-sm btn-danger pull-right delete style="margin-right: 5px; "><i class="fa fa-trash-o"></i><span class="hidden-xs hidden-sm"> ลบ</span></a>' +
-                        '<a href=" " title="แก้ไข" class="btn btn-sm btn-warning pull-right edit" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> <span class="hidden-xs hidden-sm">แก้ไข</span></a></div>' +
-                        '<a href=" " title="View" class="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">View</span></a>',
+                        '<div class="table-report__action w-56  ">' + '</div>'
                 },
             ],
         });
+
+        // $("#example2").DataTable({
+        //     responsive: true
+        // });
     }, [user]);
 
     return (
+        <Fragment>
         <div className="content-wrapper">
-            {/* Content Header (Page header) */}
-            <section className="content-header">
-                <h1>
-                    ดู order ทั้งหมด
-                    {/* <small>advanced tables</small> */}
-                </h1>
-                <ol className="breadcrumb">
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-dashboard" /> Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Tables</a>
-                    </li>
-                    <li className="active">Data tables</li>
-                </ol>
-            </section>
-            {/* Main content */}
-            <section className="content">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div className="box">
-                            <div className="box-header">
-                                <h3 className="box-title">
-                                    รายการ Order ทั้งหมด
-                                </h3>
-                            </div>
-                            <div className="box-body">
-                                <table
-                                    id="example2"
-                                    className="table table-bordered table-hover"
-                                    style={{
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                เลขที่
-                                            </th>
-                                            {/* <th>เลขสหกรณ์</th> */}
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                สหกรณ์
-                                            </th>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                วันที่รับแจ้ง
-                                            </th>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                ผู้รับแจ้ง
-                                            </th>
-                                            {/* <th>ประเภทงาน</th> */}
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                สถานะงาน
-                                            </th>
-                                            <th
-                                                style={{
-                                                    textAlign: "center",
-                                                }}
-                                            >
-                                                Action
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            {feedData.fetching && <Lodingicon />}
-                            {/* /.box-body */}
-                        </div>
-                    </div>
-                    {/* /.col */}
+                {/* BEGIN: Data List */}
+                <div className="intro-y datatable-wrapper col-span-12 overflow-auto lg:overflow-visible">
+                    <table className="table table-report datatable -mt-2 text-center" id="example2" style={{ fontFamily: "Kanit" }}>
+                        <thead>
+                            <tr>
+                                <th className="whitespace-no-wrap">เลขที่</th>
+                                <th className="whitespace-no-wrap">
+                                สหกรณ์
+                                </th>
+                                <th className="text-center whitespace-no-wrap">
+                                วันที่รับแจ้ง
+                                </th>
+                                <th className="text-center whitespace-no-wrap">
+                                ผู้รับแจ้ง
+                                </th>
+                                <th className="text-center whitespace-no-wrap">
+                                สถานะงาน
+                                </th>
+                                <th className="text-center whitespace-no-wrap">
+                                Action
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-                {/* /.row */}
-            </section>
-            {/* /.content */}
-        </div>
+                {/* END: Data List */}
+            </div>
+        </Fragment>
     );
 }
 

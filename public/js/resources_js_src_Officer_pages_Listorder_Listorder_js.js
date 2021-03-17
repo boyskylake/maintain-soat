@@ -119,7 +119,7 @@ function Listorder() {
       }, {
         data: null,
         // className: "center",
-        defaultContent: '<div style="padding-right: 30px;"><a href=" " title="ลบ" class="btn btn-sm btn-danger pull-right delete style="margin-right: 5px; "><i class="fa fa-trash-o"></i><span class="hidden-xs hidden-sm"> ลบ</span></a>' + '<a href=" " title="แก้ไข" class="btn btn-sm btn-warning pull-right edit" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> <span class="hidden-xs hidden-sm">แก้ไข</span></a></div>' + '<a href=" " title="View" class="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i class="fa fa-search"></i> <span class="hidden-xs hidden-sm">View</span></a>'
+        defaultContent: '<div class="table-report__action w-full ">' + '<div class="flex justify-center items-center">' + '<button href=" " title="ดู" class="font-light button rounded-8 bg-blue-200 hover:bg-blue-300 text-black w-16 mr-1 mb-2" style=" fontFamily: Kanit;"><i class="fas fa-eye"></i> <span class="hidden-xs hidden-sm"></span></button>' + '<button href=" " title="แก้ไข" class="font-light button rounded-8 bg-green-200 hover:bg-green-300 text-black w-16 mr-1 mb-2" style=" fontFamily: Kanit;"><i class="fas fa-edit pl-1"></i> <span class="hidden-xs hidden-sm"></span></button>' + '<button href=" " title="ลบ" class="font-light button rounded-8 bg-red-200 hover:bg-red-300 text-black w-16 mr-1 mb-2" style="fontFamily: Kanit;"><i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-confirmation-modal"></i> <span class="hidden-xs hidden-sm"></span></button></div></div>'
       }]
     }); // $("#example2").DataTable({
     //     responsive: true
@@ -127,39 +127,127 @@ function Listorder() {
   }, [user]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      className: "content-wrapper",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "intro-y datatable-wrapper col-span-12 overflow-auto lg:overflow-visible",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("table", {
-          className: "table table-report datatable -mt-2 text-center",
-          id: "example2",
+      className: "flex",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "content",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+          className: "intro-y text-lg mt-10 font-light",
           style: {
             fontFamily: "Kanit"
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                className: "whitespace-no-wrap",
-                children: "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                className: "whitespace-no-wrap",
-                children: "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                className: "text-center whitespace-no-wrap",
-                children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                className: "text-center whitespace-no-wrap",
-                children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                className: "text-center whitespace-no-wrap",
-                children: "\u0E2A\u0E16\u0E32\u0E19\u0E30\u0E07\u0E32\u0E19"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                className: "text-center whitespace-no-wrap",
-                children: "Action"
+          children: "Order \u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "grid grid-cols-12 gap-6 mt-5 w-full",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              className: "button text-white bg-theme-1 shadow-md mr-2",
+              children: "Add New Product"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "dropdown relative",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                className: "dropdown-toggle button px-2 box text-gray-700",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+                  className: "w-5 h-5 flex items-center justify-center",
+                  children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                    className: "w-4 h-4",
+                    "data-feather": "plus"
+                  }), " "]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "dropdown-box mt-10 absolute w-40 top-0 left-0 z-20",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                  className: "dropdown-box__content box p-2",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
+                    href: true,
+                    className: "flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md",
+                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      "data-feather": "printer",
+                      className: "w-4 h-4 mr-2"
+                    }), " ", "Print", " "]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
+                    href: true,
+                    className: "flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md",
+                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      "data-feather": "file-text",
+                      className: "w-4 h-4 mr-2"
+                    }), " ", "Export to Excel", " "]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
+                    href: true,
+                    className: "flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md",
+                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                      "data-feather": "file-text",
+                      className: "w-4 h-4 mr-2"
+                    }), " ", "Export to PDF", " "]
+                  })]
+                })
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "intro-y datatable-wrapper col-span-12 overflow-auto lg:overflow-visible",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("table", {
+              className: "table table-report datatable -mt-2  text-center",
+              id: "example2",
+              style: {
+                fontFamily: "Kanit"
+              },
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("thead", {
+                children: [feedData.fetching && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_utils_Lodingicon__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+                    className: "whitespace-no-wrap",
+                    children: "\u0E40\u0E25\u0E02\u0E17\u0E35\u0E48"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+                    className: "whitespace-no-wrap",
+                    children: "\u0E2A\u0E2B\u0E01\u0E23\u0E13\u0E4C"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+                    className: "text-center whitespace-no-wrap",
+                    children: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+                    className: "text-center whitespace-no-wrap",
+                    children: "\u0E1C\u0E39\u0E49\u0E23\u0E31\u0E1A\u0E41\u0E08\u0E49\u0E07"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+                    className: "text-center whitespace-no-wrap",
+                    children: "\u0E2A\u0E16\u0E32\u0E19\u0E30\u0E07\u0E32\u0E19"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+                    className: "text-center whitespace-no-wrap",
+                    children: "Action"
+                  })]
+                })]
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "modal",
+            id: "delete-confirmation-modal",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "modal__content",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                className: "p-5 text-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                  "data-feather": "x-circle",
+                  className: "w-16 h-16 text-theme-6 mx-auto mt-3"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  className: "text-3xl mt-5",
+                  children: "Are you sure?"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  className: "text-gray-600 mt-2",
+                  children: "Do you really want to delete these records? This process cannot be undone."
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                className: "px-5 pb-8 text-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                  type: "button",
+                  "data-dismiss": "modal",
+                  className: "button w-24 border text-gray-700 mr-1",
+                  children: "Cancel"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+                  type: "button",
+                  className: "button w-24 bg-theme-6 text-white",
+                  children: "Delete"
+                })]
               })]
             })
-          })
-        })
+          })]
+        })]
       })
     })
   });
