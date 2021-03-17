@@ -53,17 +53,18 @@ function Step3Component(
         // console.log(cookies.pageone.inform_type);
         // console.log(cookies.pagetwo.pagetwo);
         //
+
         if (
             cookies.pageone &&
             cookies.pageone.inform_type &&
-            // cookies.pagetwo.status == "1"
-            inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
+            cookies.pagetwo.status == "1"
+            // inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
         ) {
             // console.log(cookies.pageone, cookies.pagetwo);
             setCookiePageOne(cookies.pageone);
             setCookiePageTwo(cookies.pagetwo);
-            removeCookie("pageone");
-            removeCookie("pagetwo");
+            // removeCookie("pageone");
+            // removeCookie("pagetwo");
             feedData();
         } else {
             //
@@ -95,7 +96,15 @@ function Step3Component(
             //     feedDataAction.feedDataPost("/api/v1/officer/coopinfo",Mybody)
             // );
         }
+
+        return () => {
+            // console.log(CookiePageOne)
+            // console.log(CookiePageTwo)
+            // setCookie("pageone", JSON.stringify(CookiePageOne));
+            // setCookie("pagetwo", JSON.stringify(CookiePageTwo));
+        };
     }, [dispatch]);
+
 
     $(function () {});
 
@@ -111,25 +120,11 @@ function Step3Component(
         // console.log(newActiveStep)
         props.setActiveStep(newActiveStep);
     };
-    console.log(feedPostData);
-
+    // console.log(feedPostData);
+    console.log('pagethree',props);
     return (
         <div>
-            {/* {props.completed.has(0) ? (
-                <div className="m-2 text-center py-2">
-                    <div className="py-2">
-                        <i className="far fa-check-circle fa-5x text-emerald-400"></i>
-                    </div>
-                    <h3 className="text-gray-800 text-base font-medium">
-                        {" "}
-                        ท่านได้ดำเนินการขั้นตอนนี้เสร็จสมบรูณ์แล้ว
-                    </h3>
-                </div>
-            ) : (
-                <Fragment>
-                {props.completed.has(1) ? ( */}
-                    {/* <div className="box-body">
-                        <div className="box-header"> */}
+                {props.completed.has(0) && props.completed.has(1) ? (
                            <div className="book">
                                 <div className="page">
                                     <table className="table-fixed w-full text-lg">
@@ -916,7 +911,7 @@ function Step3Component(
                                     </table>
                                 </div>
                             </div>
-                     {/* ) : (
+                     ) : (
                          <Fragment>
                             <div className="m-2 text-center py-2">
                                 <div className="py-2">
@@ -929,8 +924,6 @@ function Step3Component(
                              </div>
                         </Fragment>
                     )}
-                </Fragment>
-            )} */}
         </div>
     );
 }

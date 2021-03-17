@@ -1,6 +1,3 @@
-// import { authHeader } from '../../helpers';
-// import { NotificationManager } from "react-notifications";
-
 class Services {
     getToken() {
         let user = JSON.parse(localStorage.getItem("user"));

@@ -1,9 +1,6 @@
 import { userConstants } from "../constants";
 import { userService } from "../services";
 
-// import { history } from "../../../helpers";
-// import { NotificationManager } from "react-notifications";
-
 export const userActions = {
     login,
     logout,

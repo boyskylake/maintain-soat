@@ -13,6 +13,8 @@ use SebastianBergmann\Environment\Console;
 
 class Profile extends Controller
 {
+
+    
     public function Profile()
     {
         // $ma_coop = DB::connection('oracle')->select("select * from MA_COOP");

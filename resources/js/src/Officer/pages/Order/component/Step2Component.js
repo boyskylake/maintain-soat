@@ -39,6 +39,7 @@ function Step2Component(
     }, []);
     // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
     const inform_type_only_c = ["07", "31", "03"];
+
     useEffect(() => {
         if (
             cookies.pageone &&
@@ -70,12 +71,12 @@ function Step2Component(
             if (coopid == null) {
                 // console.log(coopid);
 
-                document.getElementById("Detail").style.display = "block";
-                $(".select2").select2();
-                CKEDITOR.replace("editor1");
+                // document.getElementById("Detail").style.display = "block";
+                // $(".select2").select2();
+                // CKEDITOR.replace("editor1");
                 //bootstrap WYSIHTML5 - text editor
-                $(".textarea").wysihtml5();
-                document.getElementById("informer").disabled = false;
+                // $(".textarea").wysihtml5();
+                // document.getElementById("informer").disabled = false;
             }
 
             setCoopid(this.value);
@@ -110,6 +111,7 @@ function Step2Component(
                 <Fragment>
                     {props.completed.has(0) ? (
                         <div className="mt-10 pt-10 border-t border-gray-200">
+                       <form onSubmit={handleSubmit(onSubmit)} autoComplete="false">
                             {/* <div className="font-medium text-left">สำหรับ Order สั่งซื้อ</div> */}
                             <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
                                 {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
@@ -164,8 +166,6 @@ function Step2Component(
                                         type="text"
                                         name="contract_no"
                                         autoComplete="off"
-                                        // data-mask="999 วัน"
-                                        // data-inputmask="'mask': '999 วัน'"
                                         className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
                                         ref={register}
                                         value={
@@ -184,8 +184,6 @@ function Step2Component(
                                         type="text"
                                         name="order_value_amount"
                                         autoComplete="off"
-                                        // data-mask="999 วัน"
-                                        // data-inputmask="'mask': '999 วัน'"
                                         className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
                                         ref={register}
                                         value={
@@ -195,18 +193,19 @@ function Step2Component(
                                     />
                                 </div>
                                 <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                                    <button className="button w-24 justify-center block bg-green-500 text-white ml-2">
+                                       ย้อนกลับ
+                                    </button>
+
                                     <button
                                         type="submit"
-                                        className="button w-36 justify-center block bg-theme-1 text-white ml-2"
-                                    >
+                                        className="button w-36 justify-center block bg-theme-1 text-white ml-2" >
                                         ดำเนินการต่อ
                                     </button>
-                                    {/* <button className="button w-24 justify-center block bg-theme-1 text-white ml-2">
-                    Next
-                </button> */}
                                 </div>
                                 {/* </form> */}
                             </div>
+                            </form>
                         </div>
                     ) : (
                         <Fragment>

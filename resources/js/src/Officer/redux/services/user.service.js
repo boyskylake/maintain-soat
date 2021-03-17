@@ -1,6 +1,4 @@
 import { authHeader } from "../../../helpers";
-// import axios from 'axios';
-// import { NotificationManager } from "react-notifications";
 import toastr from "toastr";
 
 function login(username, password) {

@@ -6,7 +6,6 @@ import {
     Route,
     useLocation,
 } from "react-router-dom";
-// import { NotificationContainer } from "react-notifications";
 
 // import ScrollToTop from "../helpers/ScrollToTop";
 
@@ -33,7 +32,6 @@ const Routes = () => (
                 </Route>
             </Switch>
         </Layout>
-        {/* <NotificationContainer /> */}
     </Router>
 );
 

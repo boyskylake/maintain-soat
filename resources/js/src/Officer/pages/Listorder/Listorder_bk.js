@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useForm } from "react-hook-form";
 
-import { feedDataAction } from "../../redux/actions";
-
-import "datatables.net-dt/css/jquery.dataTables.css";
-import { Button } from "bootstrap";
+// import "datatables.net-dt/css/jquery.dataTables.css";
 
 import Lodingicon from "../../components/utils/Lodingicon";
 
-$.DataTable = require("datatables.net");
+// $.DataTable = require("datatables.net");
+
+import dt from 'datatables.net'
+import dtResponsive from 'datatables.net-responsive-dt'
 
 function Listorder() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
 
     // const { register, handleSubmit, watch, errors } = useForm();
@@ -20,15 +19,10 @@ function Listorder() {
     //     // console.log(data);
     //     // console.log(coopid);
     // };
+
     let user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
-        // async function feedData() {
-        //     await dispatch(
-        //         feedDataAction.feedDataGet("/api/v1/officer/Listorder")
-        //     );
-        // }
-
         $("#example2").DataTable({
             lengthMenu: [
                 [10, 25, 50, 100, -1],
@@ -78,8 +72,6 @@ function Listorder() {
                 },
             ],
         });
-
-        // feedData();
     }, [user]);
 
     return (
@@ -112,23 +104,7 @@ function Listorder() {
                                     รายการ Order ทั้งหมด
                                 </h3>
                             </div>
-                            {/* <br />
-                            <div className="col-md-3">
-                                <select
-                                    name="filter_year"
-                                    id="filter_year"
-                                    className="form-control"
-                                    required
-                                >
-                                    <option>เลือกปี</option>
-                                </select>
-                            </div>
-                            <br />
-                            <br />
-                            <br /> */}
-                            {/* /.box-header */}
                             <div className="box-body">
-                                {/* <table ref={main} /> */}
                                 <table
                                     id="example2"
                                     className="table table-bordered table-hover"

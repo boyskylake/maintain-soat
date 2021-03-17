@@ -1,12 +1,10 @@
-//import libs
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-
 import { useSelector } from "react-redux";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 
 function OfficerLayout({ children }) {
     const feedData = useSelector((state) => state.feedData);

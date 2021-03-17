@@ -67,7 +67,6 @@ mix.js("resources/js/app.js", "public/js")
     .extract([
         "@popperjs/core",
         "axios",
-        "bootstrap",
         "clsx",
         "history",
         "jquery",

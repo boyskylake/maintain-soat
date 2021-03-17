@@ -70,7 +70,7 @@ class OrderListController extends Controller
                 ucf_status.status_des as name_status,
                 case when ucf_status.status = 4 then
                 -- '<span style=\"color:#00a65a;\">'||ucf_status.status_des||'</span>'
-                '<span  style=\"font-size: 14px;background-color:#19a63d; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
+                '<div class=\"fa fa-search flex items-center justify-center text-theme-9\">'||ucf_status.status_des||'</div>'
                 when ucf_status.status = 2 then
                 '<span  style=\"font-size: 14px;background-color:#fa9a0a; color:#fff; padding: .2em .6em .3em; display: inline; border-radius: .25em;  \">'||ucf_status.status_des||'</span>'
                 when ucf_status.status = 5 then

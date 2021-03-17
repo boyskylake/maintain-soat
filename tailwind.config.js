@@ -17,13 +17,13 @@ module.exports = {
                 '1/2': '50%',
                 '3/4': '75%'
               },
-            //   screens: {
-            //     'sm': '640px',
-            //     'md': '768px',
-            //     'lg': '1024px',
-            //     'xl': '1280px',
-            //     'xxl': '1600px'
-            //  },
+              screens: {
+                'sm': '640px',
+                'md': '768px',
+                'lg': '1024px',
+                'xl': '1280px',
+                'xxl': '1600px'
+             },
             // backgroundImage: theme => ({
             //     'hero-lg': "url('/Images/Utils/bg.jpg`')",
             //     'hero-sm': "url('/Images/Utils/bg.jpg`')",

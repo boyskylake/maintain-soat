@@ -1,6 +1,5 @@
 import { FeedConstants } from "../constants";
 import { feedDataService } from "../services";
-// import { NotificationManager } from "react-notifications";
 
 export const feedDataAction = {
     feedDataGet,

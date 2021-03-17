@@ -1,6 +1,6 @@
 import { FeedConstants } from "../constants";
 import { feedDataService } from "../services";
-import { NotificationManager } from "react-notifications";
+import toastr from "toastr";
 
 export const saveOrderActions = {
     feedOrderPage,
@@ -44,7 +44,8 @@ const fetchSuccess = (data) => {
 };
 
 const fetchFailure = (bool) => {
-    NotificationManager.error("ไม่สามารถเชื่อมต่อได้", "Error", 5000);
+    // NotificationManager.error("ไม่สามารถเชื่อมต่อได้", "Error", 5000);
+    toastr.error("ไม่สามารถเชื่อมต่อได้", "Error");
     return {
         type: FeedConstants.FEED_FAILURE,
     };

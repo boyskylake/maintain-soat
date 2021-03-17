@@ -102,12 +102,12 @@ function Saveorder() {
 
     $(function () {
         $(document.body).on("change", "#coopid", function () {
-            if (coopid == null) {
-                document.getElementById("Detail").style.display = "block";
-                $(".select2").select2();
-                $(".textarea").wysihtml5();
-                document.getElementById("informer").disabled = false;
-            }
+            // if (coopid == null) {
+            //     // document.getElementById("Detail").style.display = "block";
+            //     // $(".select2").select2();
+            //     // $(".textarea").wysihtml5();
+            //     document.getElementById("informer").disabled = false;
+            // }
 
             setCoopid(this.value);
         });
@@ -115,55 +115,65 @@ function Saveorder() {
 
     return (
         <div>
-            <div className="flex items-center mt-8"style={{fontFamily:'Kanit'}}>
+            <div
+                className="flex items-center mt-8"
+                style={{ fontFamily: "Kanit" }}
+            >
                 <h2 className="intro-y text-lg font-medium mr-auto">
                     บันทึกแก้ไข order
                 </h2>
             </div>
             {/* BEGIN: Wizard Layout */}
-            <div className="intro-y box py-10 sm:py-20 mt-5"style={{fontFamily:'Kanit'}}>
+            <div
+                className="intro-y box py-10 sm:py-20 mt-5"
+                style={{ fontFamily: "Kanit" }}
+            >
                 <section className="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
                     <div className="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
-                    <Stepper alternativeLabel nonLinear activeStep={activeStep}>
-                        {steps.map((label, index) => {
-                            const stepProps = {};
-                            const buttonProps = {};
-                            if (isStepSkipped(index)) {
-                                stepProps.completed = false;
-                            }
-                            return (
-                                <Step key={label} {...stepProps}>
-                                    <StepButton
-                                        onClick={handleStep(index)}
-                                        completed={isStepComplete(index)}
-                                        {...buttonProps}
-                                    >
-                                        <h1
-                                            className="text-sm lg:text-lg text-gray-700 font-medium hover:font-bold"
-                                            style={{
-                                                fontFamily: "FontDefault",
-                                            }}
+                        <Stepper
+                            alternativeLabel
+                            nonLinear
+                            activeStep={activeStep}
+                        >
+                            {steps.map((label, index) => {
+                                const stepProps = {};
+                                const buttonProps = {};
+                                if (isStepSkipped(index)) {
+                                    stepProps.completed = false;
+                                }
+                                return (
+                                    <Step key={label} {...stepProps}>
+                                        <StepButton
+                                            onClick={handleStep(index)}
+                                            completed={isStepComplete(index)}
+                                            {...buttonProps}
                                         >
-                                            {label}
-                                        </h1>
-                                    </StepButton>
-                                </Step>
-                            );
-                        })}
-                    </Stepper>
-                    {activeStep === steps.length ? (
-                        <div> ท่านยืนยันครบทุกส่วนแล้ว</div>
-                    ) : (
-                        <div>
-                            {getStepContent(
-                                activeStep,
-                                setCompleted,
-                                completed,
-                                setActiveStep,
-                                activeStep
-                            )}
-                        </div>
-                    )}
+                                            <h1
+                                                className="text-sm lg:text-lg text-gray-700 font-medium hover:font-bold"
+                                                style={{
+                                                    fontFamily: "FontDefault",
+                                                }}
+                                            >
+                                                {label}
+                                            </h1>
+                                        </StepButton>
+                                    </Step>
+                                );
+                            })}
+                        </Stepper>
+                        {activeStep === steps.length ? (
+                            <div> ท่านยืนยันครบทุกส่วนแล้ว</div>
+                        ) : (
+                            <div>
+                                {getStepContent(
+                                    activeStep,
+                                    setCompleted,
+                                    completed,
+                                    setActiveStep,
+                                    activeStep
+                                )}
+                            </div>
+                        )}
                     </div>
                 </section>
             </div>
