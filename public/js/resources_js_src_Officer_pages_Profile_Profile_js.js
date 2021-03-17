@@ -150,6 +150,7 @@ function EditProfile() {
   }; // const EditProfile = () => {
 
 
+<<<<<<< HEAD
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       className: "pl-10 pt-5",
@@ -157,6 +158,13 @@ function EditProfile() {
         children: "Edit Profile"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("form", {
+=======
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+      className: "text-gray-600 hover:text-yellow-500 font-black text-3xl mt-5",
+      children: "Edit Profile"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
+>>>>>>> 12f587142081b5493f68f305934bfaaf9625a79e
       id: "pom",
       className: "form-horizontal p-10",
       onSubmit: handleSubmit(OnSubmitEditProfile),
@@ -164,7 +172,7 @@ function EditProfile() {
         className: "form-group",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("label", {
           htmlFor: "inputName",
-          className: "col-sm-2 control-label",
+          className: "col-sm-2 control-label text-gray-600 hover:text-yellow-500",
           children: "Name:"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
           className: "col-sm-10",
@@ -173,7 +181,7 @@ function EditProfile() {
               required: true
             }),
             type: "name",
-            className: "form-control",
+            className: "input w-2/4 border mt-2",
             id: "inputName",
             name: "inputName",
             placeholder: "Name",
@@ -188,7 +196,7 @@ function EditProfile() {
         className: "form-group",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("label", {
           htmlFor: "inputEmail",
-          className: "col-sm-2 control-label",
+          className: "col-sm-2 control-label text-gray-600 hover:text-yellow-500",
           children: "E-mail:"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
           className: "col-sm-10",
@@ -197,7 +205,7 @@ function EditProfile() {
               required: true
             }),
             type: "email",
-            className: "form-control",
+            className: "input w-2/4 border mt-2",
             id: "inputEmail",
             name: "inputEmail",
             placeholder: "E-mail",
@@ -217,7 +225,7 @@ function EditProfile() {
               console.log("คลิกสิ");
             },
             type: "submit",
-            className: "btn btn-danger",
+            className: "button bg-theme-1 hover:bg-red-500 text-white mt-5",
             children: "Submit"
           })
         })
@@ -231,8 +239,13 @@ function EditProfile() {
 var ErrorSpan = function ErrorSpan(_ref) {
   var children = _ref.children,
       className = _ref.className;
+<<<<<<< HEAD
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("span", {
     className: "text-danger ".concat(className && className, " "),
+=======
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("span", {
+    className: "text-red-500 hover: text-yellow-500 ".concat(className && className, " "),
+>>>>>>> 12f587142081b5493f68f305934bfaaf9625a79e
     children: [" ", children && children]
   });
 };
@@ -415,6 +428,7 @@ function Profile() {
   // );
 
 
+<<<<<<< HEAD
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
     className: "content-wrapper",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("section", {
@@ -744,15 +758,228 @@ function Profile() {
                         type: "submit",
                         className: "btn btn-danger",
                         children: "Submit"
+=======
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+    className: "app",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+      className: "intro-y flex items-center mt-8",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h2", {
+        className: " mr-auto text-gray-600 hover:text-yellow-500 font-black text-3xl",
+        children: "Profile Layout"
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+      className: "intro-y box px-8 pt-5 mt-5",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "flex flex-col lg:flex-row border-b border-gray-200 pb-5 -mx-5",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          className: "flex flex-1 px-5 items-center justify-center lg:justify-start",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+            className: "w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative transition duration-500 transform hover:-translate-y-1 hover:scale-110",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("img", {
+              className: "rounded-full",
+              src: "/storage/".concat(feedData.fetchSuccess && feedData.data.Profile && feedData.data.Profile.avatar)
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "ml-5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+              className: "w-24 sm:w-40 truncate sm:whitespace-normal text-xl font-black text-gray-600 hover:text-yellow-500",
+              children: feedData.fetchSuccess && feedData.data.Position && feedData.data.Profile && feedData.data.Profile.name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+              className: "text-gray-600 hover:text-yellow-500 font-black text-3xl ",
+              children: feedData.fetchSuccess && feedData.data.Position && feedData.data.Position[0] && feedData.data.Position[0].name
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          className: "flex mt-6 lg:mt-0 items-center lg:items-start flex-1 flex-col justify-center text-gray-600 px-5 border-l border-r border-gray-200 border-t lg:border-t-0 pt-5 lg:pt-0",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "truncate sm:whitespace-normal flex items-center text-gray-600 hover:text-yellow-500 font-black",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+              className: "w-4 h-4 mr-2 fas fa-user-tie"
+            }), "Name:", " ", feedData.fetchSuccess && feedData.data.Position && feedData.data.Profile && feedData.data.Profile.name]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "truncate sm:whitespace-normal flex items-center mt-3 text-gray-600 hover:text-yellow-500 font-black",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+              className: "w-4 h-4 mr-2 fas fa-envelope"
+            }), " ", "E-mail:", " ", feedData.fetchSuccess && feedData.data.Position && feedData.data.Profile && feedData.data.Profile.email]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "truncate sm:whitespace-normal flex items-center mt-3 text-gray-600 hover:text-yellow-500 font-black",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+              className: "w-4 h-4 mr-2 fas fa-child"
+            }), " ", "position:", " ", feedData.fetchSuccess && feedData.data.Position && feedData.data.Position[0] && feedData.data.Position[0].name]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "nav-tabs flex flex-col sm:flex-row justify-center lg:justify-start",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("a", {
+          "data-toggle": "tab",
+          "data-target": "#profile",
+          href: "javascript:;",
+          className: "py-4 sm:mr-8 flex items-center active",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+            className: "w-4 h-4 mr-2 far fa-address-card"
+          }), " ", "Edit Profile"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("a", {
+          "data-toggle": "tab",
+          "data-target": "#Password",
+          href: "javascript:;",
+          className: "py-4 sm:mr-8 flex items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+            className: "w-4 h-4 mr-2 fas fa-key"
+          }), "    ", "Edit Password2"]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "tab-content ",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "tab-content__pane active",
+          id: "profile",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+            className: "m-5 p-5 w-3/4 bg-white  rounded-lg justify-center shadow-sm hover:shadow-2xl transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-105",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_EditProfile__WEBPACK_IMPORTED_MODULE_10__.default, {})
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "tab-content__pane",
+          id: "Password",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "m-5 p-5 w-3/4 bg-white  rounded-lg justify-center shadow-sm hover:shadow-2xl transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-105",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+              className: "text-gray-600 hover:text-yellow-500 font-black text-3xl mt-5",
+              children: "Edit Password"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("form", {
+              className: "form-horizontal p-10",
+              onSubmit: handleSubmit(OnSubmitEditPassword),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                className: "form-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+                  htmlFor: "OldPassword",
+                  className: "col-sm-2 control-label text-gray-600 hover:text-yellow-500",
+                  children: "Old Password:"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                  className: "col-sm-9",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                    className: "mt-1 relative rounded-md ",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                      className: "absolute inset-y-0  right-6 pr-3 w-2/4 flex items-center",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+                        onClick: function onClick() {
+                          setpasswordeye(function (state) {
+                            return !state;
+                          });
+                        },
+                        className: "h-5 w-5 text-gray-400",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+                          className: "fas fa-".concat(passwordeye ? "eye-slash" : "eye")
+                        })
                       })
-                    })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                      ref: register({
+                        required: true
+                      }),
+                      type: passwordeye ? "text" : "password",
+                      className: "input w-2/4 border mt-2",
+                      id: "OldPassword",
+                      name: "OldPassword",
+                      autoComplete: "off",
+                      placeholder: "Old Password"
+                    })]
+                  }), ((_errors$OldPassword = errors.OldPassword) === null || _errors$OldPassword === void 0 ? void 0 : _errors$OldPassword.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(ErrorSpan, {
+                    className: "",
+                    children: ErrorsWord.OldPassword.required
                   })]
                 })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                className: "form-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+                  htmlFor: "NewPassword",
+                  className: "col-sm-2 control-label text-gray-600 hover:text-yellow-500",
+                  children: "New Password:"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                  className: "col-sm-9",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                    className: "mt-1 relative rounded-md ",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                      className: "absolute inset-y-0  right-6 pr-3 w-2/4 flex items-center",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+                        onClick: function onClick() {
+                          setpasswordeye(function (state) {
+                            return !state;
+                          });
+                        },
+                        className: "h-5 w-5 text-gray-400",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+                          className: "fas fa-".concat(passwordeye ? "eye-slash" : "eye")
+                        })
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                      autoComplete: "off",
+                      ref: register({
+                        required: true
+                      }),
+                      type: passwordeye ? "text" : "password",
+                      className: "input w-2/4 border mt-2",
+                      id: "NewPassword",
+                      name: "NewPassword",
+                      placeholder: "New Password"
+                    })]
+                  }), ((_errors$NewPassword = errors.NewPassword) === null || _errors$NewPassword === void 0 ? void 0 : _errors$NewPassword.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(ErrorSpan, {
+                    className: "",
+                    children: ErrorsWord.NewPassword.required
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                className: "form-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+                  htmlFor: "Confirm",
+                  className: "col-sm-2 control-label text-gray-600 hover:text-yellow-500",
+                  children: "New Password (Confirm):"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                  className: "col-sm-9",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+                    className: "mt-1 relative rounded-md ",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                      className: "absolute inset-y-0  right-6 pr-3 w-2/4 flex items-center",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+                        onClick: function onClick() {
+                          setpasswordeye(function (state) {
+                            return !state;
+                          });
+                        },
+                        className: "h-5 w-5 text-gray-400",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
+                          className: "fas fa-".concat(passwordeye ? "eye-slash" : "eye")
+                        })
+>>>>>>> 12f587142081b5493f68f305934bfaaf9625a79e
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+                      autoComplete: "off",
+                      ref: register({
+                        required: true
+                      }),
+                      type: passwordeye ? "text" : "password",
+                      className: "input w-2/4 border mt-2",
+                      id: "Confirm",
+                      name: "Confirm",
+                      placeholder: "New Password (Confirm)"
+                    })]
+                  }), ((_errors$Confirm = errors.Confirm) === null || _errors$Confirm === void 0 ? void 0 : _errors$Confirm.type) === "required" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(ErrorSpan, {
+                    className: "",
+                    children: ErrorsWord.Confirm.required
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                className: "form-group",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                  className: "col-sm-offset-2 col-sm-10",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
+                    type: "submit",
+                    className: "button bg-theme-1 hover:bg-red-500 text-white mt-5",
+                    children: "Submit"
+                  })
+                })
               })]
             })]
           })
         })]
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("br", {})]
     })]
   });
 }
@@ -762,8 +989,13 @@ function Profile() {
 var ErrorSpan = function ErrorSpan(_ref) {
   var children = _ref.children,
       className = _ref.className;
+<<<<<<< HEAD
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("span", {
     className: "text-danger ".concat(className && className, " "),
+=======
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("span", {
+    className: "text-red-500 hover: text-yellow-500 ".concat(className && className, " "),
+>>>>>>> 12f587142081b5493f68f305934bfaaf9625a79e
     children: [" ", children && children]
   });
 };

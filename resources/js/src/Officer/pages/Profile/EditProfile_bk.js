@@ -7,6 +7,7 @@ import { feedDataAction } from "../../redux/actions";
 
 import { useForm } from "react-hook-form";
 import Services from "../../redux/services/services";
+import { NotificationManager } from "react-notifications";
 import toastr from "toastr";
 
 function EditProfile() {

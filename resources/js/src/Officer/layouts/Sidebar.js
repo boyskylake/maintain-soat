@@ -84,7 +84,7 @@ function ListItemLink({ to, icon, name, ...rest }) {
                 <li className={match ? "active" : ""} to={to} icon={icon} name={name}>
                     <Link className={match ? "side-menu side-menu--active" : "side-menu"} to={to} {...rest} >
                         <div className="side-menu__icon">
-                          <i className={icon} />  
+                          <i className={icon} />
                         </div>
                         <div className="side-menu__title">
                              <span>{name}</span>

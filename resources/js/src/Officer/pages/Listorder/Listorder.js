@@ -82,22 +82,27 @@ function Listorder() {
 
     return (
         <Fragment>
-            <div className="grid grid-cols-12 gap-6 mt-5">
-                <div className="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-                    <button className="button text-white bg-theme-1 shadow-md mr-2">
-                        Add New Product
-                    </button>
-                    <div className="dropdown relative">
-                        <button className="dropdown-toggle button px-2 box text-gray-700">
-                            <span className="w-5 h-5 flex items-center justify-center">
-                                <i className="w-4 h-4" data-feather="plus" />
-                            </span>
-                        </button>
-                        <div className="dropdown-box mt-10 absolute w-40 top-0 left-0 z-20">
-                            <div className="dropdown-box__content box p-2">
-                                <a
-                                    href
-                                    className="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md"
+        <div className="content-wrapper">
+            {/* Content Header (Page header) */}
+            {/* Main content */}
+            <section className="content">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <div className="box">
+                            <div className="box-header">
+                                <h3 className="box-title">
+                                    รายการ Order ทั้งหมด
+                                </h3>
+
+
+                            </div>
+                            {/* <br />
+                            <div className="col-md-3">
+                                <select
+                                    name="filter_year"
+                                    id="filter_year"
+                                    className="form-control"
+                                    required
                                 >
                                     <i
                                         data-feather="printer"
