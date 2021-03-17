@@ -191,7 +191,6 @@ function getStepContent(
         setActiveStep: setActiveStep,
         activeStep: activeStep,
     };
-    // console.log(step, setCompleted, completed, setActiveStep, activeStep);
     switch (step) {
         case 0:
             return (
@@ -204,6 +203,15 @@ function getStepContent(
                     step={step}
                 />
                 //     <Step3Component
+                //     props={data}
+                //     setCompleted={setCompleted}
+                //     completed={completed}
+                //     setActiveStep={setActiveStep}
+                //     activeStep={activeStep}
+                //     step={step}
+                // />
+
+                //     <Step2Component
                 //     props={data}
                 //     setCompleted={setCompleted}
                 //     completed={completed}

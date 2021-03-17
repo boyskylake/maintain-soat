@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
 
+import Inputmask from "inputmask";
+
 import { useCookies } from "react-cookie";
 
 function Step2Component(
@@ -31,17 +33,13 @@ function Step2Component(
         // console.log(coopid);
         // $('#myModal').modal('show')
     };
-    // useScript("/officer/dist/js/pages/saveorder.js");
+    useEffect(() => {
+        Inputmask().mask(document.querySelectorAll("input"));
+        return () => {};
+    }, []);
     // ให้ทำงานเฉพาะ สั่งซื้อเท่านั้น
     const inform_type_only_c = ["07", "31", "03"];
     useEffect(() => {
-        // console.log(
-        //     cookies.pageone,
-        //     cookies.pageone &&
-        //         cookies.pageone.inform_type &&
-        //         inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
-        // );
-
         if (
             cookies.pageone &&
             cookies.pageone.inform_type &&
@@ -111,201 +109,104 @@ function Step2Component(
             ) : (
                 <Fragment>
                     {props.completed.has(0) ? (
-                        <div className="box-header">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div
-                                        className="box box-primary"
-                                        style={{
-                                            border: "2px solid #0000008c",
-                                        }}
+                        <div className="mt-10 pt-10 border-t border-gray-200">
+                            {/* <div className="font-medium text-left">สำหรับ Order สั่งซื้อ</div> */}
+                            <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
+                                {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
+                                {/* วันที่สั่งซื้อ */}
+                                <div className="intro-y col-span-12 sm:col-span-2">
+                                    <div className="mb-2 text-left">
+                                        วันที่สั่งซื้อ
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="purchase_date_tdate"
+                                        autoComplete="off"
+                                        data-mask="99/99/9999"
+                                        data-inputmask="'mask': '99/99/9999'"
+                                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.purchase_date_tdate
+                                        }
+                                    />
+                                </div>
+                                {/* จำนวนวันตามสัญญา */}
+                                <div className="intro-y col-span-12 sm:col-span-2">
+                                    <div className="mb-2 text-left">
+                                        จำนวนวันตามสัญญา
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="contract_le"
+                                        autoComplete="off"
+                                        data-mask="999 วัน"
+                                        data-inputmask="'mask': '999 วัน'"
+                                        className="text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.purchase_date_tdate
+                                        }
+                                    />
+                                    {/* {errors.dateRevice && (
+                                    <span>This field is required</span>
+                                )} */}
+                                </div>
+                                {/* มีสัญญาจ้าง */}
+                                {/* &nbsp;&nbsp; */}
+                                <div className="intro-y col-span-12 sm:col-span-4">
+                                    <div className="mb-2 text-left">
+                                        มีสัญญาจ้าง
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="contract_no"
+                                        autoComplete="off"
+                                        // data-mask="999 วัน"
+                                        // data-inputmask="'mask': '999 วัน'"
+                                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.contract_no
+                                        }
+                                    />
+                                </div>
+                                {/* มูลค่างาน */}
+                                {/* &nbsp;&nbsp; */}
+                                <div className="intro-y col-span-12 sm:col-span-4">
+                                    <div className="mb-2 text-left">
+                                        มูลค่างาน
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="order_value_amount"
+                                        autoComplete="off"
+                                        // data-mask="999 วัน"
+                                        // data-inputmask="'mask': '999 วัน'"
+                                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                                        ref={register}
+                                        value={
+                                            cookies.pagetwo &&
+                                            cookies.pagetwo.order_value_amount
+                                        }
+                                    />
+                                </div>
+                                <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                                    <button
+                                        type="submit"
+                                        className="button w-36 justify-center block bg-theme-1 text-white ml-2"
                                     >
-                                        <div className="box-header">
-                                            <h3 className="box-title">
-                                                สำหรับ Order สั่งซื้อ
-                                            </h3>
-                                        </div>
-                                        <div className="box-body">
-                                            <div className="col-md-3">
-                                                <div className="form-group">
-                                                    <label>
-                                                        วันที่สั่งซื้อ
-                                                    </label>
-                                                    <div
-                                                        className="input-group"
-                                                        style={{
-                                                            border:
-                                                                "1.5px solid #f39c12",
-                                                            borderRadius: 2,
-                                                        }}
-                                                    >
-                                                        <div className="input-group-addon">
-                                                            <i className="fa fa-calendar" />
-                                                        </div>
-                                                        <input
-                                                            type="text"
-                                                            name="purchase_date_tdate"
-                                                            className="form-control"
-                                                            data-inputmask="'alias': 'dd/mm/yyyy'"
-                                                            data-mask
-                                                            ref={register}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <div className="form-group">
-                                                    <label>
-                                                        จำนวนวันตามสัญญา
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        name="contract_le"
-                                                        ref={register}
-                                                        style={{
-                                                            border:
-                                                                "1.5px solid #f39c12",
-                                                            borderRadius: 2,
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <div className="form-group">
-                                                    <label>มีสัญญาจ้าง</label>
-                                                    <br />
-                                                    <input
-                                                        type="checkbox"
-                                                        className="flat-red"
-                                                        name="contract_no"
-                                                        ref={register}
-                                                        style={{
-                                                            border:
-                                                                "1.5px solid #f39c12",
-                                                            borderRadius: 2,
-                                                        }}
-                                                    />
-                                                    {/* <input type="text" className="form-control" /> */}
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <div className="form-group">
-                                                    <label>มูลค่างาน</label>
-                                                    <br />
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        name="order_value_amount"
-                                                        ref={register}
-                                                        style={{
-                                                            border:
-                                                                "1.5px solid #f39c12",
-                                                            borderRadius: 2,
-                                                            textAlign: "right",
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        ดำเนินการต่อ
+                                    </button>
+                                    {/* <button className="button w-24 justify-center block bg-theme-1 text-white ml-2">
+                    Next
+                </button> */}
                                 </div>
+                                {/* </form> */}
                             </div>
-                            {/* === start */}
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <div className="form-group blueselect">
-                                        <label>ผู้ดูแล</label>
-                                        <select
-                                            className="form-control select2"
-                                            id="ownerjobselect"
-                                            ref={register}
-                                            name="programmer_date_tdata"
-                                        >
-                                            <option></option>
-                                            {feedData.data &&
-                                                feedData.data.ucf_officer &&
-                                                feedData.data.ucf_officer.map(
-                                                    (val, i) => {
-                                                        return (
-                                                            <option
-                                                                key={i}
-                                                                value={
-                                                                    val.officer_id
-                                                                }
-                                                            >
-                                                                {`[${val.officer_id}]`}
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                {
-                                                                    val.officer_name
-                                                                }
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                {
-                                                                    val.officer_full_name
-                                                                }
-                                                            </option>
-                                                        );
-                                                    }
-                                                )}
-                                        </select>
-                                        <p>(ณ วันที่แจ้งแก้ไขงาน)</p>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4">
-                                    <div className="form-group appno">
-                                        <label>ระบบงาน Service</label>
-                                        <select
-                                            className="form-control select2"
-                                            ref={register}
-                                            name="appno"
-                                            id="appno"
-                                        >
-                                            <option></option>
-                                            {feedData.data &&
-                                                feedData.data.ucf_application &&
-                                                feedData.data.ucf_application.map(
-                                                    (val, i) => {
-                                                        return (
-                                                            <option
-                                                                key={i}
-                                                                value={val.app_no}
-                                                            >
-                                                                {`[${val.app_no}]`}
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                {
-                                                                    val.application
-                                                                }
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                {`[${val.version}]`}
-                                                            </option>
-                                                        );
-                                                    }
-                                                )}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="form-group">
-                                        <label>ฝ่ายงานที่ดูแล</label>
-                                        <input
-                                            readOnly={true}
-                                            type="text"
-                                            className="form-control"
-                                            name="f_get_app_group_manage"
-                                            ref={register}
-                                            style={{
-                                                border: "1.5px solid #0000008c",
-                                                borderRadius: 2,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* ===== end  */}
-                            {/* </div> */}
-                            {/* ---------------------------กรอกรายละเอียด-------------------------- */}
                         </div>
                     ) : (
                         <Fragment>

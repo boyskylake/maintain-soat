@@ -5,6 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import select2 from "select2";
+import dropzone from "dropzone";
 
 import { useScript } from "../../../../helpers";
 import { feedDataAction } from "../../../redux/actions";
@@ -150,15 +151,16 @@ function Step1Component(
     };
     // console.log(cookies.pageone && cookies.pageone.receive_date);
     return (
-        <div className="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200">
+        <div className="mt-10 pt-10 border-t border-gray-200">
             {/* <div className="font-medium text-left">แก้ไข/บันทึก</div> */}
             <div className="grid grid-cols-12 gap-4 row-gap-5 mt-3">
                 {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="false"> */}
-                <div className="intro-y col-span-12 sm:col-span-2">
+                {/* เลขที่รายการ */}
+                <div className="intro-y col-span-12 sm:col-span-3">
                     <div className="mb-2 text-left">เลขที่รายการ</div>
                     <input
                         type="text"
-                        className="input w-full border-2 flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
                         placeholder="60xxxxxx"
                         disabled
                         name="inform_no"
@@ -166,8 +168,8 @@ function Step1Component(
                         ref={register}
                     />
                 </div>
-
-                <div className="intro-y col-span-12 sm:col-span-6">
+                {/* สหกรณ์ */}
+                <div className="intro-y col-span-12 sm:col-span-8">
                     <div className="mb-2 text-left">สหกรณ์ฯ</div>
                     <select data-hide-search="true" className="select2 w-full">
                         <option></option>
@@ -209,46 +211,328 @@ function Step1Component(
                         </ErrorSpan>
                     )}
                 </div>
-                <div className="intro-y col-span-12 sm:col-span-6">
-                    <div className="mb-2">Subject</div>
-                    <input
-                        type="text"
-                        className="input w-full border flex-1"
-                        placeholder="Important Meeting"
-                    />
-                </div>
-                <div className="intro-y col-span-12 sm:col-span-6">
-                    <div className="mb-2">Has the Words</div>
-                    <input
-                        type="text"
-                        className="input w-full border flex-1"
-                        placeholder="Job, Work, Documentation"
-                    />
-                </div>
-                <div className="intro-y col-span-12 sm:col-span-6">
-                    <div className="mb-2">Doesn't Have</div>
-                    <input
-                        type="text"
-                        className="input w-full border flex-1"
-                        placeholder="Job, Work, Documentation"
-                    />
-                </div>
-                <div className="intro-y col-span-12 sm:col-span-6">
-                    <div className="mb-2">Size</div>
-                    <select className="input w-full border flex-1">
-                        <option>10</option>
-                        <option>25</option>
-                        <option>35</option>
-                        <option>50</option>
+                {/* ผู้รับแจ้ง */}
+                <div className="intro-y col-span-12 sm:col-span-4">
+                    <div className="mb-2 text-left">ผู้รับแจ้ง</div>
+                    <select
+                        data-hide-search="true"
+                        className="select2 w-full"
+                        name="receiver"
+                        id="receiver"
+                        ref={register({ required: true })}
+                    >
+                        <option></option>
+                        {feedData.data &&
+                            feedData.data.ucf_officer &&
+                            feedData.data.ucf_officer.map((val, i) => {
+                                if (
+                                    cookies &&
+                                    cookies.pageone &&
+                                    cookies.pageone.receiver &&
+                                    cookies.pageone.receiver ==
+                                        trim(val.officer_id)
+                                ) {
+                                    // setCoopid(
+                                    //     cookies.pageone &&
+                                    //         cookies.pageone.coopid
+                                    // );
+                                }
+                                return (
+                                    <option
+                                        key={i}
+                                        value={val.officer_id}
+                                        selected={
+                                            cookies.pageone &&
+                                            cookies.pageone.receiver ==
+                                                trim(val.officer_id)
+                                                ? true
+                                                : false
+                                        }
+                                    >
+                                        {`[${val.officer_id}]`}
+                                        &nbsp;&nbsp;
+                                        {val.officer_name}
+                                        &nbsp;&nbsp;
+                                        {val.officer_full_name}
+                                    </option>
+                                );
+                            })}
                     </select>
                 </div>
+                {/* ผู้แจ้ง */}
+                <div className="intro-y col-span-12 sm:col-span-4">
+                    <div className="mb-2 text-left">ผู้แจ้ง</div>
+                    <select
+                        data-hide-search="true"
+                        className="select2 w-full"
+                        name="informer"
+                        id="informer"
+                        ref={register({
+                            required: true,
+                        })}
+                    >
+                        {/* <option></option> */}
+                        {feedData.data &&
+                            feedData.data.ucf_customer_contact &&
+                            feedData.data.ucf_customer_contact.map((val, i) => {
+                                if (watch("coopid") == val.id_pay_to) {
+                                    cookies &&
+                                        cookies.pageone &&
+                                        cookies.pageone.informer &&
+                                        cookies.pageone.informer ==
+                                            trim(val.contact_no);
+                                    return (
+                                        <option
+                                            key={i}
+                                            value={val.contact_no}
+                                            selected={
+                                                cookies.pageone &&
+                                                cookies.pageone.informer ==
+                                                    trim(val.contact_no)
+                                                    ? true
+                                                    : false
+                                            }
+                                        >
+                                            {`[${val.contact_no}]`}
+                                            &nbsp;&nbsp;&nbsp;
+                                            {val.contract_name}
+                                        </option>
+                                    );
+                                } else {
+                                    //
+                                }
+                            })}
+                    </select>
+                </div>
+                {/* ผู้แก้ไข */}
+                <div className="intro-y col-span-12 sm:col-span-4">
+                    <div className="mb-2 text-left">ผู้แก้ไข</div>
+                    <select
+                        data-hide-search="true"
+                        className="select2 w-full"
+                        name="editor_id"
+                        id="editor_id"
+                        ref={register({
+                            required: true,
+                        })}
+                    >
+                        <option></option>
+                        {feedData.data &&
+                            feedData.data.ucf_officer &&
+                            feedData.data.ucf_officer.map((val, i) => {
+                                return (
+                                    <option key={i} value={val.officer_id}>
+                                        {`[${val.officer_id}]`}
+                                        &nbsp;&nbsp;&nbsp;
+                                        {val.officer_name}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {val.officer_full_name}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                {/* วันที่รับแจ้ง */}
+                <div className="intro-y col-span-12 sm:col-span-2">
+                    <div className="mb-2 text-left">วันที่รับแจ้ง</div>
+                    <input
+                        type="text"
+                        name="receive_date"
+                        autoComplete="off"
+                        data-mask="99/99/9999"
+                        data-inputmask="'mask': '99/99/9999'"
+                        className="input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                        ref={register}
+                        value={cookies.pageone && cookies.pageone.receive_date}
+                    />
+                </div>
+                {/* เวลานัดหมาย */}
+                <div className="intro-y col-span-12 sm:col-span-2">
+                    <div className="mb-2 text-left">เวลานัดหมาย</div>
+                    <input
+                        type="text"
+                        name="appointns"
+                        autoComplete="off"
+                        data-mask="99:99 ถึง 99:99"
+                        data-inputmask="'mask': '99:99 ถึง 99:99'"
+                        className="text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                        ref={register}
+                        value={cookies.pageone && cookies.pageone.receive_date}
+                    />
+                    {/* {errors.dateRevice && (
+                                        <span>This field is required</span>
+                                    )} */}
+                </div>
+                {/* วันที่แล้วเสร็จ */}
+                <div className="intro-y col-span-12 sm:col-span-2">
+                    <div className="mb-2 text-left">วันที่แล้วเสร็จ</div>
+                    <input
+                        type="text"
+                        name="finished_date_tdate"
+                        autoComplete="off"
+                        data-mask="99/99/9999"
+                        data-inputmask="'mask': '99/99/9999'"
+                        className="text-center input w-full border flex-1 focus:ring-4 focus:border-indigo-300 focus:outline-none active:outline-none active:border-indigo-300"
+                        ref={register}
+                        value={
+                            cookies.pageone && cookies.pageone.start_date_tdata
+                        }
+                    />
+                    {/* {errors.dateRevice && (
+                                        <span>This field is required</span>
+                                    )} */}
+                </div>
+                {/* วิธีการแก้ไข */}
+                <div className="intro-y col-span-12 sm:col-span-6">
+                    <div className="mb-2 text-left">วิธีการแก้ไข</div>
+                    <div className="flex flex-col sm:flex-row mt-2">
+                        <div className="form-check mr-2">
+                            <label>
+                                <input
+                                    // id="radio-switch-4"
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="r3"
+                                    ref={register}
+                                />
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                ไม่ระบุ&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input
+                                    // id="radio-switch-4"
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="r3"
+                                    ref={register}
+                                />
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                Telephone&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input
+                                    // id="radio-switch-4"
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="r3"
+                                    ref={register}
+                                />
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                Modem&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input
+                                    // id="radio-switch-4"
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="r3"
+                                    ref={register}
+                                />
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                Onsite&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {/* ประเภทงาน */}
+                <div className="intro-y col-span-12 sm:col-span-3">
+                    <div className="mb-2 text-left">ประเภทงาน</div>
+                    <select
+                        data-hide-search="true"
+                        className="select2 w-full"
+                        name="inform_type"
+                        id="inform_type"
+                        ref={register}
+                    >
+                        <option></option>
+                        {feedData.data &&
+                            feedData.data.ucf_inform_type &&
+                            feedData.data.ucf_inform_type.map((val, i) => {
+                                return (
+                                    <option key={i} value={val.inform_type}>
+                                        {`[${val.inform_type}]`}
+                                        &nbsp;&nbsp;&nbsp;
+                                        {val.type_desc}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                {/* SA */}
+                <div className="intro-y col-span-12 sm:col-span-3">
+                    <div className="mb-2 text-left">SA</div>
+                    <select
+                        data-hide-search="true"
+                        className="select2 w-full"
+                        name="sa_id"
+                        id="sa_id"
+                        ref={register}
+                    >
+                        <option></option>
+                        {feedData.data &&
+                            feedData.data.ucf_officer &&
+                            feedData.data.ucf_officer.map((val, i) => {
+                                return (
+                                    <option key={i} value={val.officer_id}>
+                                        {`[${val.officer_id}]`}
+                                        &nbsp;&nbsp;&nbsp;
+                                        {val.officer_name}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {val.officer_full_name}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                {/* dropzone */}
+                <div className="intro-y col-span-12 sm:col-span-12">
+                    <div className="grid grid-cols-12 gap-6 mt-5">
+                    <div className="intro-y col-span-12 lg:col-span-12">
+                            <div className="intro-y box mt-5">
+                                {/* <div className="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
+                                <h2 className="font-medium text-base mr-auto">
+                                    Multiple File Upload
+                                </h2>
+                                <div className="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
+                                    <div className="mr-3">Show code</div>
+                                    <input data-target="#multiple-file-upload" className="show-code input input--switch border" type="checkbox" />
+                                </div>
+                                </div> */}
+                                <div className="p-5" id="multiple-file-upload">
+                                <div className="preview">
+                                    <form action="/file-upload" className="dropzone border-gray-200 border-dashed">
+                                    <div className="fallback">
+                                        <input name="file" type="file" multiple />
+                                    </div>
+                                    <div className="dz-message" data-dz-message>
+                                        <div className="text-lg font-medium">Drop files here or click to upload.</div>
+                                        <div className="text-gray-600"> This is just a demo dropzone. Selected files are <span className="font-medium">not</span> actually uploaded. </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                <div className="source-code hidden">
+                                    <button data-target="#copy-multiple-file-upload" className="copy-code button button--sm border flex items-center text-gray-700"> <i data-feather="file" className="w-4 h-4 mr-2" /> Copy code </button>
+                                    <div className="overflow-y-auto h-64 mt-3">
+                                    <pre className="source-preview" id="copy-multiple-file-upload"> <code className="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagform action="/file-upload" class="dropzone border-gray-200 border-dashed"HTMLCloseTag HTMLOpenTagdiv class="fallback"HTMLCloseTag HTMLOpenTaginput name="file" type="file" multiple/HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class="dz-message" data-dz-messageHTMLCloseTag HTMLOpenTagdiv class="text-lg font-medium"HTMLCloseTagDrop files here or click to upload.HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class="text-gray-600"HTMLCloseTag This is just a demo dropzone. Selected files are HTMLOpenTagspan class="font-medium"HTMLCloseTagnotHTMLOpenTag/spanHTMLCloseTag actually uploaded. HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/formHTMLCloseTag </code> </pre>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 <div className="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                    <button className="button w-24 justify-center block bg-gray-200 text-gray-600">
-                        Previous
+                    <button
+                        type="submit"
+                        className="button w-36 justify-center block bg-theme-1 text-white ml-2"
+                    >
+                        ดำเนินการต่อ
                     </button>
-                    <button className="button w-24 justify-center block bg-theme-1 text-white ml-2">
+                    {/* <button className="button w-24 justify-center block bg-theme-1 text-white ml-2">
                         Next
-                    </button>
+                    </button> */}
                 </div>
                 {/* </form> */}
             </div>

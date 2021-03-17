@@ -13,12 +13,12 @@ function Step3Component(
     props,
     { setCompleted, completed, setActiveStep, activeStep, step }
 ) {
-    const [cookies, setCookie, removeCookie] = useCookies(["pageone"]);
-    // console.log(props);
+    const [cookies, setCookie, removeCookie] = useCookies([
+    "pageone",
+    "pagetwo",]);
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const [confirmSubmit, setconfirmSubmit] = useState(false);
-    // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
 
     const [CookiePageOne, setCookiePageOne] = useState();
@@ -26,9 +26,10 @@ function Step3Component(
 
     const [feedPostData, setfeedPostData] = useState();
 
+    const { register, handleSubmit, watch, errors } = useForm();
+
     const services = new Services();
 
-    const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = (data) => {
         // console.log(data);
         // console.log(coopid);
@@ -47,29 +48,32 @@ function Step3Component(
 
     //     }
     // }, [feedPostData])
-
-    ///uplode
-
     useEffect(() => {
         // console.log(cookies.pageone);
         // console.log(cookies.pageone.inform_type);
         // console.log(cookies.pagetwo.pagetwo);
-
+        //
         if (
             cookies.pageone &&
             cookies.pageone.inform_type &&
-            cookies.pagetwo.status == "1"
+            // cookies.pagetwo.status == "1"
+            inform_type_only_c.indexOf(cookies.pageone.inform_type) > 0
         ) {
             // console.log(cookies.pageone, cookies.pagetwo);
             setCookiePageOne(cookies.pageone);
             setCookiePageTwo(cookies.pagetwo);
-            // removeCookie("pageone");
-            // removeCookie("pagetwo");
+            removeCookie("pageone");
+            removeCookie("pagetwo");
             feedData();
         } else {
-            //ยังไม่มีอะไร
+            //
+            if (cookies.pageone && cookies.pageone.coopid) {
+                setCookie("pagetwo", JSON.stringify({ status: "1" }));
+                handleComplete();
+            } else {
+                //ยังไม่มีอะไร
+            }
         }
-
         async function feedData() {
             await dispatch(
                 feedDataAction.feedDataGet("/api/v1/officer/orderPage")
@@ -107,16 +111,28 @@ function Step3Component(
         // console.log(newActiveStep)
         props.setActiveStep(newActiveStep);
     };
-    // console.log(feedPostData);
+    console.log(feedPostData);
 
     return (
         <div>
-             {props.completed.has(0) && props.completed.has(1) ? (
-                    <div className="box-body">
-                        <div className="box-header">
-                            <div className="book">
+            {/* {props.completed.has(0) ? (
+                <div className="m-2 text-center py-2">
+                    <div className="py-2">
+                        <i className="far fa-check-circle fa-5x text-emerald-400"></i>
+                    </div>
+                    <h3 className="text-gray-800 text-base font-medium">
+                        {" "}
+                        ท่านได้ดำเนินการขั้นตอนนี้เสร็จสมบรูณ์แล้ว
+                    </h3>
+                </div>
+            ) : (
+                <Fragment>
+                {props.completed.has(1) ? ( */}
+                    {/* <div className="box-body">
+                        <div className="box-header"> */}
+                           <div className="book">
                                 <div className="page">
-                                    <table className="table-fixed w-full">
+                                    <table className="table-fixed w-full text-lg">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -146,35 +162,19 @@ function Step3Component(
                                                     colSpan="8"
                                                     className="text-center"
                                                 >
-                                                    {/* <h3 className="text-3xl font-semibold"> */}
-                                                     {feedData.data &&
-                                                        feedData.data.ma_coop &&
-                                                        feedData.data.ma_coop.map((val, i) => {
-                                                                // console.log(cookies.pageone.informer == trim(val.contact_no))
-                                                                if (
-                                                                    cookies &&
-                                                                    cookies.pageone &&cookies.pageone.coopid &&
-                                                                    cookies.pageone.coopid ==
-                                                                        trim(val.coop_id)
-                                                                ) {
-                                                                    return (
-                                                                        <h5
-                                                                            key={i}
-                                                                            className="text-3xl font-semibold"
-                                                                        >
-                                                                            &nbsp;
-                                                                            {
-                                                                                val.coop_id
-                                                                            }
-                                                                            {
-                                                                                val.coop_name
-                                                                            }
-                                                                        </h5>
-                                                                    );
-                                                                }
-                                                            }
-                                                        )}
-                                                    {/* </h3> */}
+                                                    <h3 className="text-3xl font-semibold">
+                                                        {feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .coop_id}
+                                                        &nbsp;
+                                                        {feedPostData &&
+                                                            feedPostData
+                                                                .coop[0] &&
+                                                            feedPostData.coop[0]
+                                                                .coop_name}
+                                                    </h3>
                                                     {/* <br /> */}
                                                     <h5>
                                                         เอกสารภายใน
@@ -218,19 +218,10 @@ function Step3Component(
                                                 <td colSpan="6">
                                                     {" "}
                                                     &nbsp;{" "}
-                                                            {feedPostData &&
-                                                                feedPostData.coop &&
-                                                                feedPostData.coop[0] &&
-                                                                feedPostData.coop[0]
-                                                                    .tel
-                                                                    ? trim(
-                                                                        feedPostData.coop[0].tel
-                                                                    )
-                                                                    : feedPostData &&
-                                                                    feedPostData.coop[0] &&
-                                                                    feedPostData
-                                                                        .coop[0] &&
-                                                                    feedPostData.coop[0].tel}
+                                                    {feedPostData &&
+                                                        feedPostData.coop[0] &&
+                                                        feedPostData.coop[0]
+                                                            .tel}
                                                 </td>
                                                 <td
                                                     colSpan="2"
@@ -392,9 +383,7 @@ function Step3Component(
                                                     </h4>
                                                 </td>
                                                 <td colSpan="2">
-                                                    <h5> {cookies.pageone &&
-                                                            cookies.pageone
-                                                                .appointment_date}</h5>
+                                                    <h5>xx-xx-xx</h5>
                                                 </td>
                                                 <td colSpan="1">
                                                     <h4 className="text-xl font-bold">
@@ -553,7 +542,7 @@ function Step3Component(
                                                                 </td>
                                                                 <td
                                                                     colSpan="10"
-                                                                    className="text-2xl text-center"
+                                                                    className="text-xl text-center"
                                                                     style={{
                                                                         borderBottom:
                                                                             "1px solid grey",
@@ -587,7 +576,7 @@ function Step3Component(
                                                                                             key={
                                                                                                 i
                                                                                             }
-                                                                                            className="text-2xl"
+                                                                                            className="text-xl"
                                                                                         >
                                                                                             {
                                                                                                 val.officer_full_name
@@ -623,7 +612,7 @@ function Step3Component(
                                                     className="border-2"
                                                 ></td>
                                                 <td colSpan="3">
-                                                    <h4 className="text-2xl font-bold text-right">
+                                                    <h4 className="text-xl font-bold text-right">
                                                         Editor :
                                                     </h4>
                                                 </td>
@@ -687,14 +676,12 @@ function Step3Component(
                                                                 </td>
                                                                 <td
                                                                     colSpan="10"
-                                                                    className="text-2xl text-center"
+                                                                    className="text-xl text-center"
                                                                     style={{
                                                                         borderBottom:
                                                                             "1px solid grey",
                                                                     }}
-                                                                >
-
-                                                                </td>
+                                                                ></td>
                                                                 <td
                                                                     colSpan="1"
                                                                     className="text-3xl text-right font-bold"
@@ -720,7 +707,7 @@ function Step3Component(
                                                     className="border-2"
                                                 ></td>
                                                 <td colSpan="3">
-                                                    <h4 className="text-2xl font-bold text-right">
+                                                    <h4 className="text-xl font-bold text-right">
                                                         Manager :
                                                     </h4>
                                                 </td>
@@ -929,21 +916,21 @@ function Step3Component(
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                ) : (
-                <Fragment>
-                    <div className="m-2 text-center py-2">
-                        <div className="py-2">
-                            <i className="far fa-times-circle fa-5x text-red-400"></i>
-                        </div>
-                        <h3 className="text-gray-800 text-base font-medium">
-                            {" "}
-                            กรุณาดำเนินการขั้นตอนก่อนหน้าตามลำดับ
-                        </h3>
-                    </div>
+                     {/* ) : (
+                         <Fragment>
+                            <div className="m-2 text-center py-2">
+                                <div className="py-2">
+                                     <i className="far fa-times-circle fa-5x text-red-400"></i>
+                                 </div>
+                                 <h3 className="text-gray-800 text-base font-medium">
+                                     {" "}
+                                    กรุณาดำเนินการขั้นตอนก่อนหน้าตามลำดับ
+                                </h3>
+                             </div>
+                        </Fragment>
+                    )}
                 </Fragment>
-            )}
+            )} */}
         </div>
     );
 }
