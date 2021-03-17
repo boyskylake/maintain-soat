@@ -7,14 +7,13 @@ import { useScript } from "../../helpers";
 import { feedDataAction } from "../redux/actions";
 import Services from "../redux/services/services";
 
-
-const Sidebar = () => {
+const MenuMobile = () => {
     const dispatch = useDispatch();
     const feedData = useSelector((state) => state.feedData);
     const service = new Services();
 
-    useScript("/officer/dist/js/pages/tab.js");
-    // useScript("/officer/dist/js/pages/Effect/tab.js");
+    useScript("/officer/dist/js/pages/mobile-menu.js");
+    // useScript("/officer/dist/js/pages/tab.js");
     // const [inputs, setInputs] = useState(["ma_coop"]);
     const [coopid, setCoopid] = useState(null);
     const [FeedMenu, setFeedMenu] = useState();
@@ -24,7 +23,7 @@ const Sidebar = () => {
             // await dispatch(feedDataAction.feedDataGet("/api/v1/officer/menu"));
 
             service
-                .API("/api/v1/officer/menu", { method: "Get" })
+                .API("/api/v1/officer/menumoblie", { method: "Get" })
                 .then((res) => {
                     setFeedMenu(res);
                 });
@@ -33,34 +32,26 @@ const Sidebar = () => {
     }, [dispatch]);
     // console.log("feedData", feedData);
     return (
-        <nav className="side-nav" style={{fontFamily:'Kanit'}}>
-            <a href="" className="intro-x flex items-center pl-5 pt-4">
-                <span className="hidden xl:block text-white text-lg ml-3 font-medium">
-                    Soat
-                </span>
-            </a>
-            <div className="side-nav__devider my-6"></div>
-            <ul>
+        <div className="mobile-menu md:hidden">
+            <div className="mobile-menu-bar">
+                <a className="flex mr-auto">
+                    <img
+                        // alt="Midone Tailwind HTML Admin Template"
+                        className="w-6"
+                        src="/officer/dist/img/logo.png"
+                    />
+                </a>
+                <a id="mobile-menu-toggler">
+                    <i className="fas fa-user w-8 h-8 text-black transform -rotate-90"
+                    />
+                </a>
+            </div>
+            <ul className="border-t border-theme-24 py-5 hidden">
+                <li>
                 {FeedMenu &&
                     FeedMenu[0] &&
                     FeedMenu[0].map((val, i) => {
                         return (
-                            // <li
-                            //     key={i}
-                            //     to={val.url}
-                            //     icon={val.icon_class}
-                            //     name={val.title}
-                            // >
-                            //     {/* side-menu side-menu--active */}
-                            //         <a href={val.url} className={`side-menu side-menu--active`}>
-                            //         <div className="side-menu__icon">
-                            //             <i className={val.icon_class}></i>
-                            //         </div>
-                            //         <div className="side-menu__title">
-                            //             {val.title}
-                            //         </div>
-                            //     </a>
-                            // </li>
                             <ListItemLink
                                     key={i}
                                     to={val.url}
@@ -69,8 +60,9 @@ const Sidebar = () => {
                             />
                         );
                     })}
+                </li>
             </ul>
-        </nav>
+        </div>
     );
 };
 
@@ -81,13 +73,24 @@ function ListItemLink({ to, icon, name, ...rest }) {
             path={to}
             // eslint-disable-next-line react/no-children-prop
             children={({ match }) => (
-                <li className={match ? "active" : ""} to={to} icon={icon} name={name}>
-                    <Link className={match ? "side-menu side-menu--active" : "side-menu"} to={to} {...rest} >
+                <li
+                    className={match ? "active" : ""}
+                    to={to}
+                    icon={icon}
+                    name={name}
+                >
+                    <Link
+                        className={
+                            match ? "side-menu side-menu--active" : "side-menu"
+                        }
+                        to={to}
+                        {...rest}
+                    >
                         <div className="side-menu__icon">
-                          <i className={icon} />
+                            <i className={icon} />
                         </div>
                         <div className="side-menu__title">
-                             <span>{name}</span>
+                            <span>{name}</span>
                         </div>
                     </Link>
                     {/* <Link to={to} {...rest} /> */}
@@ -97,4 +100,4 @@ function ListItemLink({ to, icon, name, ...rest }) {
     );
 }
 
-export default Sidebar;
+export default MenuMobile;

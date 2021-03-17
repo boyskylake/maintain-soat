@@ -16,6 +16,7 @@ Route::group(['namespace' => 'Officer\Api'], function () {
         Route::get('user', 'Auth\AuthController@user');
 
         Route::get('menu', 'MenuController@menu');
+        Route::get('menumoblie', 'MenuController@menu');
 
 
         Route::get('Home', 'HomeController@allMacoop');

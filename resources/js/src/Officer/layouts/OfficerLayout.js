@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import MenuMobile from "./MenuMobile";
 // import Footer from "./Footer";
 
 function OfficerLayout({ children }) {
@@ -11,7 +12,8 @@ function OfficerLayout({ children }) {
 
     return (
         <Fragment>
-            {/* <MenuMobile /> */}
+        {/* <div className="app"> */}
+            <MenuMobile />
         <div className="flex officer-content px-8 py-3">
             {/* <Header /> */}
             <Sidebar />
@@ -26,6 +28,7 @@ function OfficerLayout({ children }) {
             </div>
             {/* <Footer /> */}
         </div>
+        {/* </div> */}
         </Fragment>
     );
 }
