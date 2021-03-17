@@ -120,34 +120,6 @@ function Listorder() {
                                 </h3>
 
 
-
-            <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-
-<div id="myModal" className="modal fade" role="dialog" >
-<div className="modal-dialog" style={{width:"1000px"}}>
-<div className="modal-content">
-<div className="modal-header bg-purple-500">
-<button type="button" className="close" data-dismiss="modal">&times;</button>
-<h2 className="modal-title text-white"><strong>order id: </strong></h2>
-</div>
-<div className="modal-body font-mono  text-purple-600 text-left" >
-<p ><strong>order id:</strong></p>
-<p ><strong>วันที่รับ :</strong> </p>
-<p ><strong>วันที่นัด :</strong> </p>
-<p ><strong>ชื่อสหกรณ์ :</strong> </p>
-<p ><strong>รายละเอียด:</strong> </p>
-<p ><strong>สถานะ :</strong> </p>
-
-</div>
-<div className="modal-footer bg-purple-300">
-<button type="button" className="btn btn-danger" data-dismiss="modal"><strong>Close</strong></button>
-</div>
-</div>
-
-</div>
-</div>
-
-
                             </div>
                             {/* <br />
                             <div className="col-md-3">

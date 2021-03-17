@@ -115,170 +115,106 @@ function Profile() {
     //     feedData.fetchSuccess && feedData.data && feedData.data.Profile
     // );
     return (
-        <div className="content-wrapper">
-            <section className="content-header">
-                <h1>
-                    Profile
-                    <small>Version 17.58.98</small>
-                </h1>
-                <ol className="breadcrumb">
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-dashboard" /> Home
-                        </a>
-                    </li>
-                    <li className="active">Profile</li>
-                </ol>
-            </section>
+        <div className="app">
             {/* Main content */}
-            <section className="content">
-                {/* Info boxes */}
+            <div className="intro-y flex items-center mt-8">
+                <h2 className=" mr-auto text-gray-600 hover:text-yellow-500 font-black text-3xl">Profile Layout</h2>
+            </div>
 
-                <div className="row">
-                    <div className="col-md-3">
-                        <div className="box box-primary">
-                            <div className="box-body box-profile">
-                                <div className="relative h-60">
-                                    <img
-                                        className="absolute h-full w-full object-cover"
-                                        src="https://images.unsplash.com/photo-1448932133140-b4045783ed9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
-                                    />
-                                </div>
+            <div className="intro-y box px-8 pt-5 mt-5">
+                <div className="flex flex-col lg:flex-row border-b border-gray-200 pb-5 -mx-5">
+                    <div className="flex flex-1 px-5 items-center justify-center lg:justify-start">
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative transition duration-500 transform hover:-translate-y-1 hover:scale-110">
+                            <img
+                                className="rounded-full"
+                                src={`/storage/${
+                                    feedData.fetchSuccess &&
+                                    feedData.data.Profile &&
+                                    feedData.data.Profile.avatar
+                                }`}
+                            />
+                        </div>
 
-                                <div className="relative shadow mx-auto h-64 w-64 -my-36 border-white rounded-full overflow-hidden border-4">
-                                    <img
-                                        className="object-cover w-full h-full"
-                                        src={`/storage/${
-                                            feedData.fetchSuccess &&
-                                            feedData.data.Profile &&
-                                            feedData.data.Profile.avatar
-                                        }`}
-                                        alt="User Image"
-                                    />
-                                </div>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <h3 className="profile-username text-center">
-                                    {feedData.fetchSuccess &&
-                                        feedData.data.Profile &&
-                                        feedData.data.Profile.name}
-                                </h3>
-
-                                <p className="text-muted text-center">
-                                    {feedData.fetchSuccess &&
-                                        feedData.data.Position &&
-                                        feedData.data.Position[0] &&
-                                        feedData.data.Position[0].name}
-                                </p>
-
-                                <ul className="list-group list-group-unbordered">
-                                    <li className="list-group-item">
-                                        <b>Name</b>{" "}
-                                        <a className="pull-right">
-                                            {feedData.fetchSuccess &&
-                                                feedData.data.Position &&
-                                                feedData.data.Profile &&
-                                                feedData.data.Profile.name}
-                                        </a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>E-mail</b>{" "}
-                                        <a className="pull-right">
-                                            {feedData.fetchSuccess &&
-                                                feedData.data.Position &&
-                                                feedData.data.Profile &&
-                                                feedData.data.Profile.email}
-                                        </a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>position</b>{" "}
-                                        <a className="pull-right">
-                                            {feedData.fetchSuccess &&
-                                                feedData.data.Position &&
-                                                feedData.data.Position[0] &&
-                                                feedData.data.Position[0].name}
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <a
-                                    href="#"
-                                    className="btn btn-primary btn-block"
-                                >
-                                    <b>เปลี่ยนรูป</b>
-                                </a>
+                        <div className="ml-5">
+                            <div className="w-24 sm:w-40 truncate sm:whitespace-normal text-xl font-black text-gray-600 hover:text-yellow-500">
+                                {feedData.fetchSuccess &&
+                                    feedData.data.Position &&
+                                    feedData.data.Profile &&
+                                    feedData.data.Profile.name}
+                            </div>
+                            <div className="text-gray-600 hover:text-yellow-500 font-black text-3xl ">
+                                {feedData.fetchSuccess &&
+                                    feedData.data.Position &&
+                                    feedData.data.Position[0] &&
+                                    feedData.data.Position[0].name}
                             </div>
                         </div>
                     </div>
 
+                    <div className="flex mt-6 lg:mt-0 items-center lg:items-start flex-1 flex-col justify-center text-gray-600 px-5 border-l border-r border-gray-200 border-t lg:border-t-0 pt-5 lg:pt-0">
+                        <div className="truncate sm:whitespace-normal flex items-center text-gray-600 hover:text-yellow-500 font-black">
+                            <i className="w-4 h-4 mr-2 fas fa-user-tie"></i>
+                            Name:{" "}
+                            {feedData.fetchSuccess &&
+                                feedData.data.Position &&
+                                feedData.data.Profile &&
+                                feedData.data.Profile.name}
+                        </div>
+                        <div className="truncate sm:whitespace-normal flex items-center mt-3 text-gray-600 hover:text-yellow-500 font-black">
+                            <i className="w-4 h-4 mr-2 fas fa-envelope"></i>{" "}
+                            E-mail:{" "}
+                            {feedData.fetchSuccess &&
+                                feedData.data.Position &&
+                                feedData.data.Profile &&
+                                feedData.data.Profile.email}
+                        </div>
+                        <div className="truncate sm:whitespace-normal flex items-center mt-3 text-gray-600 hover:text-yellow-500 font-black">
+                            <i className="w-4 h-4 mr-2 fas fa-child"></i>{" "}
+                            position:{" "}
+                            {feedData.fetchSuccess &&
+                                feedData.data.Position &&
+                                feedData.data.Position[0] &&
+                                feedData.data.Position[0].name}
+                        </div>
+                    </div>
+                </div>
+                <div className="nav-tabs flex flex-col sm:flex-row justify-center lg:justify-start">
+                    <a
+                        data-toggle="tab"
+                        data-target="#profile"
+                        href="javascript:;"
+                        className="py-4 sm:mr-8 flex items-center active"
+                    >
+                        <i className="w-4 h-4 mr-2 far fa-address-card"></i>{" "}
+                        Edit Profile
+                    </a>
+                    <a
+                        data-toggle="tab"
+                        data-target="#Password"
+                        href="javascript:;"
+                        className="py-4 sm:mr-8 flex items-center"
+                    >
+                        <i className="w-4 h-4 mr-2 fas fa-key"></i>{"    "}
+                        Edit Password2
+                    </a>
+                </div>
 
-<button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-{/* <a href=" " title="View" className="btn btn-sm btn-primary  pull-right view" style="margin-right: 5px;"><i className="fa fa-search"></i> <span className="hidden-xs hidden-sm">View</span></a> */}
-<a href=" " title="View" data-toggle="modal" data-target="#myModal" className="btn btn-sm btn-primary"><span className="hidden-xs hidden-sm">View555</span></a>
 
 
+                <div className="tab-content ">
+                    <div className="tab-content__pane active" id="profile" >
+                        <div className="m-5 p-5 w-3/4 bg-white  rounded-lg justify-center shadow-sm hover:shadow-2xl transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-105">
+                        <EditProfile />
+                        </div>
+                    </div>
 
-<div id="myModal" className="modal fade" role="dialog" >
-  <div className="modal-dialog" style={{width:"1000px"}}>
-    <div className="modal-content">
-      <div className="modal-header bg-purple-500">
-        <button type="button" className="close" data-dismiss="modal">&times;</button>
-        <h2 className="modal-title text-white"><strong>order id: </strong></h2>
-      </div>
-      <div className="modal-body font-mono  text-purple-600 text-left" >
-        <p ><strong>order id:</strong></p>
-        <p ><strong>วันที่รับ :</strong> </p>
-        <p ><strong>วันที่นัด :</strong> </p>
-        <p ><strong>ชื่อสหกรณ์ :</strong> </p>
-        <p ><strong>รายละเอียด:</strong> </p>
-        <p ><strong>สถานะ :</strong> </p>
+                    <div className="tab-content__pane" id="Password">
+                        <div className="m-5 p-5 w-3/4 bg-white  rounded-lg justify-center shadow-sm hover:shadow-2xl transition duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-105">
 
-      </div>
-      <div className="modal-footer bg-purple-300">
-        <button type="button" className="btn btn-danger" data-dismiss="modal"><strong>Close</strong></button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-                    <div className="col-md-9">
-                        <div className="nav-tabs-custom">
-                            <ul className="nav nav-tabs">
-                                <li className="active">
-                                    <a href="#EditProfile" data-toggle="tab">
-                                        Edit Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#EditPassword" data-toggle="tab">
-                                        Edit Password
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <div className="tab-content">
-                                <div
-                                    className="active tab-pane"
-                                    id="EditProfile"
-                                >
-                                    <EditProfile />
-                                </div>
-
-                                <div className="tab-pane" id="EditPassword">
-                                    <div className="pl-10 pt-5">
-                                        <h3>Edit Password</h3>
-                                    </div>
-
-                                    <form
+                        <div className="text-gray-600 hover:text-yellow-500 font-black text-3xl mt-5">
+                        Edit Password
+                        </div>
+                        <form
                                         className="form-horizontal p-10"
                                         onSubmit={handleSubmit(
                                             OnSubmitEditPassword
@@ -287,13 +223,13 @@ function Profile() {
                                         <div className="form-group">
                                             <label
                                                 htmlFor="OldPassword"
-                                                className="col-sm-2 control-label"
+                                                className="col-sm-2 control-label text-gray-600 hover:text-yellow-500"
                                             >
                                                 Old Password:
                                             </label>
                                             <div className="col-sm-9">
-                                                <div className="mt-1 relative rounded-md shadow-sm">
-                                                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                                <div className="mt-1 relative rounded-md ">
+                                                    <div className="absolute inset-y-0  right-6 pr-3 w-2/4 flex items-center">
                                                         <span
                                                             onClick={() => {
                                                                 setpasswordeye(
@@ -323,7 +259,7 @@ function Profile() {
                                                                 ? "text"
                                                                 : "password"
                                                         }
-                                                        className="form-control"
+                                                        className="input w-2/4 border mt-2"
                                                         id="OldPassword"
                                                         name="OldPassword"
                                                         autoComplete="off"
@@ -345,13 +281,13 @@ function Profile() {
                                         <div className="form-group">
                                             <label
                                                 htmlFor="NewPassword"
-                                                className="col-sm-2 control-label"
+                                                className="col-sm-2 control-label text-gray-600 hover:text-yellow-500"
                                             >
                                                 New Password:
                                             </label>
                                             <div className="col-sm-9">
-                                                <div className="mt-1 relative rounded-md shadow-sm">
-                                                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                                <div className="mt-1 relative rounded-md ">
+                                                    <div className="absolute inset-y-0  right-6 pr-3 w-2/4 flex items-center">
                                                         <span
                                                             onClick={() => {
                                                                 setpasswordeye(
@@ -381,7 +317,7 @@ function Profile() {
                                                                 ? "text"
                                                                 : "password"
                                                         }
-                                                        className="form-control"
+                                                        className="input w-2/4 border mt-2"
                                                         id="NewPassword"
                                                         name="NewPassword"
                                                         placeholder="New Password"
@@ -403,13 +339,13 @@ function Profile() {
                                         <div className="form-group">
                                             <label
                                                 htmlFor="Confirm"
-                                                className="col-sm-2 control-label"
+                                                className="col-sm-2 control-label text-gray-600 hover:text-yellow-500"
                                             >
                                                 New Password (Confirm):
                                             </label>
                                             <div className="col-sm-9">
-                                                <div className="mt-1 relative rounded-md shadow-sm">
-                                                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                                <div className="mt-1 relative rounded-md ">
+                                                    <div className="absolute inset-y-0  right-6 pr-3 w-2/4 flex items-center">
                                                         <span
                                                             onClick={() => {
                                                                 setpasswordeye(
@@ -439,7 +375,7 @@ function Profile() {
                                                                 ? "text"
                                                                 : "password"
                                                         }
-                                                        className="form-control"
+                                                        className="input w-2/4 border mt-2"
                                                         id="Confirm"
                                                         name="Confirm"
                                                         placeholder="New Password (Confirm)"
@@ -461,19 +397,25 @@ function Profile() {
                                             <div className="col-sm-offset-2 col-sm-10">
                                                 <button
                                                     type="submit"
-                                                    className="btn btn-danger"
+                                                    className="button bg-theme-1 hover:bg-red-500 text-white mt-5"
                                                 >
                                                     Submit
                                                 </button>
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
+
+
                 </div>
-            </section>
+                <br></br><br></br><br></br>
+
+
+
+
+            </div>
         </div>
     );
 }
@@ -481,7 +423,7 @@ export default Profile;
 
 const ErrorSpan = ({ children, className }) => {
     return (
-        <span className={`text-danger ${className && className} `}>
+        <span className={`text-red-500 hover: text-yellow-500 ${className && className} `}>
             {" "}
             {children && children}
         </span>
